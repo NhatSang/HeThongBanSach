@@ -1,74 +1,74 @@
 package ui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 //Sang
-public class GD_DangNhap extends JFrame{
-	private JLabel lblTK,lblMK;
-	private JTextField txtTK;
-	private JPasswordField txtMK;
-	private JButton btnDN;
+public class GD_DangNhap extends JFrame implements ActionListener{
+	private JLabel lblTaiKhoan, lblMatKhau, lblTieuDe;
+	private JTextField txtTaiKhoan;
+	private JPasswordField txtMatKhau;
+	private JButton btnDangNhap;
 	
 	public GD_DangNhap() {
-		setTitle("Hệ thống quản lý hiệu sách");
-		setSize(700, 380);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
+		setTitle("Hệ thống quản lý hiệu sách Chí Tâm");
+		setSize(600,350);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setResizable(false);
-		createGUI();
+		setLocationRelativeTo(null);
+		createGui();
 	}
-	private void createGUI() {
+
+	private void createGui() {
 		Container con = getContentPane();
+		
+		lblTieuDe = new JLabel("Đăng Nhập");
+		lblTaiKhoan = new JLabel("Tài khoản");
+		lblMatKhau = new JLabel("Mật khẩu");
+		lblTieuDe.setFont(new Font("Serif", Font.BOLD, 50));
+		lblTaiKhoan.setFont(new Font("Serif", Font.BOLD, 20));
+		lblMatKhau.setFont(new Font("Serif", Font.BOLD, 20));
+		
+		txtTaiKhoan = new JTextField();
+		txtMatKhau = new JPasswordField();
+		
+		btnDangNhap = new JButton("Đăng nhập");
+		btnDangNhap.setFont(new Font("Serif", Font.BOLD, 20));
+		
 		Box titleB = Box.createVerticalBox();
 		
-		JLabel lblTitle = new JLabel("Đăng Nhập");
-		lblTitle.setFont(new Font("Serif", Font.BOLD, 50));
-		lblTitle.setForeground(Color.GREEN);
-		
-		titleB.add(Box.createVerticalStrut(20));
 		titleB.add(Box.createHorizontalStrut(20));
-		titleB.add(lblTitle);
+		titleB.add(lblTieuDe);
+
 		con.add(titleB,BorderLayout.NORTH);
 		
 		Box centerB = Box.createVerticalBox();
 		Box b1 = Box.createHorizontalBox();
 		Box b2 = Box.createHorizontalBox();
 		
-		lblTK = new JLabel("Tài khoản: ");
-		lblMK = new JLabel("Mật khẩu: ");
-		lblTK.setFont(new Font("Serif", Font.BOLD, 20));
-		lblMK.setFont(new Font("Serif", Font.BOLD, 20));
-		lblMK.setPreferredSize(lblTK.getPreferredSize());
-		
-		txtTK = new JTextField();
-		txtMK = new JPasswordField();
-
-		
-		b1.add(Box.createHorizontalStrut(100));
-		b1.add(lblTK);
+		b1.add(Box.createHorizontalStrut(70));
+		b1.add(lblTaiKhoan);
 		b1.add(Box.createHorizontalStrut(20));
-		b1.add(txtTK);
-		b1.add(Box.createHorizontalStrut(100));
+		b1.add(txtTaiKhoan);
+		b1.add(Box.createHorizontalStrut(70));
 		
-		b2.add(Box.createHorizontalStrut(100));
-		b2.add(lblMK);
+		b2.add(Box.createHorizontalStrut(70));
+		b2.add(lblMatKhau);
 		b2.add(Box.createHorizontalStrut(20));
-		b2.add(txtMK);
-		b2.add(Box.createHorizontalStrut(100));
+		b2.add(txtMatKhau);
+		b2.add(Box.createHorizontalStrut(70));
 		
-		
-		centerB.add(Box.createVerticalStrut(40));
+		centerB.add(Box.createVerticalStrut(30));
 		centerB.add(b1);
 		centerB.add(Box.createVerticalStrut(30));
 		centerB.add(b2);
@@ -77,13 +77,23 @@ public class GD_DangNhap extends JFrame{
 		con.add(centerB,BorderLayout.CENTER);
 		
 		Box southB = Box.createVerticalBox();
-		btnDN = new JButton("Đăng Nhập");
-		btnDN.setFont(new Font("Serif", Font.BOLD, 20));
-		
-		southB.add(Box.createHorizontalStrut(120));
-		southB.add(btnDN);
-		southB.add(Box.createVerticalStrut(40));
+		southB.add(Box.createHorizontalStrut(100));
+		southB.add(btnDangNhap);
+		southB.add(Box.createVerticalStrut(50));
 		con.add(southB,BorderLayout.SOUTH);
+		
+		btnDangNhap.addActionListener(this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = e.getSource();
+		if(obj==btnDangNhap) {
+			GD_NhanVienBanHang gd_NhanVien = new GD_NhanVienBanHang();
+			gd_NhanVien.setVisible(true);
+			this.dispose();
+		}
+		
 	}
 
 }

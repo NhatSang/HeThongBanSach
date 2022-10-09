@@ -4,6 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -11,53 +16,71 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-//Sang
-public class GD_NhanVienBanHang extends JFrame{
+
+public class GD_NhanVienBanHang extends JFrame implements ActionListener{
 	private JLabel lblTenNV;
-	private JButton btnDX;
+	private JButton btnDangXuat;
+	static GraphicsDevice device = GraphicsEnvironment
+	        .getLocalGraphicsEnvironment().getScreenDevices()[0];
 	
 	public GD_NhanVienBanHang() {
-		setTitle("Hệ thống quản lý hiệu sách");
-		setSize(getMaximumSize());
+		setTitle("Hệ thống quản lý hiệu sách Chí Tâm");
+//		setUndecorated(true);
+		device.setFullScreenWindow(this);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
-		setResizable(false);
 		createGui();
+		
 	}
-	
 	private void createGui() {
 		Container con = getContentPane();
-
 		
-		Box menuB = Box.createHorizontalBox();
-		menuB.setBorder(new LineBorder(Color.BLACK));
-		lblTenNV = new JLabel("Nhân Viên");
-		btnDX = new JButton("Đăng xuất");
-		JMenuBar menu = new JMenuBar();
+		Box northB = Box.createHorizontalBox();
+		northB.setBorder(new LineBorder(Color.black));
+		
+		lblTenNV = new JLabel();
+		lblTenNV.setText("Tên Nhân Viên");
+		btnDangXuat = new JButton("Đăng xuất");
+		btnDangXuat.setFocusable(false);
+		
+		JMenuBar menuBar = new JMenuBar();
 		JMenu menu1 = new JMenu("Sản Phẩm");
-		JMenu menu2 = new JMenu("Hóa đơn");
-		JMenu menu3 = new JMenu("Thống kê");
-		menu1.setFont(new Font("Serif", Font.BOLD, 40));
-		menu2.setFont(new Font("Serif", Font.BOLD, 40));
-		menu3.setFont(new Font("Serif", Font.BOLD, 40));
-		lblTenNV.setFont(new Font("Serif", Font.BOLD, 20));
-		btnDX.setFont(new Font("Serif", Font.BOLD, 20));
-		menu.add(menu1);
-		menu.add(menu2);
-		menu.add(menu3);
-
-		menuB.add(menu);
-		menuB.add(Box.createHorizontalStrut(550));
-		menuB.add(lblTenNV);
-		menuB.add(Box.createHorizontalStrut(20));
-		menuB.add(btnDX);
-		con.add(menuB,BorderLayout.NORTH);
+		JMenu menu2 = new JMenu("Hóa Đơn");
+		JMenu menu3 = new JMenu("Thống Kê");
+		
+		menuBar.add(menu1);
+		menuBar.add(menu2);
+		menuBar.add(menu3);
+		
+		lblTenNV.setFont(new Font("Serif", Font.ITALIC, 20));
+		btnDangXuat.setFont(new Font("Serif", Font.BOLD, 20));
+		menu1.setFont(new Font("Serif", Font.BOLD, 30));
+		menu2.setFont(new Font("Serif", Font.BOLD, 30));
+		menu3.setFont(new Font("Serif", Font.BOLD, 30));
+		
+		northB.add(menuBar);
+		northB.add(Box.createHorizontalStrut(650));
+		northB.add(lblTenNV);
+		northB.add(Box.createHorizontalStrut(20));
+		northB.add(btnDangXuat);
+		northB.add(Box.createHorizontalStrut(20));
+		
+		con.add(northB,BorderLayout.NORTH);
+		btnDangXuat.addActionListener(this);
 		
 	}
-
-	public static void main(String[] args) {
-		new GD_NhanVienBanHang().setVisible(true);
+//	public static void main(String[] args) {
+//		new GD_NhanVienBanHang().setVisible(true);
+//	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = new Object();
+		obj = e.getSource();
+		if(obj==btnDangXuat) {
+			GD_DangNhap gd_DangNhap = new GD_DangNhap();
+			gd_DangNhap.setVisible(true);
+			this.dispose();
+		}
+		
 	}
 }
