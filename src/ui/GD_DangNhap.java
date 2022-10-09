@@ -49,7 +49,7 @@ public class GD_DangNhap extends JFrame implements ActionListener{
 		
 		titleB.add(Box.createHorizontalStrut(20));
 		titleB.add(lblTieuDe);
-		
+
 		con.add(titleB,BorderLayout.NORTH);
 		
 		Box centerB = Box.createVerticalBox();

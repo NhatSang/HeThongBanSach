@@ -32,6 +32,7 @@ public class LoaiSanPham {
 		this.tenLoai = tenLoai;
 	}
 
+
 	@Override
 	public String toString() {
 		return "LoaiSanPham [maLoai=" + maLoai + ", tenLoai=" + tenLoai + "]";

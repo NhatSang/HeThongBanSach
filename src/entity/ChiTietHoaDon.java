@@ -1,15 +1,12 @@
 package entity;
-
 //Sang
 public class ChiTietHoaDon {
 	private int soLuong;
 	private SanPham sanPham;
-
 	public ChiTietHoaDon() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 	public ChiTietHoaDon(int soLuong, SanPham sanPham) {
 		super();
 		this.soLuong = soLuong;
@@ -36,5 +33,4 @@ public class ChiTietHoaDon {
 	public String toString() {
 		return "ChiTietHoaDon [soLuong=" + soLuong + ", sanPham=" + sanPham + "]";
 	}
-
 }

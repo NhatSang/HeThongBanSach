@@ -2,7 +2,7 @@ package entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-//Sang
+
 public class HoaDon {
 	private String maHD;
 	private LocalDate ngayLapHD;
