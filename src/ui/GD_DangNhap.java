@@ -3,15 +3,19 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import entity.NhanVien;
 
 //Sang
 public class GD_DangNhap extends JFrame implements ActionListener{
@@ -21,6 +25,7 @@ public class GD_DangNhap extends JFrame implements ActionListener{
 	private JButton btnDangNhap;
 	
 	public GD_DangNhap() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\icon\\logobook.png"));
 		setTitle("Hệ thống quản lý hiệu sách Chí Tâm");
 		setSize(600,350);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -44,6 +49,7 @@ public class GD_DangNhap extends JFrame implements ActionListener{
 		
 		btnDangNhap = new JButton("Đăng nhập");
 		btnDangNhap.setFont(new Font("Serif", Font.BOLD, 20));
+		btnDangNhap.setIcon(new ImageIcon(".\\icon\\login.png"));
 		
 		Box titleB = Box.createVerticalBox();
 		
@@ -77,7 +83,7 @@ public class GD_DangNhap extends JFrame implements ActionListener{
 		con.add(centerB,BorderLayout.CENTER);
 		
 		Box southB = Box.createVerticalBox();
-		southB.add(Box.createHorizontalStrut(100));
+		southB.add(Box.createHorizontalStrut(110));
 		southB.add(btnDangNhap);
 		southB.add(Box.createVerticalStrut(50));
 		con.add(southB,BorderLayout.SOUTH);
@@ -89,8 +95,7 @@ public class GD_DangNhap extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		if(obj==btnDangNhap) {
-			GD_NhanVienBanHang gd_NhanVien = new GD_NhanVienBanHang();
-			gd_NhanVien.setVisible(true);
+			new GD_NhanVienQuanLy(new NhanVien()).setVisible(true);
 			this.dispose();
 		}
 		
