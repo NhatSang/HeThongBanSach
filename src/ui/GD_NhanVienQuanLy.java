@@ -36,8 +36,8 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener{
 	private NhanVien nhanVien;
 	static GraphicsDevice device = GraphicsEnvironment
 	        .getLocalGraphicsEnvironment().getScreenDevices()[0];
-	static LocalDate ngayHienTaiDate = LocalDate.now();
-	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	static LocalDate ngayHienTai = LocalDate.now();
+	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	public GD_NhanVienQuanLy(NhanVien nhanVien) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\icon\\logobook.png"));
 		this.nhanVien = nhanVien;
@@ -59,7 +59,7 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener{
 		lblTenNV = new JLabel();
 		lblTenNV.setText("Nguyễn Nhật Sang");
 		lblNgay = new JLabel();
-		lblNgay.setText("Ngày: "+dtf.format(ngayHienTaiDate));
+		lblNgay.setText("Ngày: "+dtf.format(ngayHienTai));
 		lblCa = new JLabel();
 		lblCa.setText("Ca: 1");
 		
@@ -124,16 +124,18 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener{
 		
 		con.add(northB,BorderLayout.NORTH);
 		
-		JPanel centerP = new JPanel();
-		try {
-			BufferedImage myPicture = ImageIO.read(new File(".\\img\\logo.png"));
-			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-			centerP.add(picLabel);
-			con.add(centerP,BorderLayout.CENTER);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		JPanel centerP = new GD_LapHoaDon(nhanVien);
+//		try {
+//			BufferedImage myPicture = ImageIO.read(new File(".\\img\\logo.png"));
+//			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+//			centerP.add(picLabel);
+//			con.add(centerP,BorderLayout.CENTER);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		con.add(centerP,BorderLayout.CENTER);
+		
 		
 	}
 //	public static void main(String[] args) {
