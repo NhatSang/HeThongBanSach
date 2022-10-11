@@ -25,7 +25,7 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
 import entity.NhanVien;
-
+//Sang
 public class GD_NhanVienBanHang extends JFrame implements ActionListener {
 	private JLabel lblTenNV, lblNgay, lblCa;
 	private NhanVien nhanVien;
