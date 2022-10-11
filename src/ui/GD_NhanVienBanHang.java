@@ -30,8 +30,8 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener {
 	private JLabel lblTenNV, lblNgay, lblCa;
 	private NhanVien nhanVien;
 	static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
-	static LocalDate ngayHienTaiDate = LocalDate.now();
-	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	static LocalDate ngayHienTai = LocalDate.now();
+	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	public GD_NhanVienBanHang(NhanVien nhanVien) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\icon\\logobook.png"));
@@ -55,7 +55,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener {
 		lblTenNV = new JLabel();
 		lblTenNV.setText("Nguyễn Nhật Sang");
 		lblNgay = new JLabel();
-		lblNgay.setText("Ngày: " + dtf.format(ngayHienTaiDate));
+		lblNgay.setText("Ngày: " + dtf.format(ngayHienTai));
 		lblCa = new JLabel();
 		lblCa.setText("Ca: 1");
 
