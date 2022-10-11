@@ -30,7 +30,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.border.LineBorder;
 
 import entity.NhanVien;
-
+//Sang
 public class GD_NhanVienQuanLy extends JFrame implements ActionListener{
 	private JLabel lblTenNV, lblNgay, lblCa;
 	private NhanVien nhanVien;
