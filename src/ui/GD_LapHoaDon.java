@@ -163,14 +163,6 @@ public class GD_LapHoaDon extends JPanel {
 		lblTienCanTra = new JLabel("Khách cần trả: ");
 		lblTienKhachTra = new JLabel("Khách thanh toán: ");
 		lblTienThua = new JLabel("Tiền thừa: ");
-		lblMaHd.setPreferredSize(lblTienKhachTra.getPreferredSize());
-		lblNgayLap.setPreferredSize(lblTienKhachTra.getPreferredSize());
-		lblCaLap.setPreferredSize(lblTienKhachTra.getPreferredSize());
-		lblTenNv.setPreferredSize(lblTienKhachTra.getPreferredSize());
-		lblTongTien.setPreferredSize(lblTienKhachTra.getPreferredSize());
-		lblTongVAT.setPreferredSize(lblTienKhachTra.getPreferredSize());
-//		lblTienCanTra.setPreferredSize(lblTienKhachTra.getPreferredSize());
-		lblTienThua.setPreferredSize(lblTienKhachTra.getPreferredSize());
 		lblMaHd.setFont(font1);
 		lblNgayLap.setFont(font1);
 		lblCaLap.setFont(font1);
@@ -180,6 +172,15 @@ public class GD_LapHoaDon extends JPanel {
 		lblTienCanTra.setFont(font1);
 		lblTienKhachTra.setFont(font1);
 		lblTienThua.setFont(font1);
+		lblMaHd.setPreferredSize(lblTienKhachTra.getPreferredSize());
+		lblNgayLap.setPreferredSize(lblTienKhachTra.getPreferredSize());
+		lblCaLap.setPreferredSize(lblTienKhachTra.getPreferredSize());
+		lblTenNv.setPreferredSize(lblTienKhachTra.getPreferredSize());
+		lblTongTien.setPreferredSize(lblTienKhachTra.getPreferredSize());
+		lblTongVAT.setPreferredSize(lblTienKhachTra.getPreferredSize());
+		lblTienCanTra.setPreferredSize(lblTienKhachTra.getPreferredSize());
+		lblTienThua.setPreferredSize(lblTienKhachTra.getPreferredSize());
+
 		txtMaHd = new JTextField();
 		txtNgayLap = new JTextField();
 		txtCaLap = new JTextField();
