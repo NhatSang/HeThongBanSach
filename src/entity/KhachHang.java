@@ -7,16 +7,16 @@ public class KhachHang {
 	private String hoTen;
 	private LocalDate ngaySinh;
 	private String diaChi;
-	private String SĐT;
+	private String sDT;
 	private Boolean gioiTinh;
 	
-	public KhachHang(String maKH, String hoTen, LocalDate ngaySinh, String diaChi, String sĐT, Boolean gioiTinh) {
+	public KhachHang(String maKH, String hoTen, LocalDate ngaySinh, String diaChi, String sDT, Boolean gioiTinh) {
 		super();
 		this.maKH = maKH;
 		this.hoTen = hoTen;
 		this.ngaySinh = ngaySinh;
 		this.diaChi = diaChi;
-		SĐT = sĐT;
+		this.sDT = sDT;
 		this.gioiTinh = gioiTinh;
 	}
 	public String getMaKH() {
@@ -43,11 +43,11 @@ public class KhachHang {
 	public void setDiaChi(String diaChi) {
 		this.diaChi = diaChi;
 	}
-	public String getSĐT() {
-		return SĐT;
+	public String getsDT() {
+		return sDT;
 	}
-	public void setSĐT(String sĐT) {
-		SĐT = sĐT;
+	public void setsDT(String sDT) {
+		sDT = sDT;
 	}
 	public Boolean getGioiTinh() {
 		return gioiTinh;
@@ -58,6 +58,6 @@ public class KhachHang {
 	@Override
 	public String toString() {
 		return "KhachHang [maKH=" + maKH + ", hoTen=" + hoTen + ", ngaySinh=" + ngaySinh + ", diaChi=" + diaChi
-				+ ", SĐT=" + SĐT + ", gioiTinh=" + gioiTinh + "]";
+				+ ", sDT=" + sDT + ", gioiTinh=" + gioiTinh + "]";
 	}
 }
