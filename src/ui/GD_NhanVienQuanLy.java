@@ -124,7 +124,7 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener{
 		
 		con.add(northB,BorderLayout.NORTH);
 		
-		JPanel centerP = new GD_VPP();
+		JPanel centerP = new GD_KH();
 //		try {
 //			BufferedImage myPicture = ImageIO.read(new File(".\\img\\logo.png"));
 //			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
