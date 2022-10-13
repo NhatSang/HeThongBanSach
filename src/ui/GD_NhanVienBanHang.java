@@ -127,6 +127,8 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener {
 		northB.add(Box.createHorizontalStrut(20));
 
 		con.add(northB, BorderLayout.NORTH);
+		
+		
 
 	}
 

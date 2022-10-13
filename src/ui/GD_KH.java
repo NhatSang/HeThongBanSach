@@ -56,10 +56,6 @@ public class GD_KH extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "STT", "Mã", "Họ Tên", "Ngày Sinh", "Email", "Địa Chỉ", "SĐT", "Giới Tính"
