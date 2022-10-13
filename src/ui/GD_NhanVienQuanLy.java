@@ -136,7 +136,9 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener{
 //		}
 		con.add(centerP,BorderLayout.CENTER);
 		
-		
+		JPanel southP = new JPanel();
+		southP.setPreferredSize(new Dimension(WIDTH, 100));
+		con.add(southP,BorderLayout.SOUTH);
 	}
 //	public static void main(String[] args) {
 //		new GD_NhanVienQuanLy(new NhanVien()).setVisible(true);
