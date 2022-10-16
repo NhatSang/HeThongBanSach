@@ -4,15 +4,15 @@ public class NhaCungCap {
 	private String maNCC;
 	private String tenNCC;
 	private String nguoiDaiDien;
-	private String SĐT;
+	private String sDt;
 	private String diaChi;
 	
-	public NhaCungCap(String maNCC, String tenNCC, String nguoiDaiDien, String sĐT, String diaChi) {
+	public NhaCungCap(String maNCC, String tenNCC, String nguoiDaiDien, String sDt, String diaChi) {
 		super();
 		this.maNCC = maNCC;
 		this.tenNCC = tenNCC;
 		this.nguoiDaiDien = nguoiDaiDien;
-		SĐT = sĐT;
+		this.sDt = sDt;
 		this.diaChi = diaChi;
 	}
 	public String getMaNCC() {
@@ -33,11 +33,11 @@ public class NhaCungCap {
 	public void setNguoiDaiDien(String nguoiDaiDien) {
 		this.nguoiDaiDien = nguoiDaiDien;
 	}
-	public String getSĐT() {
-		return SĐT;
+	public String getsDt() {
+		return sDt;
 	}
-	public void setSĐT(String sĐT) {
-		SĐT = sĐT;
+	public void setsDt(String sDt) {
+		sDt = sDt;
 	}
 	public String getDiaChi() {
 		return diaChi;
@@ -47,7 +47,7 @@ public class NhaCungCap {
 	}
 	@Override
 	public String toString() {
-		return "NhaCungCap [maNCC=" + maNCC + ", tenNCC=" + tenNCC + ", nguoiDaiDien=" + nguoiDaiDien + ", SĐT=" + SĐT
+		return "NhaCungCap [maNCC=" + maNCC + ", tenNCC=" + tenNCC + ", nguoiDaiDien=" + nguoiDaiDien + ", sDt=" + sDt
 				+ ", diaChi=" + diaChi + "]";
 	}
 }

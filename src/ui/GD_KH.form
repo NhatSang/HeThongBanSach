@@ -88,6 +88,9 @@
               <Dimension value="[200, 200]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTimKiemActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnTimKiem">
           <Properties>
@@ -160,6 +163,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableKHMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -226,9 +232,9 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lbGioiTinh" min="-2" pref="62" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                  <Component id="btnNam" min="-2" max="-2" attributes="0"/>
+                                  <Component id="radNam" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnNu" min="-2" max="-2" attributes="0"/>
+                                  <Component id="radNu" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -269,8 +275,8 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbGioiTinh" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnNam" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnNu" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="radNam" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="radNu" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -352,6 +358,7 @@
             <Property name="text" type="java.lang.String" value="Xo&#xe1;"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnXoaMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaActionPerformed"/>
           </Events>
         </Component>
@@ -360,7 +367,7 @@
             <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="btnNam">
+        <Component class="javax.swing.JRadioButton" name="radNam">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="btnGroupGioiTinh"/>
@@ -369,10 +376,10 @@
             <Property name="text" type="java.lang.String" value="Nam"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNamActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radNamActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="btnNu">
+        <Component class="javax.swing.JRadioButton" name="radNu">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="btnGroupGioiTinh"/>

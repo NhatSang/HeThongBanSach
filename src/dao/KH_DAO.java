@@ -5,6 +5,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -48,5 +49,20 @@ public class KH_DAO {
 		}
 		return dsKH;
 	}
-	
+//        Xoá Khách hàng
+	public void xoa_KH(String maKH) throws SQLException{
+            DataBase.getInstance();
+            Connection connection = DataBase.getConnection();
+            PreparedStatement statement = null;
+            try {
+			String sql = "delete from KhachHang where maKH='" + maKH +"'";
+			statement = connection.prepareStatement(sql);
+			statement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			statement.close();
+		}
+        }
 }
