@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,9 +15,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -43,33 +46,38 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 	private JPanel centerP,childP;
 	static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 	static LocalDate ngayHienTai = LocalDate.now();
+	private int caLap;
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	public GD_NhanVienQuanLy(NhanVien nhanVien) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\icon\\logobook.png"));
 		this.nhanVien = nhanVien;
 		setTitle("Hệ thống quản lý hiệu sách Chí Tâm");
-//		setUndecorated(true);
-		device.setFullScreenWindow(this);
+		setExtendedState(this.MAXIMIZED_BOTH);
+		setUndecorated(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		createGui();
-
 	}
 
 	private void createGui() {
 		Container con = getContentPane();
-
+		Font font1 = new Font("Serif", Font.ITALIC, 20);
 		Box northB = Box.createHorizontalBox();
 		northB.setBorder(new LineBorder(Color.black));
 		Box infoB = Box.createHorizontalBox();
 		Box infoB1 = Box.createVerticalBox();
 
 		lblTenNV = new JLabel();
-		lblTenNV.setText("Nguyễn Nhật Sang");
+		lblTenNV.setText(nhanVien.getHoTen());
 		lblNgay = new JLabel();
 		lblNgay.setText("Ngày: " + dtf.format(ngayHienTai));
 		lblCa = new JLabel();
-		lblCa.setText("Ca: 1");
+		int gioHT = LocalDateTime.now().getHour();
+		if (gioHT >= 8 && gioHT <= 15)
+			caLap = 1;
+		else
+			caLap = 2;
+		lblCa.setText("Ca: "+caLap);
 
 		infoB1.add(lblNgay);
 		infoB1.add(lblCa);
@@ -79,7 +87,7 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 		infoB.add(infoB1);
 
 		Box menuB = Box.createHorizontalBox();
-		menuB.setPreferredSize(new Dimension(900, 50));
+		menuB.setPreferredSize(new Dimension(1000, 50));
 		menuBar = new JMenuBar();
 		menu1 = new JMenu("Nhân Viên");
 		menu2 = new JMenu("Khách Hàng");
@@ -101,9 +109,9 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 		menuBar.add(menu3);
 		menuBar.add(menu4);
 
-		lblTenNV.setFont(new Font("Serif", Font.ITALIC, 20));
-		lblNgay.setFont(new Font("Serif", Font.ITALIC, 20));
-		lblCa.setFont(new Font("Serif", Font.ITALIC, 20));
+		lblTenNV.setFont(font1);
+		lblNgay.setFont(font1);
+		lblCa.setFont(font1);
 
 		menu1.setFont(new Font("Serif", Font.BOLD, 25));
 		menu2.setFont(new Font("Serif", Font.BOLD, 25));
@@ -136,7 +144,42 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 		con.add(centerP, BorderLayout.CENTER);
 
 		JPanel southP = new JPanel();
+		southP.setLayout(new GridLayout(1, 2,30,30));
+		southP.setBackground(Color.orange);
 		southP.setPreferredSize(new Dimension(WIDTH, 100));
+		southP.setBorder(BorderFactory.createLineBorder(Color.black));
+		JPanel southp1 = new JPanel();
+		JPanel southp2 = new JPanel();
+		southp1.setBackground(Color.orange);
+		southp2.setBackground(Color.orange);
+		southp1.setLayout(new GridLayout(3, 1));
+		southp2.setLayout(new GridLayout(4,1));
+		JLabel lblMonHoc = new JLabel("Môn: Phát Triển Ứng Dụng");
+		JLabel lblGV = new JLabel("Giáo Viên: Trần Thị Anh Thi");
+		JLabel lblLop = new JLabel("Lớp: DHKTPM16FTT");
+		JLabel lblSV1 = new JLabel("Nguyễn Nhật Sang - 20001531 (Nhóm trưởng)");
+		JLabel lblSV2 = new JLabel("Lương Viết Thanh - ");
+		JLabel lblSV3 = new JLabel("Trương Văn Tuấn - ");
+		JLabel lblSV4 = new JLabel("Nguyễn Minh Quân -");
+		lblGV.setFont(font1);
+		lblMonHoc.setFont(font1);
+		lblLop.setFont(font1);
+		lblSV1.setFont(font1);
+		lblSV2.setFont(font1);
+		lblSV3.setFont(font1);
+		lblSV4.setFont(font1);
+		
+		southp1.add(lblMonHoc);
+		southp1.add(lblGV);
+		southp1.add(lblLop);
+		
+		southp2.add(lblSV1);
+		southp2.add(lblSV2);
+		southp2.add(lblSV3);
+		southp2.add(lblSV4);
+		
+		southP.add(southp1);
+		southP.add(southp2);
 		con.add(southP, BorderLayout.SOUTH);
 
 		menu1.addMenuListener(this);

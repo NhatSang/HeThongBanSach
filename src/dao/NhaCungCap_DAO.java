@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import connectDB.DataBase;
 import entity.NhaCungCap;
 
-public class NCC_DAO {
+public class NhaCungCap_DAO {
 
-	public NCC_DAO() {
+	public NhaCungCap_DAO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

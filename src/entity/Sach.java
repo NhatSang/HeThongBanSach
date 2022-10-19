@@ -1,28 +1,23 @@
 package entity;
+
 //Thanh
-public class Sach extends SanPham{
+public class Sach extends SanPham {
 	private int namXB, soTrang, tuoiGioiHan;
 	private String nguoiDich;
 	private NhaXuatBan nhaXB;
 	private TacGia tacGia;
 	private LoaiBia loaiBia;
 	private CapDoHoc capDoHoc;
-	
+
 	public Sach() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	public Sach(String maSP, String tenSP, String donVi, String moTa, int soLuong, int vAT, double donGia,
-			LoaiSanPham loaiSP, NhaCungCap nhaCC) {
-		super(maSP, tenSP, donVi, moTa, soLuong, vAT, donGia, loaiSP, nhaCC);
-		// TODO Auto-generated constructor stub
-	}
-
-	public Sach(int namXB, int soTrang, int tuoiGioiHan, String nguoiDich, NhaXuatBan nhaXB, TacGia tacGia,
-			LoaiBia loaiBia, CapDoHoc capDoHoc) {
-		super();
+	public Sach(String maSP, String tenSP, String donVi, String moTa, String hinhAnh, int soLuong, int vAT,
+			double donGia, LoaiSanPham loaiSP, NhaCungCap nhaCC, int namXB, int soTrang, int tuoiGioiHan,
+			String nguoiDich, NhaXuatBan nhaXB, TacGia tacGia, LoaiBia loaiBia, CapDoHoc capDoHoc) {
+		super(maSP, tenSP, donVi, moTa, hinhAnh, soLuong, vAT, donGia, loaiSP, nhaCC);
 		this.namXB = namXB;
 		this.soTrang = soTrang;
 		this.tuoiGioiHan = tuoiGioiHan;
@@ -39,9 +34,5 @@ public class Sach extends SanPham{
 				+ nguoiDich + ", nhaXB=" + nhaXB + ", tacGia=" + tacGia + ", loaiBia=" + loaiBia + ", capDoHoc="
 				+ capDoHoc + "]";
 	}
-	
-	
-	
-	
-	
+
 }
