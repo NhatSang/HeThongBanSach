@@ -2,16 +2,20 @@ package entity;
 //Sang
 public class ChiTietHoaDon {
 	private int soLuong;
+	private double giaBan;
 	private SanPham sanPham;
 	public ChiTietHoaDon() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ChiTietHoaDon(int soLuong, SanPham sanPham) {
+
+	public ChiTietHoaDon(int soLuong, double giaBan, SanPham sanPham) {
 		super();
 		this.soLuong = soLuong;
+		this.giaBan = giaBan;
 		this.sanPham = sanPham;
 	}
+
 
 	public int getSoLuong() {
 		return soLuong;

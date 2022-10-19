@@ -14,6 +14,7 @@ public class HoaDon {
 	public HoaDon() {
 		super();
 		// TODO Auto-generated constructor stub
+		this.dsChiTiet = new ArrayList<ChiTietHoaDon>();
 	}
 
 	public HoaDon(String maHD, LocalDate ngayLapHD, int caLapHD, NhanVien nhanVien, KhachHang khachHang) {
@@ -23,9 +24,12 @@ public class HoaDon {
 		this.caLapHD = caLapHD;
 		this.nhanVien = nhanVien;
 		this.khachHang = khachHang;
-		this.dsChiTiet = new ArrayList<>(dsChiTiet);
+		this.dsChiTiet = new ArrayList<ChiTietHoaDon>();
 	}
-
+	public void themCTHD(SanPham sp, double giaBan, int soLuong) {
+		ChiTietHoaDon cTHD = new ChiTietHoaDon(soLuong, giaBan, sp);
+		this.dsChiTiet.add(cTHD);
+	}
 	public String getMaHD() {
 		return maHD;
 	}

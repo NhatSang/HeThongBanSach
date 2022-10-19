@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
-import dao.NCC_DAO;
+import dao.NhaCungCap_DAO;
 import entity.NhaCungCap;
 
 /**
@@ -542,7 +542,7 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     private DefaultTableModel modelNCC;
     private void loadNCC() {
-    	NCC_DAO ncc = new NCC_DAO();
+    	NhaCungCap_DAO ncc = new NhaCungCap_DAO();
     	ArrayList<NhaCungCap> dsncc = ncc.getAllNhaCungCap();
     	int i= 0;
     	for (NhaCungCap nhaCungCap : dsncc) {

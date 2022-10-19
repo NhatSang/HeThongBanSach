@@ -10,6 +10,11 @@ public class LoaiSanPham {
 		// TODO Auto-generated constructor stub
 	}
 
+	public LoaiSanPham(String maLoai) {
+		super();
+		this.maLoai = maLoai;
+	}
+
 	public LoaiSanPham(String maLoai, String tenLoai) {
 		super();
 		this.maLoai = maLoai;
@@ -31,7 +36,6 @@ public class LoaiSanPham {
 	public void setTenLoai(String tenLoai) {
 		this.tenLoai = tenLoai;
 	}
-
 
 	@Override
 	public String toString() {

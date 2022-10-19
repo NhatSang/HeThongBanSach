@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
-import dao.KH_DAO;
+import dao.KhachHang_DAO;
 import entity.KhachHang;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -636,9 +636,9 @@ public class GD_KH extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
     private DefaultTableModel modelKhachHang;
-    private KH_DAO kh_dao;
+    private KhachHang_DAO kh_dao;
     private void loadKH() {
-    	KH_DAO kh = new KH_DAO();
+    	KhachHang_DAO kh = new KhachHang_DAO();
     	ArrayList<KhachHang> dskh = kh.getAllKhachHang();
     	int i = 0;
     	for (KhachHang khachHang : dskh) {
