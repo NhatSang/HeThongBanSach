@@ -40,7 +40,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 	private JMenuBar menuBar;
 	private JMenu menu1, menu2, menu3, menu4, menu5;
 	private JMenuItem itemDangXuat, itemDoiMatKhau, itemThoat, itemLapHd, itemTimHD;
-	private JPanel centerP, childP;
+	private Box centerB;
 	static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 	static LocalDate ngayHienTai = LocalDate.now();
 	private int caLap;
@@ -145,8 +145,8 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		northB.add(Box.createHorizontalStrut(20));
 
 		con.add(northB, BorderLayout.NORTH);
-		centerP = new JPanel();
-		con.add(centerP, BorderLayout.CENTER);
+		centerB = Box.createVerticalBox();
+		con.add(centerB, BorderLayout.CENTER);
 
 		JPanel southP = new JPanel();
 		southP.setLayout(new GridLayout(1, 2,30,30));
@@ -223,10 +223,9 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 	}
 
 	public void thayCenterP(JPanel p) {
-//		childP = p;
-		centerP.removeAll();
-		centerP.add(p);
-		centerP.validate();
+		centerB.removeAll();
+		centerB.add(p);
+		centerB.validate();
 	}
 
 	@Override
