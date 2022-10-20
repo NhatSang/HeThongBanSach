@@ -75,7 +75,7 @@ public class Frm_ThemKhachHang extends JFrame implements ActionListener{
 		String fdate = "yyyy-MM-dd";
 		jdcNgaySinh = new JDateChooser();
 		jdcNgaySinh.setDateFormatString(fdate);
-		
+
 		rdoNam = new JRadioButton("Nam");
 		rdoNu = new JRadioButton("Nữ");
 		ButtonGroup gr = new ButtonGroup();

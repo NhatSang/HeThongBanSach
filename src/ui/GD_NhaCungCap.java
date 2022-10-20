@@ -529,6 +529,8 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+    	setEditableForm(true);
+    	themNCC();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -575,12 +577,12 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     private DefaultTableModel modelNCC;
     private NhaCungCap_DAO ncc_dao = new NhaCungCap_DAO();
+    int stt = 0;
     private void loadNCC() {
-    	NhaCungCap_DAO ncc = new NhaCungCap_DAO();
-    	ArrayList<NhaCungCap> dsncc = ncc.getAllNhaCungCap();
-    	int i= 0;
+    	NhaCungCap_DAO ncc_dao = new NhaCungCap_DAO();
+    	ArrayList<NhaCungCap> dsncc = ncc_dao.getAllNhaCungCap();
     	for (NhaCungCap nhaCungCap : dsncc) {
-			Object row[] = {++i, nhaCungCap.getMaNCC(), nhaCungCap.getTenNCC(), nhaCungCap.getNguoiDaiDien(), nhaCungCap.getsDt(), nhaCungCap.getDiaChi()};
+			Object row[] = {++stt, nhaCungCap.getMaNCC(), nhaCungCap.getTenNCC(), nhaCungCap.getNguoiDaiDien(), nhaCungCap.getsDt(), nhaCungCap.getDiaChi()};
 			modelNCC.addRow(row);
 		}
     }
@@ -592,7 +594,7 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
 		txtNguoiDaiDien.setText(tableNCC.getValueAt(row, 3).toString());
                 txtSDT.setText(tableNCC.getValueAt(row, 4).toString());
 		txtDiaChi.setText(tableNCC.getValueAt(row, 5).toString());
-		setEditableForm(false);
+		setEditableForm(true);
 	}	
     public void setEditableForm(boolean st) {
             txtMa.setEditable(st);
@@ -602,17 +604,22 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
             txtDiaChi.setEditable(st);
 	}
     
-//    public void themNCC(){
+    public void themNCC(){
 //        String ma = txtMa.getText();
-//        String hoten = txt.getText();
-//        String ns = txtNgaySinh.getText();
-//        String dc = txtDiaChi.getText();
-//        String sdt = txtSDT.getText();
-//        String gt = radNam.isSelected() ? "Nam" : "Nữ";
-//        Object[] kh = {++stt,ma, hoten, ns, dc, sdt, gt};
-//            modelKhachHang.addRow(kh);
-//            setEditableForm(true);
-//    }
+        String ten = txtTen.getText();
+        String ndd = txtNguoiDaiDien.getText();
+        String sdt = txtSDT.getText();
+        String dc = txtDiaChi.getText();
+        NhaCungCap a = new NhaCungCap(ten, ndd, sdt, dc);
+            
+            try {
+				ncc_dao.addNCC(a);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+       loadNCC();
+    }
     public void xoa(){
         int row = tableNCC.getSelectedRow();
 		if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa")==JOptionPane.YES_OPTION) {

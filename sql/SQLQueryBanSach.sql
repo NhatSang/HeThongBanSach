@@ -359,3 +359,6 @@ go
 select * from NhaCungCap
 
 delete from NhaCungCap
+
+
+DROP TABLE SanPham;

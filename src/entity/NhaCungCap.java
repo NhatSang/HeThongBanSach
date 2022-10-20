@@ -11,6 +11,14 @@ public class NhaCungCap {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public NhaCungCap(String tenNCC, String nguoiDaiDien, String sDt, String diaChi) {
+		super();
+		this.tenNCC = tenNCC;
+		this.nguoiDaiDien = nguoiDaiDien;
+		this.sDt = sDt;
+		this.diaChi = diaChi;
+	}
 
 	public NhaCungCap(String maNCC) {
 		super();
@@ -65,7 +73,7 @@ public class NhaCungCap {
 	public void setDiaChi(String diaChi) {
 		this.diaChi = diaChi;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "NhaCungCap [maNCC=" + maNCC + ", tenNCC=" + tenNCC + ", nguoiDaiDien=" + nguoiDaiDien + ", sDt=" + sDt
