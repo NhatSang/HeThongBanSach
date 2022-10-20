@@ -1,11 +1,12 @@
 package entity;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class KhachHang {
 	private String maKH;
 	private String hoTen;
-	private LocalDate ngaySinh;
+	private Date ngaySinh;
 	private String diaChi;
 	private String sDT;
 	private Boolean gioiTinh;
@@ -22,7 +23,16 @@ public class KhachHang {
 		this.sDT = sDT;
 	}
 
-	public KhachHang(String maKH, String hoTen, LocalDate ngaySinh, String diaChi, String sDT, Boolean gioiTinh) {
+	public KhachHang(String hoTen, Date ngaySinh, String diaChi, String sDT, Boolean gioiTinh) {
+		super();
+		this.hoTen = hoTen;
+		this.ngaySinh = ngaySinh;
+		this.diaChi = diaChi;
+		this.sDT = sDT;
+		this.gioiTinh = gioiTinh;
+	}
+
+	public KhachHang(String maKH, String hoTen, Date ngaySinh, String diaChi, String sDT, Boolean gioiTinh) {
 		super();
 		this.maKH = maKH;
 		this.hoTen = hoTen;
@@ -48,11 +58,11 @@ public class KhachHang {
 		this.hoTen = hoTen;
 	}
 
-	public LocalDate getNgaySinh() {
+	public Date getNgaySinh() {
 		return ngaySinh;
 	}
 
-	public void setNgaySinh(LocalDate ngaySinh) {
+	public void setNgaySinh(Date ngaySinh) {
 		this.ngaySinh = ngaySinh;
 	}
 

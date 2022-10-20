@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
@@ -19,14 +21,16 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import entity.KhachHang;
+
 public class Frm_ThemKhachHang extends JFrame implements ActionListener{
 	private JLabel lblTen, lblNgaySinh, lblDiaChi,lblSdt,lblGioiTinh;
 	private JTextField txtTen, txtDiaChi, txtSdt;
 	private JButton btnThem, btnHuy;
 	private JRadioButton rdoNam, rdoNu;
 	private JDateChooser jdcNgaySinh;
-	private JPanel parent;
-	public Frm_ThemKhachHang(JPanel parent) {
+	private GD_LapHoaDon parent;
+	public Frm_ThemKhachHang(GD_LapHoaDon parent) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\icon\\logobook.png"));
 		setTitle("Hệ thống quản lý hiệu sách Chí Tâm");
 		setSize(600, 350);
@@ -145,6 +149,14 @@ public class Frm_ThemKhachHang extends JFrame implements ActionListener{
 			this.dispose();
 		}
 		else if(obj == btnThem) {
+			String hoTen = txtTen.getText();
+			String diaChi = txtDiaChi.getText();
+			String sdt = txtSdt.getText();
+			Date ngaySinh = Date.valueOf(((JTextField) jdcNgaySinh.getDateEditor().getUiComponent()).getText());
+			Boolean gioiTinh = rdoNam.isSelected() ? true : false; 
+			KhachHang kh = new KhachHang(hoTen, ngaySinh, diaChi, sdt, gioiTinh);
+			KhachHang kh1 = new KhachHang(hoTen, diaChi, sdt);
+			parent.capNhatKhachHang(kh1);
 			this.dispose();
 		}
 	}

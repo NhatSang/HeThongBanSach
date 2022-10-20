@@ -5,6 +5,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,7 +40,7 @@ public class KhachHang_DAO {
 			while (rs.next()) {
 				String ma = rs.getString(1);
 				String hoten = rs.getString(2);
-				LocalDate ns = LocalDate.parse(rs.getDate(3).toString());
+				Date ns = rs.getDate(3);
 				String diaChi = rs.getString(4);
 				String sdt = rs.getString(5);
 				Boolean gt = rs.getBoolean(6);
