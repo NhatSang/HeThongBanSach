@@ -63,7 +63,6 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 
 	public GD_LapHoaDon(NhanVien nhanVien) {
 		this.nhanVien = nhanVien;
-		this.setPreferredSize(new Dimension(1350, 580));
 		createGui();
 		DataBase.getInstance().connect();
 		sp_DAO = new SanPham_DAO();
