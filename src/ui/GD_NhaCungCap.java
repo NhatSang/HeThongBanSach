@@ -4,12 +4,14 @@
  */
 package ui;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
 import dao.NhaCungCap_DAO;
 import entity.NhaCungCap;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -88,6 +90,11 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        tableNCC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableNCCMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tableNCC);
@@ -170,6 +177,11 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
         });
 
         btnXoa.setText("Xoá");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -309,6 +321,11 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        tableNCC.addMouseListener(new java.awt.event.MouseAdapter() {	
+            public void mouseClicked(java.awt.event.MouseEvent evt) {	
+                tableNCCMouseClicked(evt);	
+            }	
+        });
         jScrollPane1.setViewportView(tableNCC);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -389,7 +406,11 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
         });
 
         btnXoa.setText("Xoá");
-
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {	
+            public void actionPerformed(java.awt.event.ActionEvent evt) {	
+                btnXoaActionPerformed(evt);	
+            }	
+        });
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -518,6 +539,18 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tableNCCAncestorAdded
 
+    private void tableNCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableNCCMouseClicked
+        // TODO add your handling code here:
+        int row = tableNCC.getSelectedRow();
+	loadTbltoForm(row);
+    }//GEN-LAST:event_tableNCCMouseClicked
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        xoa();
+        xoatrang();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;
@@ -541,6 +574,7 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
     private DefaultTableModel modelNCC;
+    private NhaCungCap_DAO ncc_dao = new NhaCungCap_DAO();
     private void loadNCC() {
     	NhaCungCap_DAO ncc = new NhaCungCap_DAO();
     	ArrayList<NhaCungCap> dsncc = ncc.getAllNhaCungCap();
@@ -549,5 +583,54 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
 			Object row[] = {++i, nhaCungCap.getMaNCC(), nhaCungCap.getTenNCC(), nhaCungCap.getNguoiDaiDien(), nhaCungCap.getsDt(), nhaCungCap.getDiaChi()};
 			modelNCC.addRow(row);
 		}
+    }
+    
+    public void loadTbltoForm(int row) {
+        System.out.println(row);
+		txtMa.setText(tableNCC.getValueAt(row, 1).toString());
+		txtTen.setText(tableNCC.getValueAt(row, 2).toString());
+		txtNguoiDaiDien.setText(tableNCC.getValueAt(row, 3).toString());
+                txtSDT.setText(tableNCC.getValueAt(row, 4).toString());
+		txtDiaChi.setText(tableNCC.getValueAt(row, 5).toString());
+		setEditableForm(false);
+	}	
+    public void setEditableForm(boolean st) {
+            txtMa.setEditable(st);
+            txtTen.setEditable(st);
+            txtNguoiDaiDien.setEditable(st);
+            txtSDT.setEditable(st);
+            txtDiaChi.setEditable(st);
+	}
+    
+//    public void themNCC(){
+//        String ma = txtMa.getText();
+//        String hoten = txt.getText();
+//        String ns = txtNgaySinh.getText();
+//        String dc = txtDiaChi.getText();
+//        String sdt = txtSDT.getText();
+//        String gt = radNam.isSelected() ? "Nam" : "Nữ";
+//        Object[] kh = {++stt,ma, hoten, ns, dc, sdt, gt};
+//            modelKhachHang.addRow(kh);
+//            setEditableForm(true);
+//    }
+    public void xoa(){
+        int row = tableNCC.getSelectedRow();
+		if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa")==JOptionPane.YES_OPTION) {
+			try {
+				ncc_dao.xoaNCC(tableNCC.getValueAt(row, 1).toString());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			modelNCC.removeRow(row);
+			xoatrang();
+		}
+    }
+    public void xoatrang() {
+    	txtMa.setText("");
+        txtTen.setText("");
+        txtNguoiDaiDien.setText("");
+        txtDiaChi.setText("");
+        txtSDT.setText("");
     }
 }
