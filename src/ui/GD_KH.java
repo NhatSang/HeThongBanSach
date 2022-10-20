@@ -12,6 +12,7 @@ import dao.KhachHang_DAO;
 import entity.KhachHang;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -165,6 +166,11 @@ public class GD_KH extends javax.swing.JPanel {
         lbGioiTinh.setText("Giới Tính:");
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnXoa.setText("Xoá");
         btnXoa.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -297,7 +303,7 @@ public class GD_KH extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     
-    public void myInitComponents() {
+ public void myInitComponents() {
         btnGroupGioiTinh = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
@@ -425,12 +431,16 @@ public class GD_KH extends javax.swing.JPanel {
         lbGioiTinh.setText("Giới Tính:");
 
         btnThem.setText("Thêm");
-
-        btnXoa.setText("Xoá");
-        btnXoa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnXoaMouseClicked(evt);
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
             }
+        });
+        btnXoa.setText("Xoá");
+        btnXoa.addMouseListener(new java.awt.event.MouseAdapter() {	
+            public void mouseClicked(java.awt.event.MouseEvent evt) {	
+                btnXoaMouseClicked(evt);	
+            }	
         });
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -555,7 +565,7 @@ public class GD_KH extends javax.swing.JPanel {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-}
+ }
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTimKiemActionPerformed
@@ -590,8 +600,9 @@ public class GD_KH extends javax.swing.JPanel {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
+        xoa();
         xoatrang();
-             
+        stt = 0;
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
@@ -608,6 +619,10 @@ public class GD_KH extends javax.swing.JPanel {
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btnXoaMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -636,13 +651,17 @@ public class GD_KH extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
     private DefaultTableModel modelKhachHang;
-    private KhachHang_DAO kh_dao;
+    private KhachHang_DAO kh_dao = new KhachHang_DAO();
+    private int stt = 0;
+    
     private void loadKH() {
+        while(tableKH.getRowCount()!=0) {
+			modelKhachHang.removeRow(0);
+		}
     	KhachHang_DAO kh = new KhachHang_DAO();
     	ArrayList<KhachHang> dskh = kh.getAllKhachHang();
-    	int i = 0;
     	for (KhachHang khachHang : dskh) {
-			Object row[] = {++i, khachHang.getMaKH(), khachHang.getHoTen(), khachHang.getNgaySinh(), khachHang.getDiaChi(),khachHang.getsDT(), khachHang.getGioiTinh()};
+			Object row[] = {++stt, khachHang.getMaKH(), khachHang.getHoTen(), khachHang.getNgaySinh(), khachHang.getDiaChi(),khachHang.getsDT(), khachHang.getGioiTinh()};
 			modelKhachHang.addRow(row);
 		}
     }
@@ -658,7 +677,7 @@ public class GD_KH extends javax.swing.JPanel {
 			radNam.setSelected(true);
 		else
 			radNu.setSelected(true);
-		setEditableForm(false);
+		setEditableForm(true);
 	}	
     public void setEditableForm(boolean st) {
             txtMa.setEditable(st);
@@ -670,16 +689,46 @@ public class GD_KH extends javax.swing.JPanel {
             radNu.setEnabled(st);
 	}
     
+    public void themKH(){
+        String ma = txtMa.getText();
+        String hoten = txtHoTen.getText();
+        String ns = txtNgaySinh.getText();
+        String dc = txtDiaChi.getText();
+        String sdt = txtSDT.getText();
+        String gt = radNam.isSelected() ? "Nam" : "Nữ";
+        Object[] kh = {++stt,ma, hoten, ns, dc, sdt, gt};
+            modelKhachHang.addRow(kh);
+            setEditableForm(true);
+    }
+    
     public void xoa(){
         int row = tableKH.getSelectedRow();
-        try {
+		if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa")==JOptionPane.YES_OPTION) {
+			try {
 				kh_dao.xoa_KH(tableKH.getValueAt(row, 1).toString());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        modelKhachHang.removeRow(row);
+			modelKhachHang.removeRow(row);
+			xoatrang();
+		}
+        
     }
+    
+    private void tim_Kiem(JTable table) {
+		String tk = txtTimKiem.getText();
+		int row = table.getRowCount();
+		for (int i = 0; i < row; i++) {
+			int col = table.getColumnCount();
+			for (int j = 0; j < col; j++) {
+				if (table.getValueAt(i, j).toString().contains(tk))
+					table.setRowSelectionInterval(i, i);
+				
+			}
+		}
+		
+	}
     public void xoatrang(){
         txtMa.setText("");
         txtHoTen.setText("");
@@ -689,5 +738,4 @@ public class GD_KH extends javax.swing.JPanel {
         radNam.setSelected(true);
     }
 }
-
     

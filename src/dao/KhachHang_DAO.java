@@ -87,4 +87,26 @@ public class KhachHang_DAO {
 		}
 		return kh;
 	}
-}
+//	Thêm khách hàng
+    public void addKH(KhachHang kh) throws SQLException {
+        DataBase.getInstance();
+	Connection connection = DataBase.getConnection();
+	PreparedStatement statement = null;
+	try {
+		String sql = "insert into KhachHang values (?, ?, ?, ?, ?, ?)";
+		statement = connection.prepareStatement(sql);
+		statement.setString(1, kh.getMaKH());
+		statement.setString(2, kh.getHoTen());
+		statement.setString(3, kh.getNgaySinh().toString());
+                    statement.setString(4, kh.getDiaChi());
+                    statement.setString(5, kh.getsDT());
+		statement.setBoolean(6, kh.getGioiTinh());
+		statement.executeUpdate();
+	} catch (Exception e) {
+		// TODO: handle exception
+		e.printStackTrace();
+	} finally {
+		statement.close();
+	}
+    }
+}	
