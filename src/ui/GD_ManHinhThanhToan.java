@@ -74,10 +74,46 @@ public class GD_ManHinhThanhToan extends JFrame{
 		Box bngaylap = Box.createHorizontalBox();
 		bngaylap.add(lblngaylap);
 		bngaylap.add(lbltngaylap);
+		Box bcalap = Box.createHorizontalBox();
+		bcalap.add(lblcalap);
+		bcalap.add(lbltcalap);
+		Box bnhanvien = Box.createHorizontalBox();
+		bnhanvien.add(lblnhanvien);
+		bnhanvien.add(lbltnhanvien);
+		Box bkhachhang = Box.createHorizontalBox();
+		bkhachhang.add(lblkhachhang);
+		bkhachhang.add(lbltkhachhang);
+		Box bsdt = Box.createHorizontalBox();
+		bsdt.add(lblsdt);
+		bsdt.add(lbltsdt);
+
 		
+		
+		
+		btGD.add(Box.createVerticalStrut(15));
 		btGD.add(bma);
+		btGD.add(Box.createVerticalStrut(15));
 		btGD.add(bngaylap);
-		con.add(btGD);
+		btGD.add(Box.createVerticalStrut(15));
+		btGD.add(bcalap);
+		btGD.add(Box.createVerticalStrut(15));
+		btGD.add(bnhanvien);
+		btGD.add(Box.createVerticalStrut(15));
+		btGD.add(bkhachhang);
+		btGD.add(Box.createVerticalStrut(15));
+		btGD.add(bsdt);
+		btGD.add(Box.createVerticalStrut(15));
+
+		
+		Box btop = Box.createVerticalBox();
+		Box bcenter = Box.createHorizontalBox();
+		Box btong = Box.createVerticalBox();
+		btop.add(Box.createVerticalStrut(30));
+		btop.add(btGD);
+		bcenter.add(DSNV);
+		btong.add(btop);
+		btong.add(bcenter);
+		con.add(btong);
 		
 	}
 	public static void main(String[] args) {

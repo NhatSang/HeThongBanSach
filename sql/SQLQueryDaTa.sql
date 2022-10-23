@@ -50,7 +50,7 @@ values
 go
 select * from TaiKhoan
 insert into TaiKhoan
-values (default,'123','NV00002')
+values ('NV00002','123','NV00002')
 go
 select * from KhachHang
 insert into KhachHang

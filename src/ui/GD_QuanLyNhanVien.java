@@ -108,7 +108,8 @@ public class GD_QuanLyNhanVien extends JPanel implements ActionListener{
 		lbltaikhoan.setFont(new Font("Serif", Font.ITALIC, 20));
 		lblmatkhau.setFont(new Font("Serif", Font.ITALIC, 20));
 
-//set size
+		//set size
+		
 		lblma.setPreferredSize(lblngaysinh.getPreferredSize());
 		lblhoten.setPreferredSize(lblngaysinh.getPreferredSize());
 		lblemail.setPreferredSize(lblngaysinh.getPreferredSize());
@@ -118,8 +119,8 @@ public class GD_QuanLyNhanVien extends JPanel implements ActionListener{
 		lblchucvu.setPreferredSize(lblngaysinh.getPreferredSize());
 		lbltaikhoan.setPreferredSize(lblngaysinh.getPreferredSize());
 		lblmatkhau.setPreferredSize(lblngaysinh.getPreferredSize());
-		// chức vụ có nhân viên bán hàng và người quản lý
-		// tạo bảng danh sách nhân viên
+		
+		//tạo bảng danh sách nhân viên
 		String[] header = "STT;Mã;Họ tên;Ngày sinh;CCCD;Địa chỉ;SĐT;Giới tính;Tài khoản;Chức vụ".split(";");
 		tableModel = new DefaultTableModel(header, 0);
 		table = new JTable(tableModel);
