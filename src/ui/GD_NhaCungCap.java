@@ -535,6 +535,7 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+    	capNhat();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void tableNCCAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tableNCCAncestorAdded
@@ -639,5 +640,26 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
         txtNguoiDaiDien.setText("");
         txtDiaChi.setText("");
         txtSDT.setText("");
+    }
+    
+    public void capNhat() {
+    	int row = tableNCC.getSelectedRow();
+    	String ma = txtMa.getText();
+    	String ten = txtTen.getText();
+    	String ndd = txtNguoiDaiDien.getText();
+    	String sdt = txtSDT.getText();
+    	String dc = txtDiaChi.getText();
+    	
+    	modelNCC.setValueAt(ten, row, 2);
+    	modelNCC.setValueAt(ndd, row, 3);
+    	modelNCC.setValueAt(sdt, row, 4);
+    	modelNCC.setValueAt(dc, row, 5);
+    	
+    	NhaCungCap ncc = new NhaCungCap(ma, ten, ndd, sdt, dc);
+    	try {
+			ncc_dao.capNhat(ncc);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
     }
 }

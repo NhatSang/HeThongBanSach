@@ -159,7 +159,7 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 		JLabel lblLop = new JLabel("Lớp: DHKTPM16FTT");
 		JLabel lblSV1 = new JLabel("Nguyễn Nhật Sang - 20001531 (Nhóm trưởng)");
 		JLabel lblSV2 = new JLabel("Lương Viết Thanh - ");
-		JLabel lblSV3 = new JLabel("Trương Văn Tuấn - ");
+		JLabel lblSV3 = new JLabel("Trương Văn Tuấn - 20005911");
 		JLabel lblSV4 = new JLabel("Nguyễn Minh Quân -");
 		lblGV.setFont(font1);
 		lblMonHoc.setFont(font1);
