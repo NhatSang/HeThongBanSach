@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import connectDB.DataBase;
 import entity.NhaCungCap;
 
@@ -70,6 +69,28 @@ public class NhaCungCap_DAO {
 			statement.setString(2, ncc.getNguoiDaiDien());
 			statement.setString(3, ncc.getsDt());
 			statement.setString(4, ncc.getDiaChi());
+			statement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			statement.close();
+		}
+	}
+	
+//	Thêm nhà cung cấp
+	public void capNhat(NhaCungCap nhaCungCap) throws SQLException {
+		DataBase.getInstance();
+		Connection connection = DataBase.getConnection();
+		PreparedStatement statement = null;
+		try {
+			String sql = "update NhaCungCap set tenNCC=?, nguoiDaiDien=?, sdt=?, diaChi=? where maNCC=?";
+			statement = connection.prepareStatement(sql);
+			statement.setString(5, nhaCungCap.getMaNCC());
+			statement.setString(1, nhaCungCap.getTenNCC());
+			statement.setString(2, nhaCungCap.getNguoiDaiDien());
+			statement.setString(3, nhaCungCap.getsDt());
+			statement.setString(4, nhaCungCap.getDiaChi());;
 			statement.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
