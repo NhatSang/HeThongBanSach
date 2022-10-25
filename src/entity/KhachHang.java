@@ -16,9 +16,8 @@ public class KhachHang {
 		// TODO Auto-generated constructor stub
 	}
 
-	public KhachHang(String maKH, String hoTen, String diaChi, String sDT) {
+	public KhachHang(String hoTen, String diaChi, String sDT) {
 		super();
-		this.maKH = maKH;
 		this.hoTen = hoTen;
 		this.diaChi = diaChi;
 		this.sDT = sDT;

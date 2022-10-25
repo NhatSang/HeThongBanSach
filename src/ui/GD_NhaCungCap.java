@@ -639,6 +639,9 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
 			modelNCC.removeRow(row);
 			xoatrang();
 		}
+                modelNCC.setRowCount(0);
+       stt = 0;
+       loadNCC();
     }
     public void xoatrang() {
     	txtMa.setText("");
