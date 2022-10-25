@@ -28,7 +28,7 @@ public class SanPham {
 		this.nhaCC = nhaCC;
 	}
 
-	public SanPham(String maSP, String tenSP, String donVi, String hinhAnh, int soLuong, double donGia,
+	public SanPham(String maSP, String tenSP, String donVi, String hinhAnh, int soLuong, int vAT, double donGia,
 			NhaCungCap nhaCC) {
 		super();
 		this.maSP = maSP;
@@ -36,6 +36,7 @@ public class SanPham {
 		this.donVi = donVi;
 		this.hinhAnh = hinhAnh;
 		this.soLuong = soLuong;
+		VAT = vAT;
 		this.donGia = donGia;
 		this.nhaCC = nhaCC;
 	}

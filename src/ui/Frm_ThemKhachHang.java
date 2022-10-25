@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import javax.swing.Box;
@@ -21,15 +22,18 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import dao.KhachHang_DAO;
 import entity.KhachHang;
 
-public class Frm_ThemKhachHang extends JFrame implements ActionListener{
-	private JLabel lblTen, lblNgaySinh, lblDiaChi,lblSdt,lblGioiTinh;
+public class Frm_ThemKhachHang extends JFrame implements ActionListener {
+	private JLabel lblTen, lblNgaySinh, lblDiaChi, lblSdt, lblGioiTinh;
 	private JTextField txtTen, txtDiaChi, txtSdt;
 	private JButton btnThem, btnHuy;
 	private JRadioButton rdoNam, rdoNu;
 	private JDateChooser jdcNgaySinh;
 	private GD_LapHoaDon parent;
+	private KhachHang_DAO kh_DAO;
+
 	public Frm_ThemKhachHang(GD_LapHoaDon parent) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\icon\\logobook.png"));
 		setTitle("Hệ thống quản lý hiệu sách Chí Tâm");
@@ -38,6 +42,7 @@ public class Frm_ThemKhachHang extends JFrame implements ActionListener{
 		setResizable(false);
 		setLocationRelativeTo(null);
 		this.parent = parent;
+		kh_DAO = new KhachHang_DAO();
 		createGui();
 	}
 
@@ -50,14 +55,13 @@ public class Frm_ThemKhachHang extends JFrame implements ActionListener{
 		Box b4 = Box.createHorizontalBox();
 		Box b5 = Box.createHorizontalBox();
 		Box b6 = Box.createHorizontalBox();
-		
-		
+
 		Font font1 = new Font("Serif", Font.PLAIN, 17);
-		
+
 		JLabel lblTieuDe = new JLabel("Thêm Khách Hàng");
 		lblTieuDe.setFont(new Font("Serif", Font.BOLD, 50));
 		b1.add(lblTieuDe);
-		
+
 		lblTen = new JLabel("Họ tên: ");
 		lblGioiTinh = new JLabel("Giới tính: ");
 		lblNgaySinh = new JLabel("Ngày sinh: ");
@@ -71,7 +75,7 @@ public class Frm_ThemKhachHang extends JFrame implements ActionListener{
 		lblTen.setPreferredSize(lblSdt.getPreferredSize());
 		lblDiaChi.setPreferredSize(lblSdt.getPreferredSize());
 		lblNgaySinh.setPreferredSize(lblSdt.getPreferredSize());
-		
+
 		txtTen = new JTextField();
 		txtDiaChi = new JTextField();
 		txtSdt = new JTextField();
@@ -86,12 +90,12 @@ public class Frm_ThemKhachHang extends JFrame implements ActionListener{
 		gr.add(rdoNam);
 		gr.add(rdoNu);
 		rdoNam.setSelected(true);
-		
+
 		btnThem = new JButton("Thêm");
 		btnHuy = new JButton("Hủy");
 		btnThem.setFont(new Font("Serif", Font.BOLD, 20));
 		btnHuy.setFont(new Font("Serif", Font.BOLD, 20));
-		
+
 		b2.add(Box.createHorizontalStrut(20));
 		b2.add(lblTen);
 		b2.add(txtTen);
@@ -101,28 +105,28 @@ public class Frm_ThemKhachHang extends JFrame implements ActionListener{
 		b2.add(Box.createHorizontalStrut(20));
 		b2.add(rdoNu);
 		b2.add(Box.createHorizontalStrut(20));
-		
+
 		b3.add(Box.createHorizontalStrut(20));
 		b3.add(lblNgaySinh);
 		b3.add(jdcNgaySinh);
 		b3.add(Box.createHorizontalStrut(20));
-		
+
 		b4.add(Box.createHorizontalStrut(20));
 		b4.add(lblDiaChi);
 		b4.add(txtDiaChi);
 		b4.add(Box.createHorizontalStrut(20));
-		
+
 		b5.add(Box.createHorizontalStrut(20));
 		b5.add(lblSdt);
 		b5.add(txtSdt);
 		b5.add(Box.createHorizontalStrut(20));
-		
+
 		b6.add(Box.createHorizontalStrut(20));
 		b6.add(btnThem);
 		b6.add(Box.createHorizontalStrut(20));
 		b6.add(btnHuy);
 		b6.add(Box.createHorizontalStrut(20));
-		
+
 		mainBox.add(b1);
 		mainBox.add(Box.createVerticalStrut(20));
 		mainBox.add(b2);
@@ -135,29 +139,39 @@ public class Frm_ThemKhachHang extends JFrame implements ActionListener{
 		mainBox.add(Box.createVerticalStrut(20));
 		mainBox.add(b6);
 		mainBox.add(Box.createVerticalStrut(20));
-		
-		con.add(mainBox,BorderLayout.CENTER);
+
+		con.add(mainBox, BorderLayout.CENTER);
 		btnHuy.addActionListener(this);
 		btnThem.addActionListener(this);
 	}
 
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		if(obj == btnHuy) {
+		if (obj == btnHuy) {
 			this.dispose();
-		}
-		else if(obj == btnThem) {
+		} else if (obj == btnThem) {
 			String hoTen = txtTen.getText();
 			String diaChi = txtDiaChi.getText();
 			String sdt = txtSdt.getText();
+
 			Date ngaySinh = Date.valueOf(((JTextField) jdcNgaySinh.getDateEditor().getUiComponent()).getText());
-			Boolean gioiTinh = rdoNam.isSelected() ? true : false; 
-			KhachHang kh = new KhachHang(hoTen, ngaySinh, diaChi, sdt, gioiTinh);
-			KhachHang kh1 = new KhachHang(hoTen, diaChi, sdt);
-			parent.capNhatKhachHang(kh1);
-			this.dispose();
+			Boolean gioiTinh = rdoNam.isSelected() ? true : false;
+			KhachHang kh1 = kh_DAO.timKhachHangTheoSdt(sdt);
+			if (kh1 == null) {
+				KhachHang kh = new KhachHang(hoTen, ngaySinh, diaChi, sdt, gioiTinh);
+				try {
+					kh_DAO.addKH(kh);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+				}
+				kh1 = kh_DAO.timKhachHangTheoSdt(sdt);
+				parent.setKhachHang(kh1);
+				parent.capNhatKhachHang(kh1);
+				this.dispose();
+			}else
+				JOptionPane.showMessageDialog(null, "Số điện thoại này đã tồn tại");
 		}
 	}
 

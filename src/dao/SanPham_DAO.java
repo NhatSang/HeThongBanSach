@@ -73,8 +73,8 @@ public class SanPham_DAO {
 		DataBase.getInstance();
 		Connection con = DataBase.getConnection();
 		try {
-			String sql = "select maSP,tenSP,hinhAnh,donGia, donVi, soLuong,maNCC from SanPham where tenSP = "
-					+ "N'"+key+"' or maSP =" +"'"+key +"'";
+			String sql = "select maSP,tenSP,hinhAnh,donGia, donVi, soLuong,maNCC, VAT from SanPham where tenSP = "
+					+ "N'" + key + "' or maSP =" + "'" + key + "'";
 			Statement stm = con.createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
@@ -85,7 +85,8 @@ public class SanPham_DAO {
 				String donVi = rs.getString(5);
 				int soLuong = rs.getInt(6);
 				NhaCungCap ncc = new NhaCungCap(rs.getString(7));
-				sp = new SanPham(maSp, tenSp, donVi, hinhAnh, soLuong, donGia, ncc);
+				int VAT = rs.getInt(8);
+				sp = new SanPham(maSp, tenSp, donVi, hinhAnh, soLuong, VAT, donGia, ncc);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

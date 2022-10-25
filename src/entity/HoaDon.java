@@ -26,9 +26,35 @@ public class HoaDon {
 		this.khachHang = khachHang;
 		this.dsChiTiet = new ArrayList<ChiTietHoaDon>();
 	}
+
 	public void themCTHD(SanPham sp, double giaBan, int soLuong) {
 		ChiTietHoaDon cTHD = new ChiTietHoaDon(soLuong, giaBan, sp);
 		this.dsChiTiet.add(cTHD);
+	}
+
+	public void xoaCTHD(int index) {
+		this.dsChiTiet.remove(index);
+	}
+	public double tongTien() {
+		double s = 0;
+		for(ChiTietHoaDon c : dsChiTiet) {
+			s+=c.getGiaBan()*c.getSoLuong();
+		}
+		return s;
+	}
+	public double tongVAT() {
+		double s = 0;
+		for(ChiTietHoaDon c : dsChiTiet) {
+			s+=c.getGiaBan()*(double)c.getSanPham().getVAT()/100;
+		}
+		return s;
+	}
+	public double tongTienSauVAT() {
+		double s = 0;
+		for(ChiTietHoaDon c : dsChiTiet) {
+			s+=c.thanhTien();
+		}
+		return s;
 	}
 	public String getMaHD() {
 		return maHD;
