@@ -18,8 +18,9 @@ public class NhanVien {
 		this.maNV = maNV;
 	}
 
-	public NhanVien(String hoTen, ChucVu chucVu) {
+	public NhanVien(String maNV, String hoTen, ChucVu chucVu) {
 		super();
+		this.maNV = maNV;
 		this.hoTen = hoTen;
 		this.chucVu = chucVu;
 	}
