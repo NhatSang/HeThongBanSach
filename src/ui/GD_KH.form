@@ -191,19 +191,15 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbNgaySinh" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbNgaySinh" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="lbHoTen" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                               <Component id="lbMa" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="lbSDT" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                              <Component id="lbDiaChi" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="txtHoTen" alignment="1" pref="261" max="32767" attributes="0"/>
-                              <Component id="txtSDT" alignment="1" max="32767" attributes="0"/>
-                              <Component id="txtDiaChi" alignment="1" max="32767" attributes="0"/>
-                              <Component id="txtNgaySinh" max="32767" attributes="0"/>
                               <Component id="txtMa" max="32767" attributes="0"/>
+                              <Component id="jdcNgaySinh" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -224,6 +220,19 @@
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lbDiaChi" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="lbSDT" min="-2" pref="33" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="txtSDT" pref="261" max="32767" attributes="0"/>
+                      <Component id="txtDiaChi" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -240,11 +249,11 @@
                       <Component id="lbHoTen" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtNgaySinh" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="lbNgaySinh" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lbNgaySinh" min="-2" max="-2" attributes="0"/>
+                      <Component id="jdcNgaySinh" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtDiaChi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbDiaChi" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -299,11 +308,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Ng&#xe0;y Sinh:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtNgaySinh">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNgaySinhActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbDiaChi">
           <Properties>
@@ -373,6 +377,11 @@
               <ComponentRef name="btnGroupGioiTinh"/>
             </Property>
             <Property name="text" type="java.lang.String" value="N&#x1eef;"/>
+          </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jdcNgaySinh">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
           </Properties>
         </Component>
       </SubComponents>

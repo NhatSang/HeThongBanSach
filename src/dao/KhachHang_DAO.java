@@ -76,13 +76,12 @@ public class KhachHang_DAO {
 		Connection con = DataBase.getConnection();
 		try {
 			Statement stm = con.createStatement();
-			ResultSet rs = stm.executeQuery("select maKH,hoTen,diaChi,sdt from KhachHang where sdt =" + "'" + key + "'");
+			ResultSet rs = stm.executeQuery("select hoTen,diaChi,sdt from KhachHang where sdt =" + "'" + key + "'");
 			if(rs.next()) {
-				String maKH = rs.getString(1);
-				String hoTen = rs.getString(2);
-				String diaChi = rs.getString(3);
-				String sdt = rs.getString(4);
-				kh = new KhachHang(maKH,hoTen, diaChi, sdt);
+				String hoTen = rs.getString(1);
+				String diaChi = rs.getString(2);
+				String sdt = rs.getString(3);
+				kh = new KhachHang(hoTen, diaChi, sdt);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -95,14 +94,14 @@ public class KhachHang_DAO {
 	Connection connection = DataBase.getConnection();
 	PreparedStatement statement = null;
 	try {
-		String sql = "insert into KhachHang values (?, ?, ?, ?, ?, ?)";
+		String sql = "insert into KhachHang values (default, ?, ?, ?, ?, ?)";
 		statement = connection.prepareStatement(sql);
-		statement.setString(1, kh.getMaKH());
-		statement.setString(2, kh.getHoTen());
-		statement.setString(3, kh.getNgaySinh().toString());
-                    statement.setString(4, kh.getDiaChi());
-                    statement.setString(5, kh.getsDT());
-		statement.setBoolean(6, kh.getGioiTinh());
+//		statement.setString(1, kh.getMaKH());
+		statement.setString(1, kh.getHoTen());
+		statement.setString(2, kh.getNgaySinh().toString());
+        statement.setString(3, kh.getDiaChi());
+        statement.setString(4, kh.getsDT());
+		statement.setBoolean(5, kh.getGioiTinh());
 		statement.executeUpdate();
 	} catch (Exception e) {
 		// TODO: handle exception
