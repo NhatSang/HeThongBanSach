@@ -76,12 +76,13 @@ public class KhachHang_DAO {
 		Connection con = DataBase.getConnection();
 		try {
 			Statement stm = con.createStatement();
-			ResultSet rs = stm.executeQuery("select hoTen,diaChi,sdt from KhachHang where sdt =" + "'" + key + "'");
+			ResultSet rs = stm.executeQuery("select maKH,hoTen,diaChi,sdt from KhachHang where sdt =" + "'" + key + "'");
 			if(rs.next()) {
-				String hoTen = rs.getString(1);
-				String diaChi = rs.getString(2);
-				String sdt = rs.getString(3);
-				kh = new KhachHang(hoTen, diaChi, sdt);
+				String maKH = rs.getString(1);
+				String hoTen = rs.getString(2);
+				String diaChi = rs.getString(3);
+				String sdt = rs.getString(4);
+				kh = new KhachHang(maKH,hoTen, diaChi, sdt);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

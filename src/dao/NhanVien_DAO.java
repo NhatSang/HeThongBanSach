@@ -21,11 +21,12 @@ public class NhanVien_DAO {
 		Connection con = DataBase.getConnection();
 		try {
 			Statement stm = con.createStatement();
-			ResultSet rs = stm.executeQuery("select hoTen,maCV from NhanVien where maNV = " + "'" + maNV + "'");
+			ResultSet rs = stm.executeQuery("select maNV,hoTen,maCV from NhanVien where maNV = " + "'" + maNV + "'");
 			if (rs.next()) {
-				String hoTen = rs.getString(1);
-				ChucVu chucVu = new ChucVu(rs.getString(2));
-				nv = new NhanVien(hoTen, chucVu);
+				String ma = rs.getString(1);
+				String hoTen = rs.getString(2);
+				ChucVu chucVu = new ChucVu(rs.getString(3));
+				nv = new NhanVien(ma,hoTen, chucVu);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

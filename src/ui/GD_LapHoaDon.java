@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -34,6 +35,7 @@ import connectDB.DataBase;
 import dao.HoaDon_DAO;
 import dao.KhachHang_DAO;
 import dao.SanPham_DAO;
+import entity.ChiTietHoaDon;
 import entity.HoaDon;
 import entity.KhachHang;
 import entity.NhanVien;
@@ -48,7 +50,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 			lblDonVi, lblSoLuong, lblMaHd, lblNgayLap, lblCaLap, LblNguoiLap, lblTongTien, lblTongVAT, lblTienCanTra,
 			lblTienKhachTra, lblTienThua;
 	private JTextField txtTimKh, txtTimSp, txtTienKhachTra;
-	private JButton btnTimKh, btnThemKh, btnTimSp, btnThemCTHD, btnThanhToan;
+	private JButton btnTimKh, btnThemKh, btnTimSp, btnThemCTHD, btnThanhToan, btnXoaCTHD;
 	private Box leftBox, rightBox, northLB, centerLB;
 	private JTable tblCTHD;
 	private DefaultTableModel tblModel;
@@ -68,10 +70,9 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		sp_DAO = new SanPham_DAO();
 		hd_DAO = new HoaDon_DAO();
 		kh_DAO = new KhachHang_DAO();
-		hoaDon = new HoaDon();
-		sp = new SanPham();
-		khachHang = new KhachHang();
-
+		hoaDon = null;
+		sp = null;
+		khachHang = null;
 	}
 
 	private void createGui() {
@@ -136,7 +137,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		nlb2.add(nlb2Text);
 		nlb2.add(Box.createHorizontalStrut(600));
 
-		northLB.add(Box.createVerticalStrut(25));
+		northLB.add(Box.createVerticalStrut(35));
 		northLB.add(nlb1);
 		northLB.add(Box.createVerticalStrut(20));
 		northLB.add(nlb2);
@@ -250,17 +251,27 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		gbc.gridy = 0;
 		northRP.add(nrb2, gbc1);
 
-		String[] header = "STT,Tên sản phẩm,Đơn giá,Số lượng,VAT,Thành tiền".split(",");
+		String[] header = "STT,Tên sản phẩm,Đơn giá,Số lượng,VAT(%),Thành tiền".split(",");
 		tblModel = new DefaultTableModel(header, 0);
 		tblCTHD = new JTable(tblModel);
 
-		scrP = new JScrollPane(tblCTHD);
-		scrP.setPreferredSize(new Dimension(WIDTH, 300));
-		scrP.setBorder(BorderFactory.createTitledBorder("Chi tiết hóa đơn"));
+		Box centerRB = Box.createVerticalBox();
+		Box crB1 = Box.createHorizontalBox();
+		btnXoaCTHD = new JButton(new ImageIcon(".\\icon\\trash.png"));
 
-		lblTongTien = new JLabel("Tổng:");
-		lblTongVAT = new JLabel("Tổng VAT:");
-		lblTienCanTra = new JLabel("Tổng tiền (gồm VAT):");
+		scrP = new JScrollPane(tblCTHD);
+		scrP.setPreferredSize(new Dimension(WIDTH, 250));
+		centerRB.setBorder(BorderFactory.createTitledBorder("Chi tiết hóa đơn"));
+
+		centerRB.add(scrP);
+
+		crB1.add(Box.createHorizontalStrut(450));
+		crB1.add(btnXoaCTHD);
+		centerRB.add(crB1);
+
+		lblTongTien = new JLabel("Tổng: 0.0");
+		lblTongVAT = new JLabel("Tổng VAT: 0.0");
+		lblTienCanTra = new JLabel("Tổng tiền (gồm VAT): 0.0");
 		lblTienKhachTra = new JLabel("Khách thanh toán:");
 		lblTienThua = new JLabel("Tiền thừa:");
 		lblTongTien.setFont(font1);
@@ -304,7 +315,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		southP.add(btnThanhToan);
 
 		rightBox.add(northRP);
-		rightBox.add(scrP);
+		rightBox.add(centerRB);
 		rightBox.add(srP1);
 		rightBox.add(srP2);
 		rightBox.add(Box.createVerticalStrut(10));
@@ -318,6 +329,8 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		btnThemCTHD.addActionListener(this);
 		btnThemKh.addActionListener(this);
 		btnTimKh.addActionListener(this);
+		btnXoaCTHD.addActionListener(this);
+		txtTienKhachTra.addActionListener(this);
 	}
 
 	public Icon loadImg(String linkImage, int k, int m) {
@@ -358,20 +371,70 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Không tìm thấy sản phẩm");
 			}
 		} else if (obj == btnThemCTHD) {
-			clearSanPham();
+			if (sp != null) {
+				if (khachHang != null) {
+					String soLuong = JOptionPane.showInputDialog("Nhập số lượng");
+					int sl;
+					if (isInt(soLuong)) {
+						sl = Integer.parseInt(soLuong);
+						if (sl <= 0)
+							JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn 0");
+						else if (sl > sp.getSoLuong())
+							JOptionPane.showMessageDialog(null, "Số lượng sản phẩm hiện không đủ");
+						else {
+							hoaDon.themCTHD(sp, sp.getDonGia(), sl);
+							capNhatHoaDon();
+							clearSanPham();
+							sp = null;
+						}
+					} else
+						JOptionPane.showMessageDialog(null, "Số lượng phải là số");
 
+				} else
+					JOptionPane.showMessageDialog(null, "Vui lòng nhập thông tin khách hàng");
+			}
 		} else if (obj == btnTimKh) {
 			if (txtTimKh.getText().length() != 0) {
 				khachHang = kh_DAO.timKhachHangTheoSdt(txtTimKh.getText());
-				if (khachHang != null)
+				if (khachHang != null) {
 					capNhatKhachHang(khachHang);
-				else
+					hoaDon = new HoaDon(soHD, ngayHienTai, caLap, nhanVien, khachHang);
+				} else
 					JOptionPane.showMessageDialog(null, "Không tìm thấy khách hàng");
 			}
 		} else if (obj == btnThemKh) {
 			new Frm_ThemKhachHang(this).setVisible(true);
+			hoaDon = new HoaDon(soHD, ngayHienTai, caLap, nhanVien, khachHang);
+		} else if (obj == btnXoaCTHD) {
+			int index = tblCTHD.getSelectedRow();
+			hoaDon.xoaCTHD(index);
+			capNhatHoaDon();
+		} else if (obj == txtTienKhachTra) {
+			if (hoaDon != null) {
+				String tkt = txtTienKhachTra.getText();
+				double t;
+				if (isInt(tkt)) {
+					t = Double.parseDouble(tkt);
+					double s = t - hoaDon.tongTienSauVAT();
+					lblTienThua.setText("Tiền thừa: " + s);
+				}
+			}
 		}
+	}
 
+	private void capNhatHoaDon() {
+		tblModel.setRowCount(0);
+		ArrayList<ChiTietHoaDon> dsCTHD = hoaDon.getDsChiTiet();
+		int i = 1;
+		for (ChiTietHoaDon c : dsCTHD) {
+			String r = i + "," + c.getSanPham().getTenSP() + "," + c.getGiaBan() + "," + c.getSoLuong() + ","
+					+ c.getSanPham().getVAT() + "," + c.thanhTien();
+			tblModel.addRow(r.split(","));
+			i++;
+		}
+		lblTongTien.setText("Tổng: " + hoaDon.tongTien());
+		lblTongVAT.setText("Tổng VAT: " + hoaDon.tongVAT());
+		lblTienCanTra.setText("Tổng tiền (gồm VAT): " + hoaDon.tongTienSauVAT());
 	}
 
 	public void capNhatSanPham(SanPham sp) {
@@ -409,4 +472,18 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		lblDiaChi1.setText(kh.getDiaChi());
 		lblSdt1.setText(kh.getsDT());
 	}
+
+	public boolean isInt(String s) {
+		try {
+			Integer.parseInt(s);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+
+	public void setKhachHang(KhachHang khachHang) {
+		this.khachHang = khachHang;
+	}
+
 }
