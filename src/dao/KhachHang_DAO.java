@@ -110,4 +110,26 @@ public class KhachHang_DAO {
 		statement.close();
 	}
     }
+//	Thêm khách hàng
+	public void capNhat(KhachHang khachHang) throws SQLException {
+		DataBase.getInstance();
+		Connection connection = DataBase.getConnection();
+		PreparedStatement statement = null;
+		try {
+			String sql = "update KhachHang set hoTen=?, ngaySinh=?, diaChi=?, sdt=?, gioiTinh=? where maKH=?";
+			statement = connection.prepareStatement(sql);
+			statement.setString(6, khachHang.getMaKH());
+			statement.setString(1, khachHang.getHoTen());
+			statement.setString(2, khachHang.getNgaySinh().toString());
+			statement.setString(3, khachHang.getDiaChi());
+			statement.setString(4, khachHang.getsDT());
+			statement.setString(5, khachHang.getGioiTinh().toString());
+			statement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			statement.close();
+		}
+	}
 }	
