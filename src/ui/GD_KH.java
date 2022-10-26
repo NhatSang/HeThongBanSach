@@ -612,6 +612,7 @@ public class GD_KH extends javax.swing.JPanel {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+    	capNhat();
     }//GEN-LAST:event_btnSuaActionPerformed
 
 
@@ -742,6 +743,27 @@ public class GD_KH extends javax.swing.JPanel {
 		}
 		
 	}
+    public void capNhat() {
+    	int row = tableKH.getSelectedRow();
+    	String ma = txtMa.getText();
+    	String ten = txtHoTen.getText();
+    	Date ns = Date.valueOf(((JTextField) jdcNgaySinh.getDateEditor().getUiComponent()).getText());
+    	String sdt = txtSDT.getText();
+    	String dc = txtDiaChi.getText();
+    	Boolean gt = radNam.isSelected() ? true : false;
+    	modelKhachHang.setValueAt(ten, row, 2);
+    	modelKhachHang.setValueAt(ns, row, 3);
+    	modelKhachHang.setValueAt(sdt, row, 4);
+    	modelKhachHang.setValueAt(dc, row, 5);
+    	modelKhachHang.setValueAt(gt, row, 6);
+    	
+    	KhachHang kh = new KhachHang(ma, ten, ns, dc, sdt, gt);
+    	try {
+			kh_dao.capNhat(kh);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    }
     public void xoatrang(){
         txtMa.setText("");
         txtHoTen.setText("");
