@@ -187,49 +187,58 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="16" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbNgaySinh" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbHoTen" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
-                              <Component id="lbMa" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="lbDiaChi" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="lbSDT" min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtHoTen" alignment="1" pref="261" max="32767" attributes="0"/>
-                              <Component id="txtMa" max="32767" attributes="0"/>
-                              <Component id="jdcNgaySinh" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtSDT" pref="261" max="32767" attributes="0"/>
+                              <Component id="txtDiaChi" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="lbGioiTinh" min="-2" pref="62" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="radNam" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="radNu" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="messenger" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lbNgaySinh" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbHoTen" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
+                                              <Component id="lbMa" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txtHoTen" alignment="1" pref="261" max="32767" attributes="0"/>
+                                              <Component id="txtMa" max="32767" attributes="0"/>
+                                              <Component id="jdcNgaySinh" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="lbGioiTinh" min="-2" pref="62" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="radNam" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="radNu" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                          <Component id="btnThem" min="-2" pref="72" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                          <Component id="btnXoa" min="-2" pref="72" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                          <Component id="btnSua" min="-2" pref="72" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="btnThem" min="-2" pref="72" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="btnXoa" min="-2" pref="72" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="btnSua" min="-2" pref="72" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbDiaChi" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="lbSDT" min="-2" pref="33" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtSDT" pref="261" max="32767" attributes="0"/>
-                      <Component id="txtDiaChi" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -269,6 +278,8 @@
                       <Component id="radNam" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="radNu" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="messenger" min="-2" pref="25" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnThem" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -382,6 +393,16 @@
         <Component class="com.toedter.calendar.JDateChooser" name="jdcNgaySinh">
           <Properties>
             <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="messenger">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="2"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>

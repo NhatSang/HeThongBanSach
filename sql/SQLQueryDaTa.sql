@@ -58,7 +58,7 @@ values
 	(default,N'Lương Viết Thanh','2002/07/27',N'448/3, tỉnh lộ 8, ấp Tây, Tân An Hội, Củ Chi, Tp Hồ Chí Minh','0396979388',1)
 go
 /* Thử dữ liệu*/
-delete from TaiKhoan
+delete from KhachHang
 go
 select maSP,tenSP,hinhAnh,donGia, donVi, soLuong,maNCC from SanPham
 where tenSP = N'những Đêm Không Ngủ Những Ngày Chậm Trôi' or maSP = 'SVH00001'
