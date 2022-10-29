@@ -70,7 +70,24 @@ public class KhachHang_DAO {
 			statement.close();
 		}
 	}
-
+        public void xoaTheoTrangThai(KhachHang kh) throws SQLException {
+		DataBase.getInstance();
+		Connection connection = DataBase.getConnection();
+		PreparedStatement statement = null;
+                String trangThai = "1";
+		try {
+			String sql = "update KhachHang set trangThai=? where maKH=?";
+			statement = connection.prepareStatement(sql);
+			statement.setString(2, kh.getMaKH());
+                        statement.setString(1, trangThai);
+			statement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			statement.close();
+		}
+	}
 	// Sang: tìm tt 1 khách hàng theo sdt
 	public KhachHang timKhachHangTheoSdt(String key) {
 		KhachHang kh = null;
