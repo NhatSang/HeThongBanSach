@@ -637,7 +637,8 @@ public class GD_KH extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        themKH();
+        setEditableForm(true);
+        them_KH();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -721,86 +722,33 @@ public class GD_KH extends javax.swing.JPanel {
             radNam.setEnabled(st);
             radNu.setEnabled(st);
 	}
-    
-    public void themKH(){
-//        if(btnXoa.getText().equals("Huỷ")&& check == 2){
-//            return;
-//        }
-        messenger.setText("");
-        if(check!=1){
-            xoatrang();
-            setEditableForm(true);
+    public void them_KH(){
+        if(check != 1){
             btnXoa.setText("Huỷ");
             btnSua.setEnabled(false);
             check = 1;
         }else{
-            txtMa.setText("");
-            String hoten = txtHoTen.getText();
-            if(hoten.equals("")){
-                messenger.setText("Nhập họ tên khách hàng");
-                return;
+            checkThongTin();
+            if(checkThongTin()){
+                 String hoten = txtHoTen.getText();
+                 String dc = txtDiaChi.getText();
+                 String sdt = txtSDT.getText();
+                 Boolean gt = radNam.isSelected() ? true : false;
+                 Date ns = Date.valueOf(((JTextField) jdcNgaySinh.getDateEditor().getUiComponent()).getText());
+                 KhachHang kh = new KhachHang(hoten, ns, dc, sdt, gt);
+                 try {
+                    kh_dao.addKH(kh);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+				e.printStackTrace();
+                }
+                modelKhachHang.setRowCount(0);
+                stt = 0;
+                loadKH();
             }
-            if(jdcNgaySinh.getDate()==null){
-                messenger.setText("Nhập ngày sinh khách hàng");
-                return;
-            }
-            String dc = txtDiaChi.getText();
-            if(dc.equals("")){
-                messenger.setText("Nhập địa chỉ khách hàng");
-                return;
-            }
-            String sdt = txtSDT.getText();
-            if(!sdt.matches("[0-9]{10}")){
-                messenger.setText("SĐT phải đúng định dạng 0xxxxxxxxx");
-                return;
-            }
-            Boolean gt = radNam.isSelected() ? true : false;
-        Date ns = Date.valueOf(((JTextField) jdcNgaySinh.getDateEditor().getUiComponent()).getText());
-        KhachHang kh = new KhachHang(hoten, ns, dc, sdt, gt);
-        try {
-        	kh_dao.addKH(kh);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-        modelKhachHang.setRowCount(0);
-        stt = 0;
-        btnXoa.setText("Xoá");
-        xoatrang();
-        loadKH();
-                System.out.println(check);
-            }
-        
-    }
-    public boolean checkThongTin(){
-        String ten = txtHoTen.getText();
-//        Date ns = Date.valueOf(((JTextField) jdcNgaySinh.getDateEditor().getUiComponent()).getText());
-
-        String dd = jdcNgaySinh.getDate().toString();
-        String dc = txtDiaChi.getText();
-        String sdt = txtSDT.getText();
-        if(ten.equals("")){
-                messenger.setText("Nhập họ tên khách hàng");
-                return false;
-            }
-        if(jdcNgaySinh.getDate()==null){
-                messenger.setText("Nhập ngày sinh khách hàng");
-                return false;
-            }
-        if(dc.equals("")){
-                messenger.setText("Nhập địa chỉ khách hàng");
-                return false;
-            }
-        if(!sdt.matches("[0-9]{10}")){
-                messenger.setText("SĐT phải đúng định dạng 0xxxxxxxxx");
-                return false;
-            }
-        String today = Date.valueOf(LocalDate.now()).toString();
-        if(dd.compareTo(today)<0){
-            messenger.setText("Ngày sinh phải nhỏ hơn ngày hiện tại");
-            return false;
         }
-        return true;
     }
+   
     public void xoa(){
         if (btnXoa.getText().equals("Huỷ") && check == 1) {
 			xoatrang();
@@ -809,7 +757,7 @@ public class GD_KH extends javax.swing.JPanel {
 			btnXoa.setText("Xóa");
                         btnSua.setEnabled(true);
                         check = 0;
-		}
+        }
         else if (btnXoa.getText().equals("Huỷ") && check == 2) {
 			xoatrang();
 			setEditableForm(false);
@@ -824,19 +772,21 @@ public class GD_KH extends javax.swing.JPanel {
                 messenger.setText("Vui lòng chọn dòng cần xoá");
                 return;
             }
+                String ma = txtMa.getText();
+                KhachHang kh = new KhachHang(ma);
             if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa")==JOptionPane.YES_OPTION) {
 		try {
-			kh_dao.xoa_KH(tableKH.getValueAt(row, 1).toString());
+			kh_dao.xoaTheoTrangThai(kh);
 		} catch (SQLException e) {
 				// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		modelKhachHang.removeRow(row);
 		xoatrang();
-		modelKhachHang.setRowCount(0);
-                stt = 0;
-                loadKH();
-	}}
+            }
+            modelKhachHang.setRowCount(0);
+            stt = 0;
+            loadKH();
+        }
     }
     
     private void tim_Kiem(JTable table) {
@@ -914,6 +864,37 @@ public class GD_KH extends javax.swing.JPanel {
         txtDiaChi.setText("");
         txtSDT.setText("");
         radNam.setSelected(true);
+    }
+    public boolean checkThongTin(){
+        String ten = txtHoTen.getText();
+        String dc = txtDiaChi.getText();
+        String sdt = txtSDT.getText();
+        String today = Date.valueOf(LocalDate.now()).toString();        
+        if(ten.equals("")){
+                messenger.setText("Nhập họ tên khách hàng");
+                return false;
+            }
+        if(jdcNgaySinh.getDate()==null){
+            messenger.setText("Nhập ngày sinh khách hàng");
+            return false;
+            }
+        if(dc.equals("")){
+                messenger.setText("Nhập địa chỉ khách hàng");
+                return false;
+            }
+        if(!sdt.matches("[0-9]{10}")){
+                messenger.setText("SĐT phải đúng định dạng 0xxxxxxxxx");
+                return false;
+            }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String ns = dateFormat.format(jdcNgaySinh.getDate());
+        int a = ns.compareTo(today);
+                System.out.println(a);
+        if(a > 0){
+                        messenger.setText("Ngày sinh phải bé hơn ngày hiện tại");
+                        return false;
+                    }
+        return true;
     }
 }
     

@@ -15,7 +15,11 @@ public class KhachHang {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+        public KhachHang(String maKH) {
+		super();
+                this.maKH = maKH;
+		// TODO Auto-generated constructor stub
+	}
 	public KhachHang(String hoTen, String diaChi, String sDT) {
 		super();
 		this.hoTen = hoTen;
