@@ -9,9 +9,10 @@ public class TacGia {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TacGia(String maTG) {
+
+	public TacGia(String tenTG) {
 		super();
-		this.maTG = maTG;
+		this.tenTG = tenTG;
 	}
 
 	public TacGia(String maTG, String tenTG) {

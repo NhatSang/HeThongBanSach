@@ -440,7 +440,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 	public void capNhatSanPham(SanPham sp) {
 		lblImg.setIcon(loadImg(".\\img\\" + sp.getHinhAnh(), 150, 150));
 		lblTenSp.setText("Tên sản phẩm: " + sp.getTenSP());
-		lblNCC.setText("Nhà cung cấp: " + sp.getNhaCC().getMaNCC());
+		lblNCC.setText("Nhà cung cấp: " + sp.getNhaCC().getTenNCC());
 		lblDonGia.setText("Đơn giá: " + sp.getDonGia());
 		lblDonVi.setText("Đơn vị tính: " + sp.getDonVi());
 		lblSoLuong.setText("Số lượng: " + sp.getSoLuong());

@@ -20,9 +20,10 @@ public class NhaCungCap {
 		this.diaChi = diaChi;
 	}
 
-	public NhaCungCap(String maNCC) {
+	public NhaCungCap(String maNCC, String tenNCC) {
 		super();
 		this.maNCC = maNCC;
+		this.tenNCC = tenNCC;
 	}
 
 	public NhaCungCap(String maNCC, String tenNCC, String nguoiDaiDien, String sDt, String diaChi) {
