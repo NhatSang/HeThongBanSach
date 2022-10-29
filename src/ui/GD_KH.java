@@ -731,6 +731,7 @@ public class GD_KH extends javax.swing.JPanel {
             xoatrang();
             setEditableForm(true);
             btnXoa.setText("Huỷ");
+            btnSua.setEnabled(false);
             check = 1;
         }else{
             txtMa.setText("");
@@ -739,8 +740,6 @@ public class GD_KH extends javax.swing.JPanel {
                 messenger.setText("Nhập họ tên khách hàng");
                 return;
             }
-
-//            System.out.println(ns);
             if(jdcNgaySinh.getDate()==null){
                 messenger.setText("Nhập ngày sinh khách hàng");
                 return;
@@ -751,12 +750,11 @@ public class GD_KH extends javax.swing.JPanel {
                 return;
             }
             String sdt = txtSDT.getText();
-            if(sdt.equals("")){
-                messenger.setText("Nhập sđt khách hàng");
+            if(!sdt.matches("[0-9]{10}")){
+                messenger.setText("SĐT phải đúng định dạng 0xxxxxxxxx");
                 return;
             }
             Boolean gt = radNam.isSelected() ? true : false;
-//        System.out.println(ns);
         Date ns = Date.valueOf(((JTextField) jdcNgaySinh.getDateEditor().getUiComponent()).getText());
         KhachHang kh = new KhachHang(hoten, ns, dc, sdt, gt);
         try {
@@ -804,36 +802,20 @@ public class GD_KH extends javax.swing.JPanel {
         return true;
     }
     public void xoa(){
-//        if (check != 0) {
-//			xoatrang();
-//			setEditableForm(false);
-//			messenger.setText("");
-//			btnXoa.setText("Xóa");
-//		}
-//
-//        int row = tableKH.getSelectedRow();
-//        if(row == -1){
-//            messenger.setText("Vui lòng chọn dòng cần xoá");
-//            return;
-//        }
-//	if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa")==JOptionPane.YES_OPTION) {
-//		try {
-//			kh_dao.xoa_KH(tableKH.getValueAt(row, 1).toString());
-//		} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		modelKhachHang.removeRow(row);
-//		xoatrang();
-//		modelKhachHang.setRowCount(0);
-//                stt = 0;
-//                loadKH();
-//	}
-        if (btnXoa.getText().equals("Huỷ")) {
+        if (btnXoa.getText().equals("Huỷ") && check == 1) {
 			xoatrang();
 			setEditableForm(false);
 			messenger.setText("");
 			btnXoa.setText("Xóa");
+                        btnSua.setEnabled(true);
+                        check = 0;
+		}
+        else if (btnXoa.getText().equals("Huỷ") && check == 2) {
+			xoatrang();
+			setEditableForm(false);
+			messenger.setText("");
+			btnXoa.setText("Xóa");
+                        btnThem.setEnabled(true);
                         check = 0;
 		}
         else{
@@ -871,12 +853,9 @@ public class GD_KH extends javax.swing.JPanel {
 		
 	}
     public void capNhat() {
-        if (btnXoa.getText().equals("Hủy") && check == 1) {
-            check = 0;
-			return;
-		}
+        
         messenger.setText("");
-        if(btnXoa.getText().equals("Xoá")){
+        if(check != 2){
             int row = tableKH.getSelectedRow();
             if(row == -1){
                 messenger.setText("Vui lòng chọn khách hàng cần cập nhật");
@@ -884,9 +863,9 @@ public class GD_KH extends javax.swing.JPanel {
             }
             loadTbltoForm(row);
             setEditableForm(true);
-            txtMa.setEditable(false);
             btnXoa.setText("Hủy");
-            check = 1;
+            btnThem.setEnabled(false);
+            check = 2;
         }else{
             int row = tableKH.getSelectedRow();
             String ten = txtHoTen.getText();
