@@ -33,7 +33,7 @@ public class KhachHang_DAO {
 			DataBase.getInstance();
 			Connection con = DataBase.getConnection();
 
-			String sql = "Select * from KhachHang";
+			String sql = "Select * from KhachHang where trangThai = 0";
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(sql);
 
@@ -53,13 +53,15 @@ public class KhachHang_DAO {
 	}
 
 //        Xoá Khách hàng
+	// Sang đã chỉnh sửa
 	public void xoa_KH(String maKH) throws SQLException {
 		DataBase.getInstance();
 		Connection connection = DataBase.getConnection();
 		PreparedStatement statement = null;
 		try {
-			String sql = "delete from KhachHang where maKH='" + maKH + "'";
+			String sql = "update KhachHang set trangThai = 1 where maKH = ?";
 			statement = connection.prepareStatement(sql);
+			statement.setString(1, maKH);
 			statement.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -94,7 +96,7 @@ public class KhachHang_DAO {
 	Connection connection = DataBase.getConnection();
 	PreparedStatement statement = null;
 	try {
-		String sql = "insert into KhachHang values (default, ?, ?, ?, ?, ?)";
+		String sql = "insert into KhachHang values (default, ?, ?, ?, ?, ?,0)";
 		statement = connection.prepareStatement(sql);
 //		statement.setString(1, kh.getMaKH());
 		statement.setString(1, kh.getHoTen());
