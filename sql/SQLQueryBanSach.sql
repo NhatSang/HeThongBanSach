@@ -136,17 +136,12 @@ BEGIN
 		select @len = COUNT(maNCC) FROM NhaCungCap
 	else
 	begin
-		if @tbl = 'LSP'
-			select @len = COUNT(maLoai) FROM LoaiSanPham
+		if @tbl = 'NXB'
+			select @len = COUNT(maNXB) FROM NhaXuatBan
 		else
 		begin
-			if @tbl = 'NXB'
-				select @len = COUNT(maNXB) FROM NhaXuatBan
-			else
-			begin
-				if @tbl = 'CDH'
-					select @len = COUNT(maCDH) FROM CapDoHoc
-			end
+			if @tbl = 'CDH'
+				select @len = COUNT(maCDH) FROM CapDoHoc
 		end
 	end
 	if @len = 0
@@ -157,17 +152,12 @@ BEGIN
 			select @id = max(right(maNCC,5)) FROM NhaCungCap
 		else
 		begin
-			if @tbl = 'LSP'
-				select @id = max(right(maLoai,5)) FROM LoaiSanPham
+			if @tbl = 'NXB'
+				select @id = max(right(maNXB,5)) FROM NhaXuatBan
 			else
 			begin
-				if @tbl = 'NXB'
-					select @id = max(right(maNXB,5)) FROM NhaXuatBan
-				else
-				begin
-					if @tbl = 'CDH'
-						select @id = max(right(maCDH,5)) FROM CapDoHoc
-				end
+				if @tbl = 'CDH'
+					select @id = max(right(maCDH,5)) FROM CapDoHoc
 			end
 		end
 	end
@@ -181,51 +171,53 @@ BEGIN
 	return @id
 end
 go
-create function autoIdSP(@loai as int)
+create function autoIdLSP(@loai as varchar(3))
 returns varchar(8)
 as
 begin
 	declare @id varchar(8)
-	declare @ml varchar(3)
-	if(@loai = 1)
-		set @ml = 'SGK'
-	else
-	begin
-		if(@loai = 2)
-			set @ml = 'SVH'
-		else
-		begin
-			if(@loai = 3)
-				set @ml = 'STN'
-			else
-			begin
-				if(@loai = 4)
-					set @ml = 'SKT'
-				else
-				begin
-					if(@loai = 5)
-						set @ml = 'SNN'
-					else
-					begin
-						if(@loai = 6)
-							set @ml = 'VPP'
-					end
-				end
-			end
-		end
-	end
+	set @id = @loai
+	declare @len int
+	declare @lid varchar(5)
 	
-	if (select COUNT(maSP) FROM SanPham where convert(int,right(maLoai,5)) = @loai) = 0
-		set @id = 0
+	select @len = COUNT(maLoai) FROM LoaiSanPham where left(maLoai,3) like @loai
+	if @len = 0
+		set @len +=1
 	else
-		select @id = max(right(maSP,5)) from SanPham where convert(int,right(maLoai,5)) = @loai 
-	select @id = case
-		when @id < 9 THEN @ml + '0000' + CONVERT(CHAR, CONVERT(INT, @ID) + 1)
-		when @id < 99 THEN @ml + '000' + CONVERT(CHAR, CONVERT(INT, @ID) + 1)
-		when @id < 999 THEN @ml + '00' + CONVERT(CHAR, CONVERT(INT, @ID) + 1)
-		when @id < 9999 THEN @ml + '0' + CONVERT(CHAR, CONVERT(INT, @ID) + 1)
-		when @id < 99999 THEN @ml + CONVERT(CHAR, CONVERT(INT, @ID) + 1)
+		begin
+			select @lid = right(max(maLoai),5) from LoaiSanPham where left(maLoai,3) like @loai
+			set @len = convert(int,@lid)+1
+		end
+	while len(@id)< (8- len(convert(varchar,@len)))
+	begin
+		set @id += '0'
 	end
+	set @id += convert(varchar,@len)
+	return @id
+end
+go
+create function autoIdSP(@loai as varchar(8))
+returns varchar(8)
+as
+begin
+	declare @id varchar(8)
+	set @id = left(@loai,3)
+	declare @len int
+	declare @lid varchar(5)
+	
+	select @len = COUNT(maSP) FROM SanPham where left(maLoai,3) like left(@loai,3)
+	if @len = 0
+		set @len +=1
+	else
+		begin
+			select @lid = right(max(maSP),5) from SanPham where left(maLoai,3) like left(@loai,3)
+			set @len = convert(int,@lid)+1
+		end
+	while len(@id)< (8- len(convert(varchar,@len)))
+	begin
+		set @id += '0'
+	end
+	set @id += convert(varchar,@len)
 	return @id
 end
 go
@@ -252,6 +244,7 @@ create table NhanVien(
 	diaChi nvarchar(100),
 	sdt varchar(10) not null,
 	gioiTinh bit not null,
+	trangThai bit not null,
 	maCV varchar(7) foreign key references ChucVu(maCV)
 )
 go
@@ -268,6 +261,7 @@ create table KhachHang(
 	diaChi nvarchar(100),
 	sdt varchar(10) not null,
 	gioiTinh bit not null,
+	trangThai bit not null,
 )
 go
 create table HoaDon(
@@ -283,7 +277,8 @@ create table NhaCungCap(
 	tenNCC nvarchar(50) not null,
 	nguoiDaiDien nvarchar(50) not null,
 	sdt varchar(10) not null,
-	diaChi nvarchar(100)
+	diaChi nvarchar(100),
+	trangThai bit not null
 )
 go
 create table NhaXuatBan(
@@ -344,7 +339,8 @@ create table SanPham(
 	maLB varchar(7) foreign key references LoaiBia(maLB),
 	maCDH varchar(8) foreign key references CapDoHoc(maCDH),
 	maTH varchar(7) foreign key references ThuongHieu(maTH),
-	maMau varchar(7) foreign key references MauSac(maMau)
+	maMau varchar(7) foreign key references MauSac(maMau),
+	trangThai bit not null
 )
 go
 create table ChiTietHoaDon(
@@ -356,9 +352,3 @@ create table ChiTietHoaDon(
 go
 alter table ChiTietHoaDon add constraint PL_CTHD primary key (maSP,maHD)
 go
-select * from NhaCungCap
-
-delete from NhaCungCap
-
-
-DROP TABLE SanPham;
