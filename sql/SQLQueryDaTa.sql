@@ -1,8 +1,13 @@
 ﻿use BanSach
 go
+update NhaCungCap 
+set trangThai
+where maNCC = NCC00003
+go
+
 select * from NhaCungCap
 insert into NhaCungCap
-values (default,N'AZ Việt Nam',N'Trần Quốc Toàn','0964484633',N'Số 50 - Đường 5 - Khu tập thể F361 - phố An Dương - P. Yên Phụ - Q.Tây Hồ - HN',0)
+values (default,N'AZ Việt Nam',N'Trần Quốc Toàn','0964484633',N'Số 50 - Đường 5 - Khu tập thể F361 - phố An Dương - P. Yên Phụ - Q.Tây Hồ - HN',1)
 go
 select * from NhaXuatBan
 insert into NhaXuatBan
@@ -56,7 +61,7 @@ go
 select * from KhachHang
 insert into KhachHang
 values
-	(default,N'Lương Viết Thanh','2002/07/27',N'448/3, tỉnh lộ 8, ấp Tây, Tân An Hội, Củ Chi, Tp Hồ Chí Minh','0396979388',1,0)
+	(default,N'Lương Viết Thanh','2002/07/27',N'448/3, tỉnh lộ 8, ấp Tây, Tân An Hội, Củ Chi, Tp Hồ Chí Minh','0396979388',1,1)
 go
 select * from CapDoHoc
 insert into CapDoHoc

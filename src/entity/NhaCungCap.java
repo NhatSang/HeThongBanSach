@@ -6,12 +6,16 @@ public class NhaCungCap {
 	private String nguoiDaiDien;
 	private String sDt;
 	private String diaChi;
-
+        
 	public NhaCungCap() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+	public NhaCungCap(String maNCC) {
+		super();
+                this.maNCC = maNCC;
+		// TODO Auto-generated constructor stub
+	}
 	public NhaCungCap(String tenNCC, String nguoiDaiDien, String sDt, String diaChi) {
 		super();
 		this.tenNCC = tenNCC;
