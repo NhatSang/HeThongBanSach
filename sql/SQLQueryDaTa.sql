@@ -68,3 +68,4 @@ go
 select hoTen,maCV from NhanVien where maNV = 'NV00001'
 go
 select hoTen,diaChi,sdt from KhachHang where sdt = '0396979388'
+select *from TaiKhoan
