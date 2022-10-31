@@ -7,11 +7,18 @@ public class ThuongHieu {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public ThuongHieu(String maTH) {
+		super();
+		this.maTH = maTH;
+	}
+
 	public ThuongHieu(String maTH, String tenTH) {
 		super();
 		this.maTH = maTH;
 		this.tenTH = tenTH;
 	}
+	
 	
 	public String getMaTH() {
 		return maTH;
@@ -27,7 +34,7 @@ public class ThuongHieu {
 	}
 	@Override
 	public String toString() {
-		return "ThuongHieu [maTH=" + maTH + ", tenTH=" + tenTH + "]";
+		return tenTH;
 	}
 	
 	

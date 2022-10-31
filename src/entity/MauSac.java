@@ -7,6 +7,12 @@ public class MauSac {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public MauSac(String maMau) {
+		super();
+		this.maMau = maMau;
+	}
+
 	public MauSac(String maMau, String mau) {
 		super();
 		this.maMau = maMau;
@@ -27,7 +33,7 @@ public class MauSac {
 	}
 	@Override
 	public String toString() {
-		return "MauSac [maMau=" + maMau + ", mau=" + mau + "]";
+		return mau;
 	}
 	
 	
