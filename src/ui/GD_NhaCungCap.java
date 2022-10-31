@@ -670,7 +670,7 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
 //			modelNCC.removeRow(row);
 //			xoatrang();
 //		
-        if(btnXoa.getText().equals("Huỷ")&&check == 1){
+        if(btnXoa.getText().equals("Huỷ") && check == 1){
                         xoatrang();
 			setEditableForm(false);
 			messenger.setText("");

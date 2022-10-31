@@ -765,6 +765,7 @@ public class GD_KH extends javax.swing.JPanel {
 			btnXoa.setText("Xóa");
                         btnThem.setEnabled(true);
                         check = 0;
+                        System.out.println(check);
 		}
         else{
             int row = tableKH.getSelectedRow();
@@ -788,36 +789,44 @@ public class GD_KH extends javax.swing.JPanel {
             loadKH();
         }
     }
-    
-    private void tim_Kiem(JTable table) {
-		String tk = txtTimKiem.getText();
-		int row = table.getRowCount();
-		for (int i = 0; i < row; i++) {
-			int col = table.getColumnCount();
-			for (int j = 0; j < col; j++) {
-				if (table.getValueAt(i, j).toString().contains(tk))
-					table.setRowSelectionInterval(i, i);
-				
-			}
-		}
-		
-	}
+    public void xoatrang(){
+        txtMa.setText("");
+        txtHoTen.setText("");
+        jdcNgaySinh.setDate(null);
+        txtDiaChi.setText("");
+        txtSDT.setText("");
+        radNam.setSelected(true);
+    }
+//    private void tim_Kiem(JTable table) {
+//		String tk = txtTimKiem.getText();
+//		int row = table.getRowCount();
+//		for (int i = 0; i < row; i++) {
+//			int col = table.getColumnCount();
+//			for (int j = 0; j < col; j++) {
+//				if (table.getValueAt(i, j).toString().contains(tk))
+//					table.setRowSelectionInterval(i, i);
+//				
+//			}
+//		}
+//		
+//	}
     public void capNhat() {
         
         messenger.setText("");
         if(check != 2){
-            int row = tableKH.getSelectedRow();
-            if(row == -1){
-                messenger.setText("Vui lòng chọn khách hàng cần cập nhật");
-                return;
-            }
-            loadTbltoForm(row);
             setEditableForm(true);
-            btnXoa.setText("Hủy");
+            btnXoa.setText("Huỷ");
             btnThem.setEnabled(false);
             check = 2;
-        }else{
+            System.out.println(check);
+        }
+        else{
             int row = tableKH.getSelectedRow();
+//            if(row == -1){
+//                messenger.setText("Vui lòng chọn khách hàng cần cập nhật");
+//                return;
+//            }
+            loadTbltoForm(row);
             String ten = txtHoTen.getText();
             if(ten.equals("")){
                 messenger.setText("Nhập họ tên khách hàng");
@@ -856,14 +865,6 @@ public class GD_KH extends javax.swing.JPanel {
         stt = 0;
         loadKH();
         }
-    }
-    public void xoatrang(){
-        txtMa.setText("");
-        txtHoTen.setText("");
-        jdcNgaySinh.setDate(null);
-        txtDiaChi.setText("");
-        txtSDT.setText("");
-        radNam.setSelected(true);
     }
     public boolean checkThongTin(){
         String ten = txtHoTen.getText();
