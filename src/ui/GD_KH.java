@@ -742,6 +742,9 @@ public class GD_KH extends javax.swing.JPanel {
                     // TODO Auto-generated catch block
 				e.printStackTrace();
                 }
+                reload();
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
+                xoatrang();
                 modelKhachHang.setRowCount(0);
                 stt = 0;
                 loadKH();
@@ -765,7 +768,6 @@ public class GD_KH extends javax.swing.JPanel {
 			btnXoa.setText("Xóa");
                         btnThem.setEnabled(true);
                         check = 0;
-                        System.out.println(check);
 		}
         else{
             int row = tableKH.getSelectedRow();
@@ -784,6 +786,7 @@ public class GD_KH extends javax.swing.JPanel {
 		}
 		xoatrang();
             }
+            System.out.println(check);
             modelKhachHang.setRowCount(0);
             stt = 0;
             loadKH();
@@ -861,6 +864,9 @@ public class GD_KH extends javax.swing.JPanel {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+        reload();
+                    JOptionPane.showMessageDialog(null, "Sửa thành công");
+                    xoatrang();
     	modelKhachHang.setRowCount(0);
         stt = 0;
         loadKH();
@@ -896,6 +902,15 @@ public class GD_KH extends javax.swing.JPanel {
                         return false;
                     }
         return true;
+    }
+    public void reload(){
+       btnThem.setText("Thêm");
+       btnXoa.setText("Xoá");
+       btnSua.setText("Sửa");
+       btnThem.setEnabled(true);
+       btnXoa.setEnabled(true);
+       btnSua.setEnabled(true);
+       check = 0;
     }
 }
     

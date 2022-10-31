@@ -652,6 +652,9 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+            reload();
+            JOptionPane.showMessageDialog(null, "Thêm thành công");
+            xoatrang();
        modelNCC.setRowCount(0);
        stt = 0;
        loadNCC();
@@ -743,6 +746,9 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+            reload();
+            JOptionPane.showMessageDialog(null, "Sửa thành công");
+            xoatrang();
         }
     }
     public boolean checkThongTin(){
@@ -773,4 +779,13 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
          }
         return true;
     }
+    public void reload(){
+        btnThem.setText("Thêm");
+        btnXoa.setText("Xoá");
+        btnSua.setText("Sửa");
+        btnThem.setEnabled(true);
+        btnXoa.setEnabled(true);
+        btnSua.setEnabled(true);
+        check = 0;
+     }
 }
