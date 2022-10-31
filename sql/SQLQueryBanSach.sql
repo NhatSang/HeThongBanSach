@@ -320,7 +320,7 @@ go
 create table SanPham(
 	maSP varchar(8) primary key,
 	tenSP nvarchar(100) not null,
-	namXB_SX int not null,
+	namXB_SX int,
 	soLuong int not null,
 	donGia float not null,
 	donVi nvarchar(10) not null,

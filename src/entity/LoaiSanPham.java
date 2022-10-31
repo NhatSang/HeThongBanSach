@@ -39,7 +39,7 @@ public class LoaiSanPham {
 
 	@Override
 	public String toString() {
-		return "LoaiSanPham [maLoai=" + maLoai + ", tenLoai=" + tenLoai + "]";
+		return tenLoai;
 	}
 
 }

@@ -23,9 +23,33 @@ public class CapDoHoc {
 		this.capLop = capLop;
 	}
 
+	public String getMaCDH() {
+		return maCDH;
+	}
+
+	public void setMaCDH(String maCDH) {
+		this.maCDH = maCDH;
+	}
+
+	public String getCapHoc() {
+		return capHoc;
+	}
+
+	public void setCapHoc(String capHoc) {
+		this.capHoc = capHoc;
+	}
+
+	public int getCapLop() {
+		return capLop;
+	}
+
+	public void setCapLop(int capLop) {
+		this.capLop = capLop;
+	}
+
 	@Override
 	public String toString() {
-		return "CapDoHoc [maCDH=" + maCDH + ", capHoc=" + capHoc + ", capLop=" + capLop + "]";
+		return  capHoc +"_Lớp "+capLop;
 	}
 
 }

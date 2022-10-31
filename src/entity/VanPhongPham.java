@@ -22,6 +22,38 @@ public class VanPhongPham extends SanPham {
 		this.mauSac = mauSac;
 	}
 
+	public String getXuatXu() {
+		return xuatXu;
+	}
+
+	public void setXuatXu(String xuatXu) {
+		this.xuatXu = xuatXu;
+	}
+
+	public String getChatLieu() {
+		return chatLieu;
+	}
+
+	public void setChatLieu(String chatLieu) {
+		this.chatLieu = chatLieu;
+	}
+
+	public ThuongHieu getThuongHieu() {
+		return thuongHieu;
+	}
+
+	public void setThuongHieu(ThuongHieu thuongHieu) {
+		this.thuongHieu = thuongHieu;
+	}
+
+	public MauSac getMauSac() {
+		return mauSac;
+	}
+
+	public void setMauSac(MauSac mauSac) {
+		this.mauSac = mauSac;
+	}
+
 	@Override
 	public String toString() {
 		return "VanPhongPham [xuatXu=" + xuatXu + ", chatLieu=" + chatLieu + ", thuongHieu=" + thuongHieu + ", mauSac="

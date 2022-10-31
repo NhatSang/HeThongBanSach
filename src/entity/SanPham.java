@@ -40,6 +40,22 @@ public class SanPham {
 		this.donGia = donGia;
 		this.nhaCC = nhaCC;
 	}
+	
+	
+
+	public SanPham(String tenSP, String donVi, String moTa, String hinhAnh, int soLuong, int vAT, double donGia,
+			LoaiSanPham loaiSP, NhaCungCap nhaCC) {
+		super();
+		this.tenSP = tenSP;
+		this.donVi = donVi;
+		this.moTa = moTa;
+		this.hinhAnh = hinhAnh;
+		this.soLuong = soLuong;
+		VAT = vAT;
+		this.donGia = donGia;
+		this.loaiSP = loaiSP;
+		this.nhaCC = nhaCC;
+	}
 
 	public String getMaSP() {
 		return maSP;

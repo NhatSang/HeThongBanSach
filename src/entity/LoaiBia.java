@@ -38,7 +38,7 @@ public class LoaiBia {
 
 	@Override
 	public String toString() {
-		return "LoaiBia [maLB=" + maLB + ", tenLB=" + tenLB + "]";
+		return tenLB;
 	}
 
 }

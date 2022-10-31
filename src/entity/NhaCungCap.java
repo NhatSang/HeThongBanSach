@@ -81,7 +81,6 @@ public class NhaCungCap {
 	
 	@Override
 	public String toString() {
-		return "NhaCungCap [maNCC=" + maNCC + ", tenNCC=" + tenNCC + ", nguoiDaiDien=" + nguoiDaiDien + ", sDt=" + sDt
-				+ ", diaChi=" + diaChi + "]";
+		return tenNCC;
 	}
 }
