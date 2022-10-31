@@ -85,4 +85,47 @@ public class NhanVien_DAO {
 			statement.close();
 		}
 	}
+        public void suanv(NhanVien nv) {
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+		PreparedStatement pre = null;
+		try {
+			pre = con.prepareStatement("update NhanVien set hoTen=?,ngaySinh=?,email=?,diachi=?,sdt=?,gioitinh=?,chucvu=? where maNV=?");
+			pre.setString(2,nv.getHoTen() );
+			pre.setString(3,nv.getNgaySinh().toString());
+			pre.setString(4,nv.getCccd() );
+			pre.setString(5,nv.getDiaChi() );
+			pre.setString(6,nv.getSdt() );
+			pre.setBoolean(7,nv.isGioiTinh() );
+			pre.setString(9,nv.getChucVu().getTenCV());
+			pre.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+        public void addNV(NhanVien nv) throws SQLException {
+            DataBase.getInstance();
+    	Connection connection = DataBase.getConnection();
+    	PreparedStatement statement = null;
+    	try {
+    		String sql = "insert into NhanVien values (default, ?, ?, ?, ?, ?, ?, 0,?)";
+    		statement = connection.prepareStatement(sql);
+    		statement.setString(1, nv.getMaNV());
+    		statement.setString(2, nv.getHoTen());
+    		statement.setString(3, nv.getNgaySinh().toString());
+    		statement.setString(4, nv.getCccd());
+            statement.setString(5, nv.getDiaChi());
+            statement.setString(6, nv.getSdt());
+    		statement.setBoolean(7, nv.isGioiTinh());
+    		statement.setString(9,nv.getChucVu().getMaCV());
+    		statement.executeUpdate();
+    	} catch (Exception e) {
+    		// TODO: handle exception
+    		e.printStackTrace();
+    	} finally {
+    		statement.close();
+    	}
+        }
+        
 }
