@@ -702,7 +702,6 @@ public class GD_Sach extends javax.swing.JPanel {
 		int tuoiGH = Integer.parseInt(txtTuoiGioiHan.getText().trim());
 		int vat = Integer.parseInt(txtVAT.getText().trim());
 		String moTa = txtMoTa.getText();
-//			String tacGia = txtTacGia.getText();
 		TacGia tacGia = sanPham_DAO.timTacGia(txtTacGia.getText());
 		if(tacGia == null) {
 			try {
@@ -731,7 +730,6 @@ public class GD_Sach extends javax.swing.JPanel {
 		if (sanPham_DAO.timKiemSPTheoMa(sach.getTenSP()) == null) {
 			try {
 				;
-
 				sanPham_DAO.themSach(sach);
 				loadSach();
 				stt = 0;
