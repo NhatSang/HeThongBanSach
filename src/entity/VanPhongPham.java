@@ -21,6 +21,16 @@ public class VanPhongPham extends SanPham {
 		this.thuongHieu = thuongHieu;
 		this.mauSac = mauSac;
 	}
+	
+	public VanPhongPham(String tenSP, String donVi, String moTa, String hinhAnh, int soLuong, int vAT,
+			double donGia, LoaiSanPham loaiSP, NhaCungCap nhaCC, String xuatXu, String chatLieu, ThuongHieu thuongHieu,
+			MauSac mauSac) {
+		super(tenSP, donVi, moTa, hinhAnh, soLuong, vAT, donGia, loaiSP, nhaCC);
+		this.xuatXu = xuatXu;
+		this.chatLieu = chatLieu;
+		this.thuongHieu = thuongHieu;
+		this.mauSac = mauSac;
+	}
 
 	public String getXuatXu() {
 		return xuatXu;

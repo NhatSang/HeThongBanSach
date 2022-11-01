@@ -481,18 +481,25 @@ public class GD_Sach extends javax.swing.JPanel {
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
+//    	System.out.println("btnTimKiem");
+    	timKiemSach();
+    	
     }                                          
 
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {                                       
+
+	private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {                                       
         // TODO add your handling code here:
+    	xoaSach();
     }                                      
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
+    	themSach();
     }                                       
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {                                       
         // TODO add your handling code here:
+    	suaSach();
     }                                      
 
     private void cbLoaiActionPerformed(java.awt.event.ActionEvent evt) {                                       
@@ -616,7 +623,21 @@ public class GD_Sach extends javax.swing.JPanel {
 		dssach = sp_dao.getAllSach();
 
 		for (Sach sach : dssach) {
-			Object row[] = { ++stt, sach.getMaSP(), sach.getTenSP(), sach.getLoaiSP(), sach.getNhaXB(), sach.getNamXB(),
+			Object row[] = { tableSach.getRowCount(), sach.getMaSP(), sach.getTenSP(), sach.getLoaiSP(), sach.getNhaXB(), sach.getNamXB(),
+					sach.getSoLuong(), sach.getDonGia(), sach.getDonVi(), sach.getVAT(), sach.getTuoiGioiHan(),
+					sach.getNhaCC(), sach.getMoTa(), sach.getTacGia().getTenTG(), sach.getSoTrang(), sach.getLoaiBia(),
+					sach.getCapDoHoc(), sach.getNguoiDich() };
+			modelSach.addRow(row);
+		}
+		loadData();
+	}
+	private void loadSach(ArrayList<Sach> dsSach) {
+//		while (tableSach.getRowCount() != 0) {
+//			modelSach.removeRow(0);
+//		}
+		modelSach.setRowCount(0);
+		for (Sach sach : dsSach) {
+			Object row[] = { tableSach.getRowCount(), sach.getMaSP(), sach.getTenSP(), sach.getLoaiSP(), sach.getNhaXB(), sach.getNamXB(),
 					sach.getSoLuong(), sach.getDonGia(), sach.getDonVi(), sach.getVAT(), sach.getTuoiGioiHan(),
 					sach.getNhaCC(), sach.getMoTa(), sach.getTacGia().getTenTG(), sach.getSoTrang(), sach.getLoaiBia(),
 					sach.getCapDoHoc(), sach.getNguoiDich() };
@@ -725,7 +746,7 @@ public class GD_Sach extends javax.swing.JPanel {
 		TacGia tacGia = sanPham_DAO.timTacGia(txtTacGia.getText());
 		if(tacGia == null) {
 			try {
-				sanPham_DAO.themTG(new TacGia(tenSach));
+				sanPham_DAO.themTG(new TacGia(txtTacGia.getText()));
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -764,6 +785,7 @@ public class GD_Sach extends javax.swing.JPanel {
 	}
 
 	public void suaSach() {
+		SanPham_DAO sanPham_DAO = new SanPham_DAO();
 		String maSP = txtMa.getText();
 		String tenSach = txtTen.getText();
 		int namXB_SX = Integer.parseInt(txtNamXB.getText().trim());
@@ -773,7 +795,15 @@ public class GD_Sach extends javax.swing.JPanel {
 		int vat = Integer.parseInt(txtVAT.getText().trim());
 		String moTa = txtMoTa.getText();
 //		String tacGia = txtTacGia.getText();
-		TacGia tacGia = new TacGia(txtTacGia.getText());
+		TacGia tacGia = sanPham_DAO.timTacGia(txtTacGia.getText());
+		if(tacGia == null) {
+			try {
+				sanPham_DAO.themTG(new TacGia(txtTacGia.getText()));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			tacGia = sanPham_DAO.timTacGia(txtTacGia.getText());
+		}
 		int soTrang = Integer.parseInt(txtSoTrang.getText().trim());
 		String nguoiDich = txtNguoiDIch.getText();
 		String hinhAnh = txtHinhAnh.getText();
@@ -783,11 +813,12 @@ public class GD_Sach extends javax.swing.JPanel {
 		String donVi = (String) cbDonVi.getSelectedItem();
 		LoaiBia loaiBia = (LoaiBia) cbLoaiBia.getSelectedItem();
 		NhaCungCap ncc = (NhaCungCap) cbNCC.getSelectedItem();
-		CapDoHoc cdh = (CapDoHoc) cbCDH.getSelectedItem();
+		CapDoHoc cdh = new CapDoHoc();
+		if (cbCDH.getSelectedItem() != null)
+			cdh = (CapDoHoc) cbCDH.getSelectedItem();
 		Sach sach = new Sach(maSP, tenSach, donVi, moTa, hinhAnh, soLuong, vat, donGia, loaiSp, ncc, namXB_SX, soTrang,
 				tuoiGH, nguoiDich, nxb, tacGia, loaiBia, cdh);
 		try {
-			SanPham_DAO sanPham_DAO = new SanPham_DAO();
 			sanPham_DAO.suaSach(sach);
 			loadSach();
 		} catch (Exception e) {
@@ -795,19 +826,15 @@ public class GD_Sach extends javax.swing.JPanel {
 			e.printStackTrace();
 		}
 	}
-
-	public void timSach(JTable table) {
-		String tk = txtTimKiem.getText();
-		int row = table.getRowCount();
-		for (int i = 0; i < row; i++) {
-			int col = table.getColumnCount();
-			for (int j = 0; j < col; j++) {
-				if (table.getValueAt(i, j).toString().contains(tk))
-					table.setRowSelectionInterval(i, i);
-
-			}
-		}
+	 private void timKiemSach() {
+			// TODO Auto-generated method stu
+		String txt = txtTimKiem.getText();
+//		System.out.println(txt);
+		SanPham_DAO sp_dao = new SanPham_DAO();
+		ArrayList<Sach> dsSach = sp_dao.timKiemSach(txt);
+		loadSach(dsSach);
 	}
+
 }
 
 

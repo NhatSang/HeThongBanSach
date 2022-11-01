@@ -2,6 +2,7 @@
 package ui;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -10,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.JTextComponent;
 
 import dao.SanPham_DAO;
 import entity.LoaiSanPham;
@@ -82,7 +84,7 @@ public class GD_VPP extends javax.swing.JPanel {
 		modelCboNCC = new DefaultComboBoxModel<NhaCungCap>();
 
 		cbLoai.setEditable(true);
-		cbNCC.setEditable(true);
+		cbNCC.setEditable(false);
 		cbDonVi.setEditable(true);
 		cbThuongHieu.setEditable(true);
 		cbMauSac.setEditable(true);
@@ -91,8 +93,6 @@ public class GD_VPP extends javax.swing.JPanel {
 
 		jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 		jPanel1.setPreferredSize(new java.awt.Dimension(1284, 1027));
-
-		txtTimKiem.setText("Nhập");
 
 		btnTimKiem.setText("Tìm kiếm");
 		btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
@@ -441,6 +441,7 @@ public class GD_VPP extends javax.swing.JPanel {
 
 	private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
+		suaVPP();
 	}
 
 	private void cbLoaiActionPerformed(java.awt.event.ActionEvent evt) {
@@ -467,19 +468,19 @@ public class GD_VPP extends javax.swing.JPanel {
 
 	private void btnChonFileActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
-		 JFileChooser file = new JFileChooser();
-         FileNameExtensionFilter img = new FileNameExtensionFilter("hinh anh", "jpg", "png");
-         file.setFileFilter(img);
-         
-         file.setMultiSelectionEnabled(false);
-         int x = file.showDialog(this, "Chon file");
-         if(x == JFileChooser.APPROVE_OPTION) {
-             File f = file.getSelectedFile();
-             String filename = f.getAbsolutePath();
-             //lbMes.setIcon(new ImageIcon(f.getAbsolutePath()));
-             //lbMes.setText(filename);
-             txtHinhAnh.setText(filename);
-         }
+		JFileChooser file = new JFileChooser();
+		FileNameExtensionFilter img = new FileNameExtensionFilter("hinh anh", "jpg", "png");
+		file.setFileFilter(img);
+
+		file.setMultiSelectionEnabled(false);
+		int x = file.showDialog(this, "Chon file");
+		if (x == JFileChooser.APPROVE_OPTION) {
+			File f = file.getSelectedFile();
+			String filename = f.getAbsolutePath();
+			// lbMes.setIcon(new ImageIcon(f.getAbsolutePath()));
+			// lbMes.setText(filename);
+			txtHinhAnh.setText(filename);
+		}
 	}
 
 	// Variables declaration - do not modify
@@ -541,7 +542,7 @@ public class GD_VPP extends javax.swing.JPanel {
 
 		dsvpp = sp_dao.getAllVPP1();
 		for (VanPhongPham vpp : dsvpp) {
-			Object row[] = { ++stt, vpp.getMaSP(), vpp.getTenSP(), vpp.getLoaiSP(), vpp.getSoLuong(), vpp.getDonGia(),
+			Object row[] = { tableVPP.getRowCount(), vpp.getMaSP(), vpp.getTenSP(), vpp.getLoaiSP(), vpp.getSoLuong(), vpp.getDonGia(),
 					vpp.getDonVi(), vpp.getVAT(), vpp.getNhaCC(), vpp.getMoTa(), vpp.getThuongHieu(), vpp.getMauSac(),
 					vpp.getChatLieu(), vpp.getXuatXu(), vpp.getHinhAnh() };
 			modelVPP.addRow(row);
@@ -551,6 +552,11 @@ public class GD_VPP extends javax.swing.JPanel {
 	}
 
 	public void loadData() {
+		modelCboLoai.removeAllElements();
+		modelCboNCC.removeAllElements();
+		modelCboMauSac.removeAllElements();
+		modelCboThuongHieu.removeAllElements();
+		
 		modelCboLoai.addAll(sp_dao.getLoaiSP());
 		modelCboMauSac.addAll(sp_dao.getMauSac());
 		modelCboNCC.addAll(sp_dao.getNCC());
@@ -585,9 +591,10 @@ public class GD_VPP extends javax.swing.JPanel {
 		txtTen.setEditable(st);
 		txtSoLuong.setEditable(st);
 		txtDonGia.setEditable(st);
-		txtVAT.setEnabled(st);
-		txtMoTa.setEnabled(st);
-		txtChatLieu.setEnabled(st);
+		txtVAT.setEditable(st);
+		txtMoTa.setEditable(st);
+		txtChatLieu.setEditable(st);
+		txtXuatXu.setEditable(st);
 	}
 
 	public void xoaVPP() {
@@ -599,6 +606,7 @@ public class GD_VPP extends javax.swing.JPanel {
 //			check = 0;
 //		}
 		int row = tableVPP.getSelectedRowCount();
+//		row = tableVPP.getSelectedRow();
 		if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa") == JOptionPane.YES_OPTION) {
 			try {
 				sp_dao.xoa_SP(txtMa.getText());
@@ -606,7 +614,7 @@ public class GD_VPP extends javax.swing.JPanel {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
-			modelVPP.removeRow(row);
+			loadVPP();
 		}
 	}
 
@@ -619,6 +627,7 @@ public class GD_VPP extends javax.swing.JPanel {
 		txtMoTa.setText("");
 		txtChatLieu.setText("");
 		txtXuatXu.setText("");
+		txtHinhAnh.setText("");
 
 		cbLoai.setSelectedItem(null);
 		cbNCC.setSelectedItem(null);
@@ -627,12 +636,13 @@ public class GD_VPP extends javax.swing.JPanel {
 		cbDonVi.setSelectedItem(null);
 	}
 
-	public void themVPP() {
+	public void themVPP(){
 //		if (check != 1) {
 //			btnXoa.setText("Huỷ");
 //			btnSua.setEnabled(false);
 //			check = 1;
 //		} else {
+		SanPham_DAO sanPham_DAO = new SanPham_DAO();
 		String tenVPP = txtTen.getText();
 		int soLuong = Integer.parseInt(txtSoLuong.getText().trim());
 		Double donGia = Double.parseDouble(txtDonGia.getText().trim());
@@ -640,30 +650,48 @@ public class GD_VPP extends javax.swing.JPanel {
 		String moTa = txtMoTa.getText();
 		String chatLieu = txtChatLieu.getText();
 		String xuatXu = txtXuatXu.getText();
+		String hinhAnh = txtHinhAnh.getText();
 
 		LoaiSanPham loaiVPP = (LoaiSanPham) cbLoai.getSelectedItem();
 		NhaCungCap ncc = (NhaCungCap) cbNCC.getSelectedItem();
 		MauSac mauSac = (MauSac) cbMauSac.getSelectedItem();
-		ThuongHieu thuongHieu = (ThuongHieu) cbThuongHieu.getSelectedItem();
+		ThuongHieu thuongHieu = null;
+		if (cbThuongHieu.getSelectedItem() instanceof ThuongHieu) {
+			thuongHieu = (ThuongHieu) cbThuongHieu.getSelectedItem();
+			
+		}else {
+			String newTH = ((JTextComponent) cbThuongHieu.getEditor().getEditorComponent()).getText();
+			
+			thuongHieu = sanPham_DAO.timThuongHieu(newTH);
+			if (thuongHieu == null)
+				try {
+					sanPham_DAO.themThuongHieu(new ThuongHieu(null, newTH));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			thuongHieu = sanPham_DAO.timThuongHieu(newTH);
+		}
 		String donvi = (String) cbDonVi.getSelectedItem();
 
-		VanPhongPham vpp = new VanPhongPham(donvi, tenVPP, donvi, moTa, donvi, soLuong, vat, vat, loaiVPP, ncc, xuatXu,
-				chatLieu, thuongHieu, mauSac);
-
-		try {
-			SanPham_DAO sanPham_DAO = new SanPham_DAO();
-			sanPham_DAO.themVPP(vpp);
-			stt = 0;
-			loadVPP();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+		VanPhongPham vpp = new VanPhongPham(donvi, tenVPP, donvi, moTa, hinhAnh, soLuong, vat, donGia, loaiVPP, ncc, xuatXu, chatLieu, thuongHieu, mauSac);
+		if (sanPham_DAO.timKiemSPTheoMa(vpp.getTenSP()) == null) {
+			try {
+				sanPham_DAO.themVPP(vpp);
+				loadVPP();
+				stt = 0;
+			} catch (Exception e) {
+				// TODO: handle exception
+//				e.printStackTrace();
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "sản phẩm đã tồn tại");
 		}
 
-//		}
 	}
 
 	public void suaVPP() {
+		SanPham_DAO sanPham_DAO = new SanPham_DAO();
 		String maVPP = txtMa.getText();
 		String tenVPP = txtTen.getText();
 		int soLuong = Integer.parseInt(txtSoLuong.getText().trim());
@@ -676,13 +704,25 @@ public class GD_VPP extends javax.swing.JPanel {
 		LoaiSanPham loaiVPP = (LoaiSanPham) cbLoai.getSelectedItem();
 		NhaCungCap ncc = (NhaCungCap) cbNCC.getSelectedItem();
 		MauSac mauSac = (MauSac) cbMauSac.getSelectedItem();
-		ThuongHieu thuongHieu = (ThuongHieu) cbThuongHieu.getSelectedItem();
+		ThuongHieu thuongHieu = null;
+		if (cbThuongHieu.getSelectedItem() instanceof ThuongHieu) {
+			thuongHieu = (ThuongHieu) cbThuongHieu.getSelectedItem();
+		}else {
+			String newTH = ((JTextComponent) cbThuongHieu.getEditor().getEditorComponent()).getText();
+			thuongHieu = sanPham_DAO.timThuongHieu(newTH);
+			if (thuongHieu == null)
+				try {
+					sanPham_DAO.themThuongHieu(new ThuongHieu(null, newTH));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			thuongHieu = sanPham_DAO.timThuongHieu(newTH);
+		}
 		String donvi = (String) cbDonVi.getSelectedItem();
-
-		VanPhongPham vpp = new VanPhongPham(maVPP, tenVPP, donvi, moTa, donvi, soLuong, vat, vat, loaiVPP, ncc, xuatXu,
-				chatLieu, thuongHieu, mauSac);
+		
+		VanPhongPham vpp = new VanPhongPham(maVPP, tenVPP, donvi, moTa, donvi, soLuong, vat, donGia, loaiVPP, ncc, xuatXu, chatLieu, thuongHieu, mauSac);
 		try {
-			SanPham_DAO sanPham_DAO = new SanPham_DAO();
 			sanPham_DAO.suaVPP(vpp);
 			loadVPP();
 		} catch (Exception e) {
@@ -692,16 +732,7 @@ public class GD_VPP extends javax.swing.JPanel {
 	}
 
 	public void timVPP(JTable table) {
-		String tk = txtTimKiem.getText();
-		int row = table.getRowCount();
-		for (int i = 0; i < row; i++) {
-			int col = table.getColumnCount();
-			for (int j = 0; j < col; j++) {
-				if (table.getValueAt(i, j).toString().contains(tk))
-					table.setRowSelectionInterval(i, i);
 
-			}
-		}
 	}
 
 	public boolean checkThongTin() {

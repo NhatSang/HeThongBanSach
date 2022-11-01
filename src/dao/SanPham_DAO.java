@@ -478,7 +478,7 @@ public class SanPham_DAO {
 		DataBase.getInstance();
 		Connection con = DataBase.getConnection();
 		try {
-			String sql = "select * from TacGia where tenTG = '" + key + "'";
+			String sql = "select * from TacGia where tenTG = N'" + key + "'";
 			Statement stm = con.createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			if (rs.next()) {
@@ -498,7 +498,7 @@ public class SanPham_DAO {
 		try {
 			String sql = "insert into TacGia values (default,?)";
 			statement = con.prepareStatement(sql);
-			statement.setString(1, tg.getTenTG());
+			statement.setNString(1, tg.getTenTG());
 			statement.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -506,5 +506,96 @@ public class SanPham_DAO {
 		} finally {
 			statement.close();
 		}
+	}
+	
+	public ThuongHieu timThuongHieu(String key) {
+		ThuongHieu th = null;
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+		try {
+			String sql = "select * from ThuongHieu where tenTH = N'" + key + "'";
+			Statement stm = con.createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			if (rs.next()) {
+				String maTg = rs.getString(1);
+				String tenTg = rs.getString(2);
+				th = new ThuongHieu(maTg, tenTg);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return th;
+	}
+	
+	public void themThuongHieu(ThuongHieu th) throws SQLException {
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+		PreparedStatement statement = null;
+		try {
+			String sql = "insert into ThuongHieu values (default,?)";
+			statement = con.prepareStatement(sql);
+			statement.setNString(1, th.getTenTH());
+			statement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			statement.close();
+		}
+	}
+	
+	public ArrayList<Sach> timKiemSach(String key) {
+		ArrayList<Sach> dsSach = new ArrayList<Sach>();
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+
+		try {
+			Statement stm = con.createStatement();
+			ResultSet rs = stm.executeQuery(
+					"select sp.maSP,sp.tenSP, sp.namXB_SX, sp.soLuong,sp.donGia, sp.donVi,sp.VAT, sp.soTrang, sp.tuoiGioiHan, sp.nguoiDich, sp.moTa,sp.hinhAnh,\r\n"
+							+ "lsp.*,ncc.maNCC, ncc.tenNCC,nxb.*,tg.tenTG,lb.*,cdh.*\r\n" + "from SanPham sp \r\n"
+							+ "left join LoaiSanPham lsp on sp.maLoai = lsp.maLoai \r\n"
+							+ "left join NhaCungCap ncc on sp.maNCC = ncc.maNCC\r\n"
+							+ "left join NhaXuatBan nxb on sp.maNXB = nxb.maNXB\r\n"
+							+ "left join TacGia tg on sp.maTG = tg.maTG\r\n"
+							+ "left join LoaiBia lb on sp.maLB = lb.maLB\r\n"
+							+ "left join CapDoHoc cdh on sp.maCDH = cdh.maCDH\r\n"
+							+ "where maSP not like 'VPP%' and sp.trangThai = 0 "
+							+ "and ( sp.maSP like '%"+ key +"%' or sp.tenSP like N'%"+ key +"%' "
+							+ "or sp.nguoiDich like '%" + key + "%' or lsp.maLoai like '%" + key + "%' "
+							+ "or lsp.tenLoai like '%" + key + "%' or tg.tenTG like '%" + key + "%'"
+							+ ")");
+
+			while (rs.next()) {
+				String maSach = rs.getString(1);
+				String tenSach = rs.getString(2);
+				int namXB = rs.getInt(3);
+				int soLuong = rs.getInt(4);
+				double donGia = rs.getFloat(5);
+				String donVi = rs.getString(6);
+				int VAT = rs.getInt(7);
+				int soTrang = rs.getInt(8);
+				int tuoiGH = rs.getInt(9);
+				String nguoiDich = rs.getString(10);
+				String moTa = rs.getString(11);
+				String hinhAnh = rs.getString(12);
+				LoaiSanPham loaiSp = new LoaiSanPham(rs.getString(13), rs.getString(14));
+				NhaCungCap ncc = new NhaCungCap(rs.getString(15), rs.getString(16));
+				NhaXuatBan nxb = new NhaXuatBan(rs.getString(17), rs.getString(18));
+				TacGia tacGia = new TacGia(rs.getString(19));
+				LoaiBia loaiBia = new LoaiBia(rs.getString(20), rs.getString(21));
+				String maCDH = rs.getString(22);
+				CapDoHoc cdh = null;
+				if (maCDH != null) {
+					cdh = new CapDoHoc(maCDH, rs.getString(23), rs.getInt(24));
+				}
+				Sach sach = new Sach(maSach, tenSach, donVi, moTa, hinhAnh, soLuong, VAT, donGia, loaiSp, ncc, namXB,
+						soTrang, tuoiGH, nguoiDich, nxb, tacGia, loaiBia, cdh);
+				dsSach.add(sach);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return dsSach;
 	}
 }
