@@ -268,6 +268,7 @@ create table HoaDon(
 	maHD varchar(14) primary key constraint IDHD default dbo.autoIdHD(),
 	ngayLap date not null,
 	caLap int not null,
+	trangThai bit not null,
 	maNV varchar(7) foreign key references NhanVien(maNV),
 	maKH varchar(15) foreign key references KhachHang(maKH)
 )

@@ -97,7 +97,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		itemDoiMatKhau = new JMenuItem("Đổi mật khẩu");
 		itemThoat = new JMenuItem("Thoát");
 		itemLapHd = new JMenuItem("Lập Hóa Đơn");
-		itemTimHD = new JMenuItem("Tìm kiếm Hóa Đơn");
+		itemTimHD = new JMenuItem("Xem Hàng Đợi");
 
 		menu3.add(itemLapHd);
 		menu3.add(itemTimHD);
@@ -212,14 +212,16 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		if (obj == itemThoat) {
 			System.exit(0);
 		}
-		if(obj == itemDangXuat) {
+		else if(obj == itemDangXuat) {
 			new GD_DangNhap().setVisible(true);
 			this.dispose();
 		}
-		if(obj == itemLapHd) {
+		else if(obj == itemLapHd) {
 			thayCenterP(new GD_LapHoaDon(nhanVien));
 		}
-
+		else if(obj == itemTimHD) {
+			thayCenterP(new GD_HangDoiHD(this));
+		}
 	}
 
 	public void thayCenterP(JPanel p) {

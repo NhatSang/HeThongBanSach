@@ -50,7 +50,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 			lblDonVi, lblSoLuong, lblMaHd, lblNgayLap, lblCaLap, LblNguoiLap, lblTongTien, lblTongVAT, lblTienCanTra,
 			lblTienKhachTra, lblTienThua;
 	private JTextField txtTimKh, txtTimSp, txtTienKhachTra;
-	private JButton btnTimKh, btnThemKh, btnTimSp, btnThemCTHD, btnThanhToan, btnXoaCTHD;
+	private JButton btnTimKh, btnThemKh, btnTimSp, btnThemCTHD, btnThanhToan, btnXoaCTHD, btnXuatHD, btnLuu;
 	private Box leftBox, rightBox, northLB, centerLB;
 	private JTable tblCTHD;
 	private DefaultTableModel tblModel;
@@ -65,6 +65,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 
 	public GD_LapHoaDon(NhanVien nhanVien) {
 		this.nhanVien = nhanVien;
+		getThongTinHD();
 		createGui();
 		DataBase.getInstance().connect();
 		sp_DAO = new SanPham_DAO();
@@ -73,10 +74,27 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		hoaDon = null;
 		sp = null;
 		khachHang = null;
+
+	}
+	
+	
+
+	public GD_LapHoaDon(HoaDon hoaDon) {
+		super();
+		this.hoaDon = hoaDon;
+		createGui();
+		DataBase.getInstance().connect();
+		sp_DAO = new SanPham_DAO();
+		hd_DAO = new HoaDon_DAO();
+		kh_DAO = new KhachHang_DAO();
+		this.nhanVien = hoaDon.getNhanVien();
+		this.khachHang = hoaDon.getKhachHang();
 	}
 
+
+
 	private void createGui() {
-		getThongTinHD();
+
 		this.setLayout(new BorderLayout());
 		Font font1 = new Font("Serif", Font.PLAIN, 17);
 		Font font2 = new Font("Serif", Font.ITALIC, 17);
@@ -311,8 +329,21 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		JPanel southP = new JPanel();
 		southP.setBorder(BorderFactory.createLineBorder(Color.black));
 		btnThanhToan = new JButton("Thanh toán");
+		btnXuatHD = new JButton("Xuất hóa đơn");
+		btnLuu = new JButton("Lưu");
 		btnThanhToan.setFont(new Font("Serif", Font.PLAIN, 18));
+		btnXuatHD.setFont(new Font("Serif", Font.PLAIN, 18));
+		btnLuu.setFont(new Font("Serif", Font.PLAIN, 18));
+		
+		EnabledBtn(false);
+		btnXuatHD.setEnabled(false);
+		
+		southP.add(btnLuu);
+		southP.add(Box.createHorizontalStrut(20));
 		southP.add(btnThanhToan);
+		southP.add(Box.createHorizontalStrut(20));
+		southP.add(btnXuatHD);
+
 
 		rightBox.add(northRP);
 		rightBox.add(centerRB);
@@ -383,6 +414,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 							JOptionPane.showMessageDialog(null, "Số lượng sản phẩm hiện không đủ");
 						else {
 							hoaDon.themCTHD(sp, sp.getDonGia(), sl);
+							EnabledBtn(true);
 							capNhatHoaDon();
 							clearSanPham();
 							sp = null;
@@ -407,8 +439,13 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 			hoaDon = new HoaDon(soHD, ngayHienTai, caLap, nhanVien, khachHang);
 		} else if (obj == btnXoaCTHD) {
 			int index = tblCTHD.getSelectedRow();
-			hoaDon.xoaCTHD(index);
-			capNhatHoaDon();
+			if (index != -1) {
+				hoaDon.xoaCTHD(index);
+				capNhatHoaDon();
+				if(hoaDon.getDsChiTiet().size()==0) {
+					EnabledBtn(false);
+				}
+			}
 		} else if (obj == txtTienKhachTra) {
 			if (hoaDon != null) {
 				String tkt = txtTienKhachTra.getText();
@@ -419,6 +456,8 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 					lblTienThua.setText("Tiền thừa: " + s);
 				}
 			}
+		}else if(obj == btnThanhToan) {
+			
 		}
 	}
 
@@ -486,4 +525,8 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		this.khachHang = khachHang;
 	}
 
+	public void EnabledBtn(boolean b) {
+		btnThanhToan.setEnabled(b);
+		btnLuu.setEnabled(b);
+	}
 }

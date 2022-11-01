@@ -219,7 +219,7 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 	public void menuSelected(MenuEvent e) {
 		Object obj = e.getSource();
 		if(obj == menu1) {
-//			thayCenterP(new GD_KH());
+			thayCenterP(new GD_QuanLyNhanVien());
 		}
 		if(obj == menu2) {
 			thayCenterP(new GD_KH());
