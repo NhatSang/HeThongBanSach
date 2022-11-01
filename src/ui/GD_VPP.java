@@ -17,6 +17,7 @@ import dao.SanPham_DAO;
 import entity.LoaiSanPham;
 import entity.MauSac;
 import entity.NhaCungCap;
+import entity.Sach;
 import entity.ThuongHieu;
 import entity.VanPhongPham;
 
@@ -84,7 +85,7 @@ public class GD_VPP extends javax.swing.JPanel {
 		modelCboNCC = new DefaultComboBoxModel<NhaCungCap>();
 
 		cbLoai.setEditable(true);
-		cbNCC.setEditable(false);
+		cbNCC.setEditable(true);
 		cbDonVi.setEditable(true);
 		cbThuongHieu.setEditable(true);
 		cbMauSac.setEditable(true);
@@ -423,6 +424,7 @@ public class GD_VPP extends javax.swing.JPanel {
 
 	private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
+		timKiemVPP();
 	}
 
 	private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {
@@ -550,6 +552,18 @@ public class GD_VPP extends javax.swing.JPanel {
 
 		loadData();
 	}
+	
+	private void loadVPP(ArrayList<VanPhongPham> dsVPP) {
+		modelVPP.setRowCount(0);
+		for (VanPhongPham vpp : dsVPP) {
+			Object row[] = { tableVPP.getRowCount(), vpp.getMaSP(), vpp.getTenSP(), vpp.getLoaiSP(), vpp.getSoLuong(), vpp.getDonGia(),
+					vpp.getDonVi(), vpp.getVAT(), vpp.getNhaCC(), vpp.getMoTa(), vpp.getThuongHieu(), vpp.getMauSac(),
+					vpp.getChatLieu(), vpp.getXuatXu(), vpp.getHinhAnh() };
+			modelVPP.addRow(row);
+		}
+
+		loadData();
+	}
 
 	public void loadData() {
 		modelCboLoai.removeAllElements();
@@ -654,7 +668,7 @@ public class GD_VPP extends javax.swing.JPanel {
 
 		LoaiSanPham loaiVPP = (LoaiSanPham) cbLoai.getSelectedItem();
 		NhaCungCap ncc = (NhaCungCap) cbNCC.getSelectedItem();
-		MauSac mauSac = (MauSac) cbMauSac.getSelectedItem();
+//		MauSac mauSac = (MauSac) cbMauSac.getSelectedItem();
 		ThuongHieu thuongHieu = null;
 		if (cbThuongHieu.getSelectedItem() instanceof ThuongHieu) {
 			thuongHieu = (ThuongHieu) cbThuongHieu.getSelectedItem();
@@ -671,6 +685,23 @@ public class GD_VPP extends javax.swing.JPanel {
 					e.printStackTrace();
 				}
 			thuongHieu = sanPham_DAO.timThuongHieu(newTH);
+		}
+		MauSac mauSac = null;
+		if (cbMauSac.getSelectedItem() instanceof MauSac) {
+			mauSac = (MauSac) cbMauSac.getSelectedItem();
+			
+		}else {
+			String newMS = ((JTextComponent) cbMauSac.getEditor().getEditorComponent()).getText();
+			
+			mauSac = sanPham_DAO.timMauSac(newMS);
+			if (mauSac == null)
+				try {
+					sanPham_DAO.themMauSac(new MauSac(null, newMS));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			mauSac= sanPham_DAO.timMauSac(newMS);
 		}
 		String donvi = (String) cbDonVi.getSelectedItem();
 
@@ -703,7 +734,7 @@ public class GD_VPP extends javax.swing.JPanel {
 
 		LoaiSanPham loaiVPP = (LoaiSanPham) cbLoai.getSelectedItem();
 		NhaCungCap ncc = (NhaCungCap) cbNCC.getSelectedItem();
-		MauSac mauSac = (MauSac) cbMauSac.getSelectedItem();
+//		MauSac mauSac = (MauSac) cbMauSac.getSelectedItem();
 		ThuongHieu thuongHieu = null;
 		if (cbThuongHieu.getSelectedItem() instanceof ThuongHieu) {
 			thuongHieu = (ThuongHieu) cbThuongHieu.getSelectedItem();
@@ -719,6 +750,21 @@ public class GD_VPP extends javax.swing.JPanel {
 				}
 			thuongHieu = sanPham_DAO.timThuongHieu(newTH);
 		}
+		MauSac mauSac = null;
+		if (cbMauSac.getSelectedItem() instanceof MauSac) {
+			mauSac = (MauSac) cbMauSac.getSelectedItem();
+		}else {
+			String newMS = ((JTextComponent) cbMauSac.getEditor().getEditorComponent()).getText();
+			mauSac = sanPham_DAO.timMauSac(newMS);
+			if (mauSac == null)
+				try {
+					sanPham_DAO.themMauSac(new MauSac(null, newMS));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			mauSac = sanPham_DAO.timMauSac(newMS);
+		}
 		String donvi = (String) cbDonVi.getSelectedItem();
 		
 		VanPhongPham vpp = new VanPhongPham(maVPP, tenVPP, donvi, moTa, donvi, soLuong, vat, donGia, loaiVPP, ncc, xuatXu, chatLieu, thuongHieu, mauSac);
@@ -731,8 +777,13 @@ public class GD_VPP extends javax.swing.JPanel {
 		}
 	}
 
-	public void timVPP(JTable table) {
-
+	 private void timKiemVPP() {
+			// TODO Auto-generated method stu
+		String txt = txtTimKiem.getText();
+//		System.out.println(txt);
+		SanPham_DAO sp_dao = new SanPham_DAO();
+		ArrayList<VanPhongPham> dsVPP = sp_dao.timKiemVPP(txt);
+		loadVPP(dsVPP);
 	}
 
 	public boolean checkThongTin() {

@@ -3,6 +3,7 @@
 package ui;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -11,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.JTextComponent;
 
 import dao.SanPham_DAO;
 import entity.CapDoHoc;
@@ -20,6 +22,7 @@ import entity.NhaCungCap;
 import entity.NhaXuatBan;
 import entity.Sach;
 import entity.TacGia;
+import entity.ThuongHieu;
 
 /**
  *
@@ -105,6 +108,7 @@ public class GD_Sach extends javax.swing.JPanel {
 		cbNXB.setEditable(true);
 		cbDonVi.setEditable(true);
 		cbLoaiBia.setEditable(true);
+		
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setPreferredSize(new java.awt.Dimension(960, 540));
 
@@ -632,9 +636,6 @@ public class GD_Sach extends javax.swing.JPanel {
 		loadData();
 	}
 	private void loadSach(ArrayList<Sach> dsSach) {
-//		while (tableSach.getRowCount() != 0) {
-//			modelSach.removeRow(0);
-//		}
 		modelSach.setRowCount(0);
 		for (Sach sach : dsSach) {
 			Object row[] = { tableSach.getRowCount(), sach.getMaSP(), sach.getTenSP(), sach.getLoaiSP(), sach.getNhaXB(), sach.getNamXB(),
@@ -647,6 +648,12 @@ public class GD_Sach extends javax.swing.JPanel {
 	}
 
 	public void loadData() {
+		modelCboLoai.removeAllElements();
+		modelCboNCC.removeAllElements();
+		modelCboNXB.removeAllElements();
+		modelCboCDH.removeAllElements();
+		modelCboLoaiBia.removeAllElements();
+		
 		modelCboLoai.addAll(sp_dao.getLoaiSP());
 		modelCboNXB.addAll(sp_dao.getNXB());
 		modelCboNCC.addAll(sp_dao.getNCC());
@@ -757,16 +764,50 @@ public class GD_Sach extends javax.swing.JPanel {
 		String hinhAnh = txtHinhAnh.getText();
 
 		LoaiSanPham loaiSach = (LoaiSanPham) cbLoai.getSelectedItem();
-		NhaXuatBan nxb = (NhaXuatBan) cbNXB.getSelectedItem();
+//		NhaXuatBan nxb = (NhaXuatBan) cbNXB.getSelectedItem();
+		NhaXuatBan NXB = null;
+		if (cbNXB.getSelectedItem() instanceof NhaXuatBan) {
+			NXB = (NhaXuatBan) cbNXB.getSelectedItem();
+			
+		}else {
+			String newNXB = ((JTextComponent) cbNXB.getEditor().getEditorComponent()).getText();
+			
+			NXB = sanPham_DAO.timNXB(newNXB);
+			if (NXB == null)
+				try {
+					sanPham_DAO.themNXB(new NhaXuatBan(null, newNXB));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			NXB = sanPham_DAO.timNXB(newNXB);
+		}
 		String donVi = (String) cbDonVi.getSelectedItem();
-		LoaiBia loaiBia = (LoaiBia) cbLoaiBia.getSelectedItem();
+//		LoaiBia loaiBia = (LoaiBia) cbLoaiBia.getSelectedItem();
+		LoaiBia loaiBia = null;
+		if (cbLoaiBia.getSelectedItem() instanceof LoaiBia) {
+			loaiBia = (LoaiBia) cbLoaiBia.getSelectedItem();
+			
+		}else {
+			String newLB = ((JTextComponent) cbLoaiBia.getEditor().getEditorComponent()).getText();
+			
+			loaiBia = sanPham_DAO.timLoaiBia(newLB);
+			if (loaiBia == null)
+				try {
+					sanPham_DAO.themLoaiBia(new LoaiBia(null, newLB));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			loaiBia = sanPham_DAO.timLoaiBia(newLB);
+		}
 		NhaCungCap ncc = (NhaCungCap) cbNCC.getSelectedItem();
 		CapDoHoc cdh = new CapDoHoc();
 		if (cbCDH.getSelectedItem() != null)
 			cdh = (CapDoHoc) cbCDH.getSelectedItem();
 
 		Sach sach = new Sach(tenSach, donVi, moTa, hinhAnh, soLuong, vat, donGia, loaiSach, ncc, namXB_SX, soTrang,
-				tuoiGH, nguoiDich, nxb, tacGia, loaiBia, cdh);
+				tuoiGH, nguoiDich, NXB, tacGia, loaiBia, cdh);
 		
 		if (sanPham_DAO.timKiemSPTheoMa(sach.getTenSP()) == null) {
 			try {
@@ -809,15 +850,49 @@ public class GD_Sach extends javax.swing.JPanel {
 		String hinhAnh = txtHinhAnh.getText();
 
 		LoaiSanPham loaiSp = (LoaiSanPham) cbLoai.getSelectedItem();
-		NhaXuatBan nxb = (NhaXuatBan) cbNXB.getSelectedItem();
+//		NhaXuatBan nxb = (NhaXuatBan) cbNXB.getSelectedItem();
+		NhaXuatBan NXB = null;
+		if (cbNXB.getSelectedItem() instanceof NhaXuatBan) {
+			NXB = (NhaXuatBan) cbNXB.getSelectedItem();
+			
+		}else {
+			String newNXB = ((JTextComponent) cbNXB.getEditor().getEditorComponent()).getText();
+			
+			NXB = sanPham_DAO.timNXB(newNXB);
+			if (NXB == null)
+				try {
+					sanPham_DAO.themNXB(new NhaXuatBan(null, newNXB));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			NXB = sanPham_DAO.timNXB(newNXB);
+		}
 		String donVi = (String) cbDonVi.getSelectedItem();
-		LoaiBia loaiBia = (LoaiBia) cbLoaiBia.getSelectedItem();
+//		LoaiBia loaiBia = (LoaiBia) cbLoaiBia.getSelectedItem();
+		LoaiBia loaiBia = null;
+		if (cbLoaiBia.getSelectedItem() instanceof LoaiBia) {
+			loaiBia = (LoaiBia) cbLoaiBia.getSelectedItem();
+			
+		}else {
+			String newLB = ((JTextComponent) cbLoaiBia.getEditor().getEditorComponent()).getText();
+			
+			loaiBia = sanPham_DAO.timLoaiBia(newLB);
+			if (loaiBia == null)
+				try {
+					sanPham_DAO.themLoaiBia(new LoaiBia(null, newLB));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			loaiBia = sanPham_DAO.timLoaiBia(newLB);
+		}
 		NhaCungCap ncc = (NhaCungCap) cbNCC.getSelectedItem();
 		CapDoHoc cdh = new CapDoHoc();
 		if (cbCDH.getSelectedItem() != null)
 			cdh = (CapDoHoc) cbCDH.getSelectedItem();
 		Sach sach = new Sach(maSP, tenSach, donVi, moTa, hinhAnh, soLuong, vat, donGia, loaiSp, ncc, namXB_SX, soTrang,
-				tuoiGH, nguoiDich, nxb, tacGia, loaiBia, cdh);
+				tuoiGH, nguoiDich, NXB, tacGia, loaiBia, cdh);
 		try {
 			sanPham_DAO.suaSach(sach);
 			loadSach();
