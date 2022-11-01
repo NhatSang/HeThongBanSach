@@ -461,7 +461,7 @@ public class GD_QuanLyNhanVien extends javax.swing.JPanel {
                  String cccd = txtcccd.getText();
                  String cv = cbbchucvu.getSelectedItem().toString();
                  ChucVu chucvu = new ChucVu(null, cv); 
-                 NhanVien nv = new NhanVien(hoten, ns, cccd, diachi, gt, chucvu);
+                 NhanVien nv = new NhanVien(hoten, cccd, diachi, sdt, ns, gt, chucvu);
                 		 try {
                     nv_dao.addNV(nv);
                 } catch (Exception e) {

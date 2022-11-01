@@ -25,6 +25,20 @@ public class NhanVien {
 		this.hoTen = hoTen;
 		this.chucVu = chucVu;
 	}
+	
+	
+
+	public NhanVien(String hoTen, String cccd, String diaChi, String sdt, Date ngaySinh, boolean gioiTinh,
+			ChucVu chucVu) {
+		super();
+		this.hoTen = hoTen;
+		this.cccd = cccd;
+		this.diaChi = diaChi;
+		this.sdt = sdt;
+		this.ngaySinh = ngaySinh;
+		this.gioiTinh = gioiTinh;
+		this.chucVu = chucVu;
+	}
 
 	public NhanVien(String maNV, String hoTen, String cccd, String diaChi, String sdt, Date ngaySinh,
 			boolean gioiTinh, ChucVu chucVu) {
