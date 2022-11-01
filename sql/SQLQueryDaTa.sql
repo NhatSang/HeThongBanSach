@@ -1,8 +1,20 @@
 ﻿use BanSach
 go
+
 select * from NhaCungCap
 insert into NhaCungCap
-values (default,N'AZ Việt Nam',N'Trần Quốc Toàn','0964484633',N'Số 50 - Đường 5 - Khu tập thể F361 - phố An Dương - P. Yên Phụ - Q.Tây Hồ - HN',0)
+values
+	(default,N'AZ Việt Nam',N'Trần Quốc Toàn','0964484633',N'Số 50 - Đường 5 - Khu tập thể F361 - phố An Dương - P. Yên Phụ - Q.Tây Hồ - HN',1),
+	(default,N'Thiên Long Hoàn Cầu',N'Trương Văn Tuấn','0944742935', N'Tầng 10 - Sofic Tower - Số 10 Đường Mai Chí Thọ - Phường Thủ Thiêm - TP.Thủ Đức -TP.HCM - VN', 0),
+	(default,N'CamPus',N'Trương Văn Tuấn','0944742935', N'Số 243 Dũng Sĩ Thanh Khê - Q.Thanh Khê - Đà Nẵng - VN', 0)
+go 
+select * from ThuongHieu
+insert into ThuongHieu
+values (default, N'CamPus')
+go 
+select * from MauSac
+insert into MauSac
+values (default, N'Hồng')
 go
 select * from NhaXuatBan
 insert into NhaXuatBan
@@ -33,9 +45,15 @@ values
 	(dbo.autoIdLSP('VPP'),N'Sản Phẩm Khác');
 go
 select * from SanPham
+--them sach
 insert into SanPham (maSP,tenSP,namXB_SX,soLuong,donGia,donVi,VAT,soTrang,nguoiDich,tuoiGioiHan,moTa,hinhAnh,maLoai,maNCC,maNXB,maTG,maLB,maCDH,trangThai)
 values 
 	(dbo.autoIdSP('SVH00001'),N'Những Đêm Không Ngủ Những Ngày Chậm Trôi',2021,100,60000,N'Quyển',10,192,null,null,N'“Những đêm không ngủ, những ngày chậm trôi” đại diện cho một hành tinh mới - nơi nỗi đau tinh thần được đưa ra ánh sáng và chữa lành.','SVH00001.jpg','SVH00001','NCC00001','NXB00001','TG00001','LB00001',null,0)
+go
+--them van phong pham
+insert into SanPham (maSP,tenSP,soLuong,donGia,donVi,VAT,xuatXu,chatLieu, moTa,hinhAnh,maLoai,maNCC,maTH,maMau,trangThai)
+values 
+	(dbo.autoIdSP('VPP00001'),N'Bút Bi Thiên Long TL-061', 1000,5000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế đơn giản, toàn bộ thân bút làm từ nhựa trong pha màu nhạt, nhìn được phần ruột bút bên trong','blttl061.jpg','VPP00003', 'NCC00002',  'TH00001', 'MS00001', 0)
 go
 select * from ChucVu
 insert into ChucVu
@@ -51,12 +69,12 @@ values
 go
 select * from TaiKhoan
 insert into TaiKhoan
-values ('NV00002','123','NV00002')
+values ('NV00001','123','NV00001')
 go
 select * from KhachHang
 insert into KhachHang
 values
-	(default,N'Lương Viết Thanh','2002/07/27',N'448/3, tỉnh lộ 8, ấp Tây, Tân An Hội, Củ Chi, Tp Hồ Chí Minh','0396979388',1,0)
+	(default,N'Lương Viết Thanh','2002/07/27',N'448/3, tỉnh lộ 8, ấp Tây, Tân An Hội, Củ Chi, Tp Hồ Chí Minh','0396979388',1,1)
 go
 select * from CapDoHoc
 insert into CapDoHoc

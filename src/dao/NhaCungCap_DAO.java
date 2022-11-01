@@ -22,7 +22,7 @@ public class NhaCungCap_DAO {
 			DataBase.getInstance();
 			Connection con = DataBase.getConnection();
 
-			String sql = "Select * from NhaCungCap";
+			String sql = "Select * from NhaCungCap where trangThai = 0";
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(sql);
 
@@ -56,19 +56,38 @@ public class NhaCungCap_DAO {
 			statement.close();
 		}
 	}
-
+//        Xoá theo trạng thái - sử dụng
+        public void xoaTheoTrangThai(NhaCungCap nhaCungCap) throws SQLException {
+		DataBase.getInstance();
+		Connection connection = DataBase.getConnection();
+		PreparedStatement statement = null;
+                String trangThai = "1";
+		try {
+			String sql = "update NhaCungCap set trangThai=? where maNCC=?";
+			statement = connection.prepareStatement(sql);
+			statement.setString(2, nhaCungCap.getMaNCC());
+                        statement.setString(1, trangThai);
+			statement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			statement.close();
+		}
+	}
 	public void addNCC(NhaCungCap ncc) throws SQLException {
 		DataBase.getInstance();
 		Connection connection = DataBase.getConnection();
 		PreparedStatement statement = null;
 		try {
-			String sql = "insert into NhaCungCap values (default, ?, ?, ?, ?)";
+			String sql = "insert into NhaCungCap values (default, ?, ?, ?, ?, ?)";
 			statement = connection.prepareStatement(sql);
 //		statement.setString(1, ncc.getMaNCC());
 			statement.setString(1, ncc.getTenNCC());
 			statement.setString(2, ncc.getNguoiDaiDien());
 			statement.setString(3, ncc.getsDt());
 			statement.setString(4, ncc.getDiaChi());
+                        statement.setString(5, "0");
 			statement.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -90,7 +109,7 @@ public class NhaCungCap_DAO {
 			statement.setString(1, nhaCungCap.getTenNCC());
 			statement.setString(2, nhaCungCap.getNguoiDaiDien());
 			statement.setString(3, nhaCungCap.getsDt());
-			statement.setString(4, nhaCungCap.getDiaChi());;
+			statement.setString(4, nhaCungCap.getDiaChi());
 			statement.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception

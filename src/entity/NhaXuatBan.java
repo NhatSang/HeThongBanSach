@@ -38,7 +38,7 @@ public class NhaXuatBan {
 
 	@Override
 	public String toString() {
-		return "NhaXuatBan [maNXB=" + maNXB + ", tenNXB=" + tenNXB + "]";
+		return tenNXB;
 	}
 
 }
