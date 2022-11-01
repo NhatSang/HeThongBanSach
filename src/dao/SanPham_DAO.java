@@ -472,7 +472,7 @@ public class SanPham_DAO {
 
 		return dsCDH;
 	}
-
+	
 	public TacGia timTacGia(String key) {
 		TacGia tg = null;
 		DataBase.getInstance();
@@ -491,6 +491,7 @@ public class SanPham_DAO {
 		}
 		return tg;
 	}
+
 	public void themTG(TacGia tg) throws SQLException {
 		DataBase.getInstance();
 		Connection con = DataBase.getConnection();
@@ -507,7 +508,7 @@ public class SanPham_DAO {
 			statement.close();
 		}
 	}
-	
+
 	public ThuongHieu timThuongHieu(String key) {
 		ThuongHieu th = null;
 		DataBase.getInstance();
@@ -526,7 +527,7 @@ public class SanPham_DAO {
 		}
 		return th;
 	}
-	
+
 	public void themThuongHieu(ThuongHieu th) throws SQLException {
 		DataBase.getInstance();
 		Connection con = DataBase.getConnection();
@@ -535,6 +536,114 @@ public class SanPham_DAO {
 			String sql = "insert into ThuongHieu values (default,?)";
 			statement = con.prepareStatement(sql);
 			statement.setNString(1, th.getTenTH());
+			statement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			statement.close();
+		}
+	}
+	
+	public MauSac timMauSac(String key) {
+		MauSac ms = null;
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+		try {
+			String sql = "select * from MauSac where mau = N'" + key + "'";
+			Statement stm = con.createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			if (rs.next()) {
+				String maMau = rs.getString(1);
+				String mau = rs.getString(2);
+				ms = new MauSac(maMau, mau);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return ms;
+	}
+
+	public void themMauSac(MauSac ms) throws SQLException {
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+		PreparedStatement statement = null;
+		try {
+			String sql = "insert into MauSac values (default,?)";
+			statement = con.prepareStatement(sql);
+			statement.setNString(1, ms.getMau());
+			statement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			statement.close();
+		}
+	}
+
+	public LoaiBia timLoaiBia(String key) {
+		LoaiBia lb = null;
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+		try {
+			String sql = "select * from LoaiBia where tenLB = N'" + key + "'";
+			Statement stm = con.createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			if (rs.next()) {
+				String maLB = rs.getString(1);
+				String tenLB = rs.getString(2);
+				lb = new LoaiBia(maLB, tenLB);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return lb;
+	}
+
+	public void themLoaiBia(LoaiBia lb) throws SQLException {
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+		PreparedStatement statement = null;
+		try {
+			String sql = "insert into LoaiBia values (default,?)";
+			statement = con.prepareStatement(sql);
+			statement.setNString(1, lb.getTenLB());
+			statement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			statement.close();
+		}
+	}
+	
+	public NhaXuatBan timNXB(String key) {
+		NhaXuatBan nxb = null;
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+		try {
+			String sql = "select * from NhaXuatBan where tenNXB = N'" + key + "'";
+			Statement stm = con.createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			if (rs.next()) {
+				String maNXB = rs.getString(1);
+				String tenNXB = rs.getString(2);
+				nxb = new NhaXuatBan(maNXB, tenNXB);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return nxb;
+	}
+
+	public void themNXB(NhaXuatBan nxb) throws SQLException {
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+		PreparedStatement statement = null;
+		try {
+			String sql = "insert into NhaXuatBan values (default,?)";
+			statement = con.prepareStatement(sql);
+			statement.setNString(1, nxb.getTenNXB());
 			statement.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -560,11 +669,10 @@ public class SanPham_DAO {
 							+ "left join TacGia tg on sp.maTG = tg.maTG\r\n"
 							+ "left join LoaiBia lb on sp.maLB = lb.maLB\r\n"
 							+ "left join CapDoHoc cdh on sp.maCDH = cdh.maCDH\r\n"
-							+ "where maSP not like 'VPP%' and sp.trangThai = 0 "
-							+ "and ( sp.maSP like '%"+ key +"%' or sp.tenSP like N'%"+ key +"%' "
-							+ "or sp.nguoiDich like '%" + key + "%' or lsp.maLoai like '%" + key + "%' "
-							+ "or lsp.tenLoai like '%" + key + "%' or tg.tenTG like '%" + key + "%'"
-							+ ")");
+							+ "where maSP not like 'VPP%' and sp.trangThai = 0 " + "and ( sp.maSP like '%" + key
+							+ "%' or sp.tenSP like N'%" + key + "%' " + "or sp.nguoiDich like '%" + key
+							+ "%' or lsp.maLoai like '%" + key + "%' " + "or lsp.tenLoai like '%" + key
+							+ "%' or tg.tenTG like '%" + key + "%'" + ")");
 
 			while (rs.next()) {
 				String maSach = rs.getString(1);
@@ -598,4 +706,47 @@ public class SanPham_DAO {
 		}
 		return dsSach;
 	}
+
+	public ArrayList<VanPhongPham> timKiemVPP(String key) {
+		ArrayList<VanPhongPham> dsVPP = new ArrayList<VanPhongPham>();
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+
+		try {
+			Statement stm = con.createStatement();
+			ResultSet rs = stm.executeQuery(
+					"select sp.maSP,sp.tenSP, sp.soLuong,sp.donGia,sp.donVi,sp.VAT ,sp.xuatXu,sp.chatLieu, sp.moTa,sp.hinhAnh,\r\n"
+							+ "lsp.*,ncc.maNCC, ncc.tenNCC,th.*,ms.*\r\n" + "from SanPham sp \r\n"
+							+ "left join LoaiSanPham lsp on sp.maLoai = lsp.maLoai \r\n"
+							+ "left join NhaCungCap ncc on sp.maNCC = ncc.maNCC\r\n"
+							+ "left join ThuongHieu th on sp.maTH = th.maTH\r\n"
+							+ "left join MauSac ms on sp.maMau = ms.maMau\r\n"
+							+ "where maSP like 'VPP%' and sp.trangThai = 0 " 
+							+ "and ( sp.maSP like '%" + key + "%' or sp.tenSP like N'%" + key + "%' or lsp.maLoai like '%" + key + "%' " 
+							+ "or lsp.tenLoai like '%" + key + "%' or ms.mau like N'%" + key + "%'" + ")");
+			while (rs.next()) {
+				String maVPP = rs.getString(1);
+				String tenVPP = rs.getString(2);
+				int soLuong = rs.getInt(3);
+				double donGia = rs.getFloat(4);
+				String donVi = rs.getString(5);
+				int VAT = rs.getInt(6);
+				String xuatXu = rs.getString(7);
+				String chatLieu = rs.getString(8);
+				String moTa = rs.getString(9);
+				String hinhAnh = rs.getString(10);
+				LoaiSanPham loaiSp = new LoaiSanPham(rs.getString(11), rs.getString(12));
+				NhaCungCap ncc = new NhaCungCap(rs.getString(13), rs.getString(14));
+				ThuongHieu th = new ThuongHieu(rs.getString(15), rs.getString(16));
+				MauSac ms = new MauSac(rs.getString(17), rs.getString(18));
+				VanPhongPham vpp = new VanPhongPham(maVPP, tenVPP, donVi, moTa, hinhAnh, soLuong, VAT, donGia, loaiSp,
+						ncc, xuatXu, chatLieu, th, ms);
+				dsVPP.add(vpp);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return dsVPP;
+	}
+
 }
