@@ -13,7 +13,7 @@ left join CapDoHoc cdh on sp.maCDH = cdh.maCDH
 where maSP not like 'VPP%' and sp.trangThai = 0
 go
 /*vpp*/
-select sp.maSP,sp.tenSP, sp.soLuong,sp.donGia,sp.VAT ,sp.donVi,sp.xuatXu,sp.chatLieu, sp.moTa,sp.hinhAnh,
+select sp.maSP,sp.tenSP, sp.soLuong,sp.donGia,sp.donVi,sp.VAT ,sp.xuatXu,sp.chatLieu, sp.moTa,sp.hinhAnh,
 lsp.*,ncc.maNCC, ncc.tenNCC,th.*,ms.*
 from SanPham sp 
 left join LoaiSanPham lsp on sp.maLoai = lsp.maLoai 
@@ -45,3 +45,7 @@ where maSP = 'SVH00001' -- viết câu lệnh trong hàm thì thay thành maNV =
 select maSP,tenSP,hinhAnh,donGia, donVi, soLuong, VAT, ncc.maNCC, ncc.tenNCC from SanPham sp 
 join NhaCungCap ncc on sp.maNCC = ncc.maNCC
 where (tenSP = N'Những Đêm Không Ngủ Những Ngày Chậm Trôi' or maSP = 'SVH00001') and sp.trangThai = 0
+-- get ds nhân viên
+Select nv.*,cv.tenCV from NhanVien nv
+join ChucVu cv on nv.maCV = cv.maCV
+where trangThai = 0
