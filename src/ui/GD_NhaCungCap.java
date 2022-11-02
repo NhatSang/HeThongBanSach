@@ -27,6 +27,7 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
         myInitComponents();
         loadNCC();
         txtMa.setEditable(false);
+        setEditableForm(false);
     }
 
     /**
@@ -71,6 +72,11 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
         });
 
         btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         tableNCC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -333,6 +339,11 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
         });
 
         btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         modelNCC = new DefaultTableModel(new Object [][] {
 
@@ -385,10 +396,11 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReSet, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnReSet, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                        .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1)
                 .addContainerGap())
@@ -579,7 +591,7 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-    	setEditableForm(true);
+//    	setEditableForm(true);
     	themNCC();
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -606,7 +618,13 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
 
     private void btnReSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReSetActionPerformed
         // TODO add your handling code here:
+        reset();
     }//GEN-LAST:event_btnReSetActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        // TODO add your handling code here:
+        tim_Kiem();
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -665,12 +683,14 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
     public void themNCC(){
 //        String ma = txtMa.getText
     if(check != 1){
+        xoatrang();
+        setEditableForm(true);
         btnXoa.setText("Huỷ");
         btnSua.setEnabled(false);
         check = 1;
     }else{
-        checkThongTin();
-        if(checkThongTin()){
+//        checkThongTin();
+        if(checkThongTin()&&checkTrung()){
             String ten = txtTen.getText();
             String ndd = txtNguoiDaiDien.getText();
             String sdt = txtSDT.getText();
@@ -756,10 +776,17 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
         if(check != 2){
         btnXoa.setText("Huỷ");
         btnThem.setEnabled(false);
+            setEditableForm(true);
         check = 2;
         }
         else{
             int row = tableNCC.getSelectedRow();
+            if(row == -1){
+                messenger.setText("Vui lòng chọn dòng cần sửa");
+                return;
+            }
+            if(checkThongTin()){
+                checkThongTin();
             String ma = txtMa.getText();
             String ten = txtTen.getText();
             String ndd = txtNguoiDaiDien.getText();
@@ -780,6 +807,23 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
             reload();
             JOptionPane.showMessageDialog(null, "Sửa thành công");
             xoatrang();
+            }
+        }
+    }
+    private void tim_Kiem() {
+		String tk = txtTimKiem.getText();
+                if(tk.equals("")){
+                    JOptionPane.showMessageDialog(null, "Nhập thông tin cần tìm kiếm");
+                }else{
+		ArrayList<NhaCungCap> dsNCC = ncc_dao.timKiem(tk);
+                LoadTimKiem(dsNCC);}
+		
+	}
+    private void LoadTimKiem(ArrayList<NhaCungCap> dsNCC){
+        modelNCC.setRowCount(0);
+        for (NhaCungCap nhaCungCap : dsNCC) {
+            Object row[] = {++stt, nhaCungCap.getMaNCC(), nhaCungCap.getTenNCC(), nhaCungCap.getNguoiDaiDien(), nhaCungCap.getsDt(), nhaCungCap.getDiaChi()};
+			modelNCC.addRow(row);
         }
     }
     public boolean checkThongTin(){
@@ -808,10 +852,14 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
             messenger.setText("Địa chỉ không được để trống");
             return false;
          }
-         
+        return true;
+    }
+    public boolean checkTrung(){
         NhaCungCap_DAO ncc_dao = new NhaCungCap_DAO();
     	ArrayList<NhaCungCap> dsncc = ncc_dao.getAllNhaCungCap();
         boolean check = true;
+        String ten = txtTen.getText();
+        String sdt = txtSDT.getText();
     	for (NhaCungCap nhaCungCap : dsncc) {
 			if(nhaCungCap.getTenNCC().equals(ten)){
                             check = false;
@@ -839,5 +887,11 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
         messenger.setText("");
         check = 0;
      }
+    public void reset(){
+        stt = 0;
+        modelNCC.setRowCount(0);
+        loadNCC();
+        txtTimKiem.setText("");
+    }
     
 }

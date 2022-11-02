@@ -741,7 +741,7 @@ public class GD_KH extends javax.swing.JPanel {
 			radNam.setSelected(true);
 		else
 			radNu.setSelected(true);
-		setEditableForm(true);
+//		setEditableForm(true);
 	}	
     public void setEditableForm(boolean st) {
 //            txtMa.setEditable(st);
@@ -820,6 +820,7 @@ public class GD_KH extends javax.swing.JPanel {
             }
             System.out.println(check);
             modelKhachHang.setRowCount(0);
+            reload();
             stt = 0;
             loadKH();
         }
@@ -843,6 +844,7 @@ public class GD_KH extends javax.swing.JPanel {
 	}
     private void LoadTimKiem(ArrayList<KhachHang> dsKH){
         modelKhachHang.setRowCount(0);
+//        stt = 0;
         String gt;
         for (KhachHang khachHang : dsKH) {
             if(khachHang.getGioiTinh()== false) {
@@ -859,8 +861,14 @@ public class GD_KH extends javax.swing.JPanel {
             btnXoa.setText("Huỷ");
             btnThem.setEnabled(false);
             check = 2;
+            setEditableForm(true);
         }
-        else{   
+        else{
+            int row = tableKH.getSelectedRow();
+            if(row == -1){
+                messenger.setText("Vui lòng chọn dòng cần sửa");
+                return;
+            }
             checkThongTin();
             if(checkThongTin()){
             String ma = txtMa.getText();
@@ -873,11 +881,13 @@ public class GD_KH extends javax.swing.JPanel {
             KhachHang kh = new KhachHang(ma, ten, ns, dc, sdt, gt);
             try {
             kh_dao.capNhat(kh);
+            JOptionPane.showMessageDialog(null, "Sửa thông tin thành công");
                 } catch (Exception e) {
             }
             modelKhachHang.setRowCount(0);
             stt = 0;
             loadKH();
+            xoatrang();
             reload();
             }   
         }
@@ -957,6 +967,7 @@ public class GD_KH extends javax.swing.JPanel {
        btnThem.setEnabled(true);
        btnXoa.setEnabled(true);
        btnSua.setEnabled(true);
+       messenger.setText("");
        check = 0;
     }
     public void reset(){

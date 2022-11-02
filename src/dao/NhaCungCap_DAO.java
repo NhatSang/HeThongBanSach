@@ -118,4 +118,26 @@ public class NhaCungCap_DAO {
 			statement.close();
 		}
 	}
+        public ArrayList<NhaCungCap> timKiem(String Key) {
+		ArrayList<NhaCungCap> dsNCC = new ArrayList<NhaCungCap>();
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+
+		try {
+			Statement stm = con.createStatement();
+			ResultSet rs = stm.executeQuery("select * from NhaCungCap where (NhaCungCap.maNCC like '%"+Key+"%' or NhaCungCap.sdt like '%"+Key+"%' or NhaCungCap.tenNCC like N'%"+Key+"%') and NhaCungCap.trangThai = 0");
+
+			while (rs.next()) {
+				String ma = rs.getString(1);
+				String ten = rs.getString(2);
+				String nguoidaidien = rs.getString(3);
+				String sdt = rs.getString(4);
+				String diachi = rs.getString(5);
+				dsNCC.add(new NhaCungCap(ma, ten, nguoidaidien, sdt, diachi));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return dsNCC;
+	}
 }
