@@ -670,7 +670,7 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
 		txtNguoiDaiDien.setText(tableNCC.getValueAt(row, 3).toString());
                 txtSDT.setText(tableNCC.getValueAt(row, 4).toString());
 		txtDiaChi.setText(tableNCC.getValueAt(row, 5).toString());
-		setEditableForm(true);
+//		setEditableForm(true);
 	}	
     public void setEditableForm(boolean st) {
 //            txtMa.setEditable(st);
