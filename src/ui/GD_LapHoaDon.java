@@ -52,7 +52,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 			lblDonVi, lblSoLuong, lblMaHd, lblNgayLap, lblCaLap, LblNguoiLap, lblTongTien, lblTongVAT, lblTienCanTra,
 			lblTienKhachTra, lblTienThua;
 	private JTextField txtTimKh, txtTimSp, txtTienKhachTra;
-	private JButton btnTimKh, btnThemKh, btnTimSp, btnThemCTHD, btnThanhToan, btnXoaCTHD, btnXuatHD, btnLuu;
+	private JButton btnTimKh, btnThemKh, btnTimSp, btnThemCTHD, btnThanhToan, btnXoaCTHD, btnLuu;
 	private Box leftBox, rightBox, northLB, centerLB;
 	private JTable tblCTHD;
 	private DefaultTableModel tblModel;
@@ -64,6 +64,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 	private LocalDate ngayHienTai;
 	private int caLap;
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	private int k;
 
 	public GD_LapHoaDon(GD_NhanVienBanHang parent) {
 		this.parent = parent;
@@ -77,7 +78,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		hoaDon = null;
 		sp = null;
 		khachHang = null;
-
+		k = 0;
 	}
 
 	public GD_LapHoaDon(GD_NhanVienBanHang parent, HoaDon hoaDon) {
@@ -86,15 +87,19 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		this.hoaDon = hoaDon;
 		this.nhanVien = hoaDon.getNhanVien();
 		this.khachHang = hoaDon.getKhachHang();
-		loadTTHD();
-		createGui();
-		DataBase.getInstance().connect();
 		sp_DAO = new SanPham_DAO();
 		hd_DAO = new HoaDon_DAO();
 		kh_DAO = new KhachHang_DAO();
+		loadTTHD();
+		createGui();
+		DataBase.getInstance().connect();
 		capNhatKhachHang(khachHang);
 		capNhatHoaDon();
-
+		btnThanhToan.setEnabled(true);
+		txtTimKh.setEditable(false);
+		btnTimKh.setEnabled(false);
+		btnThemKh.setEnabled(false);
+		k = 1;
 	}
 
 	private void createGui() {
@@ -333,20 +338,15 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		JPanel southP = new JPanel();
 		southP.setBorder(BorderFactory.createLineBorder(Color.black));
 		btnThanhToan = new JButton("Thanh toán");
-		btnXuatHD = new JButton("Xuất hóa đơn");
 		btnLuu = new JButton("Lưu");
 		btnThanhToan.setFont(new Font("Serif", Font.PLAIN, 18));
-		btnXuatHD.setFont(new Font("Serif", Font.PLAIN, 18));
 		btnLuu.setFont(new Font("Serif", Font.PLAIN, 18));
 
 		EnabledBtn(false);
-		btnXuatHD.setEnabled(false);
 
 		southP.add(btnLuu);
 		southP.add(Box.createHorizontalStrut(20));
 		southP.add(btnThanhToan);
-		southP.add(Box.createHorizontalStrut(20));
-		southP.add(btnXuatHD);
 
 		rightBox.add(northRP);
 		rightBox.add(centerRB);
@@ -366,6 +366,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		btnXoaCTHD.addActionListener(this);
 		txtTienKhachTra.addActionListener(this);
 		btnLuu.addActionListener(this);
+		btnThanhToan.addActionListener(this);
 	}
 
 	public Icon loadImg(String linkImage, int k, int m) {
@@ -417,11 +418,23 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 						else if (sl > sp.getSoLuong())
 							JOptionPane.showMessageDialog(null, "Số lượng sản phẩm hiện không đủ");
 						else {
-							hoaDon.themCTHD(sp, sp.getDonGia(), sl);
-							EnabledBtn(true);
-							capNhatHoaDon();
-							clearSanPham();
-							sp = null;
+							if (kiemtraSp() == false) {
+								hoaDon.themCTHD(sp, sp.getDonGia(), sl);
+								EnabledBtn(true);
+								capNhatHoaDon();
+								clearSanPham();
+								sp = null;
+							} else {
+								for (ChiTietHoaDon c : hoaDon.getDsChiTiet()) {
+									if (c.getSanPham().getMaSP().equals(sp.getMaSP())) {
+										c.setSoLuong(c.getSoLuong() + sl);
+									}
+								}
+								EnabledBtn(true);
+								capNhatHoaDon();
+								clearSanPham();
+								sp = null;
+							}
 						}
 					} else
 						JOptionPane.showMessageDialog(null, "Số lượng phải là số");
@@ -444,6 +457,9 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		} else if (obj == btnXoaCTHD) {
 			int index = tblCTHD.getSelectedRow();
 			if (index != -1) {
+				if(k==1) {
+					EnabledBtn(true);
+				}
 				hoaDon.xoaCTHD(index);
 				capNhatHoaDon();
 				if (hoaDon.getDsChiTiet().size() == 0) {
@@ -461,17 +477,84 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 				}
 			}
 		} else if (obj == btnThanhToan) {
+			if (k == 0) {
+				try {
+					hd_DAO.themHD(hoaDon, true);
+					for (ChiTietHoaDon c : hoaDon.getDsChiTiet()) {
+						hd_DAO.themCTHD(c, soHD);
+						sp_DAO.capNhat_soLuong(c.getSanPham().getMaSP(), c.getSanPham().getSoLuong() - c.getSoLuong());
+					}
+					JOptionPane.showMessageDialog(null, "Đã thanh toán");
+					int qes = JOptionPane.showConfirmDialog(null, "Có xuất hóa đơn không?");
+					if (qes == JOptionPane.YES_OPTION) {
 
+					}
+					parent.thayCenterP(new GD_LapHoaDon(parent));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			} else {
+				try {
+					for (ChiTietHoaDon c : hoaDon.getDsChiTiet()) {
+						if(c.getSanPham().getSoLuong() - c.getSoLuong() <0) {
+							JOptionPane.showMessageDialog(null,"Sản phẩm " + c.getSanPham().getTenSP() + " không đủ số lượng");
+							return;
+						}
+					}
+					hd_DAO.xoaHD(hoaDon.getMaHD());
+					hd_DAO.themHD(hoaDon, true);
+					for (ChiTietHoaDon c : hoaDon.getDsChiTiet()) {
+						hd_DAO.themCTHD(c, soHD);
+						sp_DAO.capNhat_soLuong(c.getSanPham().getMaSP(), c.getSanPham().getSoLuong() - c.getSoLuong());
+					}
+					JOptionPane.showMessageDialog(null, "Đã thanh toán");
+					int qes = JOptionPane.showConfirmDialog(null, "Có xuất hóa đơn không?");
+					if (qes == JOptionPane.YES_OPTION) {
+
+					}
+					parent.thayCenterP(new GD_LapHoaDon(parent));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 		} else if (obj == btnLuu) {
-			try {
-				hd_DAO.themHD(hoaDon, false);
-				JOptionPane.showMessageDialog(null, "Đã lưu hóa đơn");
-				parent.thayCenterP(new GD_LapHoaDon(parent));
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			if (k == 0) {
+				try {
+					hd_DAO.themHD(hoaDon, false);
+					for (ChiTietHoaDon c : hoaDon.getDsChiTiet()) {
+						hd_DAO.themCTHD(c, soHD);
+					}
+					JOptionPane.showMessageDialog(null, "Đã lưu hóa đơn");
+					parent.thayCenterP(new GD_LapHoaDon(parent));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			} else {
+				try {
+					hd_DAO.xoaHD(hoaDon.getMaHD());
+					hd_DAO.themHD(hoaDon, false);
+					for (ChiTietHoaDon c : hoaDon.getDsChiTiet()) {
+						hd_DAO.themCTHD(c, soHD);
+					}
+					JOptionPane.showMessageDialog(null, "Đã lưu hóa đơn");
+					parent.thayCenterP(new GD_LapHoaDon(parent));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
+	}
+
+	private boolean kiemtraSp() {
+		for (ChiTietHoaDon c : hoaDon.getDsChiTiet()) {
+			if (c.getSanPham().getMaSP().equals(sp.getMaSP()))
+				return true;
+		}
+		return false;
 	}
 
 	public void setTextTimKiemSP(String sdt) {
@@ -542,11 +625,10 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		btnThanhToan.setEnabled(b);
 		btnLuu.setEnabled(b);
 	}
-	
+
 	public void loadTTHD() {
 		ngayHienTai = hoaDon.getNgayLapHD();
 		soHD = hoaDon.getMaHD();
 		caLap = hoaDon.getCaLapHD();
-
 	}
 }

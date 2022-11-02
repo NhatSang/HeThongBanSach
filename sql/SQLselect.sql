@@ -50,6 +50,11 @@ Select nv.*,cv.tenCV from NhanVien nv
 join ChucVu cv on nv.maCV = cv.maCV
 where trangThai = 0
 -- them hoa don
-select * from HoaDon
+select * from SanPham
 insert into HoaDon 
 values (default,'2022-11-02',1,0,'NV00002','KH2022102900001')
+select * from HoaDon hd join ChiTietHoaDon ct on hd.maHD=ct.maHD
+delete from HoaDon where maHD = '20221102200001'
+select ct.*,sp.tenSP,sp.donGia,sp.VAT,sp.soLuong from ChiTietHoaDon ct join SanPham sp on ct.maSP = sp.maSP
+select dbo.autoIDHD()
+update SanPham set soLuong = 100 where maSP = 'SVH00001'

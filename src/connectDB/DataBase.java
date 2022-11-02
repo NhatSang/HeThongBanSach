@@ -15,7 +15,7 @@ public class DataBase {
 	public static  void connect() {
 		String url="jdbc:sqlserver://localhost:1433;DatabaseName=BanSach";
 		String user="sa";
-		String password="123456";
+		String password="12";
 		try {
 			con = DriverManager.getConnection(url,user,password);
 		}
