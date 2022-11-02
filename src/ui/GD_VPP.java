@@ -211,7 +211,7 @@ public class GD_VPP extends javax.swing.JPanel {
 		});
 
 		//
-		cbDonViVPP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "","Quyển", "Lóc", "Cây", "Vỉ", "Hộp", "Bộ", "Tờ", "Xấp", "Cục"}));
+		cbDonViVPP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "","Quyển", "Lóc", "Cây", "Vỉ", "Hộp", "Bộ", "Tờ", "Xấp", "Cục", "Cái"}));
 		cbDonViVPP.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				cbDonViActionPerformed(evt);
