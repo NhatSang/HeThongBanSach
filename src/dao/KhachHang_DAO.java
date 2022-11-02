@@ -148,7 +148,7 @@ public class KhachHang_DAO {
 			statement.setString(2, khachHang.getNgaySinh().toString());
 			statement.setString(3, khachHang.getDiaChi());
 			statement.setString(4, khachHang.getsDT());
-			statement.setString(5, khachHang.getGioiTinh().toString());
+			statement.setBoolean(5, khachHang.getGioiTinh());
 			statement.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -157,4 +157,31 @@ public class KhachHang_DAO {
 			statement.close();
 		}
 	}
+
+//      Tìm kiếm
+        public ArrayList<KhachHang> timKiem(String Key) {
+		ArrayList<KhachHang> dsKH = new ArrayList<KhachHang>();
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+
+		try {
+			Statement stm = con.createStatement();
+			ResultSet rs = stm.executeQuery("select * from KhachHang where (KhachHang.maKH like '%"+Key+"%' or KhachHang.sdt  like '%"+ Key +"%' or KhachHang.hoTen like N'%"+Key+"%') and KhachHang.trangThai = 0");
+
+			while (rs.next()) {
+				String ma = rs.getString(1);
+				String hoten = rs.getString(2);
+				Date ns = rs.getDate(3);
+				String diaChi = rs.getString(4);
+				String sdt = rs.getString(5);
+				Boolean gt = rs.getBoolean(6);
+				dsKH.add(new KhachHang(ma, hoten, ns, diaChi, sdt, gt));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return dsKH;
+	}
+}	
+
 }
