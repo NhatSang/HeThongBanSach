@@ -166,9 +166,7 @@ public class Frm_ThemKhachHang extends JFrame implements ActionListener {
 					// TODO Auto-generated catch block
 //					e1.printStackTrace();
 				}
-				kh1 = kh_DAO.timKhachHangTheoSdt(sdt);
-				parent.setKhachHang(kh1);
-				parent.capNhatKhachHang(kh1);
+				parent.setTextTimKiemSP(sdt);
 				this.dispose();
 			}else
 				JOptionPane.showMessageDialog(null, "Số điện thoại này đã tồn tại");

@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -46,6 +47,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 	private KhachHang khachHang;
 	private HoaDon hoaDon;
 	private SanPham sp;
+	private GD_NhanVienBanHang parent;
 	private JLabel lblTenKh, lblSdt, lblDiaChi, lblTenKh1, lblSdt1, lblDiaChi1, lblImg, lblTenSp, lblNCC, lblDonGia,
 			lblDonVi, lblSoLuong, lblMaHd, lblNgayLap, lblCaLap, LblNguoiLap, lblTongTien, lblTongVAT, lblTienCanTra,
 			lblTienKhachTra, lblTienThua;
@@ -63,8 +65,9 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 	private int caLap;
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-	public GD_LapHoaDon(NhanVien nhanVien) {
-		this.nhanVien = nhanVien;
+	public GD_LapHoaDon(GD_NhanVienBanHang parent) {
+		this.parent = parent;
+		this.nhanVien = parent.getNhanVien();
 		getThongTinHD();
 		createGui();
 		DataBase.getInstance().connect();
@@ -76,22 +79,23 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		khachHang = null;
 
 	}
-	
-	
 
-	public GD_LapHoaDon(HoaDon hoaDon) {
+	public GD_LapHoaDon(GD_NhanVienBanHang parent, HoaDon hoaDon) {
 		super();
+		this.parent = parent;
 		this.hoaDon = hoaDon;
+		this.nhanVien = hoaDon.getNhanVien();
+		this.khachHang = hoaDon.getKhachHang();
+		loadTTHD();
 		createGui();
 		DataBase.getInstance().connect();
 		sp_DAO = new SanPham_DAO();
 		hd_DAO = new HoaDon_DAO();
 		kh_DAO = new KhachHang_DAO();
-		this.nhanVien = hoaDon.getNhanVien();
-		this.khachHang = hoaDon.getKhachHang();
+		capNhatKhachHang(khachHang);
+		capNhatHoaDon();
+
 	}
-
-
 
 	private void createGui() {
 
@@ -334,16 +338,15 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		btnThanhToan.setFont(new Font("Serif", Font.PLAIN, 18));
 		btnXuatHD.setFont(new Font("Serif", Font.PLAIN, 18));
 		btnLuu.setFont(new Font("Serif", Font.PLAIN, 18));
-		
+
 		EnabledBtn(false);
 		btnXuatHD.setEnabled(false);
-		
+
 		southP.add(btnLuu);
 		southP.add(Box.createHorizontalStrut(20));
 		southP.add(btnThanhToan);
 		southP.add(Box.createHorizontalStrut(20));
 		southP.add(btnXuatHD);
-
 
 		rightBox.add(northRP);
 		rightBox.add(centerRB);
@@ -362,6 +365,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		btnTimKh.addActionListener(this);
 		btnXoaCTHD.addActionListener(this);
 		txtTienKhachTra.addActionListener(this);
+		btnLuu.addActionListener(this);
 	}
 
 	public Icon loadImg(String linkImage, int k, int m) {
@@ -436,13 +440,13 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 			}
 		} else if (obj == btnThemKh) {
 			new Frm_ThemKhachHang(this).setVisible(true);
-			hoaDon = new HoaDon(soHD, ngayHienTai, caLap, nhanVien, khachHang);
+			System.out.println(khachHang);
 		} else if (obj == btnXoaCTHD) {
 			int index = tblCTHD.getSelectedRow();
 			if (index != -1) {
 				hoaDon.xoaCTHD(index);
 				capNhatHoaDon();
-				if(hoaDon.getDsChiTiet().size()==0) {
+				if (hoaDon.getDsChiTiet().size() == 0) {
 					EnabledBtn(false);
 				}
 			}
@@ -456,12 +460,25 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 					lblTienThua.setText("Tiền thừa: " + s);
 				}
 			}
-		}else if(obj == btnThanhToan) {
-			
+		} else if (obj == btnThanhToan) {
+
+		} else if (obj == btnLuu) {
+			try {
+				hd_DAO.themHD(hoaDon, false);
+				JOptionPane.showMessageDialog(null, "Đã lưu hóa đơn");
+				parent.thayCenterP(new GD_LapHoaDon(parent));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
-	private void capNhatHoaDon() {
+	public void setTextTimKiemSP(String sdt) {
+		txtTimKh.setText(sdt);
+	}
+
+	public void capNhatHoaDon() {
 		tblModel.setRowCount(0);
 		ArrayList<ChiTietHoaDon> dsCTHD = hoaDon.getDsChiTiet();
 		int i = 1;
@@ -477,7 +494,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 	}
 
 	public void capNhatSanPham(SanPham sp) {
-		lblImg.setIcon(loadImg(".\\img\\" + sp.getHinhAnh(), 150, 150));
+		lblImg.setIcon(loadImg("F:\\TaiLieuHT\\PTUD\\workspaceJV\\HeThongBanSach\\img\\" + sp.getHinhAnh(), 150, 150));
 		lblTenSp.setText("Tên sản phẩm: " + sp.getTenSP());
 		lblNCC.setText("Nhà cung cấp: " + sp.getNhaCC().getTenNCC());
 		lblDonGia.setText("Đơn giá: " + sp.getDonGia());
@@ -521,12 +538,15 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		return true;
 	}
 
-	public void setKhachHang(KhachHang khachHang) {
-		this.khachHang = khachHang;
-	}
-
 	public void EnabledBtn(boolean b) {
 		btnThanhToan.setEnabled(b);
 		btnLuu.setEnabled(b);
+	}
+	
+	public void loadTTHD() {
+		ngayHienTai = hoaDon.getNgayLapHD();
+		soHD = hoaDon.getMaHD();
+		caLap = hoaDon.getCaLapHD();
+
 	}
 }

@@ -217,7 +217,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 			this.dispose();
 		}
 		else if(obj == itemLapHd) {
-			thayCenterP(new GD_LapHoaDon(nhanVien));
+			thayCenterP(new GD_LapHoaDon(this));
 		}
 		else if(obj == itemTimHD) {
 			thayCenterP(new GD_HangDoiHD(this));
@@ -256,4 +256,9 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		// TODO Auto-generated method stub
 
 	}
+
+	public NhanVien getNhanVien() {
+		return nhanVien;
+	}
+	
 }
