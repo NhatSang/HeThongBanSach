@@ -31,7 +31,6 @@ values (default,N'Bìa Mềm'),
 		(default,N'Bìa Cứng');
 go
 select * from LoaiSanPham
-Select * from LoaiSanPham where maLoai like 'VPP%'
 insert into LoaiSanPham
 values
 	(dbo.autoIdLSP('SGK'),N'Sách Giáo Khoa'),
