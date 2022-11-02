@@ -465,6 +465,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener {
 		} else if (obj == btnLuu) {
 			try {
 				hd_DAO.themHD(hoaDon, false);
+				
 				JOptionPane.showMessageDialog(null, "Đã lưu hóa đơn");
 				parent.thayCenterP(new GD_LapHoaDon(parent));
 			} catch (SQLException e1) {
