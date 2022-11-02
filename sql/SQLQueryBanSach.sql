@@ -1,30 +1,36 @@
 create database BanSach
 use BanSach
 go
-create function autoIdHD()
+create function autoIDHD()
 returns varchar(14)
 as
 begin
-	declare @id varchar(14);
+	declare @id varchar(14)
 	declare @ca varchar(1);
-	declare @len varchar(5);
+	declare @len int
+	declare @lid varchar(5)
 	if (select convert(varchar(2), GETDATE(), 108))>=8 and (select convert(varchar(2), GETDATE(), 108))<=15
 		set @ca = 1
 	else
 		set @ca = 2
+	set @id = convert(varchar,GETDATE(),112)
+	set @id += @ca
 	select @len =COUNT(maHD) from HoaDon where day(NgayLap)= DAY(GETDATE()) and MONTH(NgayLap)
 =MONTH(GETDATE()) and YEAR(NgayLap) = YEAR(GETDATE())
+
 	if @len = 0
-		set @id = 0
+		set @len +=1
 	else
-		set @id = @len
-	select @id = case
-		when @id < 9 then convert(varchar,GETDATE(),112)+ @ca + '0000'+ convert(char,convert(int,@id)+1) 
-		when @id < 99 then convert(varchar,GETDATE(),112)+ @ca + '000'+ convert(char,convert(int,@id)+1)
-		when @id < 999 then convert(varchar,GETDATE(),112)+ @ca + '00'+ convert(char,convert(int,@id)+1)
-		when @id < 9999 then convert(varchar,GETDATE(),112)+ @ca + '0'+ convert(char,convert(int,@id)+1)
-		when @id < 99999 then convert(varchar,GETDATE(),112)+ @ca + convert(char,convert(int,@id)+1)
+		begin
+			select @lid = right(max(maHD),5) from HoaDon where day(NgayLap)= DAY(GETDATE()) and MONTH(NgayLap)
+=MONTH(GETDATE()) and YEAR(NgayLap) = YEAR(GETDATE())
+			set @len = convert(int,@lid)+1
 		end
+	while len(@id)< (14- len(convert(varchar,@len)))
+	begin
+		set @id += '0'
+	end
+	set @id += convert(varchar,@len)
 	return @id
 end
 go
@@ -265,7 +271,7 @@ create table KhachHang(
 )
 go
 create table HoaDon(
-	maHD varchar(14) primary key constraint IDHD default dbo.autoIdHD(),
+	maHD varchar(14) primary key constraint IDHD default dbo.autoIDHD(),
 	ngayLap date not null,
 	caLap int not null,
 	trangThai bit not null,

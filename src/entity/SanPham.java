@@ -13,6 +13,15 @@ public class SanPham {
 		// TODO Auto-generated constructor stub
 	}
 
+	public SanPham(String maSP, String tenSP, int soLuong, int vAT, double donGia) {
+		super();
+		this.maSP = maSP;
+		this.tenSP = tenSP;
+		this.soLuong = soLuong;
+		VAT = vAT;
+		this.donGia = donGia;
+	}
+
 	public SanPham(String maSP, String tenSP, String donVi, String moTa, String hinhAnh, int soLuong, int vAT,
 			double donGia, LoaiSanPham loaiSP, NhaCungCap nhaCC) {
 		super();

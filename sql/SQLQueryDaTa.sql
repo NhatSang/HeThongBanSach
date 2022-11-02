@@ -55,7 +55,7 @@ go
 --them van phong pham
 insert into SanPham (maSP,tenSP,soLuong,donGia,donVi,VAT,xuatXu,chatLieu, moTa,hinhAnh,maLoai,maNCC,maTH,maMau,trangThai)
 values 
-	(dbo.autoIdSP('VPP00020'),N'Test5', 1000,7000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế đơn giản, toàn bộ thân bút làm từ nhựa trong pha màu nhạt, nhìn được phần ruột bút bên trong','blttl061.jpg','VPP00003', 'NCC00002',  'TH00001', 'MS00001', 0)
+	(dbo.autoIdSP('VPP00003'),N'Test5', 1000,7000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế đơn giản, toàn bộ thân bút làm từ nhựa trong pha màu nhạt, nhìn được phần ruột bút bên trong','blttl061.jpg','VPP00003', 'NCC00002',  'TH00001', 'MS00001', 0)
 go
 select * from ChucVu
 insert into ChucVu
@@ -71,7 +71,7 @@ values
 go
 select * from TaiKhoan
 insert into TaiKhoan
-values ('NV00001','123','NV00001')
+values ('NV00002','123','NV00002')
 go
 select * from KhachHang
 insert into KhachHang
