@@ -2,6 +2,9 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -12,16 +15,22 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class GD_HangDoiHD extends JPanel{
+import dao.HoaDon_DAO;
+import entity.HoaDon;
+
+public class GD_HangDoiHD extends JPanel implements ActionListener{
 	private GD_NhanVienBanHang parent;
 	private JTable tblHD;
 	private DefaultTableModel tblModelHD;
 	private JButton btnThanhToan, btnXoa, btnTim;
 	private JTextField txtTim;
-	
+	private HoaDon_DAO hd_DAO;
 	
 	public GD_HangDoiHD(GD_NhanVienBanHang parent) {
+		this.parent = parent;
+		hd_DAO = new HoaDon_DAO();
 		createGui();
+		
 	}
 
 
@@ -64,6 +73,32 @@ public class GD_HangDoiHD extends JPanel{
 		southP.add(Box.createHorizontalStrut(20));
 		southP.add(btnXoa);
 		
+		loadData();
 		this.add(southP,BorderLayout.SOUTH);
+		
+		btnThanhToan.addActionListener(this);
+	}
+
+
+	private void loadData() {
+		tblModelHD.setRowCount(0);
+		ArrayList<HoaDon> dsHD = hd_DAO.getDSHD0();
+		int i = 1;
+		for (HoaDon x:dsHD) {
+			String r = i + "," + x.getMaHD()+","+x.getKhachHang().getHoTen()+","+x.getNhanVien().getHoTen()+","+x.getCaLapHD()+","+x.getNgayLapHD();
+			tblModelHD.addRow(r.split(","));
+			i++;
+		}
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = e.getSource();
+		if(obj == btnThanhToan) {
+			int r = tblHD.getSelectedRow();
+			HoaDon hd = hd_DAO.getDSHD0().get(r);
+			parent.thayCenterP(new GD_LapHoaDon(parent, hd));
+		}
 	}
 }

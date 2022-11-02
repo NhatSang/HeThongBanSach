@@ -20,13 +20,14 @@ public class KhachHang {
                 this.maKH = maKH;
 		// TODO Auto-generated constructor stub
 	}
-	public KhachHang(String hoTen, String diaChi, String sDT) {
-		super();
-		this.hoTen = hoTen;
-		this.diaChi = diaChi;
-		this.sDT = sDT;
-	}
 
+	public KhachHang(String maKH, String hoTen, String diaChi, String sDT) {
+			super();
+			this.maKH = maKH;
+			this.hoTen = hoTen;
+			this.diaChi = diaChi;
+			this.sDT = sDT;
+		}
 	public KhachHang(String hoTen, Date ngaySinh, String diaChi, String sDT, Boolean gioiTinh) {
 		super();
 		this.hoTen = hoTen;

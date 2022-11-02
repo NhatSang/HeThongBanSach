@@ -49,3 +49,7 @@ where (tenSP = N'Những Đêm Không Ngủ Những Ngày Chậm Trôi' or maSP 
 Select nv.*,cv.tenCV from NhanVien nv
 join ChucVu cv on nv.maCV = cv.maCV
 where trangThai = 0
+-- them hoa don
+select * from HoaDon
+insert into HoaDon 
+values (default,'2022-11-02',1,0,'NV00002','KH2022102900001')

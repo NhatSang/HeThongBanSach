@@ -70,16 +70,17 @@ public class KhachHang_DAO {
 			statement.close();
 		}
 	}
-        public void xoaTheoTrangThai(KhachHang kh) throws SQLException {
+
+	public void xoaTheoTrangThai(KhachHang kh) throws SQLException {
 		DataBase.getInstance();
 		Connection connection = DataBase.getConnection();
 		PreparedStatement statement = null;
-                String trangThai = "1";
+		String trangThai = "1";
 		try {
 			String sql = "update KhachHang set trangThai=? where maKH=?";
 			statement = connection.prepareStatement(sql);
 			statement.setString(2, kh.getMaKH());
-                        statement.setString(1, trangThai);
+			statement.setString(1, trangThai);
 			statement.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -88,6 +89,7 @@ public class KhachHang_DAO {
 			statement.close();
 		}
 	}
+
 	// Sang: tìm tt 1 khách hàng theo sdt
 	public KhachHang timKhachHangTheoSdt(String key) {
 		KhachHang kh = null;
@@ -95,40 +97,44 @@ public class KhachHang_DAO {
 		Connection con = DataBase.getConnection();
 		try {
 			Statement stm = con.createStatement();
-			ResultSet rs = stm.executeQuery("select hoTen,diaChi,sdt from KhachHang where sdt =" + "'" + key + "'");
-			if(rs.next()) {
-				String hoTen = rs.getString(1);
-				String diaChi = rs.getString(2);
-				String sdt = rs.getString(3);
-				kh = new KhachHang(hoTen, diaChi, sdt);
+			ResultSet rs = stm
+					.executeQuery("select maKH,hoTen,diaChi,sdt from KhachHang where sdt =" + "'" + key + "'");
+			if (rs.next()) {
+				String maKh = rs.getString(1);
+				String hoTen = rs.getString(2);
+				String diaChi = rs.getString(3);
+				String sdt = rs.getString(4);
+				kh = new KhachHang(maKh, hoTen, diaChi, sdt);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return kh;
 	}
+
 //	Thêm khách hàng
-    public void addKH(KhachHang kh) throws SQLException {
-        DataBase.getInstance();
-	Connection connection = DataBase.getConnection();
-	PreparedStatement statement = null;
-	try {
-		String sql = "insert into KhachHang values (default, ?, ?, ?, ?, ?,0)";
-		statement = connection.prepareStatement(sql);
+	public void addKH(KhachHang kh) throws SQLException {
+		DataBase.getInstance();
+		Connection connection = DataBase.getConnection();
+		PreparedStatement statement = null;
+		try {
+			String sql = "insert into KhachHang values (default, ?, ?, ?, ?, ?,0)";
+			statement = connection.prepareStatement(sql);
 //		statement.setString(1, kh.getMaKH());
-		statement.setString(1, kh.getHoTen());
-		statement.setString(2, kh.getNgaySinh().toString());
-        statement.setString(3, kh.getDiaChi());
-        statement.setString(4, kh.getsDT());
-		statement.setBoolean(5, kh.getGioiTinh());
-		statement.executeUpdate();
-	} catch (Exception e) {
-		// TODO: handle exception
-		e.printStackTrace();
-	} finally {
-		statement.close();
+			statement.setString(1, kh.getHoTen());
+			statement.setString(2, kh.getNgaySinh().toString());
+			statement.setString(3, kh.getDiaChi());
+			statement.setString(4, kh.getsDT());
+			statement.setBoolean(5, kh.getGioiTinh());
+			statement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			statement.close();
+		}
 	}
-    }
+
 //	Thêm khách hàng
 	public void capNhat(KhachHang khachHang) throws SQLException {
 		DataBase.getInstance();
@@ -151,6 +157,7 @@ public class KhachHang_DAO {
 			statement.close();
 		}
 	}
+
 //      Tìm kiếm
         public ArrayList<KhachHang> timKiem(String Key) {
 		ArrayList<KhachHang> dsKH = new ArrayList<KhachHang>();
@@ -176,3 +183,5 @@ public class KhachHang_DAO {
 		return dsKH;
 	}
 }	
+
+}

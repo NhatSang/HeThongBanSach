@@ -28,6 +28,12 @@ public class NhanVien {
 	
 	
 
+	public NhanVien(String maNV, String hoTen) {
+		super();
+		this.maNV = maNV;
+		this.hoTen = hoTen;
+	}
+
 	public NhanVien(String hoTen, String cccd, String diaChi, String sdt, Date ngaySinh, boolean gioiTinh,
 			ChucVu chucVu) {
 		super();
