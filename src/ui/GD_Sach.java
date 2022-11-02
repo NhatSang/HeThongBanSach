@@ -3,6 +3,7 @@ package ui;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -760,6 +761,7 @@ public class GD_Sach extends javax.swing.JPanel {
 		txtSoTrang.setText("");
 		txtTacGia.setText("");
 		txtHinhAnh.setText("");
+		txtNguoiDIch.setText("");
 
 		cbLoai.setSelectedItem(null);
 		cbNCC.setSelectedItem(null);
@@ -868,6 +870,7 @@ public class GD_Sach extends javax.swing.JPanel {
 						;
 						sanPham_DAO.themSach(sach);
 						JOptionPane.showMessageDialog(null, "Thêm thành công");
+						lbMes.setText("");
 						loadSach();
 						stt = 0;
 					} catch (Exception e) {
@@ -977,6 +980,7 @@ public class GD_Sach extends javax.swing.JPanel {
 			try {
 				sanPham_DAO.suaSach(sach);
 				JOptionPane.showMessageDialog(null, "Sửa thành công");
+				lbMes.setText("");
 				loadSach();
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -988,7 +992,6 @@ public class GD_Sach extends javax.swing.JPanel {
 	private void timKiemSach() {
 		// TODO Auto-generated method stu
 		String txt = txtTimKiem.getText();
-//		System.out.println(txt);
 		SanPham_DAO sp_dao = new SanPham_DAO();
 		ArrayList<Sach> dsSach = sp_dao.timKiemSach(txt);
 		loadSach(dsSach);
@@ -1016,32 +1019,74 @@ public class GD_Sach extends javax.swing.JPanel {
 			lbMes.setText("Chọn loại sản phẩm");
 			return false;
 		}
-		if (namXB.equals("")) {
-			lbMes.setText("Nhập năm xuất bản");
-			return false;
+		if (!(namXB.length()>0 && namXB.matches("[0-9]{4}"))) {
+    		lbMes.setText("Năm xuất bản không được để trống và phải viết dưới dạng số");
+    		txtNamXB.requestFocus();
+    		return false;
 		}
+    	if(Integer.parseInt(namXB)> LocalDate.now().getYear()){
+    		lbMes.setText("Năm xuất bản không được lớn hơn năm hiện tại");
+    		txtNamXB.requestFocus();
+    		return false;
+    	}
 		if (cbNXB.getSelectedItem() == null) {
 			lbMes.setText("Chọn nhà xuất bản sách");
 			return false;
 		}
-		if (soLuong.equals("")) {
-			lbMes.setText("Nhập số lượng sách");
+		try {
+			Integer.parseInt(soLuong);
+		} catch (Exception e) {
+			// TODO: handle exception
+			lbMes.setText("Số lượng không được để trống và phải viết dưới dạng số");
+			txtSoLuong.requestFocus();
 			return false;
 		}
-		if (donGia.equals("")) {
-			lbMes.setText("Nhập đơn giá sách");
+		if (Integer.parseInt(soLuong) <= 0) {
+			lbMes.setText("Số lượng phải lớn hơn 0");
+			txtSoLuong.requestFocus();
+			return false;
+		}
+		try {
+			Double.parseDouble(donGia);
+		} catch (Exception e) {
+			// TODO: handle exception
+			lbMes.setText("Đơn giá không được để trống và phải viết dưới dạng số");
+			txtDonGia.requestFocus();
+			return false;
+		}
+		if (Double.parseDouble(donGia) <= 0) {
+			lbMes.setText("Đơn giá phải lớn hơn 0");
+			txtDonGia.requestFocus();
 			return false;
 		}
 		if (cbDonVi.getSelectedItem() == null) {
 			lbMes.setText("Chọn đơn vị");
 			return false;
 		}
-		if (tuoiGH.equals("")) {
-			lbMes.setText("Nhập tuổi giới hạn");
+		try {
+			Integer.parseInt(tuoiGH);
+		} catch (Exception e) {
+			// TODO: handle exception
+			lbMes.setText("Tuổi giới hạn không được để trống và phải viết dưới dạng số");
+			txtTuoiGioiHan.requestFocus();
 			return false;
 		}
-		if (vat.equals("")) {
-			lbMes.setText("Nhập VAT ");
+		if (Integer.parseInt(tuoiGH) <= 1) {
+			lbMes.setText("Tuổi giới hạn phải lớn hơn 1");
+			txtDonGia.requestFocus();
+			return false;
+		}
+		try {
+			Integer.parseInt(vat);
+		} catch (Exception e) {
+			// TODO: handle exception
+			lbMes.setText("VAT không được để trống và phải viết dưới dạng số");
+			txtVAT.requestFocus();
+			return false;
+		}
+		if (Integer.parseInt(vat) <= 0) {
+			lbMes.setText("VAT phải lớn hơn 0");
+			txtVAT.requestFocus();
 			return false;
 		}
 		if (cbNCC.getSelectedItem() == null) {
@@ -1053,23 +1098,19 @@ public class GD_Sach extends javax.swing.JPanel {
 			return false;
 		}
 		if (tacGia.equals("")) {
-			lbMes.setText("Nhập tác giả sách");
+			lbMes.setText("Nhập nhà tác giả");
 			return false;
 		}
-		if (soTrang.equals("")) {
-			lbMes.setText("Nhập số trang sách");
+		try {
+			Integer.parseInt(soTrang);
+		} catch (Exception e) {
+			// TODO: handle exception
+			lbMes.setText("Số trang không được để trống và phải viết dưới dạng số");
+			txtVAT.requestFocus();
 			return false;
 		}
 		if (cbLoaiBia.getSelectedItem() == null) {
 			lbMes.setText("Chọn loại bìa");
-			return false;
-		}
-		if (cbCDH.getSelectedItem() == null) {
-			lbMes.setText("Chọn cấp độ học");
-			return false;
-		}
-		if (nguoiDich.equals("")) {
-			lbMes.setText("Nhập người dịch sách");
 			return false;
 		}
 		if (hinhAnh.equals("")) {
