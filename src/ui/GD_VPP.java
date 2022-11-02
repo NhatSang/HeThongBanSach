@@ -72,7 +72,7 @@ public class GD_VPP extends javax.swing.JPanel {
 		btnThem = new javax.swing.JButton();
 		btnXoa = new javax.swing.JButton();
 		cbThuongHieu = new javax.swing.JComboBox<>();
-		cbDonVi = new javax.swing.JComboBox<>();
+		cbDonViVPP = new javax.swing.JComboBox<>();
 		cbNCC = new javax.swing.JComboBox<>();
 		btnSua = new javax.swing.JButton();
 		lbHinhAnh = new javax.swing.JLabel();
@@ -87,7 +87,7 @@ public class GD_VPP extends javax.swing.JPanel {
 
 		cbLoai.setEditable(true);
 		cbNCC.setEditable(true);
-		cbDonVi.setEditable(true);
+		cbDonViVPP.setEditable(true);
 		cbThuongHieu.setEditable(true);
 		cbMauSac.setEditable(true);
 
@@ -211,8 +211,8 @@ public class GD_VPP extends javax.swing.JPanel {
 		});
 
 		//
-		cbDonVi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Quyển", "Lóc", "Cây" }));
-		cbDonVi.addActionListener(new java.awt.event.ActionListener() {
+		cbDonViVPP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "","Quyển", "Lóc", "Cây", "Vỉ", "Hộp", "Bộ", "Tờ", "Xấp", "Cục"}));
+		cbDonViVPP.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				cbDonViActionPerformed(evt);
 			}
@@ -286,7 +286,7 @@ public class GD_VPP extends javax.swing.JPanel {
 																				.addGroup(jPanel2Layout
 																						.createParallelGroup(
 																								javax.swing.GroupLayout.Alignment.LEADING)
-																						.addComponent(cbDonVi, 0, 139,
+																						.addComponent(cbDonViVPP, 0, 139,
 																								Short.MAX_VALUE)
 																						.addComponent(txtVAT)))
 																.addComponent(txtMa,
@@ -352,7 +352,7 @@ public class GD_VPP extends javax.swing.JPanel {
 								.addComponent(lbSoLuong)
 								.addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 34,
 										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(lbDonVi).addComponent(cbDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, 34,
+								.addComponent(lbDonVi).addComponent(cbDonViVPP, javax.swing.GroupLayout.PREFERRED_SIZE, 34,
 										javax.swing.GroupLayout.PREFERRED_SIZE))
 						.addGap(20, 20, 20)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -499,7 +499,7 @@ public class GD_VPP extends javax.swing.JPanel {
 	private javax.swing.JButton btnThem;
 	private javax.swing.JButton btnTimKiem;
 	private javax.swing.JButton btnXoa;
-	private javax.swing.JComboBox<String> cbDonVi;
+	private javax.swing.JComboBox<String> cbDonViVPP;
 	private javax.swing.JComboBox<LoaiSanPham> cbLoai;
 	private DefaultComboBoxModel<LoaiSanPham> modelCboLoai;
 	private javax.swing.JComboBox<MauSac> cbMauSac;
@@ -603,7 +603,7 @@ public class GD_VPP extends javax.swing.JPanel {
 		cbNCC.setSelectedItem(vpp.getNhaCC());
 		cbMauSac.setSelectedItem(vpp.getMauSac());
 		cbThuongHieu.setSelectedItem(vpp.getThuongHieu());
-		cbDonVi.setSelectedItem(vpp.getDonVi());
+		cbDonViVPP.setSelectedItem(vpp.getDonVi());
 		setEditableForm(true);
 
 	}
@@ -665,7 +665,7 @@ public class GD_VPP extends javax.swing.JPanel {
 		cbNCC.setSelectedItem(null);
 		cbMauSac.setSelectedItem(null);
 		cbThuongHieu.setSelectedItem(null);
-		cbDonVi.setSelectedItem(null);
+		cbDonViVPP.setSelectedItem(null);
 	}
 
 	public void themVPP() {
@@ -742,7 +742,7 @@ public class GD_VPP extends javax.swing.JPanel {
 						}
 					mauSac = sanPham_DAO.timMauSac(newMS);
 				}
-				String donvi = (String) cbDonVi.getSelectedItem();
+				String donvi = (String) cbDonViVPP.getSelectedItem();
 
 				VanPhongPham vpp = new VanPhongPham(donvi, tenVPP, donvi, moTa, hinhAnh, soLuong, vat, donGia, loaiVPP,
 						ncc, xuatXu, chatLieu, thuongHieu, mauSac);
@@ -834,7 +834,7 @@ public class GD_VPP extends javax.swing.JPanel {
 					}
 				mauSac = sanPham_DAO.timMauSac(newMS);
 			}
-			String donvi = (String) cbDonVi.getSelectedItem();
+			String donvi = (String) cbDonViVPP.getSelectedItem();
 
 			VanPhongPham vpp = new VanPhongPham(maVPP, tenVPP, donvi, moTa, hinhAnh, soLuong, vat, donGia, loaiVPP, ncc,
 					xuatXu, chatLieu, thuongHieu, mauSac);
@@ -893,7 +893,7 @@ public class GD_VPP extends javax.swing.JPanel {
 			txtSoLuong.requestFocus();
 			return false;
 		}
-		if (cbDonVi.getSelectedItem() == null) {
+		if (cbDonViVPP.getSelectedItem() == null) {
 			lbMes.setText("Chọn đơn vị");
 			return false;
 		}
