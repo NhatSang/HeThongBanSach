@@ -262,7 +262,7 @@ public class GD_Sach extends javax.swing.JPanel {
 		});
 
 		//
-		cbDonVi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Quyển", "Lóc" }));
+		cbDonVi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"", "Quyển", "Lóc", "Bộ"}));
 		cbDonVi.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				cbDonViActionPerformed(evt);
@@ -1019,16 +1019,16 @@ public class GD_Sach extends javax.swing.JPanel {
 			lbMes.setText("Chọn loại sản phẩm");
 			return false;
 		}
-		if (!(namXB.length()>0 && namXB.matches("[0-9]{4}"))) {
-    		lbMes.setText("Năm xuất bản không được để trống và phải viết dưới dạng số");
-    		txtNamXB.requestFocus();
-    		return false;
+		if (!(namXB.length() > 0 && namXB.matches("[0-9]{4}"))) {
+			lbMes.setText("Năm xuất bản không được để trống và phải viết dưới dạng số");
+			txtNamXB.requestFocus();
+			return false;
 		}
-    	if(Integer.parseInt(namXB)> LocalDate.now().getYear()){
-    		lbMes.setText("Năm xuất bản không được lớn hơn năm hiện tại");
-    		txtNamXB.requestFocus();
-    		return false;
-    	}
+		if (Integer.parseInt(namXB) > LocalDate.now().getYear()) {
+			lbMes.setText("Năm xuất bản không được lớn hơn năm hiện tại");
+			txtNamXB.requestFocus();
+			return false;
+		}
 		if (cbNXB.getSelectedItem() == null) {
 			lbMes.setText("Chọn nhà xuất bản sách");
 			return false;
