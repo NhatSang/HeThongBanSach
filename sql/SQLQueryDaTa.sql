@@ -36,11 +36,15 @@ values (default, N'Xanh Dương'), (default, N'Xanh Lá'), (default, N'Đỏ'), 
 go
 select * from NhaXuatBan
 insert into NhaXuatBan
-values (default,N'NXB Văn Học')
+values 
+	(default,N'NXB Đại Học Sư Phạm TPHCM'),
+	(default,N'NXB Giáo Dục Việt Nam'),
 go
 select * from TacGia
 insert into TacGia
-values (default, N'A Crazy Mind')
+values 
+	(default, N'Nhiều tác giả'),
+	(default, N'Bộ Giáo Dục Và Đào Tạo'),
 go
 select * from LoaiBia
 insert into LoaiBia
@@ -62,11 +66,29 @@ values
 	(dbo.autoIdLSP('VPP'),N'Dụng Cụ Vẽ'),
 	(dbo.autoIdLSP('VPP'),N'Sản Phẩm Khác');
 go
+select * from CapDoHoc
+insert into CapDoHoc
+values
+	(default,N'Cấp 1',1),
+	(default,N'Cấp 1',2),
+	(default,N'Cấp 1',3),
+	(default,N'Cấp 1',4),
+	(default,N'Cấp 1',5),
+	(default,N'Cấp 2',6),
+	(default,N'Cấp 2',7),
+	(default,N'Cấp 2',8),
+	(default,N'Cấp 2',9),
+	(default,N'Cấp 3',10),
+	(default,N'Cấp 3',11),
+	(default,N'Cấp 3',12)
+go
 select * from SanPham
 --them sach
 insert into SanPham (maSP,tenSP,namXB_SX,soLuong,donGia,donVi,VAT,soTrang,nguoiDich,tuoiGioiHan,moTa,hinhAnh,maLoai,maNCC,maNXB,maTG,maLB,maCDH,trangThai)
 values 
-	(dbo.autoIdSP('SVH00001'),N'Những Đêm Không Ngủ Những Ngày Chậm Trôi',2021,100,60000,N'Quyển',10,192,null,null,N'“Những đêm không ngủ, những ngày chậm trôi” đại diện cho một hành tinh mới - nơi nỗi đau tinh thần được đưa ra ánh sáng và chữa lành.','SVH00001.jpg','SVH00001','NCC00001','NXB00001','TG00001','LB00001',null,0)
+	(dbo.autoIdSP('SGK00001'),N'Sách Giáo Khoa Bộ Lớp 1-Chân Trời Sáng Tạo-Sách Bài Học (Bộ 9 Cuốn)',2022,100,186000,N'Bộ',10,null,null,null,N'Sách giáo khoa lớp 1','F:\TaiLieuHT\PTUD\workspaceJV\HeThongBanSach\img\sgk00001.jpg','SGK00001','NCC00001','NXB00001','TG00001','LB00001','CDH00001',0),
+	(dbo.autoIdSP('SGK00001'),N'Sách Giáo Khoa Bộ Lớp 2-Chân Trời Sáng Tạo-Sách Bài Học (Bộ 10 Cuốn) (2022)',2022,100,179000,N'Bộ',10,null,null,null,N'“Sách giáo khoa lớp 2','F:\TaiLieuHT\PTUD\workspaceJV\HeThongBanSach\img\sgk00001.jpg','SGK00001','NCC00002','NXB00002','TG00002','LB00001','CDH00002',0),
+	
 go
 --them van phong pham
 insert into SanPham (maSP,tenSP,soLuong,donGia,donVi,VAT,xuatXu,chatLieu, moTa,hinhAnh,maLoai,maNCC,maTH,maMau,trangThai)
@@ -82,12 +104,105 @@ go
 select * from NhanVien
 insert into NhanVien
 values
-	(default,N'Nguyễn Nhật Sang', '1998/01/25','790168265868',N'448/3, tỉnh lộ 8, ấp Tây, Tân An Hội, Củ Chi, Tp Hồ Chí Minh','0396979388',1,0,'CV00002'),
-	(default,N'Trương Văn Tuấn', '1998/01/25','790168265868',N'448/3, tỉnh lộ 8, ấp Tây, Tân An Hội, Củ Chi, Tp Hồ Chí Minh','0396979388',1,0,'CV00001')
+	(default,N'Nguyễn Minh Quân', '2002/12/13','064202007178',N'Hẻm 06 Bùi Đình túy Tp.Pleiku Tỉnh Gia Lai','0839131202',1,0,'CV00002'),
+	(default,N'Lương Viết Thanh', '2002/04/16','79016296868',N'12 Nguyễn Thái sơn Quận Gò Vấp Tp Hồ Chí Minh','0395247855',1,0,'CV00001'),
+	(default,N'Đặng Minh Trung', '2002/07/22','067892488517',N'25 Cửu Long Quận Tân Bình Tp Hồ Chí Minh','0395467935',1,0,'CV00002'),
+	(default,N'Dương Văn Hiệu', '2002/10/3','070162946783',N'136 Nguyễn Kiệm Quận Gò Vấp Tp Hồ Chí Minh','0395248745',1,0,'CV00002'),
+	(default,N'Phan Võ Tú Anh', '2002/02/15','065729748769',N'58 Nguyễn Xí Quận Bình Thạnh Tp Hồ Chí Minh','0891475425',2,0,'CV00002'),
+	(default,N'Nguyễn Bảo Quỳnh', '2002/08/04','062375618437',N'368 Nguyễn Trãi Tp Việt Trì Tỉnh Phú Thọ','0879412873',2,0,'CV00002'),
+	(default,N'Nguyễn Thị Mai Phương', '2002/01/09','069416584821',N'45 Hoàng Văn Thụ Tp Đà Nẵng','0824798876',2,0,'CV00002'),
+	(default,N'Hoàng Phương Quỳnh', '2002/09/30','061703587925',N'83 Tô Vĩnh Diện Tp Mỹ Tho Tỉnh Tiền Giang','0893021507',2,0,'CV00002'),
+	(default,N'Đoàn Huỳnh Ngọc Thảo', '2002/10/07','038655448817',N'06 Ngô Tất Tố Tỉnh Bến Tre','0915725467',2,0,'CV00001'),
+	(default,N'Nguyễn Thị Thanh Hằng', '2002/06/01','063664689545',N'78 Nguyễn Thị Minh Khai Tp Đà Nẵng','0916117151',2,0,'CV00002'),
+	(default,N'Trần Thị Thanh Thủy', '2002/08/02','066437843762',N'182 Lê Đức Thọ Quận Gò Vấp Tp Hồ Chí Minh','0308241896',2,0,'CV00002'),
+	(default,N'Vũ Mỹ Linh', '2002/12/04','061672578631',N'275 CMT8 Quận 10 Tp Hồ Chí Minh','0362578417',2,0,'CV00002'),
+	(default,N'Nguyễn Thơ Thùy Dung', '2002/09/24','066043951690',N'19 Lê Lai Tp Thủ Đức','0823131278',2,0,'CV00002'),
+	(default,N'Lê Công Hậu', '2002/10/09','061321525875',N'83 Tô Vĩnh Diện Tp Phan Thiết Tỉnh Bình Thuận','0849507914',1,0,'CV00002'),
+	(default,N'Nguyễn Văn Thương', '2002/11/27','061654861658',N'25 Lê Lợi Huyện Nhà Bè Tp Hồ Chí Minh','0837732034',1,0,'CV00002'),
+	(default,N'Nguyễn Thế Phan', '2002/06/18','061487132687',N'70 Hoàng Hoa Thám Tp KonTum Tỉnh KonTum','0827965247',1,0,'CV00002'),
+	(default,N'Trần Thế Sang', '2002/02/13','064876485466',N'157 Nguyễn Tất Thành Tp Tuy Hòa Tỉnh Phú Yên','0735792470',1,0,'CV00002'),
+	(default,N'Nguyễn Quang Bảo', '2002/05/25','061546872679',N'57 Nguyễn Văn Trỗi Tp Quy Nhơn Tỉnh Bình Định','0379856472',1,0,'CV00002'),
+	(default,N'Trần Thanh Mẫn', '2002/1/26','064202217178',N'48 Tây Sơn, Quận Đống Đa, Hà Nội','0784432489',1,0,'CV00002'),
+	(default,N'Nguyễn Đức Hải', '2002/12/18','067792968684',N'40 Vĩnh Hồ, Quận Đống Đa, Hà Nội','0123577924',1,0,'CV00002'),
+	(default,N'Nguyễn Khắc Định', '2002/04/25','067892488517',N'229 Tây Sơn, Quận Đống Đa, Hà Nội','0319678456',1,0,'CV00002'),
+	(default,N'Trần Quang Phương', '2002/10/08','016862946783',N'19 Đường Láng, Quận Đống Đa, Hà Nội','0389674854',1,0,'CV00002'),
+	(default,N'Nguyễn Thúy Anh', '2002/11/15','065729748769',N'592 Trường Chinh, Quận Đống Đa, Hà Nội','0895478763',2,0,'CV00002'),
+	(default,N'Dương Thanh Bình', '2002/04/04','062456561843',N'11 Trường Chinh, Khương Trung, Quận Thanh Xuân, Hà Nội','0793441401',1,0,'CV00002'),
+	(default,N'Nguyễn Phú Cường', '2002/01/01','019416584821',N'45 264 Hoàng Văn Thái, Quận Thanh Xuân, Hà Nội','0824798876',1,0,'CV00002'),
+	(default,N'Bùi Văn Cường', '2002/12/30','051703587925',N'C3/18 Phạm Hùng, Huyện Bình Chánh, TP. HCM','0893021507',1,0,'CV00001'),
+	(default,N'Vũ Hải Hà', '2002/07/17','048655448817',N'C3/6 Phạm Hùng, Xã Bình Hưng, Huyện Bình Chánh, TP.Hồ Chí Minh','0917458284',2,0,'CV00002'),
+	(default,N'Lê Thị Nga', '2002/04/28','043664689545',N'Số 24 Nguyễn Thái Bình, P. Nguyễn Thái Bình, Q. 1 TP.Hồ Chí Minh','0178315894',2,0,'CV00002'),
+	(default,N'Lê Tấn Tới', '2002/02/08','026437843762',N'Số 12 – 14 Song Hành, P. An Phú, Q. 2 Tp Hồ Chí Minh','0177931482',2,0,'CV00002'),
+	(default,N'Nguyễn Thị Thanh', '2002/08/04','011672578631',N' 18 Chế Lan Viên , P. Tây Thạnh, Q. Tân Phú Tp Hồ Chí Minh','0679848213',2,0,'CV00002'),
+	(default,N'Nguyễn Quang Toán', '2002/03/24','056043951690',N'19 Lê Lai Tp Thủ Đức','0839427541',2,0,'CV00002'),
+	(default,N'Trương Ngọc Sơn', '2002/06/09','041321525875',N'60 Đường CN1, Phường Sơn Kỳ, Quận Tân Phú tp Hồ Chí Minh','0364874578',1,0,'CV00002'),
+	(default,N'Nguyễn Văn Trường', '2002/08/27','071654861658',N'55A - 55B Ngô Quang Huy, P. Thảo Điền, Q. 2 Tp Hồ Chí Minh','0839471758',1,0,'CV00002'),
+	(default,N'Nguyễn Đình Trọng', '2002/10/18','081487132687',N'27 Tú Xương, P. 7, Q. 3 Tp Hồ Chí Minh','0832479647',1,0,'CV00002'),
+	(default,N'Lê Văn Sỹ', '2002/07/13','094876485466',N'Số 19 Ngô Văn Năm, P. Bến Nghé, Q. 1 Tp Hồ Chí Minh','0835792470',1,0,'CV00002'),
+	(default,N'Nguyễn Hoàng Phúc', '2002/03/25','021546872679',N'38 Nguyễn Thị Minh Khai Tỉnh kiên Giang','0679856472',1,0,'CV00002'),
+	(default,N'Lê Công Danh', '2002/04/25','031546872679',N'21 Bùi Đình Túy Tỉnh Đồng Tháp','0739476158',1,0,'CV00002'),
+	(default,N'Hoàng Thùy Trang', '2002/05/02','064546235239',N'35 Hùng Vương Tỉnh Quảng Trị','0369874514',2,0,'CV00002'),
+	(default,N'Nguyễn Hoàng Yến', '2002/06/15','071468741239',N'57 Xô Viết Nghệ Tĩnh Quận Bình Thạnh Tp Hồ Chí Minh','0581497654',2,0,'CV00002'),
+	(default,N'Võ Thanh Hồng', '2002/10/28','081946872219',N'76 Quang Trung Tỉnh Tây Ninh','0837276521',2,0,'CV00002'),
+	(default,N'Đặng Minh Thành', '2002/11/06','061546872419',N'58 Hoàng Hoa Thám Tỉnh Gia Lai','0807985720',1,0,'CV00002'),
+	(default,N'Hoàng Thị Khánh Vân', '2002/12/01','064684254793',N'337 Ngô Tất Tố Quận 3 Tp Hồ Chí Minh','0837984754',2,0,'CV00001'),
+	(default,N'Trần Quang Đại', '2002/09/05','069873135413',N'82 Hai Bà Trưng Tỉnh Bà Rịa - Vũng Tàu','0746915874',1,0,'CV00002'),
+	(default,N'Đinh Ngọc Hoa', '2002/01/12','021343314644',N'55 Nguyễn Huệ Tỉnh Hà Giang','0369745821',2,0,'CV00002'),
+	(default,N'Đinh Ngọc Khanh', '2002/07/22','021354683356',N'97 Nguyễn Tất Thành Tỉnh Cao Bằng','0215784512',2,0,'CV00002'),
+	(default,N'Bùi Thanh Thúy', '2002/04/23','048630146848',N'268 Đinh Bộ Lĩnh Tp Hồ Chí Minh','0869451457',2,0,'CV00002'),
+	(default,N'Hoàng Thùy Linh', '2002/08/14','061548658654',N'810 Lê Đức Thọ Tp Hồ Chí Minh','1479365487',2,0,'CV00002'),
+	(default,N'Nguyễn Văn Thanh', '2002/08/19','061546146489',N'41 Nguyễn Văn Lượng Tỉnh Kiên Giang','0379856472',1,0,'CV00002')
 go
 select * from TaiKhoan
 insert into TaiKhoan
-values ('NV00002','123','NV00002')
+values	('NV00001','123','NV00001'),
+		('NV00002','123','NV00002'),
+		('NV00003','123','NV00003'),
+		('NV00004','123','NV00004'),
+		('NV00005','123','NV00005'),
+		('NV00006','123','NV00006'),
+		('NV00007','123','NV00007'),
+		('NV00008','123','NV00008'),
+		('NV00009','123','NV00009'),
+		('NV00010','123','NV00010'),
+		('NV00011','123','NV00011'),
+		('NV00012','123','NV00012'),
+		('NV00013','123','NV00013'),
+		('NV00014','123','NV00014'),
+		('NV00015','123','NV00015'),
+		('NV00016','123','NV00016'),
+		('NV00017','123','NV00017'),
+		('NV00018','123','NV00018'),
+		('NV00019','123','NV00019'),
+		('NV00020','123','NV00020'),
+		('NV00021','123','NV00021'),
+		('NV00022','123','NV00022'),
+		('NV00023','123','NV00023'),
+		('NV00024','123','NV00024'),
+		('NV00025','123','NV00025'),
+		('NV00026','123','NV00026'),
+		('NV00027','123','NV00027'),
+		('NV00028','123','NV00028'),
+		('NV00029','123','NV00029'),
+		('NV00030','123','NV00030'),
+		('NV00031','123','NV00031'),
+		('NV00032','123','NV00032'),
+		('NV00033','123','NV00033'),
+		('NV00034','123','NV00034'),
+		('NV00035','123','NV00035'),
+		('NV00036','123','NV00036'),
+		('NV00037','123','NV00037'),
+		('NV00038','123','NV00038'),
+		('NV00039','123','NV00039'),
+		('NV00040','123','NV00040'),
+		('NV00041','123','NV00041'),
+		('NV00042','123','NV00042'),
+		('NV00043','123','NV00043'),
+		('NV00044','123','NV00044'),
+		('NV00045','123','NV00045'),
+		('NV00046','123','NV00046'),
+		('NV00047','123','NV00047'),
+		('NV00048','123','NV00048')
 go
 select * from KhachHang
 insert into KhachHang
@@ -134,23 +249,7 @@ values
 	(default,N'Nguyễn Thị Ngọc','2002/12/01',N'Gò Vấp, TP.HCM','0836022809',0,0),
 	(default,N'Trần Quốc Trọng','2002/11/02',N'Quận 4, TP.HCM','0542327472',1,0),
 	(default,N'Ngô Đình Bảo	Yến','2002/02/22',N'Quận 3, TP.HCM','0522110127',0,0)
-go
-select * from CapDoHoc
-insert into CapDoHoc
-values
-	(default,N'Cấp 1',1),
-	(default,N'Cấp 1',2),
-	(default,N'Cấp 1',3),
-	(default,N'Cấp 1',4),
-	(default,N'Cấp 1',5),
-	(default,N'Cấp 2',6),
-	(default,N'Cấp 2',7),
-	(default,N'Cấp 2',8),
-	(default,N'Cấp 2',9),
-	(default,N'Cấp 3',10),
-	(default,N'Cấp 3',11),
-	(default,N'Cấp 3',12)
-go
+
 /* Thử dữ liệu*/
 
 delete from KhachHang
