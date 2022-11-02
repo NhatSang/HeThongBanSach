@@ -38,7 +38,7 @@ public class ChucVu {
 
 	@Override
 	public String toString() {
-		return "ChucVu [maCV=" + maCV + ", tenCV=" + tenCV + "]";
+		return tenCV;
 	}
 
 }
