@@ -318,26 +318,47 @@ public class SanPham_DAO {
 		}
 	}
 
-	public ArrayList<LoaiSanPham> getLoaiSP() {
-		ArrayList<LoaiSanPham> dsLoaiSP = new ArrayList<LoaiSanPham>();
+	public ArrayList<LoaiSanPham> getLoaiVPP() {
+		ArrayList<LoaiSanPham> dsLoaiVPP = new ArrayList<LoaiSanPham>();
 		try {
 			DataBase.getInstance();
 			Connection connection = DataBase.getConnection();
 			PreparedStatement statement = null;
 
-			String sql = "Select * from LoaiSanPham";
+			String sql = "Select * from LoaiSanPham where maLoai like 'VPP%'";
 			Statement statement1 = connection.createStatement();
 			ResultSet rs = statement1.executeQuery(sql);
 
 			while (rs.next()) {
 
-				dsLoaiSP.add(new LoaiSanPham(rs.getString(1), rs.getString(2)));
+				dsLoaiVPP.add(new LoaiSanPham(rs.getString(1), rs.getString(2)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return dsLoaiSP;
+		return dsLoaiVPP;
+	}
+	public ArrayList<LoaiSanPham> getLoaiSach() {
+		ArrayList<LoaiSanPham> dsLoaiSach = new ArrayList<LoaiSanPham>();
+		try {
+			DataBase.getInstance();
+			Connection connection = DataBase.getConnection();
+			PreparedStatement statement = null;
+
+			String sql = "Select * from LoaiSanPham where maLoai not like 'VPP%'";
+			Statement statement1 = connection.createStatement();
+			ResultSet rs = statement1.executeQuery(sql);
+
+			while (rs.next()) {
+
+				dsLoaiSach.add(new LoaiSanPham(rs.getString(1), rs.getString(2)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return dsLoaiSach;
 	}
 
 	public ArrayList<NhaCungCap> getNCC() {
@@ -616,7 +637,41 @@ public class SanPham_DAO {
 			statement.close();
 		}
 	}
-	
+	public LoaiSanPham timLoaiSP(String key) {
+		LoaiSanPham lsp = null;
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+		try {
+			String sql = "select * from LoaiSanPham where tenLoai = N'" + key + "'";
+			Statement stm = con.createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			if (rs.next()) {
+				String maLoai = rs.getString(1);
+				String tenLoai = rs.getString(2);
+				lsp = new LoaiSanPham(maLoai, tenLoai);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return lsp;
+	}
+
+	public void themLoaiSP(LoaiSanPham lsp) throws SQLException {
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+		PreparedStatement statement = null;
+		try {
+			String sql = "insert into LoaiSanPham values (default,?)";
+			statement = con.prepareStatement(sql);
+			statement.setNString(1, lsp.getTenLoai());
+			statement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			statement.close();
+		}
+	}
 	public NhaXuatBan timNXB(String key) {
 		NhaXuatBan nxb = null;
 		DataBase.getInstance();
@@ -670,9 +725,9 @@ public class SanPham_DAO {
 							+ "left join LoaiBia lb on sp.maLB = lb.maLB\r\n"
 							+ "left join CapDoHoc cdh on sp.maCDH = cdh.maCDH\r\n"
 							+ "where maSP not like 'VPP%' and sp.trangThai = 0 " + "and ( sp.maSP like '%" + key
-							+ "%' or sp.tenSP like N'%" + key + "%' " + "or sp.nguoiDich like '%" + key
-							+ "%' or lsp.maLoai like '%" + key + "%' " + "or lsp.tenLoai like '%" + key
-							+ "%' or tg.tenTG like '%" + key + "%'" + ")");
+							+ "%' or sp.tenSP like N'%" + key + "%' " + "or sp.nguoiDich like N'%" + key
+							+ "%' or nxb.tenNXB like '%" + key + "%' " + "or lsp.tenLoai like N'%" + key
+							+ "%' or tg.tenTG like N'%" + key + "%'" + ")");
 
 			while (rs.next()) {
 				String maSach = rs.getString(1);
@@ -722,8 +777,8 @@ public class SanPham_DAO {
 							+ "left join ThuongHieu th on sp.maTH = th.maTH\r\n"
 							+ "left join MauSac ms on sp.maMau = ms.maMau\r\n"
 							+ "where maSP like 'VPP%' and sp.trangThai = 0 " 
-							+ "and ( sp.maSP like '%" + key + "%' or sp.tenSP like N'%" + key + "%' or lsp.maLoai like '%" + key + "%' " 
-							+ "or lsp.tenLoai like '%" + key + "%' or ms.mau like N'%" + key + "%'" + ")");
+							+ "and ( sp.maSP like '%" + key + "%' or sp.tenSP like N'%" + key + "%' or th.tenTH like '%" + key + "%' " 
+							+ "or lsp.tenLoai like N'%" + key + "%' or ms.mau like N'%" + key + "%' or sp.xuatXu like '%" + key + "%' " +")");
 			while (rs.next()) {
 				String maVPP = rs.getString(1);
 				String tenVPP = rs.getString(2);
