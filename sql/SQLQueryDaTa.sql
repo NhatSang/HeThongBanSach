@@ -70,12 +70,12 @@ values
 go
 select * from TaiKhoan
 insert into TaiKhoan
-values ('NV00002','123','NV00002')
+values ('NV00001','123','NV00001')
 go
 select * from KhachHang
 insert into KhachHang
 values
-	(default,N'Lương Viết Thanh','2002/07/27',N'448/3, tỉnh lộ 8, ấp Tây, Tân An Hội, Củ Chi, Tp Hồ Chí Minh','0396979388',1,1)
+	(default,N'Lương Viết Thanh','2002/07/27',N'448/3, tỉnh lộ 8, ấp Tây, Tân An Hội, Củ Chi, Tp Hồ Chí Minh','0396979388',1,0)
 go
 select * from CapDoHoc
 insert into CapDoHoc
