@@ -1,6 +1,7 @@
 
 package ui;
 
+import java.awt.Font;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -92,10 +93,14 @@ public class GD_VPP extends javax.swing.JPanel {
 
 		setPreferredSize(new java.awt.Dimension(1899, 1087));
 
+		lbMes.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+		lbMes.setForeground(new java.awt.Color(225, 0, 0));
+
 		jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 		jPanel1.setPreferredSize(new java.awt.Dimension(1284, 1027));
 
 		btnTimKiem.setText("Tìm kiếm");
+//		btnTimKiem.setFont(new java.awt.Font("Serif",Font.PLAIN , 18));
 		btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnTimKiemActionPerformed(evt);
@@ -183,6 +188,7 @@ public class GD_VPP extends javax.swing.JPanel {
 		lbVAT.setText("VAT:");
 
 		btnThem.setText("THÊM");
+//		btnThem.setFont(new java.awt.Font("Serif",Font.PLAIN , 18));
 		btnThem.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnThemActionPerformed(evt);
@@ -190,6 +196,7 @@ public class GD_VPP extends javax.swing.JPanel {
 		});
 
 		btnXoa.setText("XÓA");
+//		btnXoa.setFont(new java.awt.Font("Serif",Font.PLAIN , 18));
 		btnXoa.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnXoaActionPerformed(evt);
@@ -204,7 +211,7 @@ public class GD_VPP extends javax.swing.JPanel {
 		});
 
 		//
-		cbDonVi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quyển", "Lóc" }));
+		cbDonVi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Quyển", "Lóc", "Cây" }));
 		cbDonVi.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				cbDonViActionPerformed(evt);
@@ -220,6 +227,7 @@ public class GD_VPP extends javax.swing.JPanel {
 		});
 
 		btnSua.setText("SỬA");
+//		btnSua.setFont(new java.awt.Font("Serif",Font.PLAIN , 18));
 		btnSua.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnSuaActionPerformed(evt);
@@ -417,8 +425,8 @@ public class GD_VPP extends javax.swing.JPanel {
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup().addGap(21, 21, 21)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-								.addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
-								.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE))
+								.addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
+								.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE))
 						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 	}// </editor-fold>
 
@@ -475,7 +483,7 @@ public class GD_VPP extends javax.swing.JPanel {
 		file.setFileFilter(img);
 
 		file.setMultiSelectionEnabled(false);
-		int x = file.showDialog(this, "Chon file");
+		int x = file.showDialog(this, "Chọn file");
 		if (x == JFileChooser.APPROVE_OPTION) {
 			File f = file.getSelectedFile();
 			String filename = f.getAbsolutePath();
@@ -544,21 +552,21 @@ public class GD_VPP extends javax.swing.JPanel {
 
 		dsvpp = sp_dao.getAllVPP1();
 		for (VanPhongPham vpp : dsvpp) {
-			Object row[] = { tableVPP.getRowCount(), vpp.getMaSP(), vpp.getTenSP(), vpp.getLoaiSP(), vpp.getSoLuong(), vpp.getDonGia(),
-					vpp.getDonVi(), vpp.getVAT(), vpp.getNhaCC(), vpp.getMoTa(), vpp.getThuongHieu(), vpp.getMauSac(),
-					vpp.getChatLieu(), vpp.getXuatXu(), vpp.getHinhAnh() };
+			Object row[] = { tableVPP.getRowCount(), vpp.getMaSP(), vpp.getTenSP(), vpp.getLoaiSP(), vpp.getSoLuong(),
+					vpp.getDonGia(), vpp.getDonVi(), vpp.getVAT(), vpp.getNhaCC(), vpp.getMoTa(), vpp.getThuongHieu(),
+					vpp.getMauSac(), vpp.getChatLieu(), vpp.getXuatXu(), vpp.getHinhAnh() };
 			modelVPP.addRow(row);
 		}
 
 		loadData();
 	}
-	
+
 	private void loadVPP(ArrayList<VanPhongPham> dsVPP) {
 		modelVPP.setRowCount(0);
 		for (VanPhongPham vpp : dsVPP) {
-			Object row[] = { tableVPP.getRowCount(), vpp.getMaSP(), vpp.getTenSP(), vpp.getLoaiSP(), vpp.getSoLuong(), vpp.getDonGia(),
-					vpp.getDonVi(), vpp.getVAT(), vpp.getNhaCC(), vpp.getMoTa(), vpp.getThuongHieu(), vpp.getMauSac(),
-					vpp.getChatLieu(), vpp.getXuatXu(), vpp.getHinhAnh() };
+			Object row[] = { tableVPP.getRowCount(), vpp.getMaSP(), vpp.getTenSP(), vpp.getLoaiSP(), vpp.getSoLuong(),
+					vpp.getDonGia(), vpp.getDonVi(), vpp.getVAT(), vpp.getNhaCC(), vpp.getMoTa(), vpp.getThuongHieu(),
+					vpp.getMauSac(), vpp.getChatLieu(), vpp.getXuatXu(), vpp.getHinhAnh() };
 			modelVPP.addRow(row);
 		}
 
@@ -570,8 +578,8 @@ public class GD_VPP extends javax.swing.JPanel {
 		modelCboNCC.removeAllElements();
 		modelCboMauSac.removeAllElements();
 		modelCboThuongHieu.removeAllElements();
-		
-		modelCboLoai.addAll(sp_dao.getLoaiSP());
+
+		modelCboLoai.addAll(sp_dao.getLoaiVPP());
 		modelCboMauSac.addAll(sp_dao.getMauSac());
 		modelCboNCC.addAll(sp_dao.getNCC());
 		modelCboThuongHieu.addAll(sp_dao.getTH());
@@ -612,23 +620,33 @@ public class GD_VPP extends javax.swing.JPanel {
 	}
 
 	public void xoaVPP() {
-//		if (btnXoa.getText().equals("Huỷ") && check == 1) {
-//			xoaTrang();
-//			setEditableForm(false);
-//			btnXoa.setText("Xóa");
-//			btnSua.setEnabled(true);
-//			check = 0;
-//		}
-		int row = tableVPP.getSelectedRowCount();
+		if (btnXoa.getText().equals("Huỷ") && check == 1) {
+			xoaTrang();
+			setEditableForm(false);
+			lbMes.setText("");
+			btnXoa.setText("Xóa");
+			btnSua.setEnabled(true);
+			check = 0;
+		} else if (btnXoa.getText().equals("Huỷ") && check == 2) {
+			xoaTrang();
+			setEditableForm(false);
+			lbMes.setText("");
+			btnXoa.setText("Xóa");
+			btnThem.setEnabled(true);
+			check = 0;
+		} else {
+			int row = tableVPP.getSelectedRowCount();
 //		row = tableVPP.getSelectedRow();
-		if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa") == JOptionPane.YES_OPTION) {
-			try {
-				sp_dao.xoa_SP(txtMa.getText());
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
+			if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa") == JOptionPane.YES_OPTION) {
+				try {
+					sp_dao.xoa_SP(txtMa.getText());
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null, "Xóa thành công");
+				loadVPP();
 			}
-			loadVPP();
 		}
 	}
 
@@ -650,135 +668,188 @@ public class GD_VPP extends javax.swing.JPanel {
 		cbDonVi.setSelectedItem(null);
 	}
 
-	public void themVPP(){
-//		if (check != 1) {
-//			btnXoa.setText("Huỷ");
-//			btnSua.setEnabled(false);
-//			check = 1;
-//		} else {
-		SanPham_DAO sanPham_DAO = new SanPham_DAO();
-		String tenVPP = txtTen.getText();
-		int soLuong = Integer.parseInt(txtSoLuong.getText().trim());
-		Double donGia = Double.parseDouble(txtDonGia.getText().trim());
-		int vat = Integer.parseInt(txtVAT.getText().trim());
-		String moTa = txtMoTa.getText();
-		String chatLieu = txtChatLieu.getText();
-		String xuatXu = txtXuatXu.getText();
-		String hinhAnh = txtHinhAnh.getText();
-
-		LoaiSanPham loaiVPP = (LoaiSanPham) cbLoai.getSelectedItem();
-		NhaCungCap ncc = (NhaCungCap) cbNCC.getSelectedItem();
-//		MauSac mauSac = (MauSac) cbMauSac.getSelectedItem();
-		ThuongHieu thuongHieu = null;
-		if (cbThuongHieu.getSelectedItem() instanceof ThuongHieu) {
-			thuongHieu = (ThuongHieu) cbThuongHieu.getSelectedItem();
-			
-		}else {
-			String newTH = ((JTextComponent) cbThuongHieu.getEditor().getEditorComponent()).getText();
-			
-			thuongHieu = sanPham_DAO.timThuongHieu(newTH);
-			if (thuongHieu == null)
-				try {
-					sanPham_DAO.themThuongHieu(new ThuongHieu(null, newTH));
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			thuongHieu = sanPham_DAO.timThuongHieu(newTH);
-		}
-		MauSac mauSac = null;
-		if (cbMauSac.getSelectedItem() instanceof MauSac) {
-			mauSac = (MauSac) cbMauSac.getSelectedItem();
-			
-		}else {
-			String newMS = ((JTextComponent) cbMauSac.getEditor().getEditorComponent()).getText();
-			
-			mauSac = sanPham_DAO.timMauSac(newMS);
-			if (mauSac == null)
-				try {
-					sanPham_DAO.themMauSac(new MauSac(null, newMS));
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			mauSac= sanPham_DAO.timMauSac(newMS);
-		}
-		String donvi = (String) cbDonVi.getSelectedItem();
-
-		VanPhongPham vpp = new VanPhongPham(donvi, tenVPP, donvi, moTa, hinhAnh, soLuong, vat, donGia, loaiVPP, ncc, xuatXu, chatLieu, thuongHieu, mauSac);
-		if (sanPham_DAO.timKiemSPTheoMa(vpp.getTenSP()) == null) {
-			try {
-				sanPham_DAO.themVPP(vpp);
-				loadVPP();
-				stt = 0;
-			} catch (Exception e) {
-				// TODO: handle exception
-//				e.printStackTrace();
-			}
+	public void themVPP() {
+		if (check != 1) {
+			btnXoa.setText("Huỷ");
+			btnSua.setEnabled(false);
+			txtMa.setEditable(false);
+			xoaTrang();
+			check = 1;
 		} else {
-			JOptionPane.showMessageDialog(null, "sản phẩm đã tồn tại");
-		}
+			checkThongTin();
+			if (checkThongTin()) {
+				SanPham_DAO sanPham_DAO = new SanPham_DAO();
+				String tenVPP = txtTen.getText();
+				int soLuong = Integer.parseInt(txtSoLuong.getText().trim());
+				Double donGia = Double.parseDouble(txtDonGia.getText().trim());
+				int vat = Integer.parseInt(txtVAT.getText().trim());
+				String moTa = txtMoTa.getText();
+				String chatLieu = txtChatLieu.getText();
+				String xuatXu = txtXuatXu.getText();
+				String hinhAnh = txtHinhAnh.getText();
 
+//				LoaiSanPham loaiVPP = (LoaiSanPham) cbLoai.getSelectedItem();
+				LoaiSanPham loaiVPP = null;
+				if (cbLoai.getSelectedItem() instanceof LoaiSanPham) {
+					loaiVPP = (LoaiSanPham) cbLoai.getSelectedItem();
+
+				} else {
+					String newVPP = ((JTextComponent) cbLoai.getEditor().getEditorComponent()).getText();
+
+					loaiVPP = sanPham_DAO.timLoaiSP(newVPP);
+					if (loaiVPP == null)
+						try {
+							sanPham_DAO.themLoaiSP(new LoaiSanPham(null, newVPP));
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					loaiVPP = sanPham_DAO.timLoaiSP(newVPP);
+				}
+				NhaCungCap ncc = (NhaCungCap) cbNCC.getSelectedItem();
+//		MauSac mauSac = (MauSac) cbMauSac.getSelectedItem();
+				ThuongHieu thuongHieu = null;
+				if (cbThuongHieu.getSelectedItem() instanceof ThuongHieu) {
+					thuongHieu = (ThuongHieu) cbThuongHieu.getSelectedItem();
+
+				} else {
+					String newTH = ((JTextComponent) cbThuongHieu.getEditor().getEditorComponent()).getText();
+
+					thuongHieu = sanPham_DAO.timThuongHieu(newTH);
+					if (thuongHieu == null)
+						try {
+							sanPham_DAO.themThuongHieu(new ThuongHieu(null, newTH));
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					thuongHieu = sanPham_DAO.timThuongHieu(newTH);
+				}
+				MauSac mauSac = null;
+				if (cbMauSac.getSelectedItem() instanceof MauSac) {
+					mauSac = (MauSac) cbMauSac.getSelectedItem();
+
+				} else {
+					String newMS = ((JTextComponent) cbMauSac.getEditor().getEditorComponent()).getText();
+
+					mauSac = sanPham_DAO.timMauSac(newMS);
+					if (mauSac == null)
+						try {
+							sanPham_DAO.themMauSac(new MauSac(null, newMS));
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					mauSac = sanPham_DAO.timMauSac(newMS);
+				}
+				String donvi = (String) cbDonVi.getSelectedItem();
+
+				VanPhongPham vpp = new VanPhongPham(donvi, tenVPP, donvi, moTa, hinhAnh, soLuong, vat, donGia, loaiVPP,
+						ncc, xuatXu, chatLieu, thuongHieu, mauSac);
+				if (sanPham_DAO.timKiemSPTheoMa(vpp.getTenSP()) == null) {
+					try {
+						sanPham_DAO.themVPP(vpp);
+						JOptionPane.showMessageDialog(null, "Thêm thành công");
+						loadVPP();
+						stt = 0;
+					} catch (Exception e) {
+						// TODO: handle exception
+//				e.printStackTrace();
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "sản phẩm đã tồn tại");
+				}
+			}
+		}
 	}
 
 	public void suaVPP() {
-		SanPham_DAO sanPham_DAO = new SanPham_DAO();
-		String maVPP = txtMa.getText();
-		String tenVPP = txtTen.getText();
-		int soLuong = Integer.parseInt(txtSoLuong.getText().trim());
-		Double donGia = Double.parseDouble(txtDonGia.getText().trim());
-		int vat = Integer.parseInt(txtVAT.getText().trim());
-		String moTa = txtMoTa.getText();
-		String chatLieu = txtChatLieu.getText();
-		String xuatXu = txtXuatXu.getText();
+		lbMes.setText("");
+		if (check != 2) {
+			setEditableForm(true);
+			btnXoa.setText("Huỷ");
+			btnThem.setEnabled(false);
+			check = 2;
+			System.out.println(check);
+		} else {
+			SanPham_DAO sanPham_DAO = new SanPham_DAO();
+			String maVPP = txtMa.getText();
+			String tenVPP = txtTen.getText();
+			int soLuong = Integer.parseInt(txtSoLuong.getText().trim());
+			Double donGia = Double.parseDouble(txtDonGia.getText().trim());
+			int vat = Integer.parseInt(txtVAT.getText().trim());
+			String moTa = txtMoTa.getText();
+			String chatLieu = txtChatLieu.getText();
+			String xuatXu = txtXuatXu.getText();
+			String hinhAnh = txtHinhAnh.getText();
 
-		LoaiSanPham loaiVPP = (LoaiSanPham) cbLoai.getSelectedItem();
-		NhaCungCap ncc = (NhaCungCap) cbNCC.getSelectedItem();
+//			LoaiSanPham loaiVPP = (LoaiSanPham) cbLoai.getSelectedItem();
+			LoaiSanPham loaiVPP = null;
+			if (cbLoai.getSelectedItem() instanceof LoaiSanPham) {
+				loaiVPP = (LoaiSanPham) cbLoai.getSelectedItem();
+
+			} else {
+				String newVPP = ((JTextComponent) cbLoai.getEditor().getEditorComponent()).getText();
+
+				loaiVPP = sanPham_DAO.timLoaiSP(newVPP);
+				if (loaiVPP == null)
+					try {
+						sanPham_DAO.themLoaiSP(new LoaiSanPham(null, newVPP));
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				loaiVPP = sanPham_DAO.timLoaiSP(newVPP);
+			}
+			NhaCungCap ncc = (NhaCungCap) cbNCC.getSelectedItem();
 //		MauSac mauSac = (MauSac) cbMauSac.getSelectedItem();
-		ThuongHieu thuongHieu = null;
-		if (cbThuongHieu.getSelectedItem() instanceof ThuongHieu) {
-			thuongHieu = (ThuongHieu) cbThuongHieu.getSelectedItem();
-		}else {
-			String newTH = ((JTextComponent) cbThuongHieu.getEditor().getEditorComponent()).getText();
-			thuongHieu = sanPham_DAO.timThuongHieu(newTH);
-			if (thuongHieu == null)
-				try {
-					sanPham_DAO.themThuongHieu(new ThuongHieu(null, newTH));
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			thuongHieu = sanPham_DAO.timThuongHieu(newTH);
-		}
-		MauSac mauSac = null;
-		if (cbMauSac.getSelectedItem() instanceof MauSac) {
-			mauSac = (MauSac) cbMauSac.getSelectedItem();
-		}else {
-			String newMS = ((JTextComponent) cbMauSac.getEditor().getEditorComponent()).getText();
-			mauSac = sanPham_DAO.timMauSac(newMS);
-			if (mauSac == null)
-				try {
-					sanPham_DAO.themMauSac(new MauSac(null, newMS));
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			mauSac = sanPham_DAO.timMauSac(newMS);
-		}
-		String donvi = (String) cbDonVi.getSelectedItem();
-		
-		VanPhongPham vpp = new VanPhongPham(maVPP, tenVPP, donvi, moTa, donvi, soLuong, vat, donGia, loaiVPP, ncc, xuatXu, chatLieu, thuongHieu, mauSac);
-		try {
-			sanPham_DAO.suaVPP(vpp);
-			loadVPP();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			ThuongHieu thuongHieu = null;
+			if (cbThuongHieu.getSelectedItem() instanceof ThuongHieu) {
+				thuongHieu = (ThuongHieu) cbThuongHieu.getSelectedItem();
+			} else {
+				String newTH = ((JTextComponent) cbThuongHieu.getEditor().getEditorComponent()).getText();
+				thuongHieu = sanPham_DAO.timThuongHieu(newTH);
+				if (thuongHieu == null)
+					try {
+						sanPham_DAO.themThuongHieu(new ThuongHieu(null, newTH));
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				thuongHieu = sanPham_DAO.timThuongHieu(newTH);
+			}
+			MauSac mauSac = null;
+			if (cbMauSac.getSelectedItem() instanceof MauSac) {
+				mauSac = (MauSac) cbMauSac.getSelectedItem();
+			} else {
+				String newMS = ((JTextComponent) cbMauSac.getEditor().getEditorComponent()).getText();
+				mauSac = sanPham_DAO.timMauSac(newMS);
+				if (mauSac == null)
+					try {
+						sanPham_DAO.themMauSac(new MauSac(null, newMS));
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				mauSac = sanPham_DAO.timMauSac(newMS);
+			}
+			String donvi = (String) cbDonVi.getSelectedItem();
+
+			VanPhongPham vpp = new VanPhongPham(maVPP, tenVPP, donvi, moTa, hinhAnh, soLuong, vat, donGia, loaiVPP, ncc,
+					xuatXu, chatLieu, thuongHieu, mauSac);
+			try {
+				sanPham_DAO.suaVPP(vpp);
+				JOptionPane.showMessageDialog(null, "Sửa thành công");
+				loadVPP();
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 		}
 	}
 
-	 private void timKiemVPP() {
-			// TODO Auto-generated method stu
+	private void timKiemVPP() {
+		// TODO Auto-generated method stu
 		String txt = txtTimKiem.getText();
 //		System.out.println(txt);
 		SanPham_DAO sp_dao = new SanPham_DAO();
@@ -787,27 +858,105 @@ public class GD_VPP extends javax.swing.JPanel {
 	}
 
 	public boolean checkThongTin() {
-
 		String tenVPP = txtTen.getText();
-		int soLuong = Integer.parseInt(txtSoLuong.getText().trim());
-		Double donGia = Double.parseDouble(txtDonGia.getText().trim());
-		int vat = Integer.parseInt(txtVAT.getText().trim());
+		String soLuong = txtSoLuong.getText();
+		String donGia = txtDonGia.getText();
+		String vat = txtVAT.getText();
 		String moTa = txtMoTa.getText();
 		String chatLieu = txtChatLieu.getText();
 		String xuatXu = txtXuatXu.getText();
-
-		LoaiSanPham loaiVPP = (LoaiSanPham) cbLoai.getSelectedItem();
-		NhaCungCap ncc = (NhaCungCap) cbNCC.getSelectedItem();
-		MauSac mauSac = (MauSac) cbMauSac.getSelectedItem();
-		ThuongHieu thuongHieu = (ThuongHieu) cbThuongHieu.getSelectedItem();
-		String donvi = (String) cbDonVi.getSelectedItem();
+		String hinhAnh = txtHinhAnh.getText();
 
 		if (tenVPP.equals("")) {
 			lbMes.setText("Nhập tên văn phòng phẩm");
 			return false;
 		}
-
+		if (cbLoai.getSelectedItem() == null) {
+			lbMes.setText("Chọn loại sản phẩm");
+			return false;
+		}
+		try {
+    		Integer.parseInt(soLuong);
+		} catch (Exception e) {
+			// TODO: handle exception
+			lbMes.setText("Số lượng không được để trống và phải viết dưới dạng số");
+			txtSoLuong.requestFocus();
+    		return false;
+		}
+    	if(Integer.parseInt(soLuong)<=0){
+    		lbMes.setText("Số lượng phải lớn hơn 0");
+    		txtSoLuong.requestFocus();
+    		return false;
+    	}
+		if (cbDonVi.getSelectedItem() == null) {
+			lbMes.setText("Chọn đơn vị");
+			return false;
+		}
+		try {
+    		Double.parseDouble(donGia);
+		} catch (Exception e) {
+			// TODO: handle exception
+			lbMes.setText("Đơn giá không được để trống và phải viết dưới dạng số");
+			txtDonGia.requestFocus();
+    		return false;
+		}
+    	if(Double.parseDouble(donGia)<=0){
+    		lbMes.setText("Đơn giá phải lớn hơn 0");
+    		txtDonGia.requestFocus();
+    		return false;
+    	}
+    	try {
+    		Integer.parseInt(vat);
+		} catch (Exception e) {
+			// TODO: handle exception
+			lbMes.setText("VAT không được để trống và phải viết dưới dạng số");
+			txtVAT.requestFocus();
+    		return false;
+		}
+    	if(Integer.parseInt(vat)<=0){
+    		lbMes.setText("VAT phải lớn hơn 0");
+    		txtVAT.requestFocus();
+    		return false;
+    	}
+		if (cbNCC.getSelectedItem() == null) {
+			lbMes.setText("Chọn nhà cung cấp");
+			return false;
+		}
+		if (moTa.equals("")) {
+			lbMes.setText("Nhập mô tả");
+			return false;
+		}
+		if (cbThuongHieu.getSelectedItem() == null) {
+			lbMes.setText("Chọn thương hiệu");
+			return false;
+		}
+		if (cbMauSac.getSelectedItem() == null) {
+			lbMes.setText("Chọn màu sắc");
+			return false;
+		}
+		if (chatLieu.equals("")) {
+			lbMes.setText("Nhập chất liệu");
+			return false;
+		}
+		if (xuatXu.equals("")) {
+			lbMes.setText("Nhập xuất xứ");
+			return false;
+		}
+		if (hinhAnh.equals("")) {
+			lbMes.setText("Nhập hình ảnh");
+			return false;
+		}
 		return true;
+	}
+
+	public void reload() {
+		btnThem.setText("Thêm");
+		btnXoa.setText("Xoá");
+		btnSua.setText("Sửa");
+		btnThem.setEnabled(true);
+		btnXoa.setEnabled(true);
+		btnSua.setEnabled(true);
+		check = 0;
 	}
 
 }
