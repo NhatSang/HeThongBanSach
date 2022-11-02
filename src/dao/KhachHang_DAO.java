@@ -183,5 +183,3 @@ public class KhachHang_DAO {
 		return dsKH;
 	}
 }	
-
-}
