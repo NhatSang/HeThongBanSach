@@ -34,17 +34,23 @@ select * from MauSac
 insert into MauSac
 values (default, N'Xanh Dương'), (default, N'Xanh Lá'), (default, N'Đỏ'), (default, N'Tím'), (default, N'Vàng'),(default, N'Trắng'),(default, N'Đen')
 go
-select * from NhaXuatBan
 insert into NhaXuatBan
-values 
-	(default,N'NXB Đại Học Sư Phạm TPHCM'),
-	(default,N'NXB Giáo Dục Việt Nam'),
+values (default,N'NXB Văn Học'), 
+	(default,N'NXB Trẻ'), 
+	(default,N'NXB Kim Đồng'), 
+	(default,N'NXB Giáo Dục'), 
+	(default,N'NXB Văn Học'), 
+	(default,N'NXB Tổng Hợp TPHCM')
 go
 select * from TacGia
 insert into TacGia
-values 
-	(default, N'Nhiều tác giả'),
-	(default, N'Bộ Giáo Dục Và Đào Tạo'),
+values (default, N'A Crazy Mind'),
+(default, N'Xuân Diệu'),
+(default, N'Nguyễn Minh Châu'),
+(default, N'Hoài niệm'),
+(default, N'Nguyễn Ngọc Tú'),
+(default, N'Franz Kafka'),
+(default, N'Harper Lee')
 go
 select * from LoaiBia
 insert into LoaiBia
@@ -86,15 +92,46 @@ select * from SanPham
 --them sach
 insert into SanPham (maSP,tenSP,namXB_SX,soLuong,donGia,donVi,VAT,soTrang,nguoiDich,tuoiGioiHan,moTa,hinhAnh,maLoai,maNCC,maNXB,maTG,maLB,maCDH,trangThai)
 values 
-	(dbo.autoIdSP('SGK00001'),N'Sách Giáo Khoa Bộ Lớp 1-Chân Trời Sáng Tạo-Sách Bài Học (Bộ 9 Cuốn)',2022,100,186000,N'Bộ',10,null,null,null,N'Sách giáo khoa lớp 1','F:\TaiLieuHT\PTUD\workspaceJV\HeThongBanSach\img\sgk00001.jpg','SGK00001','NCC00001','NXB00001','TG00001','LB00001','CDH00001',0),
-	(dbo.autoIdSP('SGK00001'),N'Sách Giáo Khoa Bộ Lớp 2-Chân Trời Sáng Tạo-Sách Bài Học (Bộ 10 Cuốn) (2022)',2022,100,179000,N'Bộ',10,null,null,null,N'“Sách giáo khoa lớp 2','F:\TaiLieuHT\PTUD\workspaceJV\HeThongBanSach\img\sgk00002.jpg','SGK00001','NCC00002','NXB00002','TG00002','LB00001','CDH00002',0),
-	
-go
---them van phong pham
+(dbo.autoIdSP('SVH00002'),N'Nhà Giả Kim',2020,100,58000,N'Quyển',10,227,N'Lê Chu Cầu',null,N'Tiểu thuyết Nhà giả kim của Paulo Coelho như một câu chuyện cổ tích giản dị, nhân ái, giàu chất thơ, thấm đẫm những minh triết huyền bí của phương Đông.','SVH00002.jpg','SVH00001','NCC00001','NXB00001','TG00001','LB00001',null,0),
+	(dbo.autoIdSP('SVH00003'),N'Bước Chậm Lại Giữa Thế Gian Vội Vã',2018,100,65000,N'Quyển',10,280,N'Nguyễn Việt Tú Anh',null,N'Bước chậm lại giữa thế gian vội vã của Đại đức Hae Min đã liên tục đứng đầu danh sách best-seller của nhiều trang sách trực tuyến uy tín của Hàn Quốc, trở thành cuốn sách chữa lành cho hàng triệu người trẻ luôn tất bật với nhịp sống hiện đại hối hả.','SVH00003.jpg','SVH0000','NCC00002','NXB00001','TG00001','LB00001',null,0),
+	(dbo.autoIdSP('SGK00001'),N'Ngữ Văn 10/1',2022,100,25000,N'Quyển',10,124,null,null,N'Ngữ Văn 10/1 (Cánh Diều) (2022)','SGK00001.jpg','SGK00001','NCC00002','NXB00002','TG00002','LB00001','CDH00010',0),
+	(dbo.autoIdSP('SGK00002'),N'Ngữ Văn 10/2',2020,100,21000,N'Quyển',10,227,null,null,N'Ngữ Văn 10/2 (Kết Nối Trí Thức) (2022)','SGK00002.jpg','SGK00001','NCC00003','NXB00003','TG00003','LB00001',null,0),
+	(dbo.autoIdSP('SKT00001'),N'Cái Đuôi Dài',2016,100,163000,N'Quyển',10,227,NULL,null,N'Với tác phẩm Cái đuôi dài, tác giả đã đưa ra một lộ trình tương lai cho ngành thương mại, một lộ trình có thể làm sáng tỏ băn khoăn của nhiều người – người bán hàng và khách hàng.','SKT00001.jpg','SKT00001','NCC00004','NXB00004','TG00004','LB00001',null,0)
+
 insert into SanPham (maSP,tenSP,soLuong,donGia,donVi,VAT,xuatXu,chatLieu, moTa,hinhAnh,maLoai,maNCC,maTH,maMau,trangThai)
-values 
-	(dbo.autoIdSP('VPP00003'),N'Test5', 1000,7000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế đơn giản, toàn bộ thân bút làm từ nhựa trong pha màu nhạt, nhìn được phần ruột bút bên trong','blttl061.jpg','VPP00003', 'NCC00002',  'TH00001', 'MS00001', 0)
-go
+values 	
+(dbo.autoIdSP('VPP00001'),N'Bút Bi Thiên Long TL-061', 100,5000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế đơn giản, toàn bộ thân bút làm từ nhựa trong pha màu nhạt, nhìn được phần ruột bút bên trong','VPP00001.jpg','VPP00001', 'NCC00002',  'TH00001', 'MS00001', 0),
+	(dbo.autoIdSP('VPP00002'),N'Bút Bi 0.5 mm Thiên Long TL-061', 100,5000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế đơn giản, toàn bộ thân bút làm từ nhựa trong pha màu nhạt, nhìn được phần ruột bút bên trong','VPP00002.jpg','VPP00001', 'NCC00002',  'TH00002', 'MS00007', 0),
+	(dbo.autoIdSP('VPP00003'),N'Bút Bi 0.5 mm Treeden', 100,5000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế hiện đại, kết hợp hài hòa giữa phần thân dưới bằng nhựa trong nhỏ và thon dài với phần giắt bút màu nhựa trắng đục khỏe khoắn','VPP00003.jpg','VPP00001', 'NCC00002',  'TH00003', 'MS00001', 0),
+	(dbo.autoIdSP('VPP00004'),N'Bút Bi 0.5 mm Thiên Long TL-027', 100,5000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế tối giản, nhưng tinh tế và ấn tượng. Toàn bộ thân bút làm từ nhựa trong, phối hợp hoàn hảo với màu ruột bút bên trong.','VPP00004.jpg','VPP00001', 'NCC00002',  'TH00004', 'MS00003', 0),
+	(dbo.autoIdSP('VPP00005'),N'Bút Xóa 12 ml - Thiên Long CP-02', 100,26000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Mực xóa nhanh khô, che phủ tốt, không độc hại và an tòan với tầng ozone. Đầu bút bằng kim lọai có lò xo đàn hồi tốt , bền khi sử dụng.','VPP00005.jpg','VPP00001', 'NCC00002',  'TH00005', 'MS00001', 0),
+	(dbo.autoIdSP('VPP00006'),N'Bút Gel-08 - Đỏ', 100,8000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thân và bút bằng nhựa trong, tảm có đệm mềm (grip) giúp cầm êm tay và giảm trơn trợt khi viết.','VPP00006.jpg','VPP00001', 'NCC00003',  'TH00001', 'MS00003', 0),
+	(dbo.autoIdSP('VPP00007'),N'Bút Gel Thiên Long Gel-08 Sunbeam', 100,8000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thân và bút bằng nhựa trong, tảm có đệm mềm (grip) giúp cầm êm tay và giảm trơn trợt khi viết.','VPP00007.jpg','VPP00001', 'NCC00004',  'TH00001', 'MS00001', 0),
+	(dbo.autoIdSP('VPP00008'),N'Bút Lông Bảng 2.0 mm - Artline EK-517-GR', 100,32000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Mực đậm, lượng mực cực kỳ nhiều, thêm mực dễ dàng sau khi viết hết. Dễ viết dễ xóa. Ngòi viết ra mực đều màu, êm, khi xóa không làm xước bề mặt bảng.','VPP00008.jpg','VPP00001', 'NCC00005',  'TH00006', 'MS00002', 0),
+	(dbo.autoIdSP('VPP00009'),N'Bút Chì Gỗ Graphite 4B', 100,7000,N'Cây',10,N'Việt Nam',N'Gỗ',N'Thân bút tam giác độc đáo, không những giúp người sử dụng cầm bút chắc tay mà còn ngăn không cho bút lăn khi để trên bàn, tránh rơi rớt.','VPP00009.jpg','VPP00001', 'NCC00006',  'TH00007', 'MS00007', 0),
+	(dbo.autoIdSP('VPP00010'),N'Thước M-Tech Slim 20 cm', 100,7000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thước kẻ được sử dụng nhiều trong học tập, cơ khí, vẽ các bảng kĩ thuật, xây dựng, vẽ tranh...','VPP00010.jpg','VPP00003', 'NCC00007',  'TH00008', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00011'),N'Thước M-Tech Slim 30 cm', 100,10000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thước kẻ được sử dụng nhiều trong học tập, cơ khí, vẽ các bảng kĩ thuật, xây dựng, vẽ tranh...','VPP00011.jpg','VPP00003', 'NCC00008',  'TH00009', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00012'),N'Bộ Thước 20cm', 100,12000,N'Bộ',10,N'Ấn Độ',N'Nhựa',N'Sản phẩm bao gồm 1 cây thước 20cm, bộ thước eke và thước đo góc 45o và 60o.','VPP00012.jpg','VPP00003', 'NCC00002',  'TH00001', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00013'),N'Gôm Đen E-011', 100,4000,N'Cục',10,N'Việt Nam',N'Nhựa',N'Gôm Đen E-011 với độ bền dẻo cao có khả năng tẩy sạch các vết chì đen mà không gây rách giấy, không làm bẩn, lem trên giấy trắng','VPP00013.jpg','VPP00003', 'NCC00009',  'TH00010', 'MS00007', 0),
+	(dbo.autoIdSP('VPP00014'),N'Vỉ 2 Gôm Thiên Long E-05', 100,9000,N'Vỉ',10,N'Việt Nam',N'Nhựa',N'Gôm với độ bền dẻo cao có khả năng tẩy sạch các vết chì đen mà không gây rách giấy, không làm bẩn, lem trên giấy trắng','VPP00014.jpg','VPP00003', 'NCC00010',  'TH00011', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00015'),N'Chuốt Chì', 100,3000,N'Cái',10,N'Việt Nam',N'Nhựa',N'Chuốt chì với thiết kế dễ sử dụng, chuốt được nhiều loại bút chì có đường kính tiêu chuẩn như bút chì đen, bút chì màu.','VPP00015.jpg','VPP00003', 'NCC00011',  'TH00012', 'MS00003', 0),
+	(dbo.autoIdSP('VPP00016'),N'Tập Sinh Viên 4 Ly Ngang 200 Trang', 100,17000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','VPP00016.jpg','VPP00002', 'NCC00012',  'TH00013', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00017'),N'Tập Học Sinh Baby Dinosaur B5 48 Trang', 100,11000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','VPP00017.jpg','VPP00002', 'NCC00013',  'TH00014', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00018'),N'Vở Freely Life - B5 Kẻ Ngang 120 Trang', 100,17000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','VPP00018.jpg','VPP00002', 'NCC00014',  'TH00015', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00019'),N'Vở Dancing Letters - B5 200 Trang', 100,34000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','VPP00019.jpg','VPP00002', 'NCC00015',  'TH00001', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00020'),N'Giấy Kiểm Tra Học Sinh', 100,4000,N'Tờ',10,N'Việt Nam',N'Giấy',N'Dòng kẻ rõ nét, giấy viết không nhòe, không bám bụi.','VPP00020.jpg','VPP00002', 'NCC00016',  'TH00001', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00021'),N'Giấy Kiểm Tra B5 Có Chấm', 100,21000,N'Xấp',10,N'Việt Nam',N'Giấy',N'Dòng kẻ rõ nét, giấy viết không nhòe, không bám bụi.','VPP00021.jpg','VPP00002', 'NCC00017',  'TH00001', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00022'),N'Bấm Kim', 100,21000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Trong văn phòng, bấm kim là vật dụng không thể thiếu khi bạn muốn liên kết, kẹp các tờ giấy tài liệu quan trọng lại với nhau','VPP00022.jpg','VPP00004', 'NCC00018',  'TH00001', 'MS00001', 0),
+	(dbo.autoIdSP('VPP00023'),N'Bấm Kim', 100,21000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Trong văn phòng, bấm kim là vật dụng không thể thiếu khi bạn muốn liên kết, kẹp các tờ giấy tài liệu quan trọng lại với nhau','VPP00023.jpg','VPP00004', 'NCC00019',  'TH00001', 'MS00005', 0),
+	(dbo.autoIdSP('VPP00024'),N'Bìa Trình Kí 1 Mặt ', 100,36000,N'Tờ',10,N'Việt Nam',N'Nhựa',N'Được làm từ chất liệu nhựa PS cao cấp ','VPP00024.jpg','VPP00004', 'NCC00020',  'TH00001', 'MS00001', 0),
+	(dbo.autoIdSP('VPP00025'),N'Bìa Trình Ký Đôi', 100,54000,N'Tờ',10,N'Việt Nam',N'Nhựa',N'Được làm từ chất liệu nhựa PS cao cấp ','VPP00025.jpg','VPP00004', 'NCC00021',  'TH00001', 'MS00003', 0),
+	(dbo.autoIdSP('VPP00026'),N'Kim Bấm', 100,3000,N'Hôp',10,N'Việt Nam',N'Kim Loại',N'Được làm từ thép không gỉ khá cứng cáp và chắc chắn, không bị bung rời khi sử dụng cũng như đảm bảo độ bền cao.','VPP00026.jpg','VPP00004', 'NCC00022',  'TH00001', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00027'),N'Kim Bấm', 100,10000,N'Hôp',10,N'Việt Nam',N'Kim Loại',N'Được làm từ thép không gỉ khá cứng cáp và chắc chắn, không bị bung rời khi sử dụng cũng như đảm bảo độ bền cao.','VPP00027.jpg','VPP00004', 'NCC00023',  'TH00001', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00028'),N'Kẹp Giấy ', 100,4000,N'Cái',10,N'Việt Nam',N'Kim Loại',N'Đầu tam giác, đầu tròn được sản xuất từ kim loại chất lượng cao, được phủ lớp Niken chống gỉ.','VPP00028.jpg','VPP00004', 'NCC00024',  'TH00001', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00029'),N'Hộp Kẹp Bướm', 100,25000,N'Hộp',10,N'Việt Nam',N'Kim Loại',N'Đầu tam giác, đầu tròn được sản xuất từ kim loại chất lượng cao, được phủ lớp Niken chống gỉ.','VPP00029.jpg','VPP00004', 'NCC00025',  'TH00001', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00030'),N'Hộp 12 Bút Sáp Màu', 100,25000,N'Hộp',10,N'Việt Nam',N'Sáp',N'Bút sáp màu được sản xuất với thân bằng sáp mềm với thiết kế dễ cầm nắm đối với bàn tay nhỏ bé của các nghệ sĩ trẻ.','VPP00030.jpg','VPP00005', 'NCC00026',  'TH00001', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00031'),N'Hộp 8 Bút Sáp Màu', 100,13000,N'Hộp',10,N'Việt Nam',N'Sáp',N'Bút sáp màu được sản xuất với thân bằng sáp mềm với thiết kế dễ cầm nắm đối với bàn tay nhỏ bé của các nghệ sĩ trẻ.','VPP00031.jpg','VPP00005', 'NCC00027',  'TH00001', 'MS00008', 0)
+	
 select * from ChucVu
 insert into ChucVu
 values 
