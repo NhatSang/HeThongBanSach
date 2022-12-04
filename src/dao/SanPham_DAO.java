@@ -777,8 +777,8 @@ public class SanPham_DAO {
 							+ "left join ThuongHieu th on sp.maTH = th.maTH\r\n"
 							+ "left join MauSac ms on sp.maMau = ms.maMau\r\n"
 							+ "where maSP like 'VPP%' and sp.trangThai = 0 " 
-							+ "and ( sp.maSP like '%" + key + "%' or sp.tenSP like N'%" + key + "%' or th.tenTH like '%" + key + "%' " 
-							+ "or lsp.tenLoai like N'%" + key + "%' or ms.mau like N'%" + key + "%' or sp.xuatXu like '%" + key + "%' " +")");
+							+ "and ( sp.maSP like '%" + key + "%' or sp.tenSP like N'%" + key + "%' or th.tenTH like N'%" + key + "%' " 
+							+ "or lsp.tenLoai like N'%" + key + "%' or ms.mau like N'%" + key + "%' or sp.xuatXu like N'%" + key + "%' " +")");
 			while (rs.next()) {
 				String maVPP = rs.getString(1);
 				String tenVPP = rs.getString(2);
