@@ -207,9 +207,6 @@ public class GD_QuanLyNhanVien extends javax.swing.JPanel {
 		txtma.setEditable(false);
 		txttaikhoan.setEditable(false);
 		txtmatkhau.setEditable(false);
-		txtma.setBackground(Color.DARK_GRAY);
-		txttaikhoan.setBackground(Color.DARK_GRAY);
-		txtmatkhau.setBackground(Color.DARK_GRAY);
 		btntimkiem.setFont(new Font("Serif", Font.PLAIN, 18));
 		btnthem.setFont(new Font("Serif", Font.PLAIN, 18));
 		btnxoa.setFont(new Font("Serif", Font.PLAIN, 18));
@@ -549,9 +546,9 @@ public class GD_QuanLyNhanVien extends javax.swing.JPanel {
 				ChucVu cv = (ChucVu) cbbchucvu.getSelectedItem();
 				NhanVien nv = new NhanVien(hoten, cccd, diachi, sdt, ns, gt, cv);
 				if (nv_dao.timKiemNVTheoCCCD(cccd) == null) {
-					String maNV = nv_dao.timKiemNVTheoCCCD(cccd).getMaNV();
 					try {
 						nv_dao.addNV(nv);
+						String maNV = nv_dao.timKiemNVTheoCCCD(cccd).getMaNV();
 						nv_dao.themTK(maNV);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -559,7 +556,7 @@ public class GD_QuanLyNhanVien extends javax.swing.JPanel {
 					}
 					reload();
 					JOptionPane.showMessageDialog(null, "Thêm thành công");
-					TaiKhoan tk = nv_dao.timTK(maNV);
+					TaiKhoan tk = nv_dao.timTK(nv_dao.timKiemNVTheoCCCD(cccd).getMaNV());
 					JOptionPane.showMessageDialog(null,
 							"Tài khoản: " + tk.getTenTK() + " Mật khẩu: " + tk.getMatKhau());
 					modelnv.setRowCount(0);
