@@ -57,7 +57,7 @@ public class GD_HangDoiHD extends JPanel implements ActionListener {
 
 		this.add(northB, BorderLayout.NORTH);
 
-		String[] header = "STT,Mã Hóa Đơn,Khách Hàng,Nhân Viên,Ca Lập, Ngày lập".split(",");
+		String[] header = "STT,Mã Hóa Đơn,Khách Hàng,Số Điện Thoại,Nhân Viên,Ca Lập, Ngày lập".split(",");
 		tblModelHD = new DefaultTableModel(header, 0);
 		tblHD = new JTable(tblModelHD);
 		JScrollPane scrp = new JScrollPane(tblHD);
@@ -73,20 +73,20 @@ public class GD_HangDoiHD extends JPanel implements ActionListener {
 		southP.add(Box.createHorizontalStrut(20));
 		southP.add(btnXoa);
 
-		loadData();
+		loadData(hd_DAO.getDSHD0());
 		this.add(southP, BorderLayout.SOUTH);
 
 		btnThanhToan.addActionListener(this);
 		btnXoa.addActionListener(this);
+		btnTim.addActionListener(this);
 	}
 
-	private void loadData() {
+	private void loadData(ArrayList<HoaDon> dsHD) {
 		tblModelHD.setRowCount(0);
-		ArrayList<HoaDon> dsHD = hd_DAO.getDSHD0();
 		int i = 1;
 		for (HoaDon x : dsHD) {
-			String r = i + "," + x.getMaHD() + "," + x.getKhachHang().getHoTen() + "," + x.getNhanVien().getHoTen()
-					+ "," + x.getCaLapHD() + "," + x.getNgayLapHD();
+			String r = i + "," + x.getMaHD() + "," + x.getKhachHang().getHoTen() + "," + x.getKhachHang().getsDT() + ","
+					+ x.getNhanVien().getHoTen() + "," + x.getCaLapHD() + "," + x.getNgayLapHD();
 			tblModelHD.addRow(r.split(","));
 			i++;
 		}
@@ -117,8 +117,21 @@ public class GD_HangDoiHD extends JPanel implements ActionListener {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					loadData();
+					loadData(hd_DAO.getDSHD0());
 				}
+			}
+		} else if (obj == btnTim) {
+			String sdt = txtTim.getText();
+			if (sdt.length() != 0) {
+				ArrayList<HoaDon> temp = hd_DAO.timHD(sdt);
+				if (temp.size() != 0) {
+					loadData(temp);
+					txtTim.requestFocus();
+					txtTim.selectAll();
+				} else
+					JOptionPane.showMessageDialog(this, "Không tìm thấy hóa đơn");
+			}else {
+				loadData(hd_DAO.getDSHD0());
 			}
 		}
 	}

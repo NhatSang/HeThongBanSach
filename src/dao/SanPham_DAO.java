@@ -121,14 +121,14 @@ public class SanPham_DAO {
 	}
 
 	// Sang
-	public SanPham timKiemSPTheoMa(String key) {
-		SanPham sp = null;
+	public ArrayList<SanPham> timKiemSPTheoMa(String key) {
+		ArrayList<SanPham> dssp = new ArrayList<SanPham>();
 		DataBase.getInstance();
 		Connection con = DataBase.getConnection();
 		try {
 			String sql = "select maSP,tenSP,hinhAnh,donGia, donVi, soLuong, VAT, ncc.maNCC, ncc.tenNCC from SanPham sp \r\n"
-					+ "join NhaCungCap ncc on sp.maNCC = ncc.maNCC\r\n" + "where (tenSP = " + "N'" + key + "' or maSP ="
-					+ "'" + key + "') and sp.trangThai = 0";
+					+ "					 join NhaCungCap ncc on sp.maNCC = ncc.maNCC where tenSP like N'%"+key+"%' or maSP like\r\n"
+					+ "					'%"+key+"%' and sp.trangThai = 0";
 			Statement stm = con.createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
@@ -140,12 +140,13 @@ public class SanPham_DAO {
 				int soLuong = rs.getInt(6);
 				int VAT = rs.getInt(7);
 				NhaCungCap ncc = new NhaCungCap(rs.getString(8), rs.getString(9));
-				sp = new SanPham(maSp, tenSp, donVi, hinhAnh, soLuong, VAT, donGia, ncc);
+				SanPham sp = new SanPham(maSp, tenSp, donVi, hinhAnh, soLuong, VAT, donGia, ncc);
+				dssp.add(sp);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
-		return sp;
+		return dssp;
 	}
 
 	// Sang xóa sp

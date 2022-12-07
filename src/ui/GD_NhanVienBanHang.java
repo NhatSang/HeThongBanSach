@@ -38,7 +38,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 	private JLabel lblTenNV, lblNgay, lblCa;
 	private NhanVien nhanVien;
 	private JMenuBar menuBar;
-	private JMenu menu1, menu2, menu3, menu4, menu5;
+	private JMenu menuSach, menuVPP, menuHD, menuTK, menuTC,menuKH;
 	private JMenuItem itemDangXuat, itemDoiMatKhau, itemThoat, itemLapHd, itemTimHD;
 	private Box centerB;
 	static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
@@ -87,11 +87,12 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		Box menuB = Box.createHorizontalBox();
 		menuB.setPreferredSize(new Dimension(1000, 50));
 		menuBar = new JMenuBar();
-		menu1 = new JMenu("Sách");
-		menu2 = new JMenu("Văn Phòng Phẩm");
-		menu3 = new JMenu("Hóa Đơn");
-		menu4 = new JMenu("Thống Kê");
-		menu5 = new JMenu("Tùy chọn");
+		menuSach = new JMenu("Sách");
+		menuVPP = new JMenu("Văn Phòng Phẩm");
+		menuHD = new JMenu("Hóa Đơn");
+		menuKH = new JMenu("Khách hàng");
+		menuTK = new JMenu("Thống Kê");
+		menuTC = new JMenu("Tùy chọn");
 
 		itemDangXuat = new JMenuItem("Đăng xuất");
 		itemDoiMatKhau = new JMenuItem("Đổi mật khẩu");
@@ -99,27 +100,29 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		itemLapHd = new JMenuItem("Lập Hóa Đơn");
 		itemTimHD = new JMenuItem("Xem Hàng Đợi");
 
-		menu3.add(itemLapHd);
-		menu3.add(itemTimHD);
-		menu5.add(itemDangXuat);
-		menu5.add(itemDoiMatKhau);
-		menu5.add(itemThoat);
+		menuHD.add(itemLapHd);
+		menuHD.add(itemTimHD);
+		menuTC.add(itemDangXuat);
+		menuTC.add(itemDoiMatKhau);
+		menuTC.add(itemThoat);
 
-		menuBar.add(menu5);
-		menuBar.add(menu1);
-		menuBar.add(menu2);
-		menuBar.add(menu3);
-		menuBar.add(menu4);
+		menuBar.add(menuTC);
+		menuBar.add(menuSach);
+		menuBar.add(menuVPP);
+		menuBar.add(menuHD);
+		menuBar.add(menuKH);
+		menuBar.add(menuTK);
 
 		lblTenNV.setFont(font1);
 		lblNgay.setFont(font1);
 		lblCa.setFont(font1);
 
-		menu1.setFont(new Font("Serif", Font.BOLD, 25));
-		menu2.setFont(new Font("Serif", Font.BOLD, 25));
-		menu3.setFont(new Font("Serif", Font.BOLD, 25));
-		menu4.setFont(new Font("Serif", Font.BOLD, 25));
-		menu5.setFont(new Font("Serif", Font.BOLD, 25));
+		menuSach.setFont(new Font("Serif", Font.BOLD, 25));
+		menuVPP.setFont(new Font("Serif", Font.BOLD, 25));
+		menuHD.setFont(new Font("Serif", Font.BOLD, 25));
+		menuTK.setFont(new Font("Serif", Font.BOLD, 25));
+		menuTC.setFont(new Font("Serif", Font.BOLD, 25));
+		menuKH.setFont(new Font("Serif", Font.BOLD, 25));
 
 		itemDangXuat.setFont(new Font("Serif", Font.ITALIC, 25));
 		itemDoiMatKhau.setFont(new Font("Serif", Font.ITALIC, 25));
@@ -127,11 +130,12 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		itemLapHd.setFont(new Font("Serif", Font.ITALIC, 25));
 		itemTimHD.setFont(new Font("Serif", Font.ITALIC, 25));
 
-		menu1.setIcon(new ImageIcon(".\\icon\\book.png"));
-		menu2.setIcon(new ImageIcon(".\\icon\\vpp.png"));
-		menu3.setIcon(new ImageIcon(".\\icon\\bill.png"));
-		menu4.setIcon(new ImageIcon(".\\icon\\chart.png"));
-		menu5.setIcon(new ImageIcon(".\\icon\\symbol.png"));
+		menuSach.setIcon(new ImageIcon(".\\icon\\book.png"));
+		menuVPP.setIcon(new ImageIcon(".\\icon\\vpp.png"));
+		menuHD.setIcon(new ImageIcon(".\\icon\\bill.png"));
+		menuKH.setIcon(new ImageIcon(".\\icon\\kh.png"));
+		menuTK.setIcon(new ImageIcon(".\\icon\\chart.png"));
+		menuTC.setIcon(new ImageIcon(".\\icon\\symbol.png"));
 		itemDangXuat.setIcon(new ImageIcon(".\\icon\\logout.png"));
 		itemDoiMatKhau.setIcon(new ImageIcon(".\\icon\\key.png"));
 		itemThoat.setIcon(new ImageIcon(".\\icon\\close.png"));
@@ -140,7 +144,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 
 		menuB.add(menuBar);
 		northB.add(menuB);
-		northB.add(Box.createHorizontalStrut(130));
+		northB.add(Box.createHorizontalStrut(50));
 		northB.add(infoB);
 		northB.add(Box.createHorizontalStrut(20));
 
@@ -148,48 +152,10 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		centerB = Box.createVerticalBox();
 		con.add(centerB, BorderLayout.CENTER);
 
-		JPanel southP = new JPanel();
-		southP.setLayout(new GridLayout(1, 2,30,30));
-		southP.setBackground(Color.orange);
-		southP.setPreferredSize(new Dimension(WIDTH, 100));
-		southP.setBorder(BorderFactory.createLineBorder(Color.black));
-		JPanel southp1 = new JPanel();
-		JPanel southp2 = new JPanel();
-		southp1.setBackground(Color.orange);
-		southp2.setBackground(Color.orange);
-		southp1.setLayout(new GridLayout(3, 1));
-		southp2.setLayout(new GridLayout(4,1));
-		JLabel lblMonHoc = new JLabel("Môn: Phát Triển Ứng Dụng");
-		JLabel lblGV = new JLabel("Giáo Viên: Trần Thị Anh Thi");
-		JLabel lblLop = new JLabel("Lớp: DHKTPM16FTT");
-		JLabel lblSV1 = new JLabel("Nguyễn Nhật Sang - 20001531 (Nhóm trưởng)");
-		JLabel lblSV2 = new JLabel("Lương Viết Thanh - ");
-		JLabel lblSV3 = new JLabel("Trương Văn Tuấn - 20005911");
-		JLabel lblSV4 = new JLabel("Nguyễn Minh Quân -");
-		lblGV.setFont(font1);
-		lblMonHoc.setFont(font1);
-		lblLop.setFont(font1);
-		lblSV1.setFont(font1);
-		lblSV2.setFont(font1);
-		lblSV3.setFont(font1);
-		lblSV4.setFont(font1);
-		
-		southp1.add(lblMonHoc);
-		southp1.add(lblGV);
-		southp1.add(lblLop);
-		
-		southp2.add(lblSV1);
-		southp2.add(lblSV2);
-		southp2.add(lblSV3);
-		southp2.add(lblSV4);
-		
-		southP.add(southp1);
-		southP.add(southp2);
-		con.add(southP, BorderLayout.SOUTH);
-
-		menu1.addMenuListener(this);
-		menu2.addMenuListener(this);
-		menu4.addMenuListener(this);
+		menuSach.addMenuListener(this);
+		menuVPP.addMenuListener(this);
+		menuKH.addMenuListener(this);
+		menuTK.addMenuListener(this);
 		itemDangXuat.addActionListener(this);
 		itemDoiMatKhau.addActionListener(this);
 		itemThoat.addActionListener(this);
@@ -233,13 +199,16 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 	@Override
 	public void menuSelected(MenuEvent e) {
 		Object obj = e.getSource();
-		if(obj == menu1) {
+		if(obj == menuSach) {
 			thayCenterP(new GD_Sach());
 		}
-		if(obj == menu2) {
+		if(obj == menuVPP) {
 			thayCenterP(new GD_VPP());
 		}
-		if(obj == menu4) {
+		if(obj == menuKH) {
+			thayCenterP(new GD_KH());
+		}
+		if(obj == menuTK) {
 
 		}
 

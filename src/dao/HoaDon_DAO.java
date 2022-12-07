@@ -107,15 +107,17 @@ public class HoaDon_DAO {
 			stm.close();
 		}
 	}
-	
-	public ArrayList<ChiTietHoaDon> getDSCT(String key){
+
+	public ArrayList<ChiTietHoaDon> getDSCT(String key) {
 		ArrayList<ChiTietHoaDon> dsCTHD = new ArrayList<ChiTietHoaDon>();
 		DataBase.getInstance();
 		Connection con = DataBase.getConnection();
 		try {
 			Statement stm = con.createStatement();
-			ResultSet rs = stm.executeQuery("select ct.*,sp.tenSP,sp.donGia,sp.VAT,sp.soLuong from ChiTietHoaDon ct join SanPham sp on ct.maSP = sp.maSP where maHD = '"+key+"'");
-			while(rs.next()) {
+			ResultSet rs = stm.executeQuery(
+					"select ct.*,sp.tenSP,sp.donGia,sp.VAT,sp.soLuong from ChiTietHoaDon ct join SanPham sp on ct.maSP = sp.maSP where maHD = '"
+							+ key + "'");
+			while (rs.next()) {
 				double giaBan = rs.getFloat(1);
 				int soLuong = rs.getInt(2);
 				String maSp = rs.getString(3);
@@ -134,7 +136,7 @@ public class HoaDon_DAO {
 		}
 		return dsCTHD;
 	}
-	
+
 	public void xoaHD(String key) throws SQLException {
 		DataBase.getInstance();
 		Connection con = DataBase.getConnection();
@@ -150,15 +152,13 @@ public class HoaDon_DAO {
 			stm.close();
 		}
 	}
-	
+
 	public void thanhToanHD(String key) throws SQLException {
 		DataBase.getInstance();
 		Connection con = DataBase.getConnection();
 		PreparedStatement stm = null;
 		try {
-			String sql = "update HoaDon\r\n"
-					+ "set trangThai = 1\r\n"
-					+ "where maHd = ?";
+			String sql = "update HoaDon\r\n" + "set trangThai = 1\r\n" + "where maHd = ?";
 			stm = con.prepareStatement(sql);
 			stm.setString(1, key);
 			stm.executeUpdate();
@@ -167,5 +167,35 @@ public class HoaDon_DAO {
 		} finally {
 			stm.close();
 		}
+	}
+
+	public ArrayList<HoaDon> timHD(String key){
+		ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+		try {
+			Statement stm = con.createStatement();
+			String sql = "select hd.maHD,hd.ngayLap,hd.caLap,nv.maNV,nv.hoTen,kh.maKH,kh.hoTen,kh.diaChi, kh.sdt from HoaDon hd join NhanVien nv on hd.maNV = nv.maNV join KhachHang kh on hd.maKH=kh.maKH where hd.trangThai = 0 and kh.sdt = '"+key+"'";
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				String maHd = rs.getString(1);
+				LocalDate ngayLap = LocalDate.parse(rs.getDate(2).toString());
+				int caLap = rs.getInt(3);
+				String maNv = rs.getString(4);
+				String tenNv = rs.getString(5);
+				NhanVien nv = new NhanVien(maNv, tenNv);
+				String maKh = rs.getString(6);
+				String tenKh = rs.getString(7);
+				String diaChi = rs.getString(8);
+				String sdt = rs.getString(9);
+				KhachHang kh = new KhachHang(maKh, tenKh, diaChi, sdt);
+				HoaDon hd = new HoaDon(maHd, ngayLap, caLap, nv, kh);
+				dsHD.add(hd);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return dsHD;
+		
 	}
 }
