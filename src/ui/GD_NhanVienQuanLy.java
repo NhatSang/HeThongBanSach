@@ -228,7 +228,7 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 			thayCenterP(new GD_NhaCungCap());
 		}
 		if(obj == menu4) {
-
+                        thayCenterP(new GD_TKDT());
 		}
 		
 	}
