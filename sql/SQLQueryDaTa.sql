@@ -102,49 +102,49 @@ values
 	(default,N'Cấp 3',11),
 	(default,N'Cấp 3',12)
 go
-select * from SanPham
+select * from KhachHang
 --them sach
 insert into SanPham (maSP,tenSP,namXB_SX,soLuong,donGia,donVi,VAT,soTrang,nguoiDich,tuoiGioiHan,moTa,hinhAnh,maLoai,maNCC,maNXB,maTG,maLB,maCDH,trangThai)
 values 
 
-	(dbo.autoIdSP('SVH00003'),N'Bước Chậm Lại Giữa Thế Gian Vội Vã',2018,100,65000,N'Quyển',10,280,N'Nguyễn Việt Tú Anh',null,N'Bước chậm lại giữa thế gian vội vã của Đại đức Hae Min đã liên tục đứng đầu danh sách best-seller của nhiều trang sách trực tuyến uy tín của Hàn Quốc, trở thành cuốn sách chữa lành cho hàng triệu người trẻ luôn tất bật với nhịp sống hiện đại hối hả.','D:\CODE\HeThongBanSach\img\SVH00003.jpg','SVH00001','NCC00002','NXB00001','TG00001','LB00001',null,0),
-	(dbo.autoIdSP('SGK00001'),N'Ngữ Văn 10/1',2022,100,25000,N'Quyển',10,124,null,null,N'Ngữ Văn 10/1 (Cánh Diều) (2022)','D:\CODE\HeThongBanSach\img\SGK00001.jpg','SGK00001','NCC00002','NXB00002','TG00002','LB00001','CDH00010',0),
-	(dbo.autoIdSP('SGK00002'),N'Ngữ Văn 10/2',2020,100,21000,N'Quyển',10,227,null,null,N'Ngữ Văn 10/2 (Kết Nối Trí Thức) (2022)','D:\CODE\HeThongBanSach\img\SGK00002.jpg','SGK00001','NCC00003','NXB00003','TG00003','LB00001',null,0),
-	(dbo.autoIdSP('SKT00001'),N'Cái Đuôi Dài',2016,100,163000,N'Quyển',10,227,NULL,null,N'Với tác phẩm Cái đuôi dài, tác giả đã đưa ra một lộ trình tương lai cho ngành thương mại, một lộ trình có thể làm sáng tỏ băn khoăn của nhiều người – người bán hàng và khách hàng.','D:\CODE\HeThongBanSach\img\SKT00001.jpg','SKT00001','NCC00004','NXB00004','TG00004','LB00001',null,0)
+	(dbo.autoIdSP('SVH00003'),N'Bước Chậm Lại Giữa Thế Gian Vội Vã',2018,100,65000,N'Quyển',10,280,N'Nguyễn Việt Tú Anh',null,N'Bước chậm lại giữa thế gian vội vã của Đại đức Hae Min đã liên tục đứng đầu danh sách best-seller của nhiều trang sách trực tuyến uy tín của Hàn Quốc, trở thành cuốn sách chữa lành cho hàng triệu người trẻ luôn tất bật với nhịp sống hiện đại hối hả.','SVH00003.jpg','SVH00001','NCC00002','NXB00001','TG00001','LB00001',null,0),
+	(dbo.autoIdSP('SGK00001'),N'Ngữ Văn 10/1',2022,100,25000,N'Quyển',10,124,null,null,N'Ngữ Văn 10/1 (Cánh Diều) (2022)','SGK00001.jpg','SGK00001','NCC00002','NXB00002','TG00002','LB00001','CDH00010',0),
+	(dbo.autoIdSP('SGK00002'),N'Ngữ Văn 10/2',2020,100,21000,N'Quyển',10,227,null,null,N'Ngữ Văn 10/2 (Kết Nối Trí Thức) (2022)','SGK00002.jpg','SGK00001','NCC00003','NXB00003','TG00003','LB00001',null,0),
+	(dbo.autoIdSP('SKT00001'),N'Cái Đuôi Dài',2016,100,163000,N'Quyển',10,227,NULL,null,N'Với tác phẩm Cái đuôi dài, tác giả đã đưa ra một lộ trình tương lai cho ngành thương mại, một lộ trình có thể làm sáng tỏ băn khoăn của nhiều người – người bán hàng và khách hàng.','SKT00001.jpg','SKT00001','NCC00004','NXB00004','TG00004','LB00001',null,0)
 
 insert into SanPham (maSP,tenSP,soLuong,donGia,donVi,VAT,xuatXu,chatLieu, moTa,hinhAnh,maLoai,maNCC,maTH,maMau,trangThai)
 values 	
-(dbo.autoIdSP('VPP00001'),N'Bút Bi Thiên Long TL-061', 100,5000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế đơn giản, toàn bộ thân bút làm từ nhựa trong pha màu nhạt, nhìn được phần ruột bút bên trong','D:\CODE\HeThongBanSach\img\VPP00001.jpg','VPP00001', 'NCC00002',  'TH00001', 'MS00001', 0),
-	(dbo.autoIdSP('VPP00002'),N'Bút Bi 0.5 mm Thiên Long TL-061', 100,5000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế đơn giản, toàn bộ thân bút làm từ nhựa trong pha màu nhạt, nhìn được phần ruột bút bên trong','D:\CODE\HeThongBanSach\img\VPP00002.jpg','VPP00001', 'NCC00002',  'TH00002', 'MS00007', 0),
-	(dbo.autoIdSP('VPP00003'),N'Bút Bi 0.5 mm Treeden', 100,5000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế hiện đại, kết hợp hài hòa giữa phần thân dưới bằng nhựa trong nhỏ và thon dài với phần giắt bút màu nhựa trắng đục khỏe khoắn','D:\CODE\HeThongBanSach\img\VPP00003.jpg','VPP00001', 'NCC00002',  'TH00003', 'MS00001', 0),
-	(dbo.autoIdSP('VPP00004'),N'Bút Bi 0.5 mm Thiên Long TL-027', 100,5000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế tối giản, nhưng tinh tế và ấn tượng. Toàn bộ thân bút làm từ nhựa trong, phối hợp hoàn hảo với màu ruột bút bên trong.','D:\CODE\HeThongBanSach\img\VPP00004.jpg','VPP00001', 'NCC00002',  'TH00004', 'MS00003', 0),
-	(dbo.autoIdSP('VPP00005'),N'Bút Xóa 12 ml - Thiên Long CP-02', 100,26000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Mực xóa nhanh khô, che phủ tốt, không độc hại và an tòan với tầng ozone. Đầu bút bằng kim lọai có lò xo đàn hồi tốt , bền khi sử dụng.','D:\CODE\HeThongBanSach\img\VPP00005.jpg','VPP00001', 'NCC00002',  'TH00005', 'MS00001', 0),
-	(dbo.autoIdSP('VPP00006'),N'Bút Gel-08 - Đỏ', 100,8000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thân và bút bằng nhựa trong, tảm có đệm mềm (grip) giúp cầm êm tay và giảm trơn trợt khi viết.','D:\CODE\HeThongBanSach\img\VPP00006.jpg','VPP00001', 'NCC00003',  'TH00001', 'MS00003', 0),
-	(dbo.autoIdSP('VPP00007'),N'Bút Gel Thiên Long Gel-08 Sunbeam', 100,8000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thân và bút bằng nhựa trong, tảm có đệm mềm (grip) giúp cầm êm tay và giảm trơn trợt khi viết.','D:\CODE\HeThongBanSach\img\VPP00007.jpg','VPP00001', 'NCC00004',  'TH00001', 'MS00001', 0),
-	(dbo.autoIdSP('VPP00008'),N'Bút Lông Bảng 2.0 mm - Artline EK-517-GR', 100,32000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Mực đậm, lượng mực cực kỳ nhiều, thêm mực dễ dàng sau khi viết hết. Dễ viết dễ xóa. Ngòi viết ra mực đều màu, êm, khi xóa không làm xước bề mặt bảng.','D:\CODE\HeThongBanSach\img\VPP00008.jpg','VPP00001', 'NCC00005',  'TH00006', 'MS00002', 0),
-	(dbo.autoIdSP('VPP00009'),N'Bút Chì Gỗ Graphite 4B', 100,7000,N'Cây',10,N'Việt Nam',N'Gỗ',N'Thân bút tam giác độc đáo, không những giúp người sử dụng cầm bút chắc tay mà còn ngăn không cho bút lăn khi để trên bàn, tránh rơi rớt.','D:\CODE\HeThongBanSach\img\VPP00009.jpg','VPP00001', 'NCC00006',  'TH00007', 'MS00007', 0),
-	(dbo.autoIdSP('VPP00010'),N'Thước M-Tech Slim 20 cm', 100,7000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thước kẻ được sử dụng nhiều trong học tập, cơ khí, vẽ các bảng kĩ thuật, xây dựng, vẽ tranh...','D:\CODE\HeThongBanSach\img\VPP00010.jpg','VPP00003', 'NCC00007',  'TH00008', 'MS00008', 0),
-	(dbo.autoIdSP('VPP00011'),N'Thước M-Tech Slim 30 cm', 100,10000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thước kẻ được sử dụng nhiều trong học tập, cơ khí, vẽ các bảng kĩ thuật, xây dựng, vẽ tranh...','D:\CODE\HeThongBanSach\img\VPP00011.jpg','VPP00003', 'NCC00008',  'TH00009', 'MS00008', 0),
-	(dbo.autoIdSP('VPP00012'),N'Bộ Thước 20cm', 100,12000,N'Bộ',10,N'Ấn Độ',N'Nhựa',N'Sản phẩm bao gồm 1 cây thước 20cm, bộ thước eke và thước đo góc 45o và 60o.','D:\CODE\HeThongBanSach\img\VPP00012.jpg','VPP00003', 'NCC00002',  'TH00001', 'MS00008', 0),
-	(dbo.autoIdSP('VPP00013'),N'Gôm Đen E-011', 100,4000,N'Cục',10,N'Việt Nam',N'Nhựa',N'Gôm Đen E-011 với độ bền dẻo cao có khả năng tẩy sạch các vết chì đen mà không gây rách giấy, không làm bẩn, lem trên giấy trắng','D:\CODE\HeThongBanSach\img\VPP00013.jpg','VPP00003', 'NCC00009',  'TH00010', 'MS00007', 0),
-	(dbo.autoIdSP('VPP00014'),N'Vỉ 2 Gôm Thiên Long E-05', 100,9000,N'Vỉ',10,N'Việt Nam',N'Nhựa',N'Gôm với độ bền dẻo cao có khả năng tẩy sạch các vết chì đen mà không gây rách giấy, không làm bẩn, lem trên giấy trắng','D:\CODE\HeThongBanSach\img\VPP00014.jpg','VPP00003', 'NCC00010',  'TH00011', 'MS00008', 0),
-	(dbo.autoIdSP('VPP00015'),N'Chuốt Chì', 100,3000,N'Cái',10,N'Việt Nam',N'Nhựa',N'Chuốt chì với thiết kế dễ sử dụng, chuốt được nhiều loại bút chì có đường kính tiêu chuẩn như bút chì đen, bút chì màu.','D:\CODE\HeThongBanSach\img\VPP00015.jpg','VPP00003', 'NCC00011',  'TH00012', 'MS00003', 0),
-	(dbo.autoIdSP('VPP00016'),N'Tập Sinh Viên 4 Ly Ngang 200 Trang', 100,17000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','D:\CODE\HeThongBanSach\img\VPP00016.jpg','VPP00002', 'NCC00012',  'TH00013', 'MS00008', 0),
-	(dbo.autoIdSP('VPP00017'),N'Tập Học Sinh Baby Dinosaur B5 48 Trang', 100,11000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','D:\CODE\HeThongBanSach\img\VPP00017.jpg','VPP00002', 'NCC00013',  'TH00014', 'MS00004', 0),
-	(dbo.autoIdSP('VPP00018'),N'Vở Freely Life - B5 Kẻ Ngang 120 Trang', 100,17000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','D:\CODE\HeThongBanSach\img\VPP00018.jpg','VPP00002', 'NCC00014',  'TH00015', 'MS00005', 0),
-	(dbo.autoIdSP('VPP00019'),N'Vở Dancing Letters - B5 200 Trang', 100,34000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','D:\CODE\HeThongBanSach\img\VPP00019.jpg','VPP00002', 'NCC00015',  'TH00001', 'MS00003', 0),
-	(dbo.autoIdSP('VPP00020'),N'Giấy Kiểm Tra Học Sinh', 100,4000,N'Tờ',10,N'Việt Nam',N'Giấy',N'Dòng kẻ rõ nét, giấy viết không nhòe, không bám bụi.','D:\CODE\HeThongBanSach\img\VPP00020.jpg','VPP00002', 'NCC00016',  'TH00001', 'MS00002', 0),
-	(dbo.autoIdSP('VPP00021'),N'Giấy Kiểm Tra B5 Có Chấm', 100,21000,N'Xấp',10,N'Việt Nam',N'Giấy',N'Dòng kẻ rõ nét, giấy viết không nhòe, không bám bụi.','D:\CODE\HeThongBanSach\img\VPP00021.jpg','VPP00002', 'NCC00017',  'TH00001', 'MS00001', 0),
-	(dbo.autoIdSP('VPP00022'),N'Bấm Kim', 100,21000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Trong văn phòng, bấm kim là vật dụng không thể thiếu khi bạn muốn liên kết, kẹp các tờ giấy tài liệu quan trọng lại với nhau','D:\CODE\HeThongBanSach\img\VPP00022.jpg','VPP00004', 'NCC00018',  'TH00001', 'MS00001', 0),
-	(dbo.autoIdSP('VPP00023'),N'Bấm Kim', 100,21000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Trong văn phòng, bấm kim là vật dụng không thể thiếu khi bạn muốn liên kết, kẹp các tờ giấy tài liệu quan trọng lại với nhau','D:\CODE\HeThongBanSach\img\VPP00023.jpg','VPP00004', 'NCC00019',  'TH00001', 'MS00005', 0),
-	(dbo.autoIdSP('VPP00024'),N'Bìa Trình Kí 1 Mặt ', 100,36000,N'Tờ',10,N'Việt Nam',N'Nhựa',N'Được làm từ chất liệu nhựa PS cao cấp ','D:\CODE\HeThongBanSach\img\VPP00024.jpg','VPP00004', 'NCC00020',  'TH00001', 'MS00001', 0),
-	(dbo.autoIdSP('VPP00025'),N'Bìa Trình Ký Đôi', 100,54000,N'Tờ',10,N'Việt Nam',N'Nhựa',N'Được làm từ chất liệu nhựa PS cao cấp ','D:\CODE\HeThongBanSach\img\VPP00025.jpg','VPP00004', 'NCC00021',  'TH00001', 'MS00003', 0),
-	(dbo.autoIdSP('VPP00026'),N'Kim Bấm', 100,3000,N'Hôp',10,N'Việt Nam',N'Kim Loại',N'Được làm từ thép không gỉ khá cứng cáp và chắc chắn, không bị bung rời khi sử dụng cũng như đảm bảo độ bền cao.','D:\CODE\HeThongBanSach\img\VPP00026.jpg','VPP00004', 'NCC00020',  'TH00001', 'MS00007', 0),
-	(dbo.autoIdSP('VPP00027'),N'Kim Bấm', 100,10000,N'Hôp',10,N'Việt Nam',N'Kim Loại',N'Được làm từ thép không gỉ khá cứng cáp và chắc chắn, không bị bung rời khi sử dụng cũng như đảm bảo độ bền cao.','D:\CODE\HeThongBanSach\img\VPP00027.jpg','VPP00004', 'NCC00021',  'TH00001', 'MS00006', 0),
-	(dbo.autoIdSP('VPP00028'),N'Kẹp Giấy ', 100,4000,N'Cái',10,N'Việt Nam',N'Kim Loại',N'Đầu tam giác, đầu tròn được sản xuất từ kim loại chất lượng cao, được phủ lớp Niken chống gỉ.','D:\CODE\HeThongBanSach\img\VPP00028.jpg','VPP00004', 'NCC00019',  'TH00001', 'MS00003', 0),
-	(dbo.autoIdSP('VPP00029'),N'Hộp Kẹp Bướm', 100,25000,N'Hộp',10,N'Việt Nam',N'Kim Loại',N'Đầu tam giác, đầu tròn được sản xuất từ kim loại chất lượng cao, được phủ lớp Niken chống gỉ.','D:\CODE\HeThongBanSach\img\VPP00029.jpg','VPP00004', 'NCC00010',  'TH00001', 'MS00004', 0),
-	(dbo.autoIdSP('VPP00030'),N'Hộp 12 Bút Sáp Màu', 100,25000,N'Hộp',10,N'Việt Nam',N'Sáp',N'Bút sáp màu được sản xuất với thân bằng sáp mềm với thiết kế dễ cầm nắm đối với bàn tay nhỏ bé của các nghệ sĩ trẻ.','D:\CODE\HeThongBanSach\img\VPP00030.jpg','VPP00005', 'NCC00011',  'TH00001', 'MS00002', 0),
-	(dbo.autoIdSP('VPP00031'),N'Hộp 8 Bút Sáp Màu', 100,13000,N'Hộp',10,N'Việt Nam',N'Sáp',N'Bút sáp màu được sản xuất với thân bằng sáp mềm với thiết kế dễ cầm nắm đối với bàn tay nhỏ bé của các nghệ sĩ trẻ.','D:\CODE\HeThongBanSach\img\VPP00031.jpg','VPP00005', 'NCC00012',  'TH00001', 'MS00001', 0)
+(dbo.autoIdSP('VPP00001'),N'Bút Bi Thiên Long TL-061', 100,5000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế đơn giản, toàn bộ thân bút làm từ nhựa trong pha màu nhạt, nhìn được phần ruột bút bên trong','VPP00001.jpg','VPP00001', 'NCC00002',  'TH00001', 'MS00001', 0),
+	(dbo.autoIdSP('VPP00002'),N'Bút Bi 0.5 mm Thiên Long TL-061', 100,5000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế đơn giản, toàn bộ thân bút làm từ nhựa trong pha màu nhạt, nhìn được phần ruột bút bên trong','VPP00002.jpg','VPP00001', 'NCC00002',  'TH00002', 'MS00007', 0),
+	(dbo.autoIdSP('VPP00003'),N'Bút Bi 0.5 mm Treeden', 100,5000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế hiện đại, kết hợp hài hòa giữa phần thân dưới bằng nhựa trong nhỏ và thon dài với phần giắt bút màu nhựa trắng đục khỏe khoắn','VPP00003.jpg','VPP00001', 'NCC00002',  'TH00003', 'MS00001', 0),
+	(dbo.autoIdSP('VPP00004'),N'Bút Bi 0.5 mm Thiên Long TL-027', 100,5000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Bút có thiết kế tối giản, nhưng tinh tế và ấn tượng. Toàn bộ thân bút làm từ nhựa trong, phối hợp hoàn hảo với màu ruột bút bên trong.','VPP00004.jpg','VPP00001', 'NCC00002',  'TH00004', 'MS00003', 0),
+	(dbo.autoIdSP('VPP00005'),N'Bút Xóa 12 ml - Thiên Long CP-02', 100,26000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Mực xóa nhanh khô, che phủ tốt, không độc hại và an tòan với tầng ozone. Đầu bút bằng kim lọai có lò xo đàn hồi tốt , bền khi sử dụng.','VPP00005.jpg','VPP00001', 'NCC00002',  'TH00005', 'MS00001', 0),
+	(dbo.autoIdSP('VPP00006'),N'Bút Gel-08 - Đỏ', 100,8000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thân và bút bằng nhựa trong, tảm có đệm mềm (grip) giúp cầm êm tay và giảm trơn trợt khi viết.','VPP00006.jpg','VPP00001', 'NCC00003',  'TH00001', 'MS00003', 0),
+	(dbo.autoIdSP('VPP00007'),N'Bút Gel Thiên Long Gel-08 Sunbeam', 100,8000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thân và bút bằng nhựa trong, tảm có đệm mềm (grip) giúp cầm êm tay và giảm trơn trợt khi viết.','VPP00007.jpg','VPP00001', 'NCC00004',  'TH00001', 'MS00001', 0),
+	(dbo.autoIdSP('VPP00008'),N'Bút Lông Bảng 2.0 mm - Artline EK-517-GR', 100,32000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Mực đậm, lượng mực cực kỳ nhiều, thêm mực dễ dàng sau khi viết hết. Dễ viết dễ xóa. Ngòi viết ra mực đều màu, êm, khi xóa không làm xước bề mặt bảng.','VPP00008.jpg','VPP00001', 'NCC00005',  'TH00006', 'MS00002', 0),
+	(dbo.autoIdSP('VPP00009'),N'Bút Chì Gỗ Graphite 4B', 100,7000,N'Cây',10,N'Việt Nam',N'Gỗ',N'Thân bút tam giác độc đáo, không những giúp người sử dụng cầm bút chắc tay mà còn ngăn không cho bút lăn khi để trên bàn, tránh rơi rớt.','VPP00009.jpg','VPP00001', 'NCC00006',  'TH00007', 'MS00007', 0),
+	(dbo.autoIdSP('VPP00010'),N'Thước M-Tech Slim 20 cm', 100,7000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thước kẻ được sử dụng nhiều trong học tập, cơ khí, vẽ các bảng kĩ thuật, xây dựng, vẽ tranh...','VPP00010.jpg','VPP00003', 'NCC00007',  'TH00008', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00011'),N'Thước M-Tech Slim 30 cm', 100,10000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thước kẻ được sử dụng nhiều trong học tập, cơ khí, vẽ các bảng kĩ thuật, xây dựng, vẽ tranh...','VPP00011.jpg','VPP00003', 'NCC00008',  'TH00009', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00012'),N'Bộ Thước 20cm', 100,12000,N'Bộ',10,N'Ấn Độ',N'Nhựa',N'Sản phẩm bao gồm 1 cây thước 20cm, bộ thước eke và thước đo góc 45o và 60o.','VPP00012.jpg','VPP00003', 'NCC00002',  'TH00001', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00013'),N'Gôm Đen E-011', 100,4000,N'Cục',10,N'Việt Nam',N'Nhựa',N'Gôm Đen E-011 với độ bền dẻo cao có khả năng tẩy sạch các vết chì đen mà không gây rách giấy, không làm bẩn, lem trên giấy trắng','VPP00013.jpg','VPP00003', 'NCC00009',  'TH00010', 'MS00007', 0),
+	(dbo.autoIdSP('VPP00014'),N'Vỉ 2 Gôm Thiên Long E-05', 100,9000,N'Vỉ',10,N'Việt Nam',N'Nhựa',N'Gôm với độ bền dẻo cao có khả năng tẩy sạch các vết chì đen mà không gây rách giấy, không làm bẩn, lem trên giấy trắng','VPP00014.jpg','VPP00003', 'NCC00010',  'TH00011', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00015'),N'Chuốt Chì', 100,3000,N'Cái',10,N'Việt Nam',N'Nhựa',N'Chuốt chì với thiết kế dễ sử dụng, chuốt được nhiều loại bút chì có đường kính tiêu chuẩn như bút chì đen, bút chì màu.','VPP00015.jpg','VPP00003', 'NCC00011',  'TH00012', 'MS00003', 0),
+	(dbo.autoIdSP('VPP00016'),N'Tập Sinh Viên 4 Ly Ngang 200 Trang', 100,17000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','VPP00016.jpg','VPP00002', 'NCC00012',  'TH00013', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00017'),N'Tập Học Sinh Baby Dinosaur B5 48 Trang', 100,11000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','VPP00017.jpg','VPP00002', 'NCC00013',  'TH00014', 'MS00004', 0),
+	(dbo.autoIdSP('VPP00018'),N'Vở Freely Life - B5 Kẻ Ngang 120 Trang', 100,17000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','VPP00018.jpg','VPP00002', 'NCC00014',  'TH00015', 'MS00005', 0),
+	(dbo.autoIdSP('VPP00019'),N'Vở Dancing Letters - B5 200 Trang', 100,34000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','VPP00019.jpg','VPP00002', 'NCC00015',  'TH00001', 'MS00003', 0),
+	(dbo.autoIdSP('VPP00020'),N'Giấy Kiểm Tra Học Sinh', 100,4000,N'Tờ',10,N'Việt Nam',N'Giấy',N'Dòng kẻ rõ nét, giấy viết không nhòe, không bám bụi.','VPP00020.jpg','VPP00002', 'NCC00016',  'TH00001', 'MS00002', 0),
+	(dbo.autoIdSP('VPP00021'),N'Giấy Kiểm Tra B5 Có Chấm', 100,21000,N'Xấp',10,N'Việt Nam',N'Giấy',N'Dòng kẻ rõ nét, giấy viết không nhòe, không bám bụi.','VPP00021.jpg','VPP00002', 'NCC00017',  'TH00001', 'MS00001', 0),
+	(dbo.autoIdSP('VPP00022'),N'Bấm Kim', 100,21000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Trong văn phòng, bấm kim là vật dụng không thể thiếu khi bạn muốn liên kết, kẹp các tờ giấy tài liệu quan trọng lại với nhau','VPP00022.jpg','VPP00004', 'NCC00018',  'TH00001', 'MS00001', 0),
+	(dbo.autoIdSP('VPP00023'),N'Bấm Kim', 100,21000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Trong văn phòng, bấm kim là vật dụng không thể thiếu khi bạn muốn liên kết, kẹp các tờ giấy tài liệu quan trọng lại với nhau','VPP00023.jpg','VPP00004', 'NCC00019',  'TH00001', 'MS00005', 0),
+	(dbo.autoIdSP('VPP00024'),N'Bìa Trình Kí 1 Mặt ', 100,36000,N'Tờ',10,N'Việt Nam',N'Nhựa',N'Được làm từ chất liệu nhựa PS cao cấp ','VPP00024.jpg','VPP00004', 'NCC00020',  'TH00001', 'MS00001', 0),
+	(dbo.autoIdSP('VPP00025'),N'Bìa Trình Ký Đôi', 100,54000,N'Tờ',10,N'Việt Nam',N'Nhựa',N'Được làm từ chất liệu nhựa PS cao cấp ','VPP00025.jpg','VPP00004', 'NCC00021',  'TH00001', 'MS00003', 0),
+	(dbo.autoIdSP('VPP00026'),N'Kim Bấm', 100,3000,N'Hôp',10,N'Việt Nam',N'Kim Loại',N'Được làm từ thép không gỉ khá cứng cáp và chắc chắn, không bị bung rời khi sử dụng cũng như đảm bảo độ bền cao.','VPP00026.jpg','VPP00004', 'NCC00020',  'TH00001', 'MS00007', 0),
+	(dbo.autoIdSP('VPP00027'),N'Kim Bấm', 100,10000,N'Hôp',10,N'Việt Nam',N'Kim Loại',N'Được làm từ thép không gỉ khá cứng cáp và chắc chắn, không bị bung rời khi sử dụng cũng như đảm bảo độ bền cao.','VPP00027.jpg','VPP00004', 'NCC00021',  'TH00001', 'MS00006', 0),
+	(dbo.autoIdSP('VPP00028'),N'Kẹp Giấy ', 100,4000,N'Cái',10,N'Việt Nam',N'Kim Loại',N'Đầu tam giác, đầu tròn được sản xuất từ kim loại chất lượng cao, được phủ lớp Niken chống gỉ.','VPP00028.jpg','VPP00004', 'NCC00019',  'TH00001', 'MS00003', 0),
+	(dbo.autoIdSP('VPP00029'),N'Hộp Kẹp Bướm', 100,25000,N'Hộp',10,N'Việt Nam',N'Kim Loại',N'Đầu tam giác, đầu tròn được sản xuất từ kim loại chất lượng cao, được phủ lớp Niken chống gỉ.','VPP00029.jpg','VPP00004', 'NCC00010',  'TH00001', 'MS00004', 0),
+	(dbo.autoIdSP('VPP00030'),N'Hộp 12 Bút Sáp Màu', 100,25000,N'Hộp',10,N'Việt Nam',N'Sáp',N'Bút sáp màu được sản xuất với thân bằng sáp mềm với thiết kế dễ cầm nắm đối với bàn tay nhỏ bé của các nghệ sĩ trẻ.','VPP00030.jpg','VPP00005', 'NCC00011',  'TH00001', 'MS00002', 0),
+	(dbo.autoIdSP('VPP00031'),N'Hộp 8 Bút Sáp Màu', 100,13000,N'Hộp',10,N'Việt Nam',N'Sáp',N'Bút sáp màu được sản xuất với thân bằng sáp mềm với thiết kế dễ cầm nắm đối với bàn tay nhỏ bé của các nghệ sĩ trẻ.','VPP00031.jpg','VPP00005', 'NCC00012',  'TH00001', 'MS00001', 0)
 	
 select * from ChucVu
 insert into ChucVu
@@ -157,51 +157,51 @@ insert into NhanVien
 values
 	(default,N'Nguyễn Minh Quân', '2002/12/13','064202007178',N'Hẻm 06 Bùi Đình túy Tp.Pleiku Tỉnh Gia Lai','0839131202',1,0,'CV00002'),
 	(default,N'Lương Viết Thanh', '2002/04/16','79016296868',N'12 Nguyễn Thái sơn Quận Gò Vấp Tp Hồ Chí Minh','0395247855',1,0,'CV00001'),
-	(default,N'Đặng Minh Trung', '2002/07/22','067892488517',N'25 Cửu Long Quận Tân Bình Tp Hồ Chí Minh','0395467935',1,0,'CV00002'),
+	(default,N'Đặng Minh Trung', '2002/07/22','067892488517',N'25 Cửu Long Quận Tân Bình Tp Hồ Chí Minh','0395467935',1,0,'CV00001'),
 	(default,N'Dương Văn Hiệu', '2002/10/3','070162946783',N'136 Nguyễn Kiệm Quận Gò Vấp Tp Hồ Chí Minh','0395248745',1,0,'CV00001'),
-	(default,N'Phan Võ Tú Anh', '2002/02/15','065729748769',N'58 Nguyễn Xí Quận Bình Thạnh Tp Hồ Chí Minh','0891475425',2,0,'CV00002'),
-	(default,N'Nguyễn Bảo Quỳnh', '2002/08/04','062375618437',N'368 Nguyễn Trãi Tp Việt Trì Tỉnh Phú Thọ','0879412873',2,0,'CV00001'),
-	(default,N'Nguyễn Thị Mai Phương', '2002/01/09','069416584821',N'45 Hoàng Văn Thụ Tp Đà Nẵng','0824798876',2,0,'CV00002'),
-	(default,N'Hoàng Phương Quỳnh', '2002/09/30','061703587925',N'83 Tô Vĩnh Diện Tp Mỹ Tho Tỉnh Tiền Giang','0893021507',2,0,'CV00001'),
-	(default,N'Đoàn Huỳnh Ngọc Thảo', '2002/10/07','038655448817',N'06 Ngô Tất Tố Tỉnh Bến Tre','0915725467',2,0,'CV00001'),
-	(default,N'Nguyễn Thị Thanh Hằng', '2002/06/01','063664689545',N'78 Nguyễn Thị Minh Khai Tp Đà Nẵng','0916117151',2,0,'CV00001'),
-	(default,N'Trần Thị Thanh Thủy', '2002/08/02','066437843762',N'182 Lê Đức Thọ Quận Gò Vấp Tp Hồ Chí Minh','0308241896',2,0,'CV00001'),
-	(default,N'Vũ Mỹ Linh', '2002/12/04','061672578631',N'275 CMT8 Quận 10 Tp Hồ Chí Minh','0362578417',2,0,'CV00001'),
-	(default,N'Nguyễn Thơ Thùy Dung', '2002/09/24','066043951690',N'19 Lê Lai Tp Thủ Đức','0823131278',2,0,'CV00001'),
+	(default,N'Phan Võ Tú Anh', '2002/02/15','065729748769',N'58 Nguyễn Xí Quận Bình Thạnh Tp Hồ Chí Minh','0891475425',0,0,'CV00001'),
+	(default,N'Nguyễn Bảo Quỳnh', '2002/08/04','062375618437',N'368 Nguyễn Trãi Tp Việt Trì Tỉnh Phú Thọ','0879412873',0,0,'CV00001'),
+	(default,N'Nguyễn Thị Mai Phương', '2002/01/09','069416584821',N'45 Hoàng Văn Thụ Tp Đà Nẵng','0824798876',0,0,'CV00001'),
+	(default,N'Hoàng Phương Quỳnh', '2002/09/30','061703587925',N'83 Tô Vĩnh Diện Tp Mỹ Tho Tỉnh Tiền Giang','0893021507',0,0,'CV00001'),
+	(default,N'Đoàn Huỳnh Ngọc Thảo', '2002/10/07','038655448817',N'06 Ngô Tất Tố Tỉnh Bến Tre','0915725467',0,0,'CV00001'),
+	(default,N'Nguyễn Thị Thanh Hằng', '2002/06/01','063664689545',N'78 Nguyễn Thị Minh Khai Tp Đà Nẵng','0916117151',0,0,'CV00001'),
+	(default,N'Trần Thị Thanh Thủy', '2002/08/02','066437843762',N'182 Lê Đức Thọ Quận Gò Vấp Tp Hồ Chí Minh','0308241896',0,0,'CV00001'),
+	(default,N'Vũ Mỹ Linh', '2002/12/04','061672578631',N'275 CMT8 Quận 10 Tp Hồ Chí Minh','0362578417',0,0,'CV00001'),
+	(default,N'Nguyễn Thơ Thùy Dung', '2002/09/24','066043951690',N'19 Lê Lai Tp Thủ Đức','0823131278',0,0,'CV00001'),
 	(default,N'Lê Công Hậu', '2002/10/09','061321525875',N'83 Tô Vĩnh Diện Tp Phan Thiết Tỉnh Bình Thuận','0849507914',1,0,'CV00001'),
 	(default,N'Nguyễn Văn Thương', '2002/11/27','061654861658',N'25 Lê Lợi Huyện Nhà Bè Tp Hồ Chí Minh','0837732034',1,0,'CV00001'),
 	(default,N'Nguyễn Thế Phan', '2002/06/18','061487132687',N'70 Hoàng Hoa Thám Tp KonTum Tỉnh KonTum','0827965247',1,0,'CV00001'),
 	(default,N'Trần Thế Sang', '2002/02/13','064876485466',N'157 Nguyễn Tất Thành Tp Tuy Hòa Tỉnh Phú Yên','0735792470',1,0,'CV00001'),
 	(default,N'Nguyễn Quang Bảo', '2002/05/25','061546872679',N'57 Nguyễn Văn Trỗi Tp Quy Nhơn Tỉnh Bình Định','0379856472',1,0,'CV00001'),
-	(default,N'Trần Thanh Mẫn', '2002/1/26','064202217178',N'48 Tây Sơn, Quận Đống Đa, Hà Nội','0784432489',1,0,'CV00002'),
+	(default,N'Trần Thanh Mẫn', '2002/1/26','064202217178',N'48 Tây Sơn, Quận Đống Đa, Hà Nội','0784432489',1,0,'CV00001'),
 	(default,N'Nguyễn Đức Hải', '2002/12/18','067792968684',N'40 Vĩnh Hồ, Quận Đống Đa, Hà Nội','0123577924',1,0,'CV00001'),
-	(default,N'Nguyễn Khắc Định', '2002/04/25','067892488517',N'229 Tây Sơn, Quận Đống Đa, Hà Nội','0319678456',1,0,'CV00002'),
+	(default,N'Nguyễn Khắc Định', '2002/04/25','067892488517',N'229 Tây Sơn, Quận Đống Đa, Hà Nội','0319678456',1,0,'CV00001'),
 	(default,N'Trần Quang Phương', '2002/10/08','016862946783',N'19 Đường Láng, Quận Đống Đa, Hà Nội','0389674854',1,0,'CV00001'),
-	(default,N'Nguyễn Thúy Anh', '2002/11/15','065729748769',N'592 Trường Chinh, Quận Đống Đa, Hà Nội','0895478763',2,0,'CV00002'),
+	(default,N'Nguyễn Thúy Anh', '2002/11/15','065729748769',N'592 Trường Chinh, Quận Đống Đa, Hà Nội','0895478763',0,0,'CV00001'),
 	(default,N'Dương Thanh Bình', '2002/04/04','062456561843',N'11 Trường Chinh, Khương Trung, Quận Thanh Xuân, Hà Nội','0793441401',1,0,'CV00001'),
-	(default,N'Nguyễn Phú Cường', '2002/01/01','019416584821',N'45 264 Hoàng Văn Thái, Quận Thanh Xuân, Hà Nội','0824798876',1,0,'CV00002'),
-	(default,N'Bùi Văn Cường', '2002/12/30','051703587925',N'C3/18 Phạm Hùng, Huyện Bình Chánh, TP. HCM','0893021507',1,0,'CV00001'),
+	(default,N'Nguyễn Phú Cường', '2002/01/01','019416584821',N'45 264 Hoàng Văn Thái, Quận Thanh Xuân, Hà Nội','0824798876',1,0,'CV00001'),
+	(default,N'Bùi Văn Cường', '2002/12/30','051703587925',N'C3/18 Phạm Hùng, Huyện Bình Chánh, TP. HCM','0893021507',0,0,'CV00001'),
 	(default,N'Vũ Hải Hà', '2002/07/17','048655448817',N'C3/6 Phạm Hùng, Xã Bình Hưng, Huyện Bình Chánh, TP.Hồ Chí Minh','0917458284',2,0,'CV00001'),
 	(default,N'Lê Thị Nga', '2002/04/28','043664689545',N'Số 24 Nguyễn Thái Bình, P. Nguyễn Thái Bình, Q. 1 TP.Hồ Chí Minh','0178315894',2,0,'CV00001'),
-	(default,N'Lê Tấn Tới', '2002/02/08','026437843762',N'Số 12 – 14 Song Hành, P. An Phú, Q. 2 Tp Hồ Chí Minh','0177931482',2,0,'CV00001'),
-	(default,N'Nguyễn Thị Thanh', '2002/08/04','011672578631',N' 18 Chế Lan Viên , P. Tây Thạnh, Q. Tân Phú Tp Hồ Chí Minh','0679848213',2,0,'CV00001'),
-	(default,N'Nguyễn Quang Toán', '2002/03/24','056043951690',N'19 Lê Lai Tp Thủ Đức','0839427541',2,0,'CV00001'),
+	(default,N'Lê Tấn Tới', '2002/02/08','026437843762',N'Số 12 – 14 Song Hành, P. An Phú, Q. 2 Tp Hồ Chí Minh','0177931482',0,0,'CV00001'),
+	(default,N'Nguyễn Thị Thanh', '2002/08/04','011672578631',N' 18 Chế Lan Viên , P. Tây Thạnh, Q. Tân Phú Tp Hồ Chí Minh','0679848213',0,0,'CV00001'),
+	(default,N'Nguyễn Quang Toán', '2002/03/24','056043951690',N'19 Lê Lai Tp Thủ Đức','0839427541',0,0,'CV00001'),
 	(default,N'Trương Ngọc Sơn', '2002/06/09','041321525875',N'60 Đường CN1, Phường Sơn Kỳ, Quận Tân Phú tp Hồ Chí Minh','0364874578',1,0,'CV00001'),
 	(default,N'Nguyễn Văn Trường', '2002/08/27','071654861658',N'55A - 55B Ngô Quang Huy, P. Thảo Điền, Q. 2 Tp Hồ Chí Minh','0839471758',1,0,'CV00001'),
 	(default,N'Nguyễn Đình Trọng', '2002/10/18','081487132687',N'27 Tú Xương, P. 7, Q. 3 Tp Hồ Chí Minh','0832479647',1,0,'CV00001'),
 	(default,N'Lê Văn Sỹ', '2002/07/13','094876485466',N'Số 19 Ngô Văn Năm, P. Bến Nghé, Q. 1 Tp Hồ Chí Minh','0835792470',1,0,'CV00001'),
 	(default,N'Nguyễn Hoàng Phúc', '2002/03/25','021546872679',N'38 Nguyễn Thị Minh Khai Tỉnh kiên Giang','0679856472',1,0,'CV00001'),
 	(default,N'Lê Công Danh', '2002/04/25','031546872679',N'21 Bùi Đình Túy Tỉnh Đồng Tháp','0739476158',1,0,'CV00001'),
-	(default,N'Hoàng Thùy Trang', '2002/05/02','064546235239',N'35 Hùng Vương Tỉnh Quảng Trị','0369874514',2,0,'CV00001'),
-	(default,N'Nguyễn Hoàng Yến', '2002/06/15','071468741239',N'57 Xô Viết Nghệ Tĩnh Quận Bình Thạnh Tp Hồ Chí Minh','0581497654',2,0,'CV00001'),
-	(default,N'Võ Thanh Hồng', '2002/10/28','081946872219',N'76 Quang Trung Tỉnh Tây Ninh','0837276521',2,0,'CV00001'),
+	(default,N'Hoàng Thùy Trang', '2002/05/02','064546235239',N'35 Hùng Vương Tỉnh Quảng Trị','0369874514',0,0,'CV00001'),
+	(default,N'Nguyễn Hoàng Yến', '2002/06/15','071468741239',N'57 Xô Viết Nghệ Tĩnh Quận Bình Thạnh Tp Hồ Chí Minh','0581497654',0,0,'CV00001'),
+	(default,N'Võ Thanh Hồng', '2002/10/28','081946872219',N'76 Quang Trung Tỉnh Tây Ninh','0837276521',0,0,'CV00001'),
 	(default,N'Đặng Minh Thành', '2002/11/06','061546872419',N'58 Hoàng Hoa Thám Tỉnh Gia Lai','0807985720',1,0,'CV00001'),
-	(default,N'Hoàng Thị Khánh Vân', '2002/12/01','064684254793',N'337 Ngô Tất Tố Quận 3 Tp Hồ Chí Minh','0837984754',2,0,'CV00001'),
+	(default,N'Hoàng Thị Khánh Vân', '2002/12/01','064684254793',N'337 Ngô Tất Tố Quận 3 Tp Hồ Chí Minh','0837984754',0,0,'CV00001'),
 	(default,N'Trần Quang Đại', '2002/09/05','069873135413',N'82 Hai Bà Trưng Tỉnh Bà Rịa - Vũng Tàu','0746915874',1,0,'CV00001'),
-	(default,N'Đinh Ngọc Hoa', '2002/01/12','021343314644',N'55 Nguyễn Huệ Tỉnh Hà Giang','0369745821',2,0,'CV00001'),
-	(default,N'Đinh Ngọc Khanh', '2002/07/22','021354683356',N'97 Nguyễn Tất Thành Tỉnh Cao Bằng','0215784512',2,0,'CV00001'),
-	(default,N'Bùi Thanh Thúy', '2002/04/23','048630146848',N'268 Đinh Bộ Lĩnh Tp Hồ Chí Minh','0869451457',2,0,'CV00001'),
-	(default,N'Hoàng Thùy Linh', '2002/08/14','061548658654',N'810 Lê Đức Thọ Tp Hồ Chí Minh','1479365487',2,0,'CV00001'),
+	(default,N'Đinh Ngọc Hoa', '2002/01/12','021343314644',N'55 Nguyễn Huệ Tỉnh Hà Giang','0369745821',0,0,'CV00001'),
+	(default,N'Đinh Ngọc Khanh', '2002/07/22','021354683356',N'97 Nguyễn Tất Thành Tỉnh Cao Bằng','0215784512',0,0,'CV00001'),
+	(default,N'Bùi Thanh Thúy', '2002/04/23','048630146848',N'268 Đinh Bộ Lĩnh Tp Hồ Chí Minh','0869451457',0,0,'CV00001'),
+	(default,N'Hoàng Thùy Linh', '2002/08/14','061548658654',N'810 Lê Đức Thọ Tp Hồ Chí Minh','1479365487',0,0,'CV00001'),
 	(default,N'Nguyễn Văn Thanh', '2002/08/19','061546146489',N'41 Nguyễn Văn Lượng Tỉnh Kiên Giang','0379856472',1,0,'CV00001')
 go
 select * from TaiKhoan
@@ -258,8 +258,8 @@ go
 select * from KhachHang
 insert into KhachHang
 values
-	(default,N'Trần Hưng An','2002/12/20',N'Gò Vấp, TP.HCM','',1,1),
-	(default,N'Nguyễn Hoàng	Anh','2002/09/03',N'Bình Thạnh, Tp.HCM','',1,0),
+	(default,N'Trần Hưng An','2002/12/20',N'Gò Vấp, TP.HCM','0396979388',1,1),
+	(default,N'Nguyễn Hoàng	Anh','2002/09/03',N'Bình Thạnh, Tp.HCM','0744244188',1,0),
 	(default,N'Nguyễn Anh Quỳnh','2002/11/14',N'Quận 1, TP.HCM','0744244179',0,0),
 	(default,N'Nguyễn Chí Bảo','2001/02/23',N'Quận 2, TP.HCM','0582897921',1,0),
 	(default,N'Nguyễn Duy Bảo','2002/11/12',N'Quân 4, TP.HCM','0515010002',1,0),
@@ -301,15 +301,3 @@ values
 	(default,N'Trần Quốc Trọng','2002/11/02',N'Quận 4, TP.HCM','0542327472',1,0),
 	(default,N'Ngô Đình Bảo	Yến','2002/02/22',N'Quận 3, TP.HCM','0522110127',0,0)
 
-/* Thử dữ liệu*/
-
-delete from SanPham
-go
-select maSP,tenSP,hinhAnh,donGia, donVi, soLuong,maNCC, VAT from SanPham
-where tenSP = N'những Đêm Không Ngủ Những Ngày Chậm Trôi' or maSP = 'SVH00001'
-go
-select dbo.autoIdHD()
-go
-select maNV,hoTen,maCV from NhanVien where maNV = 'NV00001'
-go
-select maKH,hoTen,diaChi,sdt from KhachHang where sdt = '0396979388'
