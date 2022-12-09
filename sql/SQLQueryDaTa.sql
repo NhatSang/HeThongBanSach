@@ -102,7 +102,7 @@ values
 	(default,N'Cấp 3',11),
 	(default,N'Cấp 3',12)
 go
-select * from KhachHang
+select * from SanPham
 --them sach
 insert into SanPham (maSP,tenSP,namXB_SX,soLuong,donGia,donVi,VAT,soTrang,nguoiDich,tuoiGioiHan,moTa,hinhAnh,maLoai,maNCC,maNXB,maTG,maLB,maCDH,trangThai)
 values 
@@ -123,13 +123,13 @@ values
 	(dbo.autoIdSP('VPP00007'),N'Bút Gel Thiên Long Gel-08 Sunbeam', 100,8000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thân và bút bằng nhựa trong, tảm có đệm mềm (grip) giúp cầm êm tay và giảm trơn trợt khi viết.','VPP00007.jpg','VPP00001', 'NCC00004',  'TH00001', 'MS00001', 0),
 	(dbo.autoIdSP('VPP00008'),N'Bút Lông Bảng 2.0 mm - Artline EK-517-GR', 100,32000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Mực đậm, lượng mực cực kỳ nhiều, thêm mực dễ dàng sau khi viết hết. Dễ viết dễ xóa. Ngòi viết ra mực đều màu, êm, khi xóa không làm xước bề mặt bảng.','VPP00008.jpg','VPP00001', 'NCC00005',  'TH00006', 'MS00002', 0),
 	(dbo.autoIdSP('VPP00009'),N'Bút Chì Gỗ Graphite 4B', 100,7000,N'Cây',10,N'Việt Nam',N'Gỗ',N'Thân bút tam giác độc đáo, không những giúp người sử dụng cầm bút chắc tay mà còn ngăn không cho bút lăn khi để trên bàn, tránh rơi rớt.','VPP00009.jpg','VPP00001', 'NCC00006',  'TH00007', 'MS00007', 0),
-	(dbo.autoIdSP('VPP00010'),N'Thước M-Tech Slim 20 cm', 100,7000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thước kẻ được sử dụng nhiều trong học tập, cơ khí, vẽ các bảng kĩ thuật, xây dựng, vẽ tranh...','VPP00010.jpg','VPP00003', 'NCC00007',  'TH00008', 'MS00008', 0),
-	(dbo.autoIdSP('VPP00011'),N'Thước M-Tech Slim 30 cm', 100,10000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thước kẻ được sử dụng nhiều trong học tập, cơ khí, vẽ các bảng kĩ thuật, xây dựng, vẽ tranh...','VPP00011.jpg','VPP00003', 'NCC00008',  'TH00009', 'MS00008', 0),
-	(dbo.autoIdSP('VPP00012'),N'Bộ Thước 20cm', 100,12000,N'Bộ',10,N'Ấn Độ',N'Nhựa',N'Sản phẩm bao gồm 1 cây thước 20cm, bộ thước eke và thước đo góc 45o và 60o.','VPP00012.jpg','VPP00003', 'NCC00002',  'TH00001', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00010'),N'Thước M-Tech Slim 20 cm', 100,7000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thước kẻ được sử dụng nhiều trong học tập, cơ khí, vẽ các bảng kĩ thuật, xây dựng, vẽ tranh...','VPP00010.jpg','VPP00003', 'NCC00007',  'TH00008', 'MS00006', 0),
+	(dbo.autoIdSP('VPP00011'),N'Thước M-Tech Slim 30 cm', 100,10000,N'Cây',10,N'Việt Nam',N'Nhựa',N'Thước kẻ được sử dụng nhiều trong học tập, cơ khí, vẽ các bảng kĩ thuật, xây dựng, vẽ tranh...','VPP00011.jpg','VPP00003', 'NCC00008',  'TH00009', 'MS00006', 0),
+	(dbo.autoIdSP('VPP00012'),N'Bộ Thước 20cm', 100,12000,N'Bộ',10,N'Ấn Độ',N'Nhựa',N'Sản phẩm bao gồm 1 cây thước 20cm, bộ thước eke và thước đo góc 45o và 60o.','VPP00012.jpg','VPP00003', 'NCC00002',  'TH00001', 'MS00006', 0),
 	(dbo.autoIdSP('VPP00013'),N'Gôm Đen E-011', 100,4000,N'Cục',10,N'Việt Nam',N'Nhựa',N'Gôm Đen E-011 với độ bền dẻo cao có khả năng tẩy sạch các vết chì đen mà không gây rách giấy, không làm bẩn, lem trên giấy trắng','VPP00013.jpg','VPP00003', 'NCC00009',  'TH00010', 'MS00007', 0),
-	(dbo.autoIdSP('VPP00014'),N'Vỉ 2 Gôm Thiên Long E-05', 100,9000,N'Vỉ',10,N'Việt Nam',N'Nhựa',N'Gôm với độ bền dẻo cao có khả năng tẩy sạch các vết chì đen mà không gây rách giấy, không làm bẩn, lem trên giấy trắng','VPP00014.jpg','VPP00003', 'NCC00010',  'TH00011', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00014'),N'Vỉ 2 Gôm Thiên Long E-05', 100,9000,N'Vỉ',10,N'Việt Nam',N'Nhựa',N'Gôm với độ bền dẻo cao có khả năng tẩy sạch các vết chì đen mà không gây rách giấy, không làm bẩn, lem trên giấy trắng','VPP00014.jpg','VPP00003', 'NCC00010',  'TH00011', 'MS00006', 0),
 	(dbo.autoIdSP('VPP00015'),N'Chuốt Chì', 100,3000,N'Cái',10,N'Việt Nam',N'Nhựa',N'Chuốt chì với thiết kế dễ sử dụng, chuốt được nhiều loại bút chì có đường kính tiêu chuẩn như bút chì đen, bút chì màu.','VPP00015.jpg','VPP00003', 'NCC00011',  'TH00012', 'MS00003', 0),
-	(dbo.autoIdSP('VPP00016'),N'Tập Sinh Viên 4 Ly Ngang 200 Trang', 100,17000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','VPP00016.jpg','VPP00002', 'NCC00012',  'TH00013', 'MS00008', 0),
+	(dbo.autoIdSP('VPP00016'),N'Tập Sinh Viên 4 Ly Ngang 200 Trang', 100,17000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','VPP00016.jpg','VPP00002', 'NCC00012',  'TH00013', 'MS00006', 0),
 	(dbo.autoIdSP('VPP00017'),N'Tập Học Sinh Baby Dinosaur B5 48 Trang', 100,11000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','VPP00017.jpg','VPP00002', 'NCC00013',  'TH00014', 'MS00004', 0),
 	(dbo.autoIdSP('VPP00018'),N'Vở Freely Life - B5 Kẻ Ngang 120 Trang', 100,17000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','VPP00018.jpg','VPP00002', 'NCC00014',  'TH00015', 'MS00005', 0),
 	(dbo.autoIdSP('VPP00019'),N'Vở Dancing Letters - B5 200 Trang', 100,34000,N'Quyển',10,N'Việt Nam',N'Giấy',N'Sản phẩm với mặt giấy láng mịn, viết êm tay, tạo nét chữ đẹp.','VPP00019.jpg','VPP00002', 'NCC00015',  'TH00001', 'MS00003', 0),

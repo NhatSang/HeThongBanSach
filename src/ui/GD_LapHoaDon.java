@@ -10,6 +10,8 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -33,6 +35,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 
@@ -333,10 +336,35 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 		btnThemKh.addActionListener(this);
 		btnTimKh.addActionListener(this);
 		btnXoaCTHD.addActionListener(this);
-		txtTienKhachTra.addActionListener(this);
 		btnLuu.addActionListener(this);
 		btnThanhToan.addActionListener(this);
 		tblCTHD.addMouseListener(this);
+		txtTienKhachTra.addKeyListener((KeyListener) new KeyListener() {
+			public void keyTyped(KeyEvent e) {
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if (hoaDon != null) {
+					String tkt = txtTienKhachTra.getText();
+					double t;
+					if (isInt(tkt)) {
+						t = Double.parseDouble(tkt);
+						double s = t - hoaDon.tongTienSauVAT();
+						lblTienThua.setText("Tiền thừa: " + s);
+					}
+				}
+			}
+		});
+
 	}
 
 	public Icon loadImg(String linkImage, int k, int m) {
@@ -443,67 +471,64 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 				}
 			}
 		}
-		if (obj == txtTienKhachTra) {
-			if (hoaDon != null) {
-				String tkt = txtTienKhachTra.getText();
-				double t;
-				if (isInt(tkt)) {
-					t = Double.parseDouble(tkt);
-					double s = t - hoaDon.tongTienSauVAT();
-					lblTienThua.setText("Tiền thừa: " + s);
-				}
-			}
-		}
 		if (obj == btnThanhToan) {
 			if (txtTienKhachTra.getText().length() == 0) {
 				JOptionPane.showMessageDialog(this, "Chưa nhập tiền khách thanh toán");
 				txtTienKhachTra.requestFocus();
 			} else {
-				if (k == 0) {
-					try {
-						hd_DAO.themHD(hoaDon, true);
-						for (ChiTietHoaDon c : hoaDon.getDsChiTiet()) {
-							hd_DAO.themCTHD(c, soHD);
-							sp_DAO.capNhat_soLuong(c.getSanPham().getMaSP(),
-									c.getSanPham().getSoLuong() - c.getSoLuong());
-						}
-						JOptionPane.showMessageDialog(null, "Đã thanh toán");
-						int qes = JOptionPane.showConfirmDialog(null, "Có xuất hóa đơn không?");
-						if (qes == JOptionPane.YES_OPTION) {
-
-						}
-						parent.thayCenterP(new GD_LapHoaDon(parent));
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				} else {
-					try {
-						for (ChiTietHoaDon c : hoaDon.getDsChiTiet()) {
-							if (c.getSanPham().getSoLuong() - c.getSoLuong() < 0) {
-								JOptionPane.showMessageDialog(null,
-										"Sản phẩm " + c.getSanPham().getTenSP() + " không đủ số lượng");
-								return;
+				if (Double.parseDouble(txtTienKhachTra.getText())-hoaDon.tongTienSauVAT() >= 0) {
+					if (k == 0) {
+						try {
+							hd_DAO.themHD(hoaDon, true);
+							for (ChiTietHoaDon c : hoaDon.getDsChiTiet()) {
+								hd_DAO.themCTHD(c, soHD);
+								sp_DAO.capNhat_soLuong(c.getSanPham().getMaSP(),
+										c.getSanPham().getSoLuong() - c.getSoLuong());
 							}
+							JOptionPane.showMessageDialog(null, "Đã thanh toán");
+							int qes = JOptionPane.showConfirmDialog(null, "Có xuất hóa đơn không?");
+							if (qes == JOptionPane.YES_OPTION) {
+								GD_XuatHD f = new GD_XuatHD(hoaDon);
+								f.setVisible(true);
+								f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+							}
+							parent.thayCenterP(new GD_LapHoaDon(parent));
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
-						hd_DAO.xoaHD(hoaDon.getMaHD());
-						hd_DAO.themHD(hoaDon, true);
-						for (ChiTietHoaDon c : hoaDon.getDsChiTiet()) {
-							hd_DAO.themCTHD(c, soHD);
-							sp_DAO.capNhat_soLuong(c.getSanPham().getMaSP(),
-									c.getSanPham().getSoLuong() - c.getSoLuong());
+					} else {
+						try {
+							for (ChiTietHoaDon c : hoaDon.getDsChiTiet()) {
+								if (c.getSanPham().getSoLuong() - c.getSoLuong() < 0) {
+									JOptionPane.showMessageDialog(null,
+											"Sản phẩm " + c.getSanPham().getTenSP() + " không đủ số lượng");
+									return;
+								}
+							}
+							hd_DAO.xoaHD(hoaDon.getMaHD());
+							hd_DAO.themHD(hoaDon, true);
+							for (ChiTietHoaDon c : hoaDon.getDsChiTiet()) {
+								hd_DAO.themCTHD(c, soHD);
+								sp_DAO.capNhat_soLuong(c.getSanPham().getMaSP(),
+										c.getSanPham().getSoLuong() - c.getSoLuong());
+							}
+							JOptionPane.showMessageDialog(null, "Đã thanh toán");
+							int qes = JOptionPane.showConfirmDialog(null, "Có xuất hóa đơn không?");
+							if (qes == JOptionPane.YES_OPTION) {
+								GD_XuatHD f = new GD_XuatHD(hoaDon);
+								f.setVisible(true);
+								f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+							}
+							parent.thayCenterP(new GD_LapHoaDon(parent));
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
-						JOptionPane.showMessageDialog(null, "Đã thanh toán");
-						int qes = JOptionPane.showConfirmDialog(null, "Có xuất hóa đơn không?");
-						if (qes == JOptionPane.YES_OPTION) {
-
-						}
-						parent.thayCenterP(new GD_LapHoaDon(parent));
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					}
 				}
+				else
+					JOptionPane.showMessageDialog(this, "Khách thanh toán chưa đủ tiền");
 			}
 		}
 		if (obj == btnLuu) {
@@ -595,7 +620,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 		p.setBorder(BorderFactory.createLineBorder(Color.black));
 		GridBagConstraints gbc = new GridBagConstraints();
 		lblImg = new JLabel();
-		lblImg.setIcon(loadImg(".\\img\\"+sanPham.getHinhAnh(), 150, 150));
+		lblImg.setIcon(loadImg(".\\img\\" + sanPham.getHinhAnh(), 150, 150));
 		JPanel imgP = new JPanel();
 		imgP.setPreferredSize(new Dimension(150, 150));
 		imgP.add(lblImg);
@@ -696,30 +721,31 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		JTable table = (JTable) e.getSource();
-		Point point = e.getPoint();
-		int row = table.rowAtPoint(point);
-		if (e.getClickCount() == 2 && table.getSelectedRow() != -1) {
-			// your valueChanged overridden method
-			int r = tblCTHD.getSelectedRow();
-			if (r != -1) {
-				String soLuong = JOptionPane.showInputDialog("Nhập số lượng");
-				int sl;
-				sp = sp_DAO.timKiemSPTheoMa((String) tblCTHD.getValueAt(r, 1)).get(0);
-				if (isInt(soLuong)) {
-					sl = Integer.parseInt(soLuong);
-					if (sl <= 0)
-						JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn 0");
-					else if (sl > sp.getSoLuong())
-						JOptionPane.showMessageDialog(null, "Số lượng sản phẩm hiện không đủ");
-					else {
-						hoaDon.getDsChiTiet().get(r).setSoLuong(sl);
-						capNhatHoaDon();
-						EnabledBtn(true);
+		if (e.getSource() == tblCTHD) {
+			JTable table = (JTable) e.getSource();
+			Point point = e.getPoint();
+			int row = table.rowAtPoint(point);
+			if (e.getClickCount() == 2 && table.getSelectedRow() != -1) {
+				// your valueChanged overridden method
+				int r = tblCTHD.getSelectedRow();
+				if (r != -1) {
+					String soLuong = JOptionPane.showInputDialog("Nhập số lượng");
+					int sl;
+					sp = sp_DAO.timKiemSPTheoMa((String) tblCTHD.getValueAt(r, 1)).get(0);
+					if (isInt(soLuong)) {
+						sl = Integer.parseInt(soLuong);
+						if (sl <= 0)
+							JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn 0");
+						else if (sl > sp.getSoLuong())
+							JOptionPane.showMessageDialog(null, "Số lượng sản phẩm hiện không đủ");
+						else {
+							hoaDon.getDsChiTiet().get(r).setSoLuong(sl);
+							capNhatHoaDon();
+							EnabledBtn(true);
+						}
+					} else {
+						JOptionPane.showMessageDialog(this, "Số lượng phải là số");
 					}
-				}
-				else {
-					JOptionPane.showMessageDialog(this, "Số lượng phải là số");
 				}
 			}
 		}
@@ -739,7 +765,6 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 }

@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,12 +25,14 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
+import dao.TaiKhoan_DAO;
 import entity.ChucVu;
 import entity.NhanVien;
 
@@ -38,7 +41,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 	private JLabel lblTenNV, lblNgay, lblCa;
 	private NhanVien nhanVien;
 	private JMenuBar menuBar;
-	private JMenu menuSach, menuVPP, menuHD, menuTK, menuTC,menuKH;
+	private JMenu menuSach, menuVPP, menuHD, menuTK, menuTC, menuKH;
 	private JMenuItem itemDangXuat, itemDoiMatKhau, itemThoat, itemLapHd, itemTimHD;
 	private Box centerB;
 	static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
@@ -64,7 +67,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		northB.setBorder(new LineBorder(Color.black));
 		Box infoB = Box.createHorizontalBox();
 		Box infoB1 = Box.createVerticalBox();
-		
+
 		lblTenNV = new JLabel();
 		lblTenNV.setText(nhanVien.getHoTen());
 		lblNgay = new JLabel();
@@ -75,7 +78,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 			caLap = 1;
 		else
 			caLap = 2;
-		lblCa.setText("Ca: "+caLap);
+		lblCa.setText("Ca: " + caLap);
 
 		infoB1.add(lblNgay);
 		infoB1.add(lblCa);
@@ -177,16 +180,29 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		obj = e.getSource();
 		if (obj == itemThoat) {
 			System.exit(0);
-		}
-		else if(obj == itemDangXuat) {
+		} else if (obj == itemDangXuat) {
 			new GD_DangNhap().setVisible(true);
 			this.dispose();
-		}
-		else if(obj == itemLapHd) {
+		} else if (obj == itemLapHd) {
 			thayCenterP(new GD_LapHoaDon(this));
-		}
-		else if(obj == itemTimHD) {
+		} else if (obj == itemTimHD) {
 			thayCenterP(new GD_HangDoiHD(this));
+		} else if (obj == itemDoiMatKhau) {
+			String nmk = JOptionPane.showInputDialog(this, "Nhập mật khẩu mới");
+			if (nmk!= null) {
+				if (nmk.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
+					TaiKhoan_DAO tkd = new TaiKhoan_DAO();
+					try {
+						tkd.updateMk(nhanVien.getMaNV(),nmk);
+						JOptionPane.showMessageDialog(this, "Thành công");
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				else
+					JOptionPane.showMessageDialog(this, "Mật khẩu không phù hợp");
+			}
 		}
 	}
 
@@ -199,16 +215,16 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 	@Override
 	public void menuSelected(MenuEvent e) {
 		Object obj = e.getSource();
-		if(obj == menuSach) {
+		if (obj == menuSach) {
 			thayCenterP(new GD_Sach());
 		}
-		if(obj == menuVPP) {
+		if (obj == menuVPP) {
 			thayCenterP(new GD_VPP());
 		}
-		if(obj == menuKH) {
+		if (obj == menuKH) {
 			thayCenterP(new GD_KH());
 		}
-		if(obj == menuTK) {
+		if (obj == menuTK) {
 
 		}
 
@@ -229,5 +245,5 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 	public NhanVien getNhanVien() {
 		return nhanVien;
 	}
-	
+
 }
