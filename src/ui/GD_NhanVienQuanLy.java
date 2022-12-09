@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -28,12 +29,14 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.border.LineBorder;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
+import dao.TaiKhoan_DAO;
 import entity.NhanVien;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -165,7 +168,23 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 			new GD_DangNhap().setVisible(true);
 			this.dispose();
 		}
-
+		if(obj == itemDoiMatKhau) {
+			String nmk = JOptionPane.showInputDialog(this, "Nhập mật khẩu mới");
+			if (nmk != null) {
+				if (nmk.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
+					TaiKhoan_DAO tkd = new TaiKhoan_DAO();
+					try {
+						tkd.updateMk(nhanVien.getMaNV(),nmk);
+						JOptionPane.showMessageDialog(this, "Thành công");
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				else
+					JOptionPane.showMessageDialog(this, "Mật khẩu không phù hợp");
+			}
+		}
 
 	}
 	public void thayCenterP(JPanel p) {

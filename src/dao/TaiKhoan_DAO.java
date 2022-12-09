@@ -1,7 +1,9 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import connectDB.DataBase;
@@ -21,7 +23,7 @@ public class TaiKhoan_DAO {
 		Connection con = DataBase.getConnection();
 		try {
 			Statement stm = con.createStatement();
-			ResultSet rs = stm.executeQuery("select * from TaiKhoan where tenTK = " +"'"+key+"'");
+			ResultSet rs = stm.executeQuery("select * from TaiKhoan where tenTK = '"+key+"'");
 			if(rs.next()) {
 				String tenTK = rs.getString(1);
 				String mK = rs.getString(2);
@@ -32,5 +34,20 @@ public class TaiKhoan_DAO {
 			// TODO: handle exception
 		}
 		return tk;
+	}
+	public void updateMk(String maNV, String mk) throws SQLException {
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+		PreparedStatement statement = null;
+		try {
+			String sql = "update TaiKhoan set matKhau = ? where maNV = '"+maNV+"'";
+			statement = con.prepareStatement(sql);
+			statement.setString(1,mk);
+			statement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			statement.close();
+		}
 	}
 }
