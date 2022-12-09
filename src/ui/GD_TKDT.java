@@ -12,6 +12,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -438,13 +440,24 @@ public class GD_TKDT extends javax.swing.JPanel {
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
         // TODO add your handling code here:
-//        Date ns = Date.valueOf(((JTextField) jdcNgay.getDateEditor().getUiComponent()).getText());
-//        String today = Date.valueOf(LocalDate.now()).toString();  
-//        System.out.println(today);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
+            
+            today = ((JTextField)jdcNgay.getDateEditor().getUiComponent()).getText();
+//            String a = dateFormat.format(jdcNgay.getDate());
+        try {
+            LoadTKDTTheoThang();
 
-             String sd = dateFormat.format(jdcNgay.getDate());
-             System.out.println(sd);
+        } catch (ParseException ex) {
+            Logger.getLogger(GD_TKDT.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String textcbb = cbbThongKe.getSelectedItem().toString();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM");
+        String a = dateFormat.format(jdcNgay.getDate());
+        String b = dateFormat1.format(jdcNgay.getDate());
+        System.out.println(a);
+        System.out.println(b);
     }//GEN-LAST:event_btnThongKeActionPerformed
 
 
@@ -470,22 +483,22 @@ public class GD_TKDT extends javax.swing.JPanel {
     private DefaultTableModel modelThongKeDoanhThu;
     private TKDT_DAO tkdt_dao = new TKDT_DAO();
     private int stt = 0;
+    private int nam = 0;
+    String today = Date.valueOf(LocalDate.now()).toString();
     private void loadThongKeDoanhThu() throws ParseException{
         while(tableThongKeDoanhThu.getRowCount()!=0) {
 			modelThongKeDoanhThu.removeRow(0);
 		}
-//       Date ns = Date.valueOf(((JTextField)jdcNgay.getDateEditor().getUiComponent()).getText());
         int tongsp = 0;
         int shd = 0;
         double doanhthu = 0;
         String check ="" ;
         String bnn = "";
         int checkbnn = 0;
-        TKDT_DAO tkdt = new TKDT_DAO();
-        String today = Date.valueOf(LocalDate.now()).toString();  
+        TKDT_DAO tkdt = new TKDT_DAO(); 
         java.util.Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(today);
         jdcNgay.setDate(date2);
-        ArrayList<ThongKeDoanhThu> dsTKDT = tkdt.getAllThongKeDoanhThu("2022-12-06");
+        ArrayList<ThongKeDoanhThu> dsTKDT = tkdt.getAllThongKeDoanhThu(today);
         for (ThongKeDoanhThu tk : dsTKDT){
             Object row[] = {++stt, tk.getTenSP(), tk.getTongSoLuong()};
             modelThongKeDoanhThu.addRow(row);
@@ -510,6 +523,52 @@ public class GD_TKDT extends javax.swing.JPanel {
         txtTongHoaDon.setText(tongHD);
         txtDoanhThu.setText(tongDoanhThu);
         txtSanPhamBanNhieuNhat.setText(bnn);
+    }
+    
+    public void LoadTKDTTheoThang() throws ParseException{
+        while(tableThongKeDoanhThu.getRowCount()!=0) {
+			modelThongKeDoanhThu.removeRow(0);
+		}
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM");
+        String a = dateFormat.format(jdcNgay.getDate());
+        String b = dateFormat1.format(jdcNgay.getDate());
+        int tongsp = 0;
+        int shd = 0;
+        double doanhthu = 0;
+        String check ="" ;
+        String bnn = "";
+        int checkbnn = 0;
+        TKDT_DAO tkdt = new TKDT_DAO(); 
+        java.util.Date date2 = new SimpleDateFormat("yyyy-MM").parse(today);
+   
+        jdcNgay.setDate(date2);
+        ArrayList<ThongKeDoanhThu> dsTKDT = tkdt.ThongKeDoanhThuTheoThang(a,b);
+        for (ThongKeDoanhThu tk : dsTKDT){
+            Object row[] = {++stt, tk.getTenSP(), tk.getTongSoLuong()};
+            modelThongKeDoanhThu.addRow(row);
+            tongsp = tongsp + tk.getTongSoLuong();
+            if (!check.equals(tk.getMaHD())) {
+                shd++;
+                check = tk.getMaHD();
+            } else {
+                check = tk.getMaHD();
+            }
+            
+            doanhthu =doanhthu + Double.valueOf(tk.getTongSoLuong())*tk.getGiaBan();
+            
+            if(tk.getTongSoLuong() > checkbnn){
+                bnn = tk.getTenSP();
+            }
+        }
+        String tongSL = String.valueOf(tongsp);
+        String tongHD = String.valueOf(shd);
+        String tongDoanhThu = String.valueOf(doanhthu);
+        txtTongSanPham.setText(tongSL);
+        txtTongHoaDon.setText(tongHD);
+        txtDoanhThu.setText(tongDoanhThu);
+        txtSanPhamBanNhieuNhat.setText(bnn);
+
     }
     
     public void VHH(){
