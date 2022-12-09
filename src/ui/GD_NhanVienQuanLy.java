@@ -35,6 +35,9 @@ import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
 import entity.NhanVien;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Sang
 public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuListener {
@@ -181,7 +184,11 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 			thayCenterP(new GD_NhaCungCap());
 		}
 		if(obj == menuTK) {
-
+                    try {
+                        thayCenterP(new GD_TKDT());
+                    } catch (ParseException ex) {
+                        Logger.getLogger(GD_NhanVienQuanLy.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 		}
 		
 	}
