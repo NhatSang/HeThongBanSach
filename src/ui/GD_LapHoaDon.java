@@ -18,6 +18,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -388,7 +389,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 			}
 			return new ImageIcon(image.getScaledInstance(dx, dy, image.SCALE_SMOOTH));
 		} catch (IOException e) {
-			e.printStackTrace();
+
 		}
 		return null;
 	}
@@ -574,18 +575,19 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 	}
 
 	public void capNhatHoaDon() {
+		DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
 		tblModel.setRowCount(0);
 		ArrayList<ChiTietHoaDon> dsCTHD = hoaDon.getDsChiTiet();
 		int i = 1;
 		for (ChiTietHoaDon c : dsCTHD) {
-			String r = i + "," + c.getSanPham().getTenSP() + "," + c.getGiaBan() + "," + c.getSoLuong() + ","
-					+ c.getSanPham().getVAT() + "," + c.thanhTien();
+			String r = i + "," + c.getSanPham().getTenSP() + "," + decimalFormat.format(c.getGiaBan()) + "," + c.getSoLuong() + ","
+					+ c.getSanPham().getVAT() + "," + decimalFormat.format(c.thanhTien());
 			tblModel.addRow(r.split(","));
 			i++;
 		}
-		lblTongTien.setText("Tổng: " + hoaDon.tongTien());
-		lblTongVAT.setText("Tổng VAT: " + hoaDon.tongVAT());
-		lblTienCanTra.setText("Tổng tiền (gồm VAT): " + hoaDon.tongTienSauVAT());
+		lblTongTien.setText("Tổng: " + decimalFormat.format(hoaDon.tongTien()));
+		lblTongVAT.setText("Tổng VAT: " + decimalFormat.format(hoaDon.tongVAT()));
+		lblTienCanTra.setText("Tổng tiền (gồm VAT): " + decimalFormat.format(hoaDon.tongTienSauVAT()));
 	}
 
 	public void capNhatSanPham(ArrayList<SanPham> dssp) {

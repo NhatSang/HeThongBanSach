@@ -3,6 +3,7 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsDevice;
@@ -48,7 +49,7 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 	private NhanVien nhanVien;
 	private JMenuBar menuBar;
 	private JMenu menuNV, menuNCC, menuTK, menuTC;
-	private JMenuItem itemDangXuat, itemDoiMatKhau, itemThoat;
+	private JMenuItem itemDangXuat, itemDoiMatKhau, itemThoat, itemHoTro;
 	private Box centerB;
 	static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 	static LocalDate ngayHienTai = LocalDate.now();
@@ -83,7 +84,7 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 			caLap = 1;
 		else
 			caLap = 2;
-		lblCa.setText("Ca: "+caLap);
+		lblCa.setText("Ca: " + caLap);
 
 		infoB1.add(lblNgay);
 		infoB1.add(lblCa);
@@ -97,15 +98,17 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 		menuBar = new JMenuBar();
 		menuNV = new JMenu("Nhân Viên");
 		menuNCC = new JMenu("Nhà Cung Cấp");
-		menuTK = new JMenu("Thống kê");
-		menuTC = new JMenu("Tùy chọn");
+		menuTK = new JMenu("Thống Kê");
+		menuTC = new JMenu("Tùy Chọn");
 
-		itemDangXuat = new JMenuItem("Đăng xuất");
-		itemDoiMatKhau = new JMenuItem("Đổi mật khẩu");
+		itemDangXuat = new JMenuItem("Đăng Xuất");
+		itemDoiMatKhau = new JMenuItem("Đổi Mật Khẩu");
 		itemThoat = new JMenuItem("Thoát");
+		itemHoTro = new JMenuItem("Hổ trợ");
 
-		menuTC.add(itemDangXuat);
+		menuTC.add(itemHoTro);
 		menuTC.add(itemDoiMatKhau);
+		menuTC.add(itemDangXuat);
 		menuTC.add(itemThoat);
 
 		menuBar.add(menuTC);
@@ -125,6 +128,7 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 		itemDangXuat.setFont(new Font("Serif", Font.ITALIC, 25));
 		itemDoiMatKhau.setFont(new Font("Serif", Font.ITALIC, 25));
 		itemThoat.setFont(new Font("Serif", Font.ITALIC, 25));
+		itemHoTro.setFont(new Font("Serif", Font.ITALIC, 25));
 
 		menuNV.setIcon(new ImageIcon(".\\icon\\nv.png"));
 		menuNCC.setIcon(new ImageIcon(".\\icon\\home.png"));
@@ -133,6 +137,7 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 		itemDangXuat.setIcon(new ImageIcon(".\\icon\\logout.png"));
 		itemDoiMatKhau.setIcon(new ImageIcon(".\\icon\\key.png"));
 		itemThoat.setIcon(new ImageIcon(".\\icon\\close.png"));
+		itemHoTro.setIcon(new ImageIcon(".\\icon\\help.png"));
 
 		menuB.add(menuBar);
 		northB.add(menuB);
@@ -151,7 +156,8 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 		itemDangXuat.addActionListener(this);
 		itemDoiMatKhau.addActionListener(this);
 		itemThoat.addActionListener(this);
-		
+		itemHoTro.addActionListener(this);
+
 	}
 
 //	public static void main(String[] args) {
@@ -164,29 +170,38 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 		if (obj == itemThoat) {
 			System.exit(0);
 		}
-		if(obj == itemDangXuat) {
+		if (obj == itemDangXuat) {
 			new GD_DangNhap().setVisible(true);
 			this.dispose();
 		}
-		if(obj == itemDoiMatKhau) {
+		if (obj == itemDoiMatKhau) {
 			String nmk = JOptionPane.showInputDialog(this, "Nhập mật khẩu mới");
 			if (nmk != null) {
 				if (nmk.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
 					TaiKhoan_DAO tkd = new TaiKhoan_DAO();
 					try {
-						tkd.updateMk(nhanVien.getMaNV(),nmk);
+						tkd.updateMk(nhanVien.getMaNV(), nmk);
 						JOptionPane.showMessageDialog(this, "Thành công");
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				}
-				else
+				} else
 					JOptionPane.showMessageDialog(this, "Mật khẩu không phù hợp");
 			}
 		}
-
+		if(obj == itemHoTro) {
+			if (Desktop.isDesktopSupported()) {
+			    try {
+			        File myFile = new File(".\\docs\\UserManuall.pdf");
+			        Desktop.getDesktop().open(myFile);
+			    } catch (IOException ex) {
+			        // no application registered for PDFs
+			    }
+			}
+		}
 	}
+
 	public void thayCenterP(JPanel p) {
 		centerB.removeAll();
 		centerB.add(p);
@@ -196,31 +211,30 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 	@Override
 	public void menuSelected(MenuEvent e) {
 		Object obj = e.getSource();
-		if(obj == menuNV) {
+		if (obj == menuNV) {
 			thayCenterP(new GD_QuanLyNhanVien());
 		}
-		if(obj == menuNCC) {
+		if (obj == menuNCC) {
 			thayCenterP(new GD_NhaCungCap());
 		}
-		if(obj == menuTK) {
-                    try {
-                        thayCenterP(new GD_TKDT());
-                    } catch (ParseException ex) {
-                        Logger.getLogger(GD_NhanVienQuanLy.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+		if (obj == menuTK) {
+			try {
+				thayCenterP(new GD_TKDT());
+			} catch (ParseException ex) {
+				Logger.getLogger(GD_NhanVienQuanLy.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		}
-		
+
 	}
 
 	@Override
 	public void menuDeselected(MenuEvent e) {
 
-		
 	}
 
 	@Override
 	public void menuCanceled(MenuEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

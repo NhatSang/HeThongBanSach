@@ -3,6 +3,7 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsDevice;
@@ -11,6 +12,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -43,7 +46,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 	private NhanVien nhanVien;
 	private JMenuBar menuBar;
 	private JMenu menuSach, menuVPP, menuHD, menuTK, menuTC, menuKH;
-	private JMenuItem itemDangXuat, itemDoiMatKhau, itemThoat, itemLapHd, itemTimHD;
+	private JMenuItem itemDangXuat, itemDoiMatKhau, itemThoat, itemHoTro, itemLapHd, itemTimHD;
 	private Box centerB;
 	static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 	static LocalDate ngayHienTai = LocalDate.now();
@@ -94,20 +97,22 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		menuSach = new JMenu("Sách");
 		menuVPP = new JMenu("Văn Phòng Phẩm");
 		menuHD = new JMenu("Hóa Đơn");
-		menuKH = new JMenu("Khách hàng");
+		menuKH = new JMenu("Khách Hàng");
 		menuTK = new JMenu("Thống Kê");
-		menuTC = new JMenu("Tùy chọn");
+		menuTC = new JMenu("Tùy Chọn");
 
-		itemDangXuat = new JMenuItem("Đăng xuất");
-		itemDoiMatKhau = new JMenuItem("Đổi mật khẩu");
+		itemDangXuat = new JMenuItem("Đăng Xuất");
+		itemDoiMatKhau = new JMenuItem("Đổi Mật Khẩu");
 		itemThoat = new JMenuItem("Thoát");
+		itemHoTro = new JMenuItem("Hổ trợ");
 		itemLapHd = new JMenuItem("Lập Hóa Đơn");
 		itemTimHD = new JMenuItem("Xem Hàng Đợi");
 
 		menuHD.add(itemLapHd);
 		menuHD.add(itemTimHD);
-		menuTC.add(itemDangXuat);
+		menuTC.add(itemHoTro);
 		menuTC.add(itemDoiMatKhau);
+		menuTC.add(itemDangXuat);
 		menuTC.add(itemThoat);
 
 		menuBar.add(menuTC);
@@ -133,6 +138,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		itemThoat.setFont(new Font("Serif", Font.ITALIC, 25));
 		itemLapHd.setFont(new Font("Serif", Font.ITALIC, 25));
 		itemTimHD.setFont(new Font("Serif", Font.ITALIC, 25));
+		itemHoTro.setFont(new Font("Serif", Font.ITALIC, 25));
 
 		menuSach.setIcon(new ImageIcon(".\\icon\\book.png"));
 		menuVPP.setIcon(new ImageIcon(".\\icon\\vpp.png"));
@@ -145,6 +151,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		itemThoat.setIcon(new ImageIcon(".\\icon\\close.png"));
 		itemLapHd.setIcon(new ImageIcon(".\\icon\\addbill.png"));
 		itemTimHD.setIcon(new ImageIcon(".\\icon\\searchbill.png"));
+		itemHoTro.setIcon(new ImageIcon(".\\icon\\help.png"));
 
 		menuB.add(menuBar);
 		northB.add(menuB);
@@ -165,6 +172,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		itemThoat.addActionListener(this);
 		itemLapHd.addActionListener(this);
 		itemTimHD.addActionListener(this);
+		itemHoTro.addActionListener(this);
 	}
 
 //	public static void main(String[] args) {
@@ -190,19 +198,27 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 			thayCenterP(new GD_HangDoiHD(this));
 		} else if (obj == itemDoiMatKhau) {
 			String nmk = JOptionPane.showInputDialog(this, "Nhập mật khẩu mới");
-			if (nmk!= null) {
+			if (nmk != null) {
 				if (nmk.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
 					TaiKhoan_DAO tkd = new TaiKhoan_DAO();
 					try {
-						tkd.updateMk(nhanVien.getMaNV(),nmk);
+						tkd.updateMk(nhanVien.getMaNV(), nmk);
 						JOptionPane.showMessageDialog(this, "Thành công");
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				}
-				else
+				} else
 					JOptionPane.showMessageDialog(this, "Mật khẩu không phù hợp");
+			}
+		} else if (obj == itemHoTro) {
+			if (Desktop.isDesktopSupported()) {
+				try {
+					File myFile = new File(".\\docs\\UserManuall.pdf");
+					Desktop.getDesktop().open(myFile);
+				} catch (IOException ex) {
+					// no application registered for PDFs
+				}
 			}
 		}
 	}
@@ -226,12 +242,12 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 			thayCenterP(new GD_KH());
 		}
 		if (obj == menuTK) {
-                    try {
-						thayCenterP(new GD_ThongKeTheoCa());
-					} catch (ParseException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+			try {
+				thayCenterP(new GD_ThongKeTheoCa());
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 	}
