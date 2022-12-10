@@ -514,7 +514,7 @@ public class GD_TKDT extends javax.swing.JPanel {
             ArrayList<ThongKeDoanhThu> v = tkdt.VAT(tk.getMaSP());
             for (ThongKeDoanhThu tk1 : v) {
             	System.out.println(tk1.getVat());
-            	doanhthu =doanhthu + Double.valueOf(tk.getTongSoLuong())*tk.getGiaBan()+ tk.getGiaBan()*tk1.getVat()/100;
+            	doanhthu =doanhthu + Double.valueOf(tk.getTongSoLuong())*tk.getGiaBan()+ tk.getGiaBan()*tk.getTongSoLuong()*tk1.getVat()/100;
             }
             
             if(tk.getTongSoLuong() > checkbnn){
