@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -225,7 +226,12 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 			thayCenterP(new GD_KH());
 		}
 		if (obj == menuTK) {
-                    thayCenterP(new GD_ThongKeTheoCa());
+                    try {
+						thayCenterP(new GD_ThongKeTheoCa());
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 		}
 
 	}
