@@ -60,7 +60,7 @@ public class TKDT_DAO {
 			DataBase.getInstance();
 			Connection con = DataBase.getConnection();
 
-			String sql = " select  cthd.maSP, sp.tenSP, SUM(cthd.soLuong) as 'soLuong' , hd.ngayLap, sp.donGia from ChiTietHoaDon cthd left join SanPham sp on cthd.maSP = sp.maSP left join HoaDon hd on cthd.maHD = hd.maHD group by cthd.maSP,sp.tenSP, hd.ngayLap, sp.donGia having YEAR(hd.ngayLap)="+ "'"+ nam +"'" + "and MONTH(hd.ngayLap)=" + "'" + thang + "'";
+			String sql = "select test.maSP, test.tenSP, SUM(test.soLuong) as 'soLuong' , test.donGia from (select  cthd.maSP, sp.tenSP, SUM(cthd.soLuong) as 'soLuong' , hd.ngayLap, sp.donGia, hd.maHD from ChiTietHoaDon cthd left join SanPham sp on cthd.maSP = sp.maSP left join HoaDon hd on cthd.maHD = hd.maHD  group by cthd.maSP,sp.tenSP, hd.ngayLap, sp.donGia , hd.maHD having YEAR(hd.ngayLap)="+ "'"+ nam +"'" + "and MONTH(hd.ngayLap)=" + "'" + thang + "') as test group by test.maSP,test.tenSP ,test.donGia";
 
                         Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(sql);
@@ -69,10 +69,10 @@ public class TKDT_DAO {
 				String tenSP = rs.getString(2);
 				String maSP = rs.getString(1);
 				int soLuong = rs.getInt(3);
-				Date ngayLap = rs.getDate(4);
-				Double giaBan = rs.getDouble(5);
+//				Date ngayLap = rs.getDate(4);
+				Double giaBan = rs.getDouble(4);
 //				String maHD = rs.getString(6);
-				dsThongKe.add(new ThongKeDoanhThu(maSP, tenSP, soLuong, giaBan, ngayLap));
+				dsThongKe.add(new ThongKeDoanhThu(maSP, tenSP, soLuong, giaBan));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

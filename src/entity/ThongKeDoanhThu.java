@@ -37,7 +37,13 @@ public class ThongKeDoanhThu {
 		this.ngay = ngay;
 	}
 
-
+        public ThongKeDoanhThu(String maSP, String tenSP, int tongSoLuong, double giaBan) {
+		super();
+		this.maSP = maSP;
+		this.tenSP = tenSP;
+		this.tongSoLuong = tongSoLuong;
+		this.giaBan = giaBan;
+	}
 
 	public ThongKeDoanhThu(String maSP, double vat) {
 		super();
