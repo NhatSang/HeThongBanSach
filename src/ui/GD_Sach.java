@@ -126,7 +126,7 @@ public class GD_Sach extends javax.swing.JPanel {
 		tableSach.setModel(modelSach = new DefaultTableModel(new Object[][] {
 
 		}, new String[] { "STT", "Mã", "Tên ", "Loại", "Nhà xuất bản", "Năm xuất bản", "Số lượng", "Đơn giá",
-				 "Nhà cung cấp", "Tác giả" }) {
+				"Nhà cung cấp", "Tác giả" }) {
 
 		});
 
@@ -692,7 +692,8 @@ public class GD_Sach extends javax.swing.JPanel {
 
 		for (Sach sach : dssach) {
 			Object row[] = { tableSach.getRowCount(), sach.getMaSP(), sach.getTenSP(), sach.getLoaiSP(),
-					sach.getNhaXB(), sach.getNamXB(), sach.getSoLuong(), sach.getDonGia(), sach.getNhaCC(), sach.getTacGia().getTenTG()};
+					sach.getNhaXB(), sach.getNamXB(), sach.getSoLuong(), sach.getDonGia(), sach.getNhaCC(),
+					sach.getTacGia().getTenTG() };
 			modelSach.addRow(row);
 		}
 		loadData();
@@ -873,7 +874,10 @@ public class GD_Sach extends javax.swing.JPanel {
 				int namXB_SX = Integer.parseInt(txtNamXB.getText().trim());
 				int soLuong = Integer.parseInt(txtSoLuong.getText().trim());
 				Double donGia = Double.parseDouble(txtDonGia.getText().trim());
-				int tuoiGH = Integer.parseInt(txtTuoiGioiHan.getText().trim());
+				int tuoiGH = 0;
+				if (txtTuoiGioiHan.getText().trim().length() != 0) {
+					tuoiGH = Integer.parseInt(txtTuoiGioiHan.getText().trim());
+				}
 				int vat = Integer.parseInt(txtVAT.getText().trim());
 				String moTa = txtMoTa.getText();
 				TacGia tacGia = sanPham_DAO.timTacGia(txtTacGia.getText());
@@ -1162,18 +1166,15 @@ public class GD_Sach extends javax.swing.JPanel {
 			lbMes.setText("Chọn đơn vị");
 			return false;
 		}
-		try {
-			Integer.parseInt(tuoiGH);
-		} catch (Exception e) {
-			// TODO: handle exception
-			lbMes.setText("Tuổi giới hạn không được để trống và phải viết dưới dạng số");
-			txtTuoiGioiHan.requestFocus();
-			return false;
-		}
-		if (Integer.parseInt(tuoiGH) <= 1) {
-			lbMes.setText("Tuổi giới hạn phải lớn hơn 1");
-			txtDonGia.requestFocus();
-			return false;
+		if (tuoiGH.length() != 0) {
+			try {
+				Integer.parseInt(tuoiGH);
+			} catch (Exception e) {
+				// TODO: handle exception
+				lbMes.setText("Tuổi giới hạn phải viết dưới dạng số");
+				txtTuoiGioiHan.requestFocus();
+				return false;
+			}
 		}
 		try {
 			Integer.parseInt(vat);
