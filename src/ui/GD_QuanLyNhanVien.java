@@ -457,7 +457,7 @@ public class GD_QuanLyNhanVien extends javax.swing.JPanel {
 	private javax.swing.JTextField txttaikhoan;
 	private javax.swing.JLabel txtthongbao;
 	private javax.swing.JTextField txttimkiem;
-	// End of variables declaration//GEN-END:variables
+	// End of variables declaration                   
 	private DefaultTableModel modelnv;
 	private NhanVien_DAO nv_dao = new NhanVien_DAO();
 	private ArrayList<NhanVien> dsnv = new ArrayList<NhanVien>();

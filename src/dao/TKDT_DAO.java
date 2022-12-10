@@ -31,7 +31,7 @@ public class TKDT_DAO {
 			DataBase.getInstance();
 			Connection con = DataBase.getConnection();
 
-			String sql = "select  cthd.maSP, sp.tenSP, SUM(cthd.soLuong) as 'soLuong' , hd.ngayLap, sp.donGia from ChiTietHoaDon cthd left join SanPham sp on cthd.maSP = sp.maSP left join HoaDon hd on cthd.maHD = hd.maHD group by cthd.maSP,sp.tenSP, hd.ngayLap, sp.donGia having hd.ngayLap=" + "'" + ngay + "'";
+			String sql = "select  cthd.maSP, sp.tenSP, SUM(cthd.soLuong) as 'soLuong' , hd.ngayLap, sp.donGia from ChiTietHoaDon cthd left join SanPham sp on cthd.maSP = sp.maSP left join HoaDon hd on cthd.maHD = hd.maHD group by cthd.maSP,sp.tenSP, hd.ngayLap, sp.donGia, hd.trangThai having hd.ngayLap=" + "'" + ngay + "' and hd.trangThai = 1";
 
                         Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(sql);
@@ -60,7 +60,7 @@ public class TKDT_DAO {
 			DataBase.getInstance();
 			Connection con = DataBase.getConnection();
 
-			String sql = "select test.maSP, test.tenSP, SUM(test.soLuong) as 'soLuong' , test.donGia from (select  cthd.maSP, sp.tenSP, SUM(cthd.soLuong) as 'soLuong' , hd.ngayLap, sp.donGia, hd.maHD from ChiTietHoaDon cthd left join SanPham sp on cthd.maSP = sp.maSP left join HoaDon hd on cthd.maHD = hd.maHD  group by cthd.maSP,sp.tenSP, hd.ngayLap, sp.donGia , hd.maHD having YEAR(hd.ngayLap)="+ "'"+ nam +"'" + "and MONTH(hd.ngayLap)=" + "'" + thang + "') as test group by test.maSP,test.tenSP ,test.donGia";
+			String sql = "select test.maSP, test.tenSP, SUM(test.soLuong) as 'soLuong' , test.donGia from (select  cthd.maSP, sp.tenSP, SUM(cthd.soLuong) as 'soLuong' , hd.ngayLap, sp.donGia, hd.maHD from ChiTietHoaDon cthd left join SanPham sp on cthd.maSP = sp.maSP left join HoaDon hd on cthd.maHD = hd.maHD  group by cthd.maSP,sp.tenSP, hd.ngayLap, sp.donGia , hd.maHD, hd.trangThai having YEAR(hd.ngayLap)="+ "'"+ nam +"'" + "and MONTH(hd.ngayLap)=" + "'" + thang + "' and hd.trangThai = 1) as test group by test.maSP,test.tenSP ,test.donGia";
 
                         Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(sql);
@@ -152,4 +152,31 @@ public class TKDT_DAO {
     		}
     		return dsThongKe;
     	}
+        
+        public ArrayList<ThongKeDoanhThu> ThongKeTheoCa(String ngay, int caLap) {
+    		ArrayList<ThongKeDoanhThu> dsThongKe = new ArrayList<ThongKeDoanhThu>();
+    		try {
+    			DataBase.getInstance();
+    			Connection con = DataBase.getConnection();
+
+    			String sql = "  select  cthd.maSP, sp.tenSP, SUM(cthd.soLuong) as 'soLuong' , hd.ngayLap, sp.donGia, hd.caLap from ChiTietHoaDon cthd left join SanPham sp on cthd.maSP = sp.maSP left join HoaDon hd on cthd.maHD = hd.maHD group by cthd.maSP,sp.tenSP, hd.ngayLap, sp.donGia, hd.caLap having hd.ngayLap="+ "'"+ ngay +"'" + " and hd.caLap = " + "'" + caLap + "'";
+
+                            Statement statement = con.createStatement();
+    			ResultSet rs = statement.executeQuery(sql);
+
+    			while (rs.next()) {
+    				String tenSP = rs.getString(2);
+    				String maSP = rs.getString(1);
+    				int soLuong = rs.getInt(3);
+    				Date ngayLap = rs.getDate(4);
+    				Double giaBan = rs.getDouble(5);
+    				int ca = rs.getInt(6);
+    				dsThongKe.add(new ThongKeDoanhThu(maSP, tenSP, soLuong, giaBan, ngayLap, ca));
+    			}
+    		} catch (SQLException e) {
+    			e.printStackTrace();
+    		}
+    		return dsThongKe;
+    	}
+        
 }

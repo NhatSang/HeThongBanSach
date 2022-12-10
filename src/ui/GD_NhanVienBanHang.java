@@ -225,7 +225,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 			thayCenterP(new GD_KH());
 		}
 		if (obj == menuTK) {
-
+                    thayCenterP(new GD_ThongKeTheoCa());
 		}
 
 	}
