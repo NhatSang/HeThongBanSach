@@ -57,8 +57,9 @@ public class GD_TKDT extends javax.swing.JPanel {
         lbDoanhThu = new javax.swing.JLabel();
         txtDoanhThu = new javax.swing.JTextField();
         lbSanPhamBanNhieuNhat = new javax.swing.JLabel();
-        txtSanPhamBanNhieuNhat = new javax.swing.JTextField();
         btnThongKe = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtSanPhamBanNhieuNhat = new javax.swing.JTextArea();
 
         setPreferredSize(new java.awt.Dimension(960, 540));
 
@@ -91,7 +92,7 @@ public class GD_TKDT extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -144,12 +145,6 @@ public class GD_TKDT extends javax.swing.JPanel {
 
         lbSanPhamBanNhieuNhat.setText("Sản phẩm bán nhiều nhất:");
 
-        txtSanPhamBanNhieuNhat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSanPhamBanNhieuNhatActionPerformed(evt);
-            }
-        });
-
         btnThongKe.setText("Thống Kê");
         btnThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,12 +152,23 @@ public class GD_TKDT extends javax.swing.JPanel {
             }
         });
 
+        txtSanPhamBanNhieuNhat.setColumns(20);
+        txtSanPhamBanNhieuNhat.setRows(5);
+        jScrollPane2.setViewportView(txtSanPhamBanNhieuNhat);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jdcNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                            .addComponent(txtTongSanPham)
+                            .addComponent(txtTongHoaDon)
+                            .addComponent(txtDoanhThu)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,17 +178,12 @@ public class GD_TKDT extends javax.swing.JPanel {
                             .addComponent(lbTongHoaDon)
                             .addComponent(lbDoanhThu)
                             .addComponent(lbSanPhamBanNhieuNhat))
-                        .addGap(0, 172, Short.MAX_VALUE))
+                        .addGap(0, 178, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(120, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jdcNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                                .addComponent(txtTongSanPham)
-                                .addComponent(txtTongHoaDon)
-                                .addComponent(txtDoanhThu)
-                                .addComponent(txtSanPhamBanNhieuNhat)))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -208,9 +209,9 @@ public class GD_TKDT extends javax.swing.JPanel {
                     .addComponent(txtDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lbSanPhamBanNhieuNhat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSanPhamBanNhieuNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -220,7 +221,7 @@ public class GD_TKDT extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -247,8 +248,9 @@ public class GD_TKDT extends javax.swing.JPanel {
         lbDoanhThu = new javax.swing.JLabel();
         txtDoanhThu = new javax.swing.JTextField();
         lbSanPhamBanNhieuNhat = new javax.swing.JLabel();
-        txtSanPhamBanNhieuNhat = new javax.swing.JTextField();
         btnThongKe = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtSanPhamBanNhieuNhat = new javax.swing.JTextArea();
 
         setPreferredSize(new java.awt.Dimension(960, 540));
 
@@ -279,7 +281,7 @@ public class GD_TKDT extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -332,12 +334,6 @@ public class GD_TKDT extends javax.swing.JPanel {
 
         lbSanPhamBanNhieuNhat.setText("Sản phẩm bán nhiều nhất:");
 
-        txtSanPhamBanNhieuNhat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSanPhamBanNhieuNhatActionPerformed(evt);
-            }
-        });
-
         btnThongKe.setText("Thống Kê");
         btnThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -345,12 +341,23 @@ public class GD_TKDT extends javax.swing.JPanel {
             }
         });
 
+        txtSanPhamBanNhieuNhat.setColumns(20);
+        txtSanPhamBanNhieuNhat.setRows(5);
+        jScrollPane2.setViewportView(txtSanPhamBanNhieuNhat);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jdcNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                            .addComponent(txtTongSanPham)
+                            .addComponent(txtTongHoaDon)
+                            .addComponent(txtDoanhThu)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,17 +367,12 @@ public class GD_TKDT extends javax.swing.JPanel {
                             .addComponent(lbTongHoaDon)
                             .addComponent(lbDoanhThu)
                             .addComponent(lbSanPhamBanNhieuNhat))
-                        .addGap(0, 172, Short.MAX_VALUE))
+                        .addGap(0, 178, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(120, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jdcNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                                .addComponent(txtTongSanPham)
-                                .addComponent(txtTongHoaDon)
-                                .addComponent(txtDoanhThu)
-                                .addComponent(txtSanPhamBanNhieuNhat)))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -396,9 +398,9 @@ public class GD_TKDT extends javax.swing.JPanel {
                     .addComponent(txtDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lbSanPhamBanNhieuNhat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSanPhamBanNhieuNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -408,7 +410,7 @@ public class GD_TKDT extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -433,10 +435,6 @@ public class GD_TKDT extends javax.swing.JPanel {
     private void txtDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDoanhThuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDoanhThuActionPerformed
-
-    private void txtSanPhamBanNhieuNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSanPhamBanNhieuNhatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSanPhamBanNhieuNhatActionPerformed
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
         // TODO add your handling code here:
@@ -475,6 +473,7 @@ public class GD_TKDT extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private com.toedter.calendar.JDateChooser jdcNgay;
     private javax.swing.JLabel lbDoanhThu;
     private javax.swing.JLabel lbNgay;
@@ -483,7 +482,7 @@ public class GD_TKDT extends javax.swing.JPanel {
     private javax.swing.JLabel lbTongSanPham;
     private javax.swing.JTable tableThongKeDoanhThu;
     private javax.swing.JTextField txtDoanhThu;
-    private javax.swing.JTextField txtSanPhamBanNhieuNhat;
+    private javax.swing.JTextArea txtSanPhamBanNhieuNhat;
     private javax.swing.JTextField txtTongHoaDon;
     private javax.swing.JTextField txtTongSanPham;
     // End of variables declaration//GEN-END:variables
@@ -518,11 +517,15 @@ public class GD_TKDT extends javax.swing.JPanel {
             }
             
             if(tk.getTongSoLuong() > checkbnn){
-                bnn = tk.getTenSP();
+//                bnn = tk.getTenSP();
                 checkbnn = tk.getTongSoLuong();
             }
         }
-        
+        for(ThongKeDoanhThu tk : dsTKDT){
+            if(checkbnn == tk.getTongSoLuong()){
+               bnn = bnn + tk.getTenSP() + "\n";  
+            }
+        }
         ArrayList<ThongKeDoanhThu> Dem = tkdt.DemTKTheoNgay(today);
         for(ThongKeDoanhThu tk : Dem){
             if (!check.equals(tk.getMaHD())) {

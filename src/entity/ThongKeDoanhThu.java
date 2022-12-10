@@ -10,6 +10,7 @@ public class ThongKeDoanhThu {
 	private Date ngay;
     private String maHD;
     private double vat;
+    private int ca;
 	
 	
 	public ThongKeDoanhThu() {
@@ -49,6 +50,18 @@ public class ThongKeDoanhThu {
 		super();
 		this.maSP = maSP;
 		this.vat = vat;
+	}
+
+	
+
+	public ThongKeDoanhThu(String maSP, String tenSP, int tongSoLuong, double giaBan, Date ngay, int ca) {
+		super();
+		this.maSP = maSP;
+		this.tenSP = tenSP;
+		this.tongSoLuong = tongSoLuong;
+		this.giaBan = giaBan;
+		this.ngay = ngay;
+		this.ca = ca;
 	}
 
 
@@ -137,13 +150,23 @@ public class ThongKeDoanhThu {
 
 
 
+	public int getCa() {
+		return ca;
+	}
+
+
+
+	public void setCa(int ca) {
+		this.ca = ca;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "ThongKeDoanhThu [maSP=" + maSP + ", tenSP=" + tenSP + ", tongSoLuong=" + tongSoLuong + ", giaBan="
-				+ giaBan + ", ngay=" + ngay + ", maHD=" + maHD + ", vat=" + vat + "]";
+				+ giaBan + ", ngay=" + ngay + ", maHD=" + maHD + ", vat=" + vat + ", ca=" + ca + "]";
 	}
-	
-
 	
         
 }
