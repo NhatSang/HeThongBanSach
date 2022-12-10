@@ -148,6 +148,33 @@ public class SanPham_DAO {
 		}
 		return dssp;
 	}
+	
+	public SanPham timKiemSP(String key) {
+		SanPham sp = null;
+		DataBase.getInstance();
+		Connection con = DataBase.getConnection();
+		try {
+			String sql = "select maSP,tenSP,hinhAnh,donGia, donVi, soLuong, VAT, ncc.maNCC, ncc.tenNCC from SanPham sp \r\n"
+					+ "					 join NhaCungCap ncc on sp.maNCC = ncc.maNCC where tenSP like N'%"+key+"%' or maSP like\r\n"
+					+ "					'%"+key+"%' and sp.trangThai = 0";
+			Statement stm = con.createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				String maSp = rs.getString(1);
+				String tenSp = rs.getString(2);
+				String hinhAnh = rs.getString(3);
+				double donGia = rs.getFloat(4);
+				String donVi = rs.getString(5);
+				int soLuong = rs.getInt(6);
+				int VAT = rs.getInt(7);
+				NhaCungCap ncc = new NhaCungCap(rs.getString(8), rs.getString(9));
+				sp = new SanPham(maSp, tenSp, donVi, hinhAnh, soLuong, VAT, donGia, ncc);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sp;
+	}
 
 	// Sang xóa sp
 	public void xoa_SP(String maSp) throws SQLException {
