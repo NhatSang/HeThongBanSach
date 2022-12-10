@@ -120,8 +120,8 @@ public class GD_VPP extends javax.swing.JPanel {
 
 		tableVPP.setModel(modelVPP = new DefaultTableModel(new Object[][] {
 
-		}, new String[] { "STT", "Mã", "Tên", "Loại", "Số lượng", "Đơn giá", "Đơn vị ", "VAT", "Nhà cung cấp", "Mô tả",
-				"Thương hiệu", "Màu sắc", "Chất liệu", "Xuất xứ", "Hình ảnh" }) {
+		}, new String[] { "STT", "Mã", "Tên", "Loại", "Số lượng", "Đơn giá", "Nhà cung cấp",
+				"Thương hiệu", "Màu sắc", "Xuất xứ"}) {
 		});
 
 		tableVPP.setRowHeight(50);
@@ -595,8 +595,8 @@ public class GD_VPP extends javax.swing.JPanel {
 		dsvpp = sp_dao.getAllVPP1();
 		for (VanPhongPham vpp : dsvpp) {
 			Object row[] = { tableVPP.getRowCount(), vpp.getMaSP(), vpp.getTenSP(), vpp.getLoaiSP(), vpp.getSoLuong(),
-					vpp.getDonGia(), vpp.getDonVi(), vpp.getVAT(), vpp.getNhaCC(), vpp.getMoTa(), vpp.getThuongHieu(),
-					vpp.getMauSac(), vpp.getChatLieu(), vpp.getXuatXu(), vpp.getHinhAnh() };
+					vpp.getDonGia(), vpp.getNhaCC(), vpp.getThuongHieu(),
+					vpp.getMauSac(), vpp.getXuatXu()};
 			modelVPP.addRow(row);
 		}
 

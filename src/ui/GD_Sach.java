@@ -125,9 +125,8 @@ public class GD_Sach extends javax.swing.JPanel {
 
 		tableSach.setModel(modelSach = new DefaultTableModel(new Object[][] {
 
-		}, new String[] { "STT", "Mã", "Tên ", "Loại", "Nhà xuất bản", "Năm xuất bản", "Số lượng", "Đơn giá", "Đơn vị ",
-				"VAT", "Tuổi giới hạn", "Nhà cung cấp", "Mô tả", "Tác giả", "Số trang", "Loại bìa", "Cấp độ học",
-				"Người dịch", "Hình ảnh" }) {
+		}, new String[] { "STT", "Mã", "Tên ", "Loại", "Nhà xuất bản", "Năm xuất bản", "Số lượng", "Đơn giá",
+				 "Nhà cung cấp", "Tác giả" }) {
 
 		});
 
@@ -693,9 +692,7 @@ public class GD_Sach extends javax.swing.JPanel {
 
 		for (Sach sach : dssach) {
 			Object row[] = { tableSach.getRowCount(), sach.getMaSP(), sach.getTenSP(), sach.getLoaiSP(),
-					sach.getNhaXB(), sach.getNamXB(), sach.getSoLuong(), sach.getDonGia(), sach.getDonVi(),
-					sach.getVAT(), sach.getTuoiGioiHan(), sach.getNhaCC(), sach.getMoTa(), sach.getTacGia().getTenTG(),
-					sach.getSoTrang(), sach.getLoaiBia(), sach.getCapDoHoc(), sach.getNguoiDich(), sach.getHinhAnh() };
+					sach.getNhaXB(), sach.getNamXB(), sach.getSoLuong(), sach.getDonGia(), sach.getNhaCC(), sach.getTacGia().getTenTG()};
 			modelSach.addRow(row);
 		}
 		loadData();
