@@ -440,24 +440,31 @@ public class GD_TKDT extends javax.swing.JPanel {
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
         // TODO add your handling code here:
-//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
-            
+            stt = 0;
             today = ((JTextField)jdcNgay.getDateEditor().getUiComponent()).getText();
-//            String a = dateFormat.format(jdcNgay.getDate());
-        try {
-            LoadTKDTTheoThang();
-
-        } catch (ParseException ex) {
-            Logger.getLogger(GD_TKDT.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        String textcbb = cbbThongKe.getSelectedItem().toString();
+       
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM");
         String a = dateFormat.format(jdcNgay.getDate());
         String b = dateFormat1.format(jdcNgay.getDate());
         System.out.println(a);
         System.out.println(b);
+        String check = cbbThongKe.getSelectedItem().toString();
+        if(check.equals("Thống kê theo ngày")){
+            try {
+            loadThongKeDoanhThu();
+
+        } catch (ParseException ex) {
+            Logger.getLogger(GD_TKDT.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }else {
+            try {
+            LoadTKDTTheoThang();
+
+        } catch (ParseException ex) {
+            Logger.getLogger(GD_TKDT.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
     }//GEN-LAST:event_btnThongKeActionPerformed
 
 
@@ -495,6 +502,7 @@ public class GD_TKDT extends javax.swing.JPanel {
         String check ="" ;
         String bnn = "";
         int checkbnn = 0;
+        double vat;
         TKDT_DAO tkdt = new TKDT_DAO(); 
         java.util.Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(today);
         jdcNgay.setDate(date2);
@@ -502,18 +510,26 @@ public class GD_TKDT extends javax.swing.JPanel {
         for (ThongKeDoanhThu tk : dsTKDT){
             Object row[] = {++stt, tk.getTenSP(), tk.getTongSoLuong()};
             modelThongKeDoanhThu.addRow(row);
-            tongsp = tongsp + tk.getTongSoLuong();
+            tongsp = tongsp + tk.getTongSoLuong();   
+            ArrayList<ThongKeDoanhThu> v = tkdt.VAT(tk.getMaSP());
+            for (ThongKeDoanhThu tk1 : v) {
+            	System.out.println(tk1.getVat());
+            	doanhthu =doanhthu + Double.valueOf(tk.getTongSoLuong())*tk.getGiaBan()+ tk.getGiaBan()*tk1.getVat()/100;
+            }
+            
+            if(tk.getTongSoLuong() > checkbnn){
+                bnn = tk.getTenSP();
+                checkbnn = tk.getTongSoLuong();
+            }
+        }
+        
+        ArrayList<ThongKeDoanhThu> Dem = tkdt.DemTKTheoNgay(today);
+        for(ThongKeDoanhThu tk : Dem){
             if (!check.equals(tk.getMaHD())) {
                 shd++;
                 check = tk.getMaHD();
             } else {
                 check = tk.getMaHD();
-            }
-            
-            doanhthu =doanhthu + Double.valueOf(tk.getTongSoLuong())*tk.getGiaBan();
-            
-            if(tk.getTongSoLuong() > checkbnn){
-                bnn = tk.getTenSP();
             }
         }
         String tongSL = String.valueOf(tongsp);
@@ -540,25 +556,37 @@ public class GD_TKDT extends javax.swing.JPanel {
         String bnn = "";
         int checkbnn = 0;
         TKDT_DAO tkdt = new TKDT_DAO(); 
-        java.util.Date date2 = new SimpleDateFormat("yyyy-MM").parse(today);
+        java.util.Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(today);
    
         jdcNgay.setDate(date2);
         ArrayList<ThongKeDoanhThu> dsTKDT = tkdt.ThongKeDoanhThuTheoThang(a,b);
         for (ThongKeDoanhThu tk : dsTKDT){
+            
             Object row[] = {++stt, tk.getTenSP(), tk.getTongSoLuong()};
             modelThongKeDoanhThu.addRow(row);
             tongsp = tongsp + tk.getTongSoLuong();
+            
+            ArrayList<ThongKeDoanhThu> v = tkdt.VAT(tk.getMaSP());
+            for (ThongKeDoanhThu tk1 : v) {
+            	System.out.println(tk1.getVat());
+            	doanhthu =doanhthu + Double.valueOf(tk.getTongSoLuong())*tk.getGiaBan()+ tk.getGiaBan()*tk1.getVat()/100;
+            }
+            if(tk.getTongSoLuong() > checkbnn){
+                bnn = tk.getTenSP();
+                checkbnn = tk.getTongSoLuong();
+            }
+            System.out.println(tk.getTongSoLuong());
+            System.out.println(bnn);
+            
+        }
+        
+        ArrayList<ThongKeDoanhThu> Dem = tkdt.DemTheoThang(a,b);
+        for(ThongKeDoanhThu tk : Dem){
             if (!check.equals(tk.getMaHD())) {
                 shd++;
                 check = tk.getMaHD();
             } else {
                 check = tk.getMaHD();
-            }
-            
-            doanhthu =doanhthu + Double.valueOf(tk.getTongSoLuong())*tk.getGiaBan();
-            
-            if(tk.getTongSoLuong() > checkbnn){
-                bnn = tk.getTenSP();
             }
         }
         String tongSL = String.valueOf(tongsp);
