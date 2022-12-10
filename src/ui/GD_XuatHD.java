@@ -220,7 +220,6 @@ public class GD_XuatHD extends JFrame implements Printable{
         tongTien = hd.tongTienSauVAT();
         modelDSSP.getDataVector().removeAllElements();
         hd_DAO.getDSCT(hd.getMaHD()).forEach(cthd -> {
-//            Double tien = tienKhach;
 
             String giaBan = decimalFormat.format(cthd.getGiaBan()) + " VND ";
             String thanhTien = decimalFormat.format(cthd.thanhTien()) + " VND ";
@@ -235,11 +234,6 @@ public class GD_XuatHD extends JFrame implements Printable{
         });
         lblTongTien.setText(decimalFormat.format(tongTien) + " VND ");
     }
-//
-//    public void setHoaDon(HoaDon hd) {
-//        this.hd = hd;
-//        renderData();
-//    }
 
     private void printFrame() throws PrinterException{
     	PrintService printService = PrintServiceLookup.lookupDefaultPrintService();

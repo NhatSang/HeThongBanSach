@@ -45,7 +45,7 @@ public class HoaDon {
 	public double tongVAT() {
 		double s = 0;
 		for(ChiTietHoaDon c : dsChiTiet) {
-			s+=c.getGiaBan()*(double)c.getSanPham().getVAT()/100;
+			s+=(c.getGiaBan()*(double)c.getSanPham().getVAT()/100)*c.getSoLuong();
 		}
 		return s;
 	}
