@@ -828,7 +828,7 @@ public class GD_VPP extends javax.swing.JPanel {
 
 				VanPhongPham vpp = new VanPhongPham(donvi, tenVPP, donvi, moTa, hinhAnh, soLuong, vat, donGia, loaiVPP,
 						ncc, xuatXu, chatLieu, thuongHieu, mauSac);
-				if (sanPham_DAO.timKiemSPTheoMa(vpp.getTenSP()) == null) {
+				if (sanPham_DAO.timKiemSP(vpp.getTenSP()) == null) {
 					try {
 						sanPham_DAO.themVPP(vpp);
 						JOptionPane.showMessageDialog(null, "Thêm thành công");

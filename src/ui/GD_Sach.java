@@ -952,7 +952,7 @@ public class GD_Sach extends javax.swing.JPanel {
 				Sach sach = new Sach(tenSach, donVi, moTa, hinhAnh, soLuong, vat, donGia, loaiSach, ncc, namXB_SX,
 						soTrang, tuoiGH, nguoiDich, NXB, tacGia, loaiBia, cdh);
 
-				if (sanPham_DAO.timKiemSPTheoMa(sach.getTenSP()) == null) {
+				if (sanPham_DAO.timKiemSP(sach.getTenSP()) == null) {
 					try {
 						;
 						sanPham_DAO.themSach(sach);
