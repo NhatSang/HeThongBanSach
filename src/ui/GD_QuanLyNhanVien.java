@@ -43,6 +43,7 @@ public class GD_QuanLyNhanVien extends javax.swing.JPanel {
 	public GD_QuanLyNhanVien() {
 		initComponents();
 		loadnv();
+		setEditableForm(false);
 	}
 
 	/**
@@ -140,6 +141,7 @@ public class GD_QuanLyNhanVien extends javax.swing.JPanel {
 		jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 		lblma.setText("Mã:");
+		txtma.setEnabled(false);
 
 		txtma.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -457,7 +459,7 @@ public class GD_QuanLyNhanVien extends javax.swing.JPanel {
 	private javax.swing.JTextField txttaikhoan;
 	private javax.swing.JLabel txtthongbao;
 	private javax.swing.JTextField txttimkiem;
-	// End of variables declaration                   
+	// End of variables declaration//GEN-END:variables
 	private DefaultTableModel modelnv;
 	private NhanVien_DAO nv_dao = new NhanVien_DAO();
 	private ArrayList<NhanVien> dsnv = new ArrayList<NhanVien>();
@@ -511,7 +513,6 @@ public class GD_QuanLyNhanVien extends javax.swing.JPanel {
 		TaiKhoan tk = nv_dao.timTK(nv.getMaNV());
 		txttaikhoan.setText(tk.getTenTK());
 		txtmatkhau.setText(tk.getMatKhau());
-		setEditableForm(true);
 	}
 
 	public void setEditableForm(boolean st) {
@@ -533,9 +534,9 @@ public class GD_QuanLyNhanVien extends javax.swing.JPanel {
 		if (check != 1) {
 			btnxoa.setText("Huỷ");
 			btnsua.setEnabled(false);
+			radnam.setSelected(true);
 			check = 1;
 		} else {
-//			checkThongTin();
 			if (checkThongTin()) {
 				String hoten = txthoten.getText();
 				String diachi = txtdiachi.getText();
@@ -622,26 +623,6 @@ public class GD_QuanLyNhanVien extends javax.swing.JPanel {
 		cbbchucvu.setSelectedItem(null);
 	}
 
-//	public void suanv() {
-//		String ma = txtma.getText();
-//		String ten = txthoten.getText();
-//		String cccd = txtcccd.getText();
-//		String diachi = txtdiachi.getText();
-//		ChucVu chucvu = (ChucVu) cbbchucvu.getSelectedItem();
-//		Date ns = Date.valueOf(((JTextField) jdcngaysinh.getDateEditor().getUiComponent()).getText());
-//		Boolean gt = radnam.isSelected() ? true : false;
-//		String sdt = txtsdt.getText();
-//		NhanVien nv = new NhanVien(ma, ten, cccd, diachi, sdt, ns, gt, chucvu);
-//		try {
-//			NhanVien_DAO nhanvien_DAO = new NhanVien_DAO();
-//			nhanvien_DAO.suanv(nv);
-//			;
-//			loadnv();
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
-//	}
 	public void suanv() {
 		if (check != 2) {
 			btnxoa.setText("Huỷ");
@@ -694,6 +675,14 @@ public class GD_QuanLyNhanVien extends javax.swing.JPanel {
 			txtthongbao.setText("Nhập ngày sinh Nhân Viên");
 			return false;
 		}
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String ns = dateFormat.format(jdcngaysinh.getDate());
+		int a = ns.compareTo(today);
+		System.out.println(a);
+		if (a > 0) {
+			txtthongbao.setText("Ngày sinh phải bé hơn ngày hiện tại");
+			return false;
+		}
 		if (dc.equals("")) {
 			txtthongbao.setText("Nhập địa chỉ Nhân Viên");
 			return false;
@@ -706,12 +695,12 @@ public class GD_QuanLyNhanVien extends javax.swing.JPanel {
 			txtthongbao.setText("Nhập số CCCD Nhân viên");
 			return false;
 		}
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String ns = dateFormat.format(jdcngaysinh.getDate());
-		int a = ns.compareTo(today);
-		System.out.println(a);
-		if (a > 0) {
-			txtthongbao.setText("Ngày sinh phải bé hơn ngày hiện tại");
+		if(cccd.matches("[0-9]{12}")) {
+			txtthongbao.setText("CCCD có 12 số");
+			return false;
+		}
+		if(cbbchucvu.getSelectedItem() == null) {
+			txtthongbao.setText("chọn chức vụ");
 			return false;
 		}
 		return true;
@@ -730,10 +719,11 @@ public class GD_QuanLyNhanVien extends javax.swing.JPanel {
 	private void timKiem() {
 		String tk = txttimkiem.getText();
 		if (!tk.equals("")) {
-			ArrayList<NhanVien> dsnv = nv_dao.timKiemNV(tk);
+			dsnv = nv_dao.timKiemNV(tk);
 			LoadTimKiem(dsnv);
 		}
 		else {
+			dsnv = nv_dao.getAllNV();
 			loadnv();
 		}
 	}
