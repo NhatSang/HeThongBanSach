@@ -76,7 +76,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 	private int caLap;
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	private int k;
-
+	private DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
 	public GD_LapHoaDon(GD_NhanVienBanHang parent) {
 		this.parent = parent;
 		this.nhanVien = parent.getNhanVien();
@@ -359,8 +359,8 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 					double t;
 					if (isInt(tkt)) {
 						t = Double.parseDouble(tkt);
-						double s = t - hoaDon.tongTienSauVAT();
-						lblTienThua.setText("Tiền thừa: " + s);
+						double s = t - Math.round(hoaDon.tongTienSauVAT());
+						lblTienThua.setText("Tiền thừa: " + decimalFormat.format(s));
 					}
 				}
 			}
@@ -575,7 +575,6 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 	}
 
 	public void capNhatHoaDon() {
-		DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
 		tblModel.setRowCount(0);
 		ArrayList<ChiTietHoaDon> dsCTHD = hoaDon.getDsChiTiet();
 		int i = 1;
