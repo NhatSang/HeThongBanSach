@@ -85,7 +85,7 @@ public class TKDT_DAO {
 			DataBase.getInstance();
 			Connection con = DataBase.getConnection();
 
-			String sql = "select cthd.maSP,hd.ngayLap, cthd.maHD from HoaDon hd  join ChiTietHoaDon cthd on hd.maHD = cthd.maHD group by cthd.maSP, hd.ngayLap,cthd.maHD having hd.ngayLap=" + "'" + ngay + "'";
+			String sql = "select cthd.maSP,hd.ngayLap, cthd.maHD from HoaDon hd  join ChiTietHoaDon cthd on hd.maHD = cthd.maHD group by cthd.maSP, hd.ngayLap,cthd.maHD, hd.trangThai having hd.ngayLap=" + "'" + ngay + "' and hd.trangThai = 1";
 
                         Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(sql);
@@ -112,7 +112,7 @@ public class TKDT_DAO {
 			DataBase.getInstance();
 			Connection con = DataBase.getConnection();
 
-			String sql = "select cthd.maSP,hd.ngayLap, cthd.maHD from HoaDon hd  join ChiTietHoaDon cthd on hd.maHD = cthd.maHD group by cthd.maSP, hd.ngayLap,cthd.maHD having YEAR(hd.ngayLap)="+ "'"+ nam +"'" + "and MONTH(hd.ngayLap)=" + "'" + thang + "'";
+			String sql = "select cthd.maSP,hd.ngayLap, cthd.maHD from HoaDon hd  join ChiTietHoaDon cthd on hd.maHD = cthd.maHD group by cthd.maSP, hd.ngayLap,cthd.maHD, hd.trangThai having YEAR(hd.ngayLap)="+ "'"+ nam +"'" + "and MONTH(hd.ngayLap)=" + "'" + thang + "' and and hd.trangThai = 1";
 
                         Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(sql);
@@ -159,7 +159,7 @@ public class TKDT_DAO {
     			DataBase.getInstance();
     			Connection con = DataBase.getConnection();
 
-    			String sql = "  select  cthd.maSP, sp.tenSP, SUM(cthd.soLuong) as 'soLuong' , hd.ngayLap, sp.donGia, hd.caLap from ChiTietHoaDon cthd left join SanPham sp on cthd.maSP = sp.maSP left join HoaDon hd on cthd.maHD = hd.maHD group by cthd.maSP,sp.tenSP, hd.ngayLap, sp.donGia, hd.caLap having hd.ngayLap="+ "'"+ ngay +"'" + " and hd.caLap = " + "'" + caLap + "'";
+    			String sql = "  select  cthd.maSP, sp.tenSP, SUM(cthd.soLuong) as 'soLuong' , hd.ngayLap, sp.donGia, hd.caLap from ChiTietHoaDon cthd left join SanPham sp on cthd.maSP = sp.maSP left join HoaDon hd on cthd.maHD = hd.maHD group by cthd.maSP,sp.tenSP, hd.ngayLap, sp.donGia, hd.caLap, hd.trangThai having hd.ngayLap="+ "'"+ ngay +"'" + " and hd.caLap = " + "'" + caLap + "' and hd.trangThai = 1";
 
                             Statement statement = con.createStatement();
     			ResultSet rs = statement.executeQuery(sql);
