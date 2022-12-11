@@ -178,5 +178,28 @@ public class TKDT_DAO {
     		}
     		return dsThongKe;
     	}
+        public ArrayList<ThongKeDoanhThu> DemTKTheoCa(String ngay, int ca) {
+		ArrayList<ThongKeDoanhThu> dsThongKe = new ArrayList<ThongKeDoanhThu>();
+		try {
+			DataBase.getInstance();
+			Connection con = DataBase.getConnection();
+
+			String sql = "select cthd.maSP,hd.ngayLap, cthd.maHD from HoaDon hd  join ChiTietHoaDon cthd on hd.maHD = cthd.maHD group by cthd.maSP, hd.ngayLap,cthd.maHD, hd.trangThai, hd.caLap having hd.ngayLap=" + "'" + ngay + "' and hd.trangThai = 1 and hd.caLap = "+"'"+ ca +"'";
+
+                        Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(sql);
+
+			while (rs.next()) {
+				String maSP = rs.getString(1);
+				Date ngayLap = rs.getDate(2);
+				String maHD = rs.getString(3);
+//              int soLuong = rs.getInt(4);
+				dsThongKe.add(new ThongKeDoanhThu(maSP, ngayLap, maHD));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dsThongKe;
+	}
         
 }
