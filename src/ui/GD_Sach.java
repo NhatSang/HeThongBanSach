@@ -806,6 +806,7 @@ public class GD_Sach extends javax.swing.JPanel {
 	}
 
 	public void xoaSach() {
+		int row = tableSach.getSelectedRow();
 		if (btnXoa.getText().equals("Huỷ") && check == 1) {
 			xoaTrang();
 			setEditableForm(false);
@@ -820,8 +821,12 @@ public class GD_Sach extends javax.swing.JPanel {
 			btnXoa.setText("Xóa");
 			btnThem.setEnabled(true);
 			check = 0;
-		} else {
-			int row = tableSach.getSelectedRowCount();
+		} 
+		else if (row == -1) {
+			lbMes.setText("Vui lòng chọn dòng cần xóa");
+			return;
+		} 
+		else {
 			if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa") == JOptionPane.YES_OPTION) {
 				try {
 					sp_dao.xoa_SP(txtMa.getText());
@@ -829,9 +834,11 @@ public class GD_Sach extends javax.swing.JPanel {
 					// TODO: handle exception
 					e.printStackTrace();
 				}
+				xoaTrang();
 				JOptionPane.showMessageDialog(null, "Xóa thành công");
-				loadSach();
 			}
+			loadSach();
+			reload();
 		}
 	}
 
@@ -961,8 +968,10 @@ public class GD_Sach extends javax.swing.JPanel {
 						;
 						sanPham_DAO.themSach(sach);
 						JOptionPane.showMessageDialog(null, "Thêm thành công");
-						lbMes.setText("");
+						reload();
+						xoaTrang();
 						loadSach();
+						lbIcon.setText("");
 						stt = 0;
 					} catch (Exception e) {
 						// TODO: handle exception
@@ -985,6 +994,13 @@ public class GD_Sach extends javax.swing.JPanel {
 			check = 2;
 			System.out.println(check);
 		} else {
+			int row = tableSach.getSelectedRow();
+			if (row == -1) {
+				lbMes.setText("Vui lòng chọn dòng cần sửa");
+				return;
+			}
+			checkThongTin();
+			if (checkThongTin()) {
 			SanPham_DAO sanPham_DAO = new SanPham_DAO();
 			String maSP = txtMa.getText();
 			String tenSach = txtTen.getText();
@@ -1079,10 +1095,13 @@ public class GD_Sach extends javax.swing.JPanel {
 				JOptionPane.showMessageDialog(null, "Sửa thành công");
 				lbMes.setText("");
 				loadSach();
+				reload();
+				xoaTrang();
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
+		}
 		}
 	}
 
@@ -1215,5 +1234,16 @@ public class GD_Sach extends javax.swing.JPanel {
 		}
 
 		return true;
+	}
+	
+	public void reload() {
+		btnThem.setText("Thêm");
+		btnXoa.setText("Xoá");
+		btnSua.setText("Sửa");
+		btnThem.setEnabled(true);
+		btnXoa.setEnabled(true);
+		btnSua.setEnabled(true);
+		lbMes.setText("");
+		check = 0;
 	}
 }
