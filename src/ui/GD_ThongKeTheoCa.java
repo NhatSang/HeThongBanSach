@@ -442,7 +442,7 @@ public class GD_ThongKeTheoCa extends javax.swing.JPanel {
                bnn = bnn + tk.getTenSP() + "\n";  
             }
         }
-        ArrayList<ThongKeDoanhThu> Dem = tkdt.DemTKTheoNgay(today);
+        ArrayList<ThongKeDoanhThu> Dem = tkdt.DemTKTheoCa(today, calv);
         for(ThongKeDoanhThu tk : Dem){
             if (!check.equals(tk.getMaHD())) {
                 shd++;
