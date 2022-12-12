@@ -476,7 +476,11 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 			if (txtTienKhachTra.getText().length() == 0) {
 				JOptionPane.showMessageDialog(this, "Chưa nhập tiền khách thanh toán");
 				txtTienKhachTra.requestFocus();
-			} else {
+			}else if(!isDbl(txtTienKhachTra.getText())) {
+				JOptionPane.showMessageDialog(this, "Vui lòng nhập vào 1 số");
+				txtTienKhachTra.requestFocus();
+			}
+			else {
 				if (Double.parseDouble(txtTienKhachTra.getText())-hoaDon.tongTienSauVAT() >= 0) {
 					if (k == 0) {
 						try {
@@ -697,6 +701,14 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 	public boolean isInt(String s) {
 		try {
 			Integer.parseInt(s);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+	public boolean isDbl(String s) {
+		try {
+			Double.parseDouble(s);
 		} catch (Exception e) {
 			return false;
 		}
