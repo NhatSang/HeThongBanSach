@@ -17,6 +17,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -61,7 +62,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 			lblDonVi, lblSoLuong, lblMaHd, lblNgayLap, lblCaLap, LblNguoiLap, lblTongTien, lblTongVAT, lblTienCanTra,
 			lblTienKhachTra, lblTienThua;
 	private JTextField txtTimKh, txtTimSp, txtTienKhachTra;
-	private JButton btnTimKh, btnThemKh, btnTimSp, btnThanhToan, btnXoaCTHD, btnLuu;
+	private JButton btnTimKh, btnTimSp, btnThanhToan, btnXoaCTHD, btnLuu;
 	private static JButton[] btn;
 	private Box leftBox, rightBox, northLB, centerLB;
 	private JTable tblCTHD;
@@ -110,7 +111,6 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 		btnThanhToan.setEnabled(true);
 		txtTimKh.setEditable(false);
 		btnTimKh.setEnabled(false);
-		btnThemKh.setEnabled(false);
 		dssp = new ArrayList<SanPham>();
 		k = 1;
 	}
@@ -126,8 +126,23 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 		northLB.setBorder(BorderFactory.createTitledBorder("Thông tin khách hàng"));
 
 		txtTimKh = new JTextField();
-		btnTimKh = new JButton(new ImageIcon(".\\icon\\search.png"));
-		btnThemKh = new JButton(new ImageIcon(".\\icon\\addkh.png"));
+		
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		InputStream input1 = classLoader.getResourceAsStream("search.png");
+		InputStream input2 = classLoader.getResourceAsStream("trash.png");
+		
+		BufferedImage image1 = null;
+		BufferedImage image2 = null;
+		
+		try {
+		    image1 = ImageIO.read(input1);
+		    image2 = ImageIO.read(input2);
+
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+		btnTimKh = new JButton(new ImageIcon(image1));
 
 		lblTenKh = new JLabel("Họ tên:");
 		lblTenKh1 = new JLabel();
@@ -147,8 +162,6 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 		nlb1.add(Box.createHorizontalStrut(20));
 		nlb1.add(txtTimKh);
 		nlb1.add(btnTimKh);
-//		nlb1.add(Box.createHorizontalStrut(20));
-//		nlb1.add(btnThemKh);
 		nlb1.add(Box.createHorizontalStrut(20));
 
 		Box nlb2 = Box.createHorizontalBox();
@@ -185,7 +198,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 		centerLB = Box.createVerticalBox();
 		centerLB.setBorder(BorderFactory.createTitledBorder("Thông tin sản phẩm"));
 		txtTimSp = new JTextField();
-		btnTimSp = new JButton(new ImageIcon(".\\icon\\search.png"));
+		btnTimSp = new JButton(new ImageIcon(image1));
 
 		Box clb1 = Box.createHorizontalBox();
 		clP1 = new JPanel();
@@ -257,7 +270,7 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 		};
 		Box centerRB = Box.createVerticalBox();
 		Box crB1 = Box.createHorizontalBox();
-		btnXoaCTHD = new JButton(new ImageIcon(".\\icon\\trash.png"));
+		btnXoaCTHD = new JButton(new ImageIcon(image2));
 
 		scrRP = new JScrollPane(tblCTHD);
 		scrRP.setPreferredSize(new Dimension(WIDTH, 350));
@@ -334,7 +347,6 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 		this.add(rightBox, BorderLayout.EAST);
 
 		btnTimSp.addActionListener(this);
-		btnThemKh.addActionListener(this);
 		btnTimKh.addActionListener(this);
 		btnXoaCTHD.addActionListener(this);
 		btnLuu.addActionListener(this);
@@ -455,9 +467,6 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 				} else
 					JOptionPane.showMessageDialog(null, "Không tìm thấy khách hàng");
 			}
-//		} else if (obj == btnThemKh) {
-//			new Frm_ThemKhachHang(this).setVisible(true);
-//			System.out.println(khachHang);
 		}
 		if (obj == btnXoaCTHD) {
 			int index = tblCTHD.getSelectedRow();
