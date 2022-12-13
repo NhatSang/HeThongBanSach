@@ -513,10 +513,11 @@ public class GD_VPP extends javax.swing.JPanel {
 			String nameimg = pImg[pImg.length - 1];
 			InputStream inStream = null;
 	        OutputStream outStream = null;
-	 
+	        File fimg = new File(".\\img\\"+nameimg);
+			if(!fimg.exists())
 	        try {
 	            inStream = new FileInputStream(f);
-	            outStream = new FileOutputStream(new File(".\\img\\"+nameimg));
+	            outStream = new FileOutputStream(fimg);
 	 
 	            int length;
 	            byte[] buffer = new byte[1024];
@@ -637,8 +638,7 @@ public class GD_VPP extends javax.swing.JPanel {
 		modelVPP.setRowCount(0);
 		for (VanPhongPham vpp : dsVPP) {
 			Object row[] = { tableVPP.getRowCount(), vpp.getMaSP(), vpp.getTenSP(), vpp.getLoaiSP(), vpp.getSoLuong(),
-					vpp.getDonGia(), vpp.getDonVi(), vpp.getVAT(), vpp.getNhaCC(), vpp.getMoTa(), vpp.getThuongHieu(),
-					vpp.getMauSac(), vpp.getChatLieu(), vpp.getXuatXu(), vpp.getHinhAnh() };
+					vpp.getDonGia(), vpp.getNhaCC(), vpp.getThuongHieu(), vpp.getMauSac(), vpp.getXuatXu() };
 			modelVPP.addRow(row);
 		}
 

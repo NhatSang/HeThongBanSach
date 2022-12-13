@@ -614,11 +614,23 @@ public class GD_LapHoaDon extends JPanel implements ActionListener, MouseListene
 		clP1.revalidate();
 		clP1.repaint();
 
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		InputStream input3 = classLoader.getResourceAsStream("plus.png");
+		
+		BufferedImage image3 = null;
+		
+		try {
+		    image3 = ImageIO.read(input3);
+
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
 		int r = dssp.size();
 		sanPhamP.setLayout(new GridLayout(r, 1));
 		btn = new JButton[dssp.size()];
 		for (int i = 0; i < dssp.size(); i++) {
-			btn[i] = new JButton(new ImageIcon(".\\icon\\plus.png"));
+			btn[i] = new JButton(new ImageIcon(image3));
 			btn[i].addActionListener(this);
 			JPanel p = new JPanel();
 			createSanPham(p, dssp.get(i), btn[i]);
