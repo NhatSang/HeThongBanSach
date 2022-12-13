@@ -24,7 +24,18 @@ values
 	(default,N'THẾ GIA',N'Lê Hoàng Nhật An','0903706471',N'VPP THẾ GIA',0),
 	(default,N'KHANG LÊ',N'Trương Nhật Duy','0935508693',N'Số 60A, Đường Tam Đông 21, Xã Thới Tam Thôn, Huyện Hóc Môn, Tp Hồ Chí Minh (TPHCM)',0),
 	(default,N'SOVINA',N'Hoàng Phú Quý','0837468168',N' Nhà LK - 08 khu B4 Nam Trung Yên, phố Nguyễn Chánh, Phường Yên Hoà, Quận Cầu Giấy, TP Hà Nội (TPHN)',0),
-	(default,N'CÔNG TY TNHH ANGEL TAPE VIỆT NAM',N'Lê Đức Toàn','0903024347',N'179 - 181 Lê Đức Thọ, P. 17, Q. Gò Vấp, TP. Hồ Chí Minh (TPHCM)',0)
+	(default,N'CÔNG TY TNHH ANGEL TAPE VIỆT NAM',N'Lê Đức Toàn','0903024347',N'179 - 181 Lê Đức Thọ, P. 17, Q. Gò Vấp, TP. Hồ Chí Minh (TPHCM)',0),
+	(default,N'Công ty Cổ phần Văn hóa và Truyền thông Nhã Nam',N'Étienne Rolland-Piègue','0903244248', N'59 Đỗ Quang, Trung Hòa, Cầu Giấy, Hà Nội',0),
+	(default,N'Skybooks',N'Xuân Lê', '0243848220',N'Số 83 Lý Nam Đế, Phường Cửa Đông, Quận Hoàn Kiếm, Hà Nội',0),
+	(default,N'Công ty Văn HÓa Nhân Văn',N' DƯƠNG QUỐC TRỊ', '0839481793',N'391A Trường Chinh, Khu Phố 3, Tân Bình, Thành phố Hồ Chí Minh',0),
+	(default,N'FIRST NEWS',N' DƯƠNG QUỐC TRỊ', '0838224560',N'11 I-H Nguyễn Thị Minh Khai, Phường Bến Nghé, Quận 1, Thành phố Hồ Chí Minh',0),
+	(default,N'Thái Hà',N' Thái Hà', '0282253264',N'88/28 Đào Duy Anh, P.9, Q.Phú Nhuận, TP.HCM',0),
+	(default,N'Saigon Books',N' Nguyễn Tuấn Quỳnh', '0902551818',N'222  Điện Biên Phủ , Q3, TP.HCMViệt Nam',0),
+	(default,N'MCBooks',N' Nguyễn Anh', '0243792146',N'45 đường 8, KP5, Hiệp Bình Chánh, Thủ Đức, TP Hồ Chí Minh',0),
+	(default,N'Huy Hoang Bookstore',N'Huy Hoàng', '0243735859',N'357A Lê Văn Sỹ - Phường 1 - Quận Tân Bình - TP. Hồ Chí Minh',0),
+	(default,N'Cty Sách Văn Chương',N'Nguyễn Chương', '0838307360',N'80 Nguyễn Chí Thanh, Phường 2, Quận 10, TP.HCM',0),
+	(default,N'Alpha Books',N'Nhóm tri thức', '0932329959',N'Tầng 3, Dream Home Center, 11a ngõ 282 Nguyễn Huy Tưởng, Thanh Xuân, Hà Nội',0)
+
 go 
 select * from ThuongHieu
 insert into ThuongHieu
@@ -54,7 +65,15 @@ values (default,N'NXB Văn Học'),
 	(default,N'NXB Kim Đồng'), 
 	(default,N'NXB Giáo Dục'), 
 	(default,N'NXB Văn Học'), 
-	(default,N'NXB Tổng Hợp TPHCM')
+	(default,N'NXB Tổng Hợp TPHCM'),
+	(default,N' NXB Hội Nhà Văn'),
+	(default,N'NXB Phụ Nữ Việt Nam'),
+	(default,N'NXB Hồng Đức'),
+	(default,N'Dân Trí'),
+	(default,N'NXB Tri Thức'),
+	(default,N'NXB Thế Giới'),
+	(default,N'NXB Đại Học Sư Phạm'),
+	(default,N'NXB Thanh Niên')
 go
 select * from TacGia
 insert into TacGia
@@ -64,7 +83,23 @@ values (default, N'A Crazy Mind'),
 (default, N'Hoài niệm'),
 (default, N'Nguyễn Ngọc Tú'),
 (default, N'Franz Kafka'),
-(default, N'Harper Lee')
+(default, N'Harper Lee'),
+(default, N'A.G. Riddle'),
+	(default, N'Khotudien'),
+	(default, N'Lê Quang'),
+	(default, N'Múc'),
+	(default, N'T Harv Eker'),
+	(default, N'Geshe Michael Roach'),
+	(default, N'Jeffrey Sugerman'),
+	(default, N'Helgi Thor Ingason'),
+	(default, N'Trang Anh'),
+	(default, N'Choi Kwanghuyn'),
+	(default, N'Nhóm Hà Nội Tri Thức'),
+	(default, N'JOY LAND MEDIA'),
+	(default, N'Og Mandino'),
+	(default, N'Ron Kaufman'),
+	(default, N'Joe Vitable'),
+	(default, N'Viện Ngôn Ngữ Hackers')
 go
 select * from LoaiBia
 insert into LoaiBia
@@ -110,7 +145,27 @@ values
 	(dbo.autoIdSP('SVH00003'),N'Bước Chậm Lại Giữa Thế Gian Vội Vã',2018,100,65000,N'Quyển',10,280,N'Nguyễn Việt Tú Anh',null,N'Bước chậm lại giữa thế gian vội vã của Đại đức Hae Min đã liên tục đứng đầu danh sách best-seller của nhiều trang sách trực tuyến uy tín của Hàn Quốc, trở thành cuốn sách chữa lành cho hàng triệu người trẻ luôn tất bật với nhịp sống hiện đại hối hả.','SVH00003.jpg','SVH00001','NCC00002','NXB00001','TG00001','LB00001',null,0),
 	(dbo.autoIdSP('SGK00001'),N'Ngữ Văn 10/1',2022,100,25000,N'Quyển',10,124,null,null,N'Ngữ Văn 10/1 (Cánh Diều) (2022)','SGK00001.jpg','SGK00001','NCC00002','NXB00002','TG00002','LB00001','CDH00010',0),
 	(dbo.autoIdSP('SGK00002'),N'Ngữ Văn 10/2',2020,100,21000,N'Quyển',10,227,null,null,N'Ngữ Văn 10/2 (Kết Nối Trí Thức) (2022)','SGK00002.jpg','SGK00001','NCC00003','NXB00003','TG00003','LB00001',null,0),
-	(dbo.autoIdSP('SKT00001'),N'Cái Đuôi Dài',2016,100,163000,N'Quyển',10,227,NULL,null,N'Với tác phẩm Cái đuôi dài, tác giả đã đưa ra một lộ trình tương lai cho ngành thương mại, một lộ trình có thể làm sáng tỏ băn khoăn của nhiều người – người bán hàng và khách hàng.','SKT00001.jpg','SKT00001','NCC00004','NXB00004','TG00004','LB00001',null,0)
+	(dbo.autoIdSP('SKT00001'),N'Cái Đuôi Dài',2016,100,163000,N'Quyển',10,227,NULL,null,N'Với tác phẩm Cái đuôi dài, tác giả đã đưa ra một lộ trình tương lai cho ngành thương mại, một lộ trình có thể làm sáng tỏ băn khoăn của nhiều người – người bán hàng và khách hàng.','SKT00001.jpg','SKT00001','NCC00004','NXB00004','TG00004','LB00001',null,0),
+	(dbo.autoIdSP('SVH00001'),N'Dịch Bệnh Atlantis',2022,100,170000,N'Quyển',10,496,null,null,N'Một đại dịch đã được ấp ủ 70.000 năm','SVH00010.jpg','SVH00001','NCC00021','NXB00007','TG00008','LB00001',null,0),
+	(dbo.autoIdSP('SVH00001'),N'Từ Điển Tiếng “Em”',2021,100,48000,N'Quyển',10,280,null,null, N'TỪ ĐIỂN TIẾNG “EM” – Định nghĩa về thế giới mới!','SVH00011.jpg','SVH00001','NCC00022','NXB00008','TG00009','LB00001',null,0),
+	(dbo.autoIdSP('SVH00001'),N'Cách Để Yêu 1 Người',2020,100,60000,N'Quyển',10,214,null,null, N'Là bộ sách độc quyền Cách Để Trở Thành của Nhân Văn nói về những khía cạnh đa dạng của cuộc sống','SVH00012.jpg','SVH00001','NCC00022','NXB00009','TG00010','LB00001',null,0),
+	(dbo.autoIdSP('SVH00001'),N'Ở Tiệm bánh Ngày Mai',2022,100,100000,N'Quyển',10,104,null,null,N'Cuốn sách tô màu này dành tặng bạn, cho những ngày u ám','SVH00013.jpg','SVH00001','NCC00002','NXB00010','TG00011','LB00001',null,0),
+	(dbo.autoIdSP('SKT00001'),N'Bí Mật Tư Duy Triệu Phú',2021,100,80000,N'Quyển',10,287,null,null,N'Tiết lộ những bí mật tại sao một số người lại đạt được những thành công','SKT00005.jpg','SKT00001','NCC00024','NXB00006','TG00012','LB00001',null,0),
+	(dbo.autoIdSP('SKT00001'),N'Năng Đoạn Kim Cương',2020,100,9000,N'Quyển',10,348,null,null,N'Cuốn sách này là một câu chuyện về tác giả đã xây dựng đơn vị kim cương lại tại Andin International','SKT00006.jpg','SKT00001','NCC00025','NXB00011','TG00013','LB00001',null,0),
+	(dbo.autoIdSP('SKT00001'),N'Trải Nghiệm Nhân Viên',2021,100,10000,N'Quyển',10,228,null,null,N'những tổ chức khác điềm tĩnh xây dựng đội ngũ nhân viên ưu tú và liên tiếp đạt được mục tiêu','SKT00007.jpg','SKT00001','NCC00026','NXB00012','TG00013','LB00001',null,0),
+	(dbo.autoIdSP('SKT00001'),N'Giải Mã Hành Vi',2021,100,10000,N'Quyển',10,300,null,null,N'DISC giúp thấu hiểu bản thân, thấu hiểu con người, thấu hiểu người khác','SKT00008.jpg','SKT00001','NCC00027','NXB00009','TG00014','LB00001',null,0),
+	(dbo.autoIdSP('SKT00001'),N'Lãnh Đạo Dự Án',2020,100,160000,N'Quyển',10,419,null,null,N'Dự án giúp là một công việc giúp chúng ta lên kế hoạch tốt','SKT00009.jpg','SKT00001','NCC00028','NXB00012','TG00015','LB00002',null,0),
+	(dbo.autoIdSP('SNN00001'),N'Cẩm Nang Cấu Trúc Tiếng Anh',2019,100,60000,N'Quyển',10,237,null,null,N'phạm trù kiến thức trong tiếng Anh được trình bày một cách ngắn gọn, đơn giản','SNN00010.jpg','SNN00001','NCC00029','NXB00013','TG00016','LB00001',null,0), 
+	(dbo.autoIdSP('SVH00001'),N'Hai Mặt Của Gia Đình',2020,100,80000,N'Quyển',10,290,null,null,N'Vì sao chúng ta luôn bộc phát cảm xúc khi đứng trước gia đình mình','SVH00014.jpg','SVH00001','NCC00002','NXB00014','TG00017','LB00001',null,0),
+	(dbo.autoIdSP('SVH00001'),N'Chuyện Người Hà Nội',2022,100,140000,N'Quyển',10,350,null,null,N'một cuốn sách nhỏ xinh chứa đựng những câu chuyện, kỷ niệm có thể rất đỗi thân quen với những người con xa xứ đã lâu','SVH00015.jpg','SVH00001','NCC00005','NXB00014','TG00018','LB00002',null,0),
+	(dbo.autoIdSP('STN00001'),N'Trò Chơi Mê Cung Phát Triển Trí Tuệ 4',2020,100,55000,N'Quyển',10,64,null,null,N'Sách sẽ giúp kích thích phát triển trí thông minh của bé theo từng thời kì','STN00010.jpg','STN00001','NCC00030','NXB00001','TG00019','LB00001',null,0), 
+	(dbo.autoIdSP('STN00001'),N'Trò Chơi Mê Cung Phát Triển Trí Tuệ 3',2020,100,55000,N'Quyển',10,64,null,null,N'Sách sẽ giúp kích thích phát triển trí thông minh của bé theo từng thời kì','STN00011.jpg','STN00001','NCC00030','NXB00001','TG00019','LB00001',null,0),
+	(dbo.autoIdSP('STN00001'),N'Trò Chơi Mê Cung Phát Triển Trí Tuệ 2',2020,100,55000,N'Quyển',10,64,null,null,N'Sách sẽ giúp kích thích phát triển trí thông minh của bé theo từng thời kì','STN00012.jpg','STN00001','NCC00030','NXB00001','TG00019','LB00001',null,0),
+	(dbo.autoIdSP('STN00001'),N'Trò Chơi Mê Cung Phát Triển Trí Tuệ 1',2020,100,55000,N'Quyển',10,64,null,null,N'Sách sẽ giúp kích thích phát triển trí thông minh của bé theo từng thời kì','STN00013.jpg','STN00001','NCC00030','NXB00001','TG00019','LB00001',null,0),
+	(dbo.autoIdSP('SKT00001'),N'Người Bán Hàng Vĩ Đại Nhất Thế Giới',2020,100,130000,N'Quyển',10,296,null,null,N'kể về câu chuyện của Hafid, một cậu bé chăn lạc đà nghèo, ở Jerusalem thời cổ đại','SKT00009.jpg','SKT00001','NCC00025','NXB00006','TG00020','LB00001',null,0), 
+	(dbo.autoIdSP('SKT00001'),N'Nâng Tầm Dịch Vụ',2020,100,130000,N'Quyển',10,436,null,null,N'tiết lộ sức mạnh của việc cung cấp dịch vụ nâng tầm và các bước đi mà người làm dịch vụ có thể áp dụng','SKT00010.jpg','SKT00001','NCC00025','NXB00002','TG00021','LB00001',null,0), 
+	(dbo.autoIdSP('SKT00001'),N'Thôi Miên Bằng Ngôn Từ',2019,100,140000,N'Quyển',10,388,null,null,N'Làm thế nào để thu hút và thuyết phục khách hàng chỉ bằng ngôn từ của bạn?','SKT00011.jpg','SKT00001','NCC00028','NXB00009','TG00021','LB00001',null,0), 
+	(dbo.autoIdSP('SNN00001'),N'Hackers Lelts:Writing',2019,100,150000,N'Quyển',10,452,null,null,N'Bộ sách luyện thi IELTS đầu tiên có kèm giải thích đáp án chi tiết và hướng dẫn cách tự nâng band điểm','SNN00011.jpg','SNN00001','NCC00031','NXB00012','TG00022','LB00001',null,0)
 
 insert into SanPham (maSP,tenSP,soLuong,donGia,donVi,VAT,xuatXu,chatLieu, moTa,hinhAnh,maLoai,maNCC,maTH,maMau,trangThai)
 values 	

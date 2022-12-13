@@ -7,7 +7,11 @@ package ui;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -507,6 +511,33 @@ public class GD_VPP extends javax.swing.JPanel {
 			String filename = f.getAbsolutePath();
 			String pImg[] = filename.split("\\\\");
 			String nameimg = pImg[pImg.length - 1];
+			InputStream inStream = null;
+	        OutputStream outStream = null;
+	 
+	        try {
+	            inStream = new FileInputStream(f);
+	            outStream = new FileOutputStream(new File(".\\img\\"+nameimg));
+	 
+	            int length;
+	            byte[] buffer = new byte[1024];
+	 
+	            // copy the file content in bytes
+	            while ((length = inStream.read(buffer)) > 0) {
+	                outStream.write(buffer, 0, length);
+	            }
+	            System.out.println("File is copied successful!");
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } finally {
+	            try {
+					inStream.close();
+		            outStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	
+	        }
 			lbIcon.setIcon(new ImageIcon(f.getAbsolutePath()));
 			lbIcon.setIcon(loadImg(f.getAbsolutePath(), 200, 150));
 			lbIcon.setText(nameimg);
