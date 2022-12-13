@@ -882,6 +882,7 @@ public class GD_KH extends javax.swing.JPanel {
             try {
             kh_dao.capNhat(kh);
             JOptionPane.showMessageDialog(null, "Sửa thông tin thành công");
+            setEditableForm(false);
                 } catch (Exception e) {
             }
             modelKhachHang.setRowCount(0);

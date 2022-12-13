@@ -56,7 +56,6 @@ public class GD_ThongKeTheoCa extends javax.swing.JPanel {
         txtTongHoaDon = new javax.swing.JTextField();
         lbDoanhThu = new javax.swing.JLabel();
         txtDoanhThu = new javax.swing.JTextField();
-        btnKetCa = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(960, 540));
 
@@ -124,13 +123,6 @@ public class GD_ThongKeTheoCa extends javax.swing.JPanel {
 
         lbDoanhThu.setText("Doanh thu:");
 
-        btnKetCa.setText("Kết ca");
-        btnKetCa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKetCaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -152,9 +144,6 @@ public class GD_ThongKeTheoCa extends javax.swing.JPanel {
                     .addComponent(txtTongHoaDon, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtTongSanPham, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtCaLamViec, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnKetCa)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jdcNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -181,8 +170,6 @@ public class GD_ThongKeTheoCa extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnKetCa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -219,7 +206,7 @@ public class GD_ThongKeTheoCa extends javax.swing.JPanel {
         txtTongHoaDon = new javax.swing.JTextField();
         lbDoanhThu = new javax.swing.JLabel();
         txtDoanhThu = new javax.swing.JTextField();
-        btnKetCa = new javax.swing.JButton();
+//        btnKetCa = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(960, 540));
 
@@ -286,12 +273,12 @@ public class GD_ThongKeTheoCa extends javax.swing.JPanel {
 
         lbDoanhThu.setText("Doanh thu:");
 
-        btnKetCa.setText("Kết ca");
-        btnKetCa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKetCaActionPerformed(evt);
-            }
-        });
+//        btnKetCa.setText("Kết ca");
+//        btnKetCa.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                btnKetCaActionPerformed(evt);
+//            }
+//        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -315,7 +302,7 @@ public class GD_ThongKeTheoCa extends javax.swing.JPanel {
                     .addComponent(txtTongSanPham, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtCaLamViec, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnKetCa)
+//                        .addComponent(btnKetCa)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jdcNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
                 .addContainerGap())
@@ -344,7 +331,7 @@ public class GD_ThongKeTheoCa extends javax.swing.JPanel {
                     .addComponent(lbDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnKetCa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                .addComponent(btnKetCa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -363,18 +350,12 @@ public class GD_ThongKeTheoCa extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
         );
     }
-    private void btnKetCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetCaActionPerformed
-        // TODO add your handling code here:
-//        System.exit(0);
-    }//GEN-LAST:event_btnKetCaActionPerformed
-
     private void txtTongSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongSanPhamActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTongSanPhamActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnKetCa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
