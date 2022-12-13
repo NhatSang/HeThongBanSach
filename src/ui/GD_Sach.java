@@ -601,10 +601,11 @@ public class GD_Sach extends javax.swing.JPanel {
 			String nameimg = pImg[pImg.length - 1];
 			InputStream inStream = null;
 	        OutputStream outStream = null;
-	 
+			File fimg = new File(".\\img\\"+nameimg);
+			if(!fimg.exists())
 	        try {
 	            inStream = new FileInputStream(f);
-	            outStream = new FileOutputStream(new File(".\\img\\"+nameimg));
+	            outStream = new FileOutputStream(fimg);
 	 
 	            int length;
 	            byte[] buffer = new byte[1024];
@@ -735,9 +736,8 @@ public class GD_Sach extends javax.swing.JPanel {
 		modelSach.setRowCount(0);
 		for (Sach sach : dsSach) {
 			Object row[] = { tableSach.getRowCount(), sach.getMaSP(), sach.getTenSP(), sach.getLoaiSP(),
-					sach.getNhaXB(), sach.getNamXB(), sach.getSoLuong(), sach.getDonGia(), sach.getDonVi(),
-					sach.getVAT(), sach.getTuoiGioiHan(), sach.getNhaCC(), sach.getMoTa(), sach.getTacGia().getTenTG(),
-					sach.getSoTrang(), sach.getLoaiBia(), sach.getCapDoHoc(), sach.getNguoiDich(), sach.getHinhAnh() };
+					sach.getNhaXB(), sach.getNamXB(), sach.getSoLuong(), sach.getDonGia(), sach.getNhaCC(),
+					sach.getTacGia().getTenTG() };
 			modelSach.addRow(row);
 		}
 		loadData();
