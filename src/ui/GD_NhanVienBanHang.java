@@ -12,14 +12,20 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -140,18 +146,73 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 		itemTimHD.setFont(new Font("Serif", Font.ITALIC, 25));
 		itemHoTro.setFont(new Font("Serif", Font.ITALIC, 25));
 
-		menuSach.setIcon(new ImageIcon(".\\icon\\book.png"));
-		menuVPP.setIcon(new ImageIcon(".\\icon\\vpp.png"));
-		menuHD.setIcon(new ImageIcon(".\\icon\\bill.png"));
-		menuKH.setIcon(new ImageIcon(".\\icon\\kh.png"));
-		menuTK.setIcon(new ImageIcon(".\\icon\\chart.png"));
-		menuTC.setIcon(new ImageIcon(".\\icon\\symbol.png"));
-		itemDangXuat.setIcon(new ImageIcon(".\\icon\\logout.png"));
-		itemDoiMatKhau.setIcon(new ImageIcon(".\\icon\\key.png"));
-		itemThoat.setIcon(new ImageIcon(".\\icon\\close.png"));
-		itemLapHd.setIcon(new ImageIcon(".\\icon\\addbill.png"));
-		itemTimHD.setIcon(new ImageIcon(".\\icon\\searchbill.png"));
-		itemHoTro.setIcon(new ImageIcon(".\\icon\\help.png"));
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		InputStream input1 = classLoader.getResourceAsStream("book.png");
+		InputStream input2 = classLoader.getResourceAsStream("vpp.png");
+		InputStream input3 = classLoader.getResourceAsStream("bill.png");
+		InputStream input4 = classLoader.getResourceAsStream("kh.png");
+		InputStream input5 = classLoader.getResourceAsStream("chart.png");
+		InputStream input6 = classLoader.getResourceAsStream("symbol.png");
+		InputStream input7 = classLoader.getResourceAsStream("logout.png");
+		InputStream input8 = classLoader.getResourceAsStream("key.png");
+		InputStream input9 = classLoader.getResourceAsStream("close.png");
+		InputStream input10 = classLoader.getResourceAsStream("addbill.png");
+		InputStream input11 = classLoader.getResourceAsStream("searchbill.png");
+		InputStream input12 = classLoader.getResourceAsStream("help.png");
+
+		BufferedImage image1 = null;
+		BufferedImage image2 = null;
+		BufferedImage image3 = null;
+		BufferedImage image4 = null;
+		BufferedImage image5 = null;
+		BufferedImage image6 = null;
+		BufferedImage image7 = null;
+		BufferedImage image8 = null;
+		BufferedImage image9 = null;
+		BufferedImage image10 = null;
+		BufferedImage image11 = null;
+		BufferedImage image12 = null;
+		try {
+			image1 = ImageIO.read(input1);
+			image2 = ImageIO.read(input2);
+			image3 = ImageIO.read(input3);
+			image4 = ImageIO.read(input4);
+			image5 = ImageIO.read(input5);
+			image6 = ImageIO.read(input6);
+			image7 = ImageIO.read(input7);
+			image8 = ImageIO.read(input8);
+			image9 = ImageIO.read(input9);
+			image10 = ImageIO.read(input10);
+			image11 = ImageIO.read(input11);
+			image12 = ImageIO.read(input12);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+//		menuSach.setIcon(new ImageIcon(".\\icon\\book.png"));
+//		menuVPP.setIcon(new ImageIcon(".\\icon\\vpp.png"));
+//		menuHD.setIcon(new ImageIcon(".\\icon\\bill.png"));
+//		menuKH.setIcon(new ImageIcon(".\\icon\\kh.png"));
+//		menuTK.setIcon(new ImageIcon(".\\icon\\chart.png"));
+//		menuTC.setIcon(new ImageIcon(".\\icon\\symbol.png"));
+//		itemDangXuat.setIcon(new ImageIcon(".\\icon\\logout.png"));
+//		itemDoiMatKhau.setIcon(new ImageIcon(".\\icon\\key.png"));
+//		itemThoat.setIcon(new ImageIcon(".\\icon\\close.png"));
+//		itemLapHd.setIcon(new ImageIcon(".\\icon\\addbill.png"));
+//		itemTimHD.setIcon(new ImageIcon(".\\icon\\searchbill.png"));
+//		itemHoTro.setIcon(new ImageIcon(".\\icon\\help.png"));
+		menuSach.setIcon(new ImageIcon(image1));
+		menuVPP.setIcon(new ImageIcon(image2));
+		menuHD.setIcon(new ImageIcon(image3));
+		menuKH.setIcon(new ImageIcon(image4));
+		menuTK.setIcon(new ImageIcon(image5));
+		menuTC.setIcon(new ImageIcon(image6));
+		itemDangXuat.setIcon(new ImageIcon(image7));
+		itemDoiMatKhau.setIcon(new ImageIcon(image8));
+		itemThoat.setIcon(new ImageIcon(image9));
+		itemLapHd.setIcon(new ImageIcon(image10));
+		itemTimHD.setIcon(new ImageIcon(image11));
+		itemHoTro.setIcon(new ImageIcon(image12));
 
 		menuB.add(menuBar);
 		northB.add(menuB);
@@ -213,15 +274,29 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 			}
 		} else if (obj == itemHoTro) {
 			if (Desktop.isDesktopSupported()) {
+				ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+				InputStream input1 = classLoader.getResourceAsStream("UserManuall.pdf");
+				File myFile = new File("F:\\TaiLieuHT\\PTUD\\FIle_DongGoi\\UserManuall.pdf");
+
+				try (OutputStream output = new FileOutputStream(myFile, false)) {
+					input1.transferTo(output);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				try {
-					File myFile = new File(".\\docs\\UserManuall.pdf");
 					Desktop.getDesktop().open(myFile);
-				} catch (IOException ex) {
-					// no application registered for PDFs
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		}
 	}
+
 
 	public void thayCenterP(JPanel p) {
 		centerB.removeAll();

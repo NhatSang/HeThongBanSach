@@ -14,7 +14,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -129,15 +133,49 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 		itemDoiMatKhau.setFont(new Font("Serif", Font.ITALIC, 25));
 		itemThoat.setFont(new Font("Serif", Font.ITALIC, 25));
 		itemHoTro.setFont(new Font("Serif", Font.ITALIC, 25));
+		
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		InputStream input1 = classLoader.getResourceAsStream("nv.png");
+		InputStream input2 = classLoader.getResourceAsStream("home.png");
+		InputStream input3 = classLoader.getResourceAsStream("chart.png");
+		InputStream input4 = classLoader.getResourceAsStream("symbol.png");
+		InputStream input5 = classLoader.getResourceAsStream("logout.png");
+		InputStream input6 = classLoader.getResourceAsStream("key.png");
+		InputStream input7 = classLoader.getResourceAsStream("close.png");
+		InputStream input8 = classLoader.getResourceAsStream("help.png");
 
-		menuNV.setIcon(new ImageIcon(".\\icon\\nv.png"));
-		menuNCC.setIcon(new ImageIcon(".\\icon\\home.png"));
-		menuTK.setIcon(new ImageIcon(".\\icon\\chart.png"));
-		menuTC.setIcon(new ImageIcon(".\\icon\\symbol.png"));
-		itemDangXuat.setIcon(new ImageIcon(".\\icon\\logout.png"));
-		itemDoiMatKhau.setIcon(new ImageIcon(".\\icon\\key.png"));
-		itemThoat.setIcon(new ImageIcon(".\\icon\\close.png"));
-		itemHoTro.setIcon(new ImageIcon(".\\icon\\help.png"));
+		BufferedImage image1 = null;
+		BufferedImage image2 = null;
+		BufferedImage image3 = null;
+		BufferedImage image4 = null;
+		BufferedImage image5 = null;
+		BufferedImage image6 = null;
+		BufferedImage image7 = null;
+		BufferedImage image8 = null;
+		
+		try {
+		    image1 = ImageIO.read(input1);
+		    image2 = ImageIO.read(input2);
+		    image3 = ImageIO.read(input3);
+		    image4 = ImageIO.read(input4);
+		    image5 = ImageIO.read(input5);
+		    image6 = ImageIO.read(input6);
+		    image7 = ImageIO.read(input7);
+		    image8 = ImageIO.read(input8);
+		} catch (IOException e) {
+//		    e.printStackTrace();
+		}
+
+		
+		menuNV.setIcon(new ImageIcon(image1));
+		menuNCC.setIcon(new ImageIcon(image2));
+		menuTK.setIcon(new ImageIcon(image3));
+		menuTC.setIcon(new ImageIcon(image4));
+		itemDangXuat.setIcon(new ImageIcon(image5));
+		itemDoiMatKhau.setIcon(new ImageIcon(image6));
+		itemThoat.setIcon(new ImageIcon(image7));
+		itemHoTro.setIcon(new ImageIcon(image8));
+		
 
 		menuB.add(menuBar);
 		northB.add(menuB);
@@ -192,12 +230,25 @@ public class GD_NhanVienQuanLy extends JFrame implements ActionListener, MenuLis
 		}
 		if(obj == itemHoTro) {
 			if (Desktop.isDesktopSupported()) {
-			    try {
-			        File myFile = new File(".\\docs\\UserManuall.pdf");
-			        Desktop.getDesktop().open(myFile);
-			    } catch (IOException ex) {
-			        // no application registered for PDFs
-			    }
+				ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+				InputStream input1 = classLoader.getResourceAsStream("UserManuall.pdf");
+				File myFile = new File("F:\\TaiLieuHT\\PTUD\\FIle_DongGoi\\UserManuall.pdf");
+
+				try (OutputStream output = new FileOutputStream(myFile, false)) {
+					input1.transferTo(output);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					Desktop.getDesktop().open(myFile);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
 	}

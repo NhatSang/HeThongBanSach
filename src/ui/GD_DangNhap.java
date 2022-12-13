@@ -6,7 +6,11 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -58,10 +62,22 @@ public class GD_DangNhap extends JFrame implements ActionListener {
 
 		txtTaiKhoan = new JTextField();
 		txtMatKhau = new JPasswordField();
+		
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		InputStream input1 = classLoader.getResourceAsStream("login.png");
+		
+		BufferedImage image1 = null;
+		
+		try {
+		    image1 = ImageIO.read(input1);
 
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
 		btnDangNhap = new JButton("Đăng nhập");
 		btnDangNhap.setFont(new Font("Serif", Font.BOLD, 20));
-		btnDangNhap.setIcon(new ImageIcon(".\\icon\\login.png"));
+		btnDangNhap.setIcon(new ImageIcon(image1));
 
 		Box titleB = Box.createVerticalBox();
 
