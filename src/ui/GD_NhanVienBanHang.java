@@ -276,7 +276,7 @@ public class GD_NhanVienBanHang extends JFrame implements ActionListener, MenuLi
 			if (Desktop.isDesktopSupported()) {
 				ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 				InputStream input1 = classLoader.getResourceAsStream("UserManuall.pdf");
-				File myFile = new File("F:\\TaiLieuHT\\PTUD\\FIle_DongGoi\\UserManuall.pdf");
+				File myFile = new File(".\\UserManuall.pdf");
 
 				try (OutputStream output = new FileOutputStream(myFile, false)) {
 					input1.transferTo(output);
