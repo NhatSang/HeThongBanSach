@@ -806,6 +806,7 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
 		}
             reload();
             JOptionPane.showMessageDialog(null, "Sửa thành công");
+            setEditableForm(false);
             xoatrang();
             }
         }
