@@ -10,11 +10,15 @@ import javax.swing.table.DefaultTableModel;
 
 import dao.KhachHang_DAO;
 import entity.KhachHang;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import javax.imageio.ImageIO;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -385,8 +389,18 @@ public class GD_KH extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tableKH);
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		InputStream input1 = classLoader.getResourceAsStream("reset.png");
+		
+		BufferedImage image1 = null;
+		
+		try {
+		    image1 = ImageIO.read(input1);
 
-        btnResSet.setIcon(new javax.swing.ImageIcon("D:\\CODE\\HeThongBanSach\\icon\\reset.png")); // NOI18N
+		} catch (IOException e) {
+		    e.printStackTrace();
+                }
+        btnResSet.setIcon(new javax.swing.ImageIcon(image1)); // NOI18N
         btnResSet.setPreferredSize(new java.awt.Dimension(22, 22));
         btnResSet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
