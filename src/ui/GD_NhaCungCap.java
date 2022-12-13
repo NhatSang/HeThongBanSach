@@ -11,6 +11,10 @@ import javax.swing.table.DefaultTableModel;
 
 import dao.NhaCungCap_DAO;
 import entity.NhaCungCap;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /**
@@ -367,8 +371,18 @@ public class GD_NhaCungCap extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tableNCC);
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		InputStream input1 = classLoader.getResourceAsStream("reset.png");
+		
+		BufferedImage image1 = null;
+		
+		try {
+		    image1 = ImageIO.read(input1);
 
-        btnReSet.setIcon(new javax.swing.ImageIcon("D:\\CODE\\HeThongBanSach\\icon\\reset.png")); // NOI18N
+		} catch (IOException e) {
+		    e.printStackTrace();
+                }
+        btnReSet.setIcon(new javax.swing.ImageIcon(image1)); // NOI18N
         btnReSet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReSetActionPerformed(evt);
